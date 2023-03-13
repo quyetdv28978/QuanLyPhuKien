@@ -11,24 +11,13 @@ public class NhanVienView {
     private String id;
     private String ma, ten, gioitinh, diachi, sdt;
     private Date ngaySinh;
-    private int tuoi;
     private ChucVuView cv;
+    private UserView UV;
 
     public NhanVienView() {
     }
 
-    public NhanVienView(String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVuView cv, int tuoi) {
-        this.ma = ma;
-        this.ten = ten;
-        this.gioitinh = gioitinh;
-        this.diachi = diachi;
-        this.sdt = sdt;
-        this.ngaySinh = ngaySinh;
-        this.cv = cv;
-        this.tuoi = tuoi;
-    }
-
-    public NhanVienView(String id, String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVuView cv, int tuoi) {
+    public NhanVienView(String id, String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVuView cv, UserView UV) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -37,8 +26,20 @@ public class NhanVienView {
         this.sdt = sdt;
         this.ngaySinh = ngaySinh;
         this.cv = cv;
-        this.tuoi = tuoi;
+        this.UV = UV;
     }
+
+    public NhanVienView(String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVuView cv, UserView UV) {
+        this.ma = ma;
+        this.ten = ten;
+        this.gioitinh = gioitinh;
+        this.diachi = diachi;
+        this.sdt = sdt;
+        this.ngaySinh = ngaySinh;
+        this.cv = cv;
+        this.UV = UV;
+    }
+
 
     public String getId() {
         return id;
@@ -104,12 +105,15 @@ public class NhanVienView {
         this.cv = cv;
     }
 
-    public int getTuoi() {
-        return tuoi;
+
+    public UserView getUV() {
+        return UV;
     }
 
-    public void setTuoi(int tuoi) {
-        this.tuoi = tuoi;
+    public void setUV(UserView UV) {
+        this.UV = UV;
     }
+    
+    
 
 }

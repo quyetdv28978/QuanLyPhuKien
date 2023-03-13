@@ -7,6 +7,7 @@ package Responsitoties;
 import DomainModel.ChucVu;
 import DomainModel.NhanVien;
 import Utilities.DBConnection;
+import Utilities.jframeCheck;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -14,31 +15,34 @@ import org.hibernate.Session;
  *
  * @author yugip
  */
-public class ResNhanVien implements IfResponsitoties<NhanVien>{
+public class ResNhanVien implements IfResponsitoties<NhanVien> {
+
+    private int check;
+    private jframeCheck jcheck = new jframeCheck();
 
     @Override
     public List<NhanVien> getAll(String dk) {
-         throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public int add(NhanVien q) {
-       return DBConnection.executeQuery(q, null);
+        return DBConnection.executeQuery(q, null);
     }
 
     @Override
     public int update(NhanVien q) {
         Session ss = DBConnection.getseFactory().openSession();
-       NhanVien nv = DBConnection.getseFactory().openSession().get(NhanVien.class, q.getId());
-       nv.setTen(q.getTen());
-       nv.setDiachi(q.getDiachi());
-       nv.setGioitinh(q.getGioitinh());
-       nv.setNgaySinh(q.getNgaySinh());
-       nv.setSdt(q.getSdt());
-       nv.setCv(q.getCv());
-        nv.setTuoi(q.getTuoi());
+        NhanVien nv = DBConnection.getseFactory().openSession().get(NhanVien.class, q.getId());
+        nv.setTen(q.getTen());
+        nv.setDiachi(q.getDiachi());
+        nv.setGioitinh(q.getGioitinh());
+        nv.setNgaySinh(q.getNgaySinh());
+        nv.setSdt(q.getSdt());
+        nv.setCv(q.getCv());
+        nv.setUser(q.getUser());
         return DBConnection.executeQuery(nv, "update");
-        
+
     }
 
     @Override
@@ -55,18 +59,19 @@ public class ResNhanVien implements IfResponsitoties<NhanVien>{
     public NhanVien timObject(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     @Override
-    public List<Object[]> getALLJoin(String dk){
-        if (DBConnection.selectQueRyJoin("from NhanVien n join n.cv") != null) {
-            return DBConnection.selectQueRyJoin("from NhanVien n join n.cv");
+    public List<Object[]> getALLJoin(String dk) {
+        if (DBConnection.selectQueRyJoin("from NhanVien n join n.cv join n.user") != null) {
+            return DBConnection.selectQueRyJoin("from NhanVien n join n.cv join n.user");
         }
-       return null;
+        return null;
     }
-    
+
     public List<ChucVu> getALlCV() {
         if (DBConnection.selectQueRy("from ChucVu") != null) {
             return DBConnection.selectQueRy("from ChucVu");
         }
-return null;
-}
+        return null;
+    }
 }

@@ -6,7 +6,7 @@ package Utilities;
 
 import DomainModel.ChucVu;
 import DomainModel.NhanVien;
-import ViewModel.NhanVienView;
+import DomainModel.User;
 import java.util.List;
 import java.util.Properties;
 import org.hibernate.Session;
@@ -36,6 +36,7 @@ public class DBConnection {
         confi.setProperties(pro);
         confi.addAnnotatedClass(ChucVu.class);
         confi.addAnnotatedClass(NhanVien.class);
+        confi.addAnnotatedClass(User.class);
 
         ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
         FACTORY = confi.buildSessionFactory(ser);

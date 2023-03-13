@@ -6,6 +6,7 @@ package DomainModel;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,28 +22,20 @@ public class NhanVien implements Serializable {
     @Id
     private String id;
     private String ma, ten, gioitinh, diachi, sdt;
-    private int tuoi;
     @Temporal(TemporalType.DATE)
     private Date ngaySinh;
     @OneToOne
     @JoinColumn(name = "idcv")
     private ChucVu cv;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "iduser")
+    private User user;
+   
 
     public NhanVien() {
     }
 
-    public NhanVien(String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVu cv, int tuoi) {
-        this.ma = ma;
-        this.ten = ten;
-        this.gioitinh = gioitinh;
-        this.diachi = diachi;
-        this.sdt = sdt;
-        this.ngaySinh = ngaySinh;
-        this.cv = cv;
-        this.tuoi = tuoi;
-    }
-
-    public NhanVien(String id, String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVu cv, int tuoi) {
+    public NhanVien(String id, String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVu cv, User user) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -51,8 +44,20 @@ public class NhanVien implements Serializable {
         this.sdt = sdt;
         this.ngaySinh = ngaySinh;
         this.cv = cv;
-        this.tuoi = tuoi;
+        this.user = user;
     }
+
+    public NhanVien(String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVu cv, User user) {
+        this.ma = ma;
+        this.ten = ten;
+        this.gioitinh = gioitinh;
+        this.diachi = diachi;
+        this.sdt = sdt;
+        this.ngaySinh = ngaySinh;
+        this.cv = cv;
+        this.user = user;
+    }
+
 
     public String getId() {
         return id;
@@ -118,14 +123,11 @@ public class NhanVien implements Serializable {
         this.cv = cv;
     }
 
-    public int getTuoi() {
-        return tuoi;
+    public User getUser() {
+        return user;
     }
 
-    public void setTuoi(int tuoi) {
-        this.tuoi = tuoi;
+    public void setUser(User user) {
+        this.user = user;
     }
-    
-    
-
 }

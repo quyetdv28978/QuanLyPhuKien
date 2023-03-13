@@ -6,9 +6,11 @@ package Service;
 
 import DomainModel.ChucVu;
 import DomainModel.NhanVien;
+import DomainModel.User;
 import Responsitoties.ResNhanVien;
 import ViewModel.ChucVuView;
 import ViewModel.NhanVienView;
+import ViewModel.UserView;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class SerNhanVien implements IFService<NhanVienView> {
                         ((NhanVien) objects[0]).getGioitinh(), ((NhanVien) objects[0]).getDiachi(),
                         ((NhanVien) objects[0]).getSdt(), ((NhanVien) objects[0]).getNgaySinh(),
                         new ChucVuView(((ChucVu) objects[1]).getId(), ((ChucVu) objects[1]).getMa(), ((ChucVu) objects[1]).getTen()),
-                 ((NhanVien) objects[0]).getTuoi()));
+                        new UserView(((User) objects[2]).getId(),((User) objects[2]).getTentk(), ((User) objects[2]).getMk())));
             }
             return listNVV;
         }
@@ -38,7 +40,7 @@ public class SerNhanVien implements IFService<NhanVienView> {
 
     @Override
     public int add(NhanVienView q) {
-        
+
         return this.resNV.add((NhanVien) CD(q));
     }
 
@@ -64,15 +66,17 @@ public class SerNhanVien implements IFService<NhanVienView> {
 
     @Override
     public Object CD(NhanVienView q) {
-        System.out.println("tuoi ser: " + q.getTuoi());
-        return new NhanVien(q.getId(),q.getMa(), q.getTen(), q.getGioitinh(), q.getDiachi(), q.getSdt(), q.getNgaySinh(),
-                new ChucVu(q.getCv().getId(), q.getCv().getMa(), q.getCv().getTen()), q.getTuoi());
+        return new NhanVien(q.getId(), q.getMa(), q.getTen(), q.getGioitinh(), q.getDiachi(),
+                q.getSdt(), q.getNgaySinh(),
+                new ChucVu(q.getCv().getId(), q.getCv().getMa(), q.getCv().getTen()),
+                 new User(q.getUV().getId(), q.getUV().getTen(), q.getUV().getMk())
+        );
     }
-    
-    public List<ChucVuView> getAllCVV(){
+
+    public List<ChucVuView> getAllCVV() {
         if (this.resNV.getALlCV() != null) {
             List<ChucVuView> listCVV = new ArrayList<>();
-            
+
             for (ChucVu chucVu : this.resNV.getALlCV()) {
                 listCVV.add(new ChucVuView(chucVu.getId(), chucVu.getMa(), chucVu.getTen()));
             }
@@ -80,12 +84,11 @@ public class SerNhanVien implements IFService<NhanVienView> {
         }
         return null;
     }
-    
+
 //    @Override
 //    public boolean checkTrung(String ma) {
 //        
 //    }
-
     @Override
     public boolean checkTrung(String ma) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
