@@ -8,6 +8,6 @@ package viewmodel;
  *
  * @author Admin
  */
-public class ChatLieuViewModel {
-
+public class SanPhamViewModel {
+    
 }

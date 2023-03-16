@@ -22,20 +22,19 @@ package com.toedter.calendar;
 
 import com.toedter.components.GenericBeanInfo;
 
-
 /**
  * A BeanInfo class for JCalendar.
- * 
+ *
  * @author Kai Toedter
  * @version $LastChangedRevision: 85 $
  * @version $LastChangedDate: 2006-04-28 13:50:52 +0200 (Fr, 28 Apr 2006) $
  */
 public class JCalendarBeanInfo extends GenericBeanInfo {
 
-	/**
-	 * Constructs a new BeanInfo class for the JCalendar bean.
-	 */
-	public JCalendarBeanInfo() {
-	    super("JCalendar", true);
-	}
+    /**
+     * Constructs a new BeanInfo class for the JCalendar bean.
+     */
+    public JCalendarBeanInfo() {
+        super("JCalendar", true);
+    }
 }

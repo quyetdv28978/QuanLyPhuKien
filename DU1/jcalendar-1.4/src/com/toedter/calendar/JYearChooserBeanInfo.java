@@ -24,16 +24,17 @@ import com.toedter.components.GenericBeanInfo;
 
 /**
  * A BeanInfo class for the JYearChooser bean.
- * 
+ *
  * @author Kai Toedter
  * @version $LastChangedRevision: 85 $
  * @version $LastChangedDate: 2006-04-28 13:50:52 +0200 (Fr, 28 Apr 2006) $
  */
 public class JYearChooserBeanInfo extends GenericBeanInfo {
-	/**
-	 * Constructs a new BeanInfo class for the JYearChooser bean.
-	 */
-	public JYearChooserBeanInfo() {
-	    super("JYearChooser", false);
-	}
+
+    /**
+     * Constructs a new BeanInfo class for the JYearChooser bean.
+     */
+    public JYearChooserBeanInfo() {
+        super("JYearChooser", false);
+    }
 }

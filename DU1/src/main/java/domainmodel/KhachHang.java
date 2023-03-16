@@ -18,26 +18,72 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "KHACHHANG")
-public class KhachHang implements Serializable{
+public class KhachHang implements Serializable {
+
     @Id
     private String id;
     private String ma;
     private String ten;
     private String sdt, diaChi;
+    private String gioiTinh;
+    private Date ngayTao;
+    private int trangThai;
+    
+    
     @Temporal(TemporalType.DATE)
     private Date ngaySinh;
 
     public KhachHang() {
     }
 
-    public KhachHang(String id, String ma, String ten, String sdt, String diaChi, Date ngaySinh) {
+    public KhachHang( String ma, String ten, String sdt, String diaChi, String gioiTinh, Date ngaySinh) {
+        
+        this.ma = ma;
+        this.ten = ten;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.gioiTinh = gioiTinh;
+        this.ngaySinh = ngaySinh;
+    }
+
+    public KhachHang(String id, String ma, String ten, String sdt, String diaChi, String gioiTinh, Date ngaySinh) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.sdt = sdt;
         this.diaChi = diaChi;
-        
+        this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;
+    }
+    
+
+    public KhachHang(String id, String ma, String ten, String sdt, String diaChi, String gioiTinh, Date ngayTao, int trangThai, Date ngaySinh) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.gioiTinh = gioiTinh;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+        this.ngaySinh = ngaySinh;
+    }
+    
+
+    public String getSdt() {
+        return sdt;
+    }
+
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
+    }
+
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 
     public String getId() {
@@ -80,8 +126,6 @@ public class KhachHang implements Serializable{
         this.diaChi = diaChi;
     }
 
-   
-
     public Date getNgaySinh() {
         return ngaySinh;
     }
@@ -89,6 +133,5 @@ public class KhachHang implements Serializable{
     public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
-    
-    
+
 }

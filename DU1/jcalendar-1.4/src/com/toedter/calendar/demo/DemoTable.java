@@ -18,7 +18,6 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-
 package com.toedter.calendar.demo;
 
 import java.awt.Dimension;
@@ -34,77 +33,79 @@ import com.toedter.calendar.JDateChooserCellEditor;
 
 /**
  * A demonstration table with JDateChooserCellEditors.
- * 
+ *
  * @author Kai Toedter
  * @version $LastChangedRevision: 119 $
  * @version $LastChangedDate: 2009-05-04 17:47:56 +0200 (Mo, 04 Mai 2009) $
  */
 public class DemoTable extends JPanel {
-	private static final long serialVersionUID = -2823838920746867592L;
 
-	public DemoTable() {
-		super(new GridLayout(1, 0));
+    private static final long serialVersionUID = -2823838920746867592L;
 
-		setName("DemoTable");
+    public DemoTable() {
+        super(new GridLayout(1, 0));
 
-		JTable table = new JTable(new DemoTableModel());
-		table.setPreferredScrollableViewportSize(new Dimension(180, 32));
-		table.setDefaultEditor(Date.class, new JDateChooserCellEditor());
+        setName("DemoTable");
 
-		// Create the scroll pane and add the table to it.
-		JScrollPane scrollPane = new JScrollPane(table);
+        JTable table = new JTable(new DemoTableModel());
+        table.setPreferredScrollableViewportSize(new Dimension(180, 32));
+        table.setDefaultEditor(Date.class, new JDateChooserCellEditor());
 
-		// Add the scroll pane to this panel.
-		add(scrollPane);
-	}
+        // Create the scroll pane and add the table to it.
+        JScrollPane scrollPane = new JScrollPane(table);
 
-	class DemoTableModel extends AbstractTableModel {
-		private static final long serialVersionUID = 3283465559187131559L;
+        // Add the scroll pane to this panel.
+        add(scrollPane);
+    }
 
-		private final String[] columnNames = { "Empty Date", "Date set" };
+    class DemoTableModel extends AbstractTableModel {
 
-		private final Object[][] data = { { null, new Date() },
-				{ null, new Date() } };
+        private static final long serialVersionUID = 3283465559187131559L;
 
-		public int getColumnCount() {
-			return columnNames.length;
-		}
+        private final String[] columnNames = {"Empty Date", "Date set"};
 
-		public int getRowCount() {
-			return data.length;
-		}
+        private final Object[][] data = {{null, new Date()},
+        {null, new Date()}};
 
-		public String getColumnName(int col) {
-			return columnNames[col];
-		}
+        public int getColumnCount() {
+            return columnNames.length;
+        }
 
-		public Object getValueAt(int row, int col) {
-			return data[row][col];
-		}
+        public int getRowCount() {
+            return data.length;
+        }
 
-		/*
+        public String getColumnName(int col) {
+            return columnNames[col];
+        }
+
+        public Object getValueAt(int row, int col) {
+            return data[row][col];
+        }
+
+        /*
 		 * JTable uses this method to determine the default renderer/ editor for
 		 * each cell. If we didn't implement this method, then the last column
 		 * would contain text ("true"/"false"), rather than a check box.
-		 */
-		public Class getColumnClass(int c) {
-			return getValueAt(0, 1).getClass();
-		}
+         */
+        public Class getColumnClass(int c) {
+            return getValueAt(0, 1).getClass();
+        }
 
-		/*
+        /*
 		 * Don't need to implement this method unless your table's editable.
-		 */
-		public boolean isCellEditable(int row, int col) {
-			return true;
-		}
+         */
+        public boolean isCellEditable(int row, int col) {
+            return true;
+        }
 
-		/*
+        /*
 		 * Don't need to implement this method unless your table's data can
 		 * change.
-		 */
-		public void setValueAt(Object value, int row, int col) {
-			data[row][col] = value;
-			fireTableCellUpdated(row, col);
-		}
-	}
+         */
+        public void setValueAt(Object value, int row, int col) {
+            data[row][col] = value;
+            fireTableCellUpdated(row, col);
+        }
+    }
 }

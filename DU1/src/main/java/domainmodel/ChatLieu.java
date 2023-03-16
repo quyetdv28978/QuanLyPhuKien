@@ -17,7 +17,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ChatLieu")
-public class ChatLieu implements Serializable{
+public class ChatLieu implements Serializable {
+
     @Id
     private String id;
     private String ma, ten;
@@ -34,7 +35,6 @@ public class ChatLieu implements Serializable{
         this.ten = ten;
         this.sp = sp;
     }
-    
 
     public String getId() {
         return id;
@@ -68,5 +68,4 @@ public class ChatLieu implements Serializable{
         this.sp = sp;
     }
 
-   
 }

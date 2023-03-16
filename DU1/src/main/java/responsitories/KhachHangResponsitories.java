@@ -22,13 +22,13 @@ public class KhachHangResponsitories implements Iresponsitories<KhachHang> {
 
     @Override
     public List<KhachHang> getAll(String dk) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return DBConnection.selectQueRy("from KhachHang where ten = " + "'" + dk+ "'" );
     }
 
     public List<KhachHang> getAllKH() {
-        if(DBConnection.selectQueRy("from KhachHang")!= null){
+        if (DBConnection.selectQueRy("from KhachHang") != null) {
             return DBConnection.selectQueRy("from KhachHang");
-            }
+        }
         return null;
     }
 
@@ -41,10 +41,12 @@ public class KhachHangResponsitories implements Iresponsitories<KhachHang> {
     public int update(KhachHang q) {
         Session s = DBConnection.getseFactory().openSession();
         KhachHang kh = DBConnection.getseFactory().openSession().get(KhachHang.class, q.getId());
+        kh.setMa(q.getMa());
         kh.setTen(q.getTen());
-        kh.setDiaChi(q.getDiaChi());
-        kh.setNgaySinh(q.getNgaySinh());
+        kh.setGioiTinh(q.getGioiTinh());
         kh.setSđt(q.getSđt());
+        kh.setNgaySinh(q.getNgaySinh());
+        kh.setDiaChi(q.getDiaChi());
         return DBConnection.executeQuery(kh, "update");
     }
 
@@ -55,7 +57,8 @@ public class KhachHangResponsitories implements Iresponsitories<KhachHang> {
 
     @Override
     public String timID(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String a = getAll(ma).toString();
+        return a;
     }
 
     @Override

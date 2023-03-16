@@ -11,6 +11,7 @@ import java.util.List;
  * @author Admin
  */
 public interface IServices<Q> {
+
     public List<Q> getALl(String dk);
 
     public int add(Q q);
@@ -24,6 +25,6 @@ public interface IServices<Q> {
     public Q timOB(String id);
 
     public Object CD(Q q);
-    
+
     public boolean checkTrung(String ma);
 }

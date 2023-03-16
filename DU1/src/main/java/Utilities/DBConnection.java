@@ -4,10 +4,10 @@
  */
 package Utilities;
 
-
-
-
+import domainmodel.ChatLieu;
+import domainmodel.DanhMuc;
 import domainmodel.KhachHang;
+import domainmodel.SanPham;
 import java.util.List;
 
 import java.util.Properties;
@@ -30,19 +30,23 @@ public class DBConnection {
         Configuration confi = new Configuration();
         Properties pro = new Properties();
         pro.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
-        pro.put(Environment.DRIVER,"com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        pro.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1;trustServerCertificate=true");
         pro.put(Environment.USER, "sa");
         pro.put(Environment.PASS, "123456");
         pro.put(Environment.SHOW_SQL, true);
         confi.setProperties(pro);
         confi.addAnnotatedClass(KhachHang.class);
+        confi.addAnnotatedClass(DanhMuc.class);
+        confi.addAnnotatedClass(ChatLieu.class);
+        confi.addAnnotatedClass(SanPham.class);
 
 //        confi.addAnnotatedClass(SanPham.class);
         ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
         FACTORY = confi.buildSessionFactory(ser);
 
     }
+
     public static SessionFactory getseFactory() {
         return FACTORY;
     }

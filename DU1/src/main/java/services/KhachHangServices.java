@@ -14,14 +14,19 @@ import viewmodel.KhachHangViewModel;
  *
  * @author Admin
  */
-public class KhachHangServices implements IServices<KhachHangViewModel>{
-public final KhachHangResponsitories hangResponsitories = new KhachHangResponsitories();
+public class KhachHangServices implements IServices<KhachHangViewModel> {
 
-   
+    public final KhachHangResponsitories hangResponsitories = new KhachHangResponsitories();
 
     @Override
     public List<KhachHangViewModel> getALl(String dk) {
-       throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        List<KhachHang> l=hangResponsitories.getAll(dk);
+        List<KhachHangViewModel> a = new ArrayList<>();
+        for (KhachHang khachHang : l) {
+            a.add(new KhachHangViewModel(khachHang.getId(), khachHang.getMa(), khachHang.getTen(), khachHang.getGioiTinh(), khachHang.getSdt(), khachHang.getNgaySinh(), khachHang.getDiaChi()));
+        }
+        return a;
     }
 
     @Override
@@ -41,7 +46,7 @@ public final KhachHangResponsitories hangResponsitories = new KhachHangResponsit
 
     @Override
     public String timID(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return hangResponsitories.timID(ma);
     }
 
     @Override
@@ -51,21 +56,21 @@ public final KhachHangResponsitories hangResponsitories = new KhachHangResponsit
 
     @Override
     public Object CD(KhachHangViewModel q) {
-        
-        return new KhachHang(q.getId(), q.getMa(), q.getTen(), q.getSđt(), q.getDiaChi(), q.getNgaySinh());
-                
+        return new KhachHang(q.getId(), q.getMa(), q.getTen(), q.getSdt(), q.getDiaChi(), q.getGioiTinh(), q.getNgaySinh());
+
     }
 
     @Override
     public boolean checkTrung(String ma) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-     public List<KhachHangViewModel> getAllKhachHang(){
-        if (this.hangResponsitories.getAllKH()!= null) {
+
+    public List<KhachHangViewModel> getAllKhachHang() {
+        if (this.hangResponsitories.getAllKH() != null) {
             List<KhachHangViewModel> listKH = new ArrayList<>();
             List<KhachHang> a = hangResponsitories.getAllKH();
-            for (KhachHang chucVu : a ){
-                listKH.add(new KhachHangViewModel(chucVu.getId(), chucVu.getMa(), chucVu.getTen(), chucVu.getSđt(), chucVu.getDiaChi(), chucVu.getNgaySinh()));
+            for (KhachHang chucVu : a) {
+                listKH.add(new KhachHangViewModel(chucVu.getId(),chucVu.getMa(), chucVu.getTen(), chucVu.getGioiTinh(), chucVu.getSdt(), chucVu.getNgaySinh(), chucVu.getDiaChi()));
             }
             return listKH;
         }

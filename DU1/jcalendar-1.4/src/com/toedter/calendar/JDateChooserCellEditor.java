@@ -18,7 +18,6 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-
 package com.toedter.calendar;
 
 import java.awt.Component;
@@ -30,31 +29,32 @@ import javax.swing.table.TableCellEditor;
 
 /**
  * A CellEditor for tables, using a JDateChooser.
- * 
+ *
  * @author Kai Toedter
  * @version $LastChangedRevision: 100 $
  * @version $LastChangedDate: 2006-06-04 14:36:06 +0200 (So, 04 Jun 2006) $
  */
 public class JDateChooserCellEditor extends AbstractCellEditor implements
-		TableCellEditor {
+        TableCellEditor {
 
-	private static final long serialVersionUID = 917881575221755609L;
+    private static final long serialVersionUID = 917881575221755609L;
 
-	private JDateChooser dateChooser = new JDateChooser();
+    private JDateChooser dateChooser = new JDateChooser();
 
-	public Component getTableCellEditorComponent(JTable table, Object value,
-			boolean isSelected, int row, int column) {
+    public Component getTableCellEditorComponent(JTable table, Object value,
+            boolean isSelected, int row, int column) {
 
-		Date date = null;
-		if (value instanceof Date)
-			date = (Date) value;
+        Date date = null;
+        if (value instanceof Date) {
+            date = (Date) value;
+        }
 
-		dateChooser.setDate(date);
+        dateChooser.setDate(date);
 
-		return dateChooser;
-	}
+        return dateChooser;
+    }
 
-	public Object getCellEditorValue() {
-		return dateChooser.getDate();
-	}
+    public Object getCellEditorValue() {
+        return dateChooser.getDate();
+    }
 }

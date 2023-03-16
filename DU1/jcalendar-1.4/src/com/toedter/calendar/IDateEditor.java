@@ -17,7 +17,6 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-
 package com.toedter.calendar;
 
 import java.beans.PropertyChangeListener;
@@ -29,151 +28,140 @@ import javax.swing.JComponent;
 /**
  * All date editors that should be used by a JDateChooser have to implement this
  * interface.
- * 
+ *
  * @author Kai Toedter
  * @version $LastChangedRevision: 142 $
  * @version $LastChangedDate: 2011-06-05 07:06:03 +0200 (So, 05 Jun 2011) $
- * 
+ *
  */
 public interface IDateEditor {
 
-	/**
-	 * 
-	 * Returns the date.
-	 * 
-	 * @return the date
-	 */
-	public Date getDate();
+    /**
+     *
+     * Returns the date.
+     *
+     * @return the date
+     */
+    public Date getDate();
 
-	/**
-	 * Sets the date. This should be implemented as a bound property, firing the
-	 * "date" property.
-	 * 
-	 * @param date
-	 *            the date to set
-	 */
-	public void setDate(Date date);
+    /**
+     * Sets the date. This should be implemented as a bound property, firing the
+     * "date" property.
+     *
+     * @param date the date to set
+     */
+    public void setDate(Date date);
 
-	/**
-	 * Sets the date format string, e.g. "MM/dd/yy". If the date format string
-	 * is null or invalid, the date format string will be set to the MEDIUM
-	 * Simple date format of the current locale.
-	 * 
-	 * @param dateFormatString
-	 *            the date format string
-	 */
-	public void setDateFormatString(String dateFormatString);
+    /**
+     * Sets the date format string, e.g. "MM/dd/yy". If the date format string
+     * is null or invalid, the date format string will be set to the MEDIUM
+     * Simple date format of the current locale.
+     *
+     * @param dateFormatString the date format string
+     */
+    public void setDateFormatString(String dateFormatString);
 
-	/**
-	 * Returns the date format string.
-	 * 
-	 * @return the date format string
-	 */
-	public String getDateFormatString();
+    /**
+     * Returns the date format string.
+     *
+     * @return the date format string
+     */
+    public String getDateFormatString();
 
-	/**
-	 * Sets a valid date range for selectable dates. If max is before
-	 * min, the default range with no limitation is set.
-	 * 
-	 * @param min
-	 *            the minimum selectable date or null (then the minimum date should be
-	 *            set to 01\01\0001)
-	 * @param max
-	 *            the maximum selectable date or null (then the maximum date should be
-	 *            set to 01\01\9999)
-	 */
-	public void setSelectableDateRange(Date min, Date max) ;
+    /**
+     * Sets a valid date range for selectable dates. If max is before min, the
+     * default range with no limitation is set.
+     *
+     * @param min the minimum selectable date or null (then the minimum date
+     * should be set to 01\01\0001)
+     * @param max the maximum selectable date or null (then the maximum date
+     * should be set to 01\01\9999)
+     */
+    public void setSelectableDateRange(Date min, Date max);
 
-	/**
-	 * Gets the minimum selectable date.
-	 * 
-	 * @return the minimum selectable date
-	 */
-	public Date getMaxSelectableDate();
-	
-	/**
-	 * Gets the maximum selectable date.
-	 * 
-	 * @return the maximum selectable date
-	 */
-	public Date getMinSelectableDate();
+    /**
+     * Gets the minimum selectable date.
+     *
+     * @return the minimum selectable date
+     */
+    public Date getMaxSelectableDate();
 
-	/**
-	 * Sets the maximum selectable date.
-	 * 
-	 * @param max maximum selectable date
-	 */
-	public void setMaxSelectableDate(Date max);
+    /**
+     * Gets the maximum selectable date.
+     *
+     * @return the maximum selectable date
+     */
+    public Date getMinSelectableDate();
 
-	/**
-	 * Sets the minimum selectable date.
-	 * 
-	 * @param min minimum selectable date
-	 */
-	public void setMinSelectableDate(Date min);
+    /**
+     * Sets the maximum selectable date.
+     *
+     * @param max maximum selectable date
+     */
+    public void setMaxSelectableDate(Date max);
 
-	/**
-	 * Returns the UI component, e.g. the actual JTextField implementing the
-	 * editor.
-	 * 
-	 * @return the UI component
-	 */
-	public JComponent getUiComponent();
+    /**
+     * Sets the minimum selectable date.
+     *
+     * @param min minimum selectable date
+     */
+    public void setMinSelectableDate(Date min);
 
-	/**
-	 * Sets the locale. Usually this should have impact on the current date
-	 * format string.
-	 * 
-	 * @param locale
-	 *            the locale to set
-	 */
-	public void setLocale(Locale locale);
+    /**
+     * Returns the UI component, e.g. the actual JTextField implementing the
+     * editor.
+     *
+     * @return the UI component
+     */
+    public JComponent getUiComponent();
 
-	/**
-	 * Enables or disables the UI compoment.
-	 * 
-	 * @param enabled
-	 *            true, if the UI component should be enabled.
-	 */
-	public void setEnabled(boolean enabled);
+    /**
+     * Sets the locale. Usually this should have impact on the current date
+     * format string.
+     *
+     * @param locale the locale to set
+     */
+    public void setLocale(Locale locale);
 
-	/**
-	 * Adds a property change listener that should be added to the implementing
-	 * UI component. The UI component should fire a "date" property if the date
-	 * changes.
-	 * 
-	 * @param listener
-	 *            the property change listener.
-	 */
-	public void addPropertyChangeListener(PropertyChangeListener listener);
+    /**
+     * Enables or disables the UI compoment.
+     *
+     * @param enabled true, if the UI component should be enabled.
+     */
+    public void setEnabled(boolean enabled);
 
-	/**
-	 * Adds a property change listener that should be added to the implementing
-	 * UI component. The UI component should fire a "date" property if the date
-	 * changes.
-	 * 
-	 * @param propertyName
-	 *            the property name, e.g. "date"
-	 * @param listener
-	 *            the property change listener.
-	 */
-	public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener);
+    /**
+     * Adds a property change listener that should be added to the implementing
+     * UI component. The UI component should fire a "date" property if the date
+     * changes.
+     *
+     * @param listener the property change listener.
+     */
+    public void addPropertyChangeListener(PropertyChangeListener listener);
 
-	/**
-	 * Removes a property change listener.
-	 * 
-	 * @param listener
-	 *            the property change listener.
-	 */
-	public void removePropertyChangeListener(PropertyChangeListener listener);
+    /**
+     * Adds a property change listener that should be added to the implementing
+     * UI component. The UI component should fire a "date" property if the date
+     * changes.
+     *
+     * @param propertyName the property name, e.g. "date"
+     * @param listener the property change listener.
+     */
+    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener);
 
-	/**
-	 * Removes the listener from the date editor's property change listeners for the specific property.
-	 * 
-	 * @param propertyName
-	 *            the property to listen for, e.g. "date"
-	 * @param listener
-	 *            the listener
-	 */
-	public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener);
+    /**
+     * Removes a property change listener.
+     *
+     * @param listener the property change listener.
+     */
+    public void removePropertyChangeListener(PropertyChangeListener listener);
+
+    /**
+     * Removes the listener from the date editor's property change listeners for
+     * the specific property.
+     *
+     * @param propertyName the property to listen for, e.g. "date"
+     * @param listener the listener
+     */
+    public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener);
 }
