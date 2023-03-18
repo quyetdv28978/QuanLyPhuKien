@@ -4,22 +4,32 @@
  */
 package ViewModel;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author yugip
  */
-public class UserView {
-    private String id, ten, mk;
+public class ChatLieuView {
 
-    public UserView(String ten, String mk) {
-        this.ten = ten;
-        this.mk = mk;
+    private String id;
+    private String ten, ma;
+
+    public ChatLieuView() {
     }
 
-    public UserView(String id, String ten, String mk) {
+    public ChatLieuView(String ten) {
+        this.ten = ten;
+    }
+    
+    
+
+    public ChatLieuView(String id, String ten, String ma) {
         this.id = id;
         this.ten = ten;
-        this.mk = mk;
+        this.ma = ma;
     }
 
     public String getId() {
@@ -29,8 +39,6 @@ public class UserView {
     public void setId(String id) {
         this.id = id;
     }
-    
-    
 
     public String getTen() {
         return ten;
@@ -40,13 +48,16 @@ public class UserView {
         this.ten = ten;
     }
 
-    public String getMk() {
-        return mk;
+    public String getMa() {
+        return ma;
     }
 
-    public void setMk(String mk) {
-        this.mk = mk;
+    public void setMa(String ma) {
+        this.ma = ma;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return ten;
+    }
 }

@@ -4,9 +4,16 @@
  */
 package Utilities;
 
+import DomainModel.ChatLieu;
+import DomainModel.ChiTietGioHang;
+import DomainModel.ChiTietHoaDon;
 import DomainModel.ChucVu;
+import DomainModel.DanhMuc;
+import DomainModel.GioHang;
+import DomainModel.HoaDon;
+import DomainModel.KhachHang;
 import DomainModel.NhanVien;
-import DomainModel.User;
+import DomainModel.SanPham;
 import java.util.List;
 import java.util.Properties;
 import org.hibernate.Session;
@@ -14,6 +21,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 
 /**
@@ -36,7 +44,14 @@ public class DBConnection {
         confi.setProperties(pro);
         confi.addAnnotatedClass(ChucVu.class);
         confi.addAnnotatedClass(NhanVien.class);
-        confi.addAnnotatedClass(User.class);
+        confi.addAnnotatedClass(DanhMuc.class);
+        confi.addAnnotatedClass(ChatLieu.class);
+        confi.addAnnotatedClass(SanPham.class);
+        confi.addAnnotatedClass(KhachHang.class);
+        confi.addAnnotatedClass(HoaDon.class);
+        confi.addAnnotatedClass(ChiTietHoaDon.class);
+        confi.addAnnotatedClass(GioHang.class);
+        confi.addAnnotatedClass(ChiTietGioHang.class);
 
         ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
         FACTORY = confi.buildSessionFactory(ser);
@@ -52,7 +67,8 @@ public class DBConnection {
         List listOB = null;
         try {
             ss = getseFactory().openSession();
-            listOB = ss.createQuery(sql).getResultList();
+            Query q = ss.createQuery(sql);
+            return q.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -60,6 +76,12 @@ public class DBConnection {
         }
 
         return listOB;
+//System.out.println(args[0]);
+//        System.out.println("2: " + args[1]);
+//        for (Object arg : args) {
+//            System.out.println(arg);
+//        }
+//        return null;
     }
 
     public static List<Object[]> selectQueRyJoin(String sql) {

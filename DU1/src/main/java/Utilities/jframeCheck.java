@@ -129,5 +129,4 @@ public class jframeCheck {
     public UUID createID() {
         return UUID.randomUUID();
     }
-    
 }

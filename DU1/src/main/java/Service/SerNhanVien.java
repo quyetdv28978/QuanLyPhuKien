@@ -6,11 +6,9 @@ package Service;
 
 import DomainModel.ChucVu;
 import DomainModel.NhanVien;
-import DomainModel.User;
 import Responsitoties.ResNhanVien;
 import ViewModel.ChucVuView;
 import ViewModel.NhanVienView;
-import ViewModel.UserView;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +28,9 @@ public class SerNhanVien implements IFService<NhanVienView> {
                 listNVV.add(new NhanVienView(((NhanVien) objects[0]).getId(), ((NhanVien) objects[0]).getMa(), ((NhanVien) objects[0]).getTen(),
                         ((NhanVien) objects[0]).getGioitinh(), ((NhanVien) objects[0]).getDiachi(),
                         ((NhanVien) objects[0]).getSdt(), ((NhanVien) objects[0]).getNgaySinh(),
-                        new ChucVuView(((ChucVu) objects[1]).getId(), ((ChucVu) objects[1]).getMa(), ((ChucVu) objects[1]).getTen()),
-                        new UserView(((User) objects[2]).getId(),((User) objects[2]).getTentk(), ((User) objects[2]).getMk())));
-            }
+                           new ChucVuView(((ChucVu) objects[1]).getId(), ((ChucVu) objects[1]).getMa(), ((ChucVu) objects[1]).getTen()),
+                        null, null));
+                        }
             return listNVV;
         }
         return null;
@@ -69,7 +67,7 @@ public class SerNhanVien implements IFService<NhanVienView> {
         return new NhanVien(q.getId(), q.getMa(), q.getTen(), q.getGioitinh(), q.getDiachi(),
                 q.getSdt(), q.getNgaySinh(),
                 new ChucVu(q.getCv().getId(), q.getCv().getMa(), q.getCv().getTen()),
-                 new User(q.getUV().getId(), q.getUV().getTen(), q.getUV().getMk())
+                null, null
         );
     }
 

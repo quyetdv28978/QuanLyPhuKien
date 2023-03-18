@@ -4,9 +4,7 @@
  */
 package Responsitoties;
 
-import Utilities.DBConnection;
 import java.util.List;
-import org.hibernate.Session;
 
 /**
  *

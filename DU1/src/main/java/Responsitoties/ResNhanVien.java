@@ -40,7 +40,6 @@ public class ResNhanVien implements IfResponsitoties<NhanVien> {
         nv.setNgaySinh(q.getNgaySinh());
         nv.setSdt(q.getSdt());
         nv.setCv(q.getCv());
-        nv.setUser(q.getUser());
         return DBConnection.executeQuery(nv, "update");
 
     }

@@ -21,43 +21,42 @@ public class NhanVien implements Serializable {
 
     @Id
     private String id;
-    private String ma, ten, gioitinh, diachi, sdt;
+    private String ma, ten, gioitinh, diachi, sdt, tentk, mk;
     @Temporal(TemporalType.DATE)
     private Date ngaySinh;
     @OneToOne
     @JoinColumn(name = "idcv")
     private ChucVu cv;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "iduser")
-    private User user;
-   
 
     public NhanVien() {
     }
 
-    public NhanVien(String id, String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVu cv, User user) {
+    public NhanVien(String id, String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVu cv, String tentk, String mk) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.gioitinh = gioitinh;
         this.diachi = diachi;
         this.sdt = sdt;
+        this.tentk = tentk;
+        this.mk = mk;
         this.ngaySinh = ngaySinh;
         this.cv = cv;
-        this.user = user;
     }
 
-    public NhanVien(String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVu cv, User user) {
+    public NhanVien(String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVu cv, String tentk, String mk) {
         this.ma = ma;
         this.ten = ten;
         this.gioitinh = gioitinh;
         this.diachi = diachi;
         this.sdt = sdt;
+        this.tentk = tentk;
+        this.mk = mk;
         this.ngaySinh = ngaySinh;
         this.cv = cv;
-        this.user = user;
     }
 
+    
 
     public String getId() {
         return id;
@@ -123,11 +122,22 @@ public class NhanVien implements Serializable {
         this.cv = cv;
     }
 
-    public User getUser() {
-        return user;
+    public String getTentk() {
+        return tentk;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setTentk(String tentk) {
+        this.tentk = tentk;
     }
+
+    public String getMk() {
+        return mk;
+    }
+
+    public void setMk(String mk) {
+        this.mk = mk;
+    }
+
+    
+    
 }

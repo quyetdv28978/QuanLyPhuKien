@@ -9,35 +9,36 @@ import java.util.Date;
 public class NhanVienView {
 
     private String id;
-    private String ma, ten, gioitinh, diachi, sdt;
+    private String ma, ten, gioitinh, diachi, sdt, tenTK, mk;
     private Date ngaySinh;
     private ChucVuView cv;
-    private UserView UV;
 
     public NhanVienView() {
     }
 
-    public NhanVienView(String id, String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVuView cv, UserView UV) {
+    public NhanVienView(String id, String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVuView cv, String tenTK, String mk) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.gioitinh = gioitinh;
         this.diachi = diachi;
         this.sdt = sdt;
+        this.tenTK = tenTK;
+        this.mk = mk;
         this.ngaySinh = ngaySinh;
         this.cv = cv;
-        this.UV = UV;
     }
 
-    public NhanVienView(String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVuView cv, UserView UV) {
+    public NhanVienView(String ma, String ten, String gioitinh, String diachi, String sdt, Date ngaySinh, ChucVuView cv, String tenTK, String mk) {
         this.ma = ma;
         this.ten = ten;
         this.gioitinh = gioitinh;
         this.diachi = diachi;
         this.sdt = sdt;
+        this.tenTK = tenTK;
+        this.mk = mk;
         this.ngaySinh = ngaySinh;
         this.cv = cv;
-        this.UV = UV;
     }
 
 
@@ -105,15 +106,20 @@ public class NhanVienView {
         this.cv = cv;
     }
 
-
-    public UserView getUV() {
-        return UV;
+    public String getTenTK() {
+        return tenTK;
     }
 
-    public void setUV(UserView UV) {
-        this.UV = UV;
+    public void setTenTK(String tenTK) {
+        this.tenTK = tenTK;
     }
-    
-    
+
+    public String getMk() {
+        return mk;
+    }
+
+    public void setMk(String mk) {
+        this.mk = mk;
+    }
 
 }

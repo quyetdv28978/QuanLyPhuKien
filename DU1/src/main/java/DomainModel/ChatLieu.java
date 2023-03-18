@@ -13,20 +13,26 @@ import javax.persistence.Table;
  * @author yugip
  */
 @Entity
-@Table(name = "user_pass")
-public class User {
+@Table(name = "chatlieu")
+public class ChatLieu {
 
     @Id
     private String id;
-        private String tentk, mk;
+    private String tenchatlieu, ma;
 
-    public User() {
+    public ChatLieu() {
     }
 
-    public User(String id, String tentk, String mk) {
+    public ChatLieu(String ten) {
+        this.tenchatlieu = ten;
+    }
+    
+    
+
+    public ChatLieu(String id, String ten, String ma) {
         this.id = id;
-        this.tentk = tentk;
-        this.mk = mk;
+        this.tenchatlieu = ten;
+        this.ma = ma;
     }
 
     public String getId() {
@@ -37,20 +43,20 @@ public class User {
         this.id = id;
     }
 
-    public String getTentk() {
-        return tentk;
+    public String getTen() {
+        return tenchatlieu;
     }
 
-    public void setTentk(String tentk) {
-        this.tentk = tentk;
+    public void setTen(String ten) {
+        this.tenchatlieu = ten;
     }
 
-    public String getMk() {
-        return mk;
+    public String getMa() {
+        return ma;
     }
 
-    public void setMk(String mk) {
-        this.mk = mk;
+    public void setMa(String ma) {
+        this.ma = ma;
     }
 
 }

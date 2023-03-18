@@ -9,7 +9,6 @@ import Service.SerNhanVien;
 import Utilities.jframeCheck;
 import ViewModel.ChucVuView;
 import ViewModel.NhanVienView;
-import ViewModel.UserView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -74,8 +73,8 @@ public class QLNhanVien extends javax.swing.JFrame {
                     object.getSdt(),
                     object.getGioitinh(),
                     object.getCv().getTen(),
-                    object.getUV().getTen(),
-                    object.getUV().getMk()
+                    object.getTen(),
+                    object.getMk()
                 });
             }
         }
@@ -89,7 +88,7 @@ public class QLNhanVien extends javax.swing.JFrame {
                 return new NhanVienView(tbnNV.getValueAt(tbnNV.getSelectedRow(), 0).toString(), tbnNV.getValueAt(tbnNV.getSelectedRow(), 1).toString(), txtT.getText().trim(), rdoNam.isSelected() == true ? "Nam" : "Nữ",
                         txtD.getText().trim(), txtSDT.getText().trim(), new SimpleDateFormat("yyyy-MM-dd").parse(txtNS.getText().trim()),
                        (ChucVuView) dccCV.getSelectedItem(),
-                        new UserView(((UserView) this.serNV.getALl("").get(tbnNV.getSelectedRow()).getUV()).getId(), txtTK.getText().trim(), txtMK.getText().trim())
+                        null, null
                 );
             }
             String ma2 = null;
@@ -98,8 +97,8 @@ public class QLNhanVien extends javax.swing.JFrame {
             }else ma2 = txtT.getText().trim();
             return new NhanVienView(jcheck.createID().toString(), jcheck.randomMA(), txtT.getText(), rdoNam.isSelected() == true ? "Nam" : "Nữ",
                     txtD.getText().trim(), txtSDT.getText().trim(), new SimpleDateFormat("yyyy-MM-dd").parse(txtNS.getText().trim()),
-                  (ChucVuView) dccCV.getSelectedItem(),
-                    new UserView(jcheck.createID().toString(), ma2, ma)
+                      (ChucVuView) dccCV.getSelectedItem(),
+                    null,null
             );
         } catch (ParseException ex) {
             Logger.getLogger(QLNhanVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -142,8 +141,6 @@ public class QLNhanVien extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbnNV = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
-        txtTuoi = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtTK = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -303,10 +300,6 @@ public class QLNhanVien extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tbnNV);
 
-        jLabel8.setText("Tuoi: ");
-
-        txtTuoi.setName("Tuổi "); // NOI18N
-
         jLabel6.setText("Tài khoản : ");
 
         txtTK.setEnabled(false);
@@ -363,18 +356,16 @@ public class QLNhanVien extends javax.swing.JFrame {
                                         .addGap(57, 57, 57)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(cbbCV, 0, 146, Short.MAX_VALUE)
-                                            .addComponent(txtTuoi)
                                             .addComponent(txtTK))))
                                 .addGap(18, 18, 18)
                                 .addComponent(btnTD)))
-                        .addGap(0, 53, Short.MAX_VALUE)))
+                        .addGap(0, 290, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -389,9 +380,7 @@ public class QLNhanVien extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtNS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtTuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -574,7 +563,6 @@ public class QLNhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
@@ -594,6 +582,5 @@ public class QLNhanVien extends javax.swing.JFrame {
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtT;
     private javax.swing.JTextField txtTK;
-    private javax.swing.JTextField txtTuoi;
     // End of variables declaration//GEN-END:variables
 }
