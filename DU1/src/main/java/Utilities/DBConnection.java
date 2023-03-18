@@ -4,9 +4,8 @@
  */
 package Utilities;
 
-import DomainModel.ChucVu;
-import DomainModel.NhanVien;
-import DomainModel.User;
+import DomainModels.CV;
+import DomainModels.NV;
 import java.util.List;
 import java.util.Properties;
 import org.hibernate.Session;
@@ -30,13 +29,12 @@ public class DBConnection {
         pro.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
         pro.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1;trustServerCertificate=true");
-        pro.put(Environment.USER, "sa");
-        pro.put(Environment.PASS, "1");
+        pro.put(Environment.USER, "Kanna");
+        pro.put(Environment.PASS, "S2gaungok");
         pro.put(Environment.SHOW_SQL, true);
         confi.setProperties(pro);
-        confi.addAnnotatedClass(ChucVu.class);
-        confi.addAnnotatedClass(NhanVien.class);
-        confi.addAnnotatedClass(User.class);
+        confi.addAnnotatedClass(CV.class);
+        confi.addAnnotatedClass(NV.class);
 
         ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
         FACTORY = confi.buildSessionFactory(ser);

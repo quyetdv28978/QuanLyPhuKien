@@ -60,7 +60,7 @@ public class jframeCheck {
                         if (Integer.parseInt(((JTextField) listOB.get(i)).getText().trim()) < dk[0]
                                 || Integer.parseInt(((JTextField) listOB.get(i)).getText().trim()) > dk[1]) {
                             JOptionPane.showMessageDialog(thisjFrame, ((JTextField) ((JTextField) listOB.get(i))).getName()
-                                    + " phải nằm trong khoản (" + dk[0] + "-" + dk[1] + ")");
+                                    + " phải nằm trong khoảng (" + dk[0] + "-" + dk[1] + ")");
                             ((JTextField) listOB.get(i)).requestFocus();
                             return 0;
                         }
@@ -116,7 +116,7 @@ public class jframeCheck {
 
     public boolean checkClcick(JTable jtable, JFrame jrame) {
         if (jtable.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(jrame, "Vui lòng chọn một dòng trên table");
+            JOptionPane.showMessageDialog(jrame, "Vui lòng chọn một dòng trên bảng");
             return false;
         }
         return true;
