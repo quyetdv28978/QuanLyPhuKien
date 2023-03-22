@@ -5,13 +5,14 @@
 package DomainModels;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.*;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,23 +28,29 @@ public class NhanVien implements Serializable {
     private String tenNhanVien;
     private String cmnd;
     private String gioiTinh;
+
     private Date ngaySinh;
+
     private String diaChi;
     private String sdt;
+    private String email;
     private String anh;
     private String taiKhoan;
     private String matKhau;
+
+    @Temporal(TemporalType.DATE)
     private Date ngayTao;
-    private String idChucVu;
-    private int trangThai;
-    @ManyToOne
+
+    @OneToOne
     @JoinColumn(name = "idChucVu")
     private ChucVu chucVu;
+
+    private int trangThai;
 
     public NhanVien() {
     }
 
-    public NhanVien(String idNhanVien, String maNhanVien, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String anh, String taiKhoan, String matKhau, Date ngayTao, String idChucVu, int trangThai, ChucVu chucVu) {
+    public NhanVien(String idNhanVien, String maNhanVien, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String email, String anh, String taiKhoan, String matKhau, Date ngayTao, ChucVu chucVu, int trangThai) {
         this.idNhanVien = idNhanVien;
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
@@ -52,24 +59,30 @@ public class NhanVien implements Serializable {
         this.ngaySinh = ngaySinh;
         this.diaChi = diaChi;
         this.sdt = sdt;
+        this.email = email;
         this.anh = anh;
         this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
         this.ngayTao = ngayTao;
-        this.idChucVu = idChucVu;
-        this.trangThai = trangThai;
         this.chucVu = chucVu;
+        this.trangThai = trangThai;
     }
 
-    public NhanVien(String maNhanVien, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String sdt, int trangThai, ChucVu chucVu) {
+    public NhanVien(String idNhanVien, String maNhanVien, String taiKhoan, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String email, String anh, Date ngayTao, ChucVu chucVu, int trangThai) {
+        this.idNhanVien = idNhanVien;
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
         this.cmnd = cmnd;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;
+        this.diaChi = diaChi;
         this.sdt = sdt;
-        this.trangThai = trangThai;
+        this.email = email;
+        this.anh = anh;
+        this.taiKhoan = taiKhoan;
+        this.ngayTao = ngayTao;
         this.chucVu = chucVu;
+        this.trangThai = trangThai;
     }
 
     public String getIdNhanVien() {
@@ -136,6 +149,14 @@ public class NhanVien implements Serializable {
         this.sdt = sdt;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getAnh() {
         return anh;
     }
@@ -168,12 +189,12 @@ public class NhanVien implements Serializable {
         this.ngayTao = ngayTao;
     }
 
-    public String getIdChucVu() {
-        return idChucVu;
+    public ChucVu getChucVu() {
+        return chucVu;
     }
 
-    public void setIdChucVu(String idChucVu) {
-        this.idChucVu = idChucVu;
+    public void setChucVu(ChucVu chucVu) {
+        this.chucVu = chucVu;
     }
 
     public int getTrangThai() {
@@ -182,14 +203,6 @@ public class NhanVien implements Serializable {
 
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
-    }
-
-    public ChucVu getChucVu() {
-        return chucVu;
-    }
-
-    public void setChucVu(ChucVu chucVu) {
-        this.chucVu = chucVu;
     }
 
 }

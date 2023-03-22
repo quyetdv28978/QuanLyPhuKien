@@ -5,7 +5,11 @@
 package Services.Impl;
 
 import DomainModels.ChucVu;
+import Respositories.IManageChucVuRespository;
+import Respositories.Impl.ChucVuRespository;
 import Services.IManageChucVuService;
+import ViewModels.ChucVuViewModel;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,26 +18,32 @@ import java.util.List;
  */
 public class ChucVuService implements IManageChucVuService {
 
-    private ChucVuRespository chucVuRespository = new IMa
-    @Override
+    public final ChucVuRespository chucVuRespository;
 
-    public List<ChucVu> getListFromDb() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ChucVuService() {
+        chucVuRespository = new ChucVuRespository();
     }
 
     @Override
-    public int them(String maChucVu) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<ChucVuViewModel> getListFromDb() {
+        List<ChucVuViewModel> list = new ArrayList<>();
+        for (ChucVu chucVu : chucVuRespository.getListFromDb()) {
+            list.add(new ChucVuViewModel(
+                    chucVu.getIdChucVu(),
+                    chucVu.getMaChucVu(),
+                    chucVu.getTenChucVu()));
+        };
+        return list;
     }
 
-    @Override
-    public int capNhat(String machucVu) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<ChucVuViewModel> getAllLoad() {
+        List<ChucVuViewModel> chucVuViewModel = new ArrayList<>();
+        for (ChucVu chucVu : chucVuRespository.getAllLoad()) {
+            chucVuViewModel.add(new ChucVuViewModel(
+                    chucVu.getIdChucVu(),
+                    chucVu.getMaChucVu(),
+                    chucVu.getTenChucVu()));
+        }
+        return chucVuViewModel;
     }
-
-    @Override
-    public int xoa(String maChucVu) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  *
  * @author yugip
  */
-public class jframeCheck {
+public class JframeCheck {
 
     public boolean checkData(List<Object> checkL, JFrame thisjFrame) {
         for (Object object : checkL) {

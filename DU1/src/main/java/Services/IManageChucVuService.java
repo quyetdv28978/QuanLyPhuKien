@@ -4,7 +4,7 @@
  */
 package Services;
 
-import DomainModels.ChucVu;
+import ViewModels.ChucVuViewModel;
 import java.util.List;
 
 /**
@@ -13,6 +13,6 @@ import java.util.List;
  */
 public interface IManageChucVuService {
 
-    List<ChucVu> getListFromDb();
+    List<ChucVuViewModel> getListFromDb();
 
 }

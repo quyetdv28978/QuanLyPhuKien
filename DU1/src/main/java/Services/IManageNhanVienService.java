@@ -4,7 +4,7 @@
  */
 package Services;
 
-import ViewModel.NhanVienViewModel;
+import ViewModels.NhanVienViewModel;
 import java.util.List;
 
 /**
@@ -13,11 +13,13 @@ import java.util.List;
  */
 public interface IManageNhanVienService {
 
-    List<NhanVienViewModel> getListFromDb();
+    List<NhanVienViewModel> getListNhanVienFromDb(String dieuKien);
+    
+    Object CD (NhanVienViewModel nhanVienViewModel);
 
-    int them(String maNhanVien);
+    int them(NhanVienViewModel nhanNhanVienViewModel);
 
-    int capNhat(String maNhanVien);
+    int capNhat(NhanVienViewModel nhanVienViewModel);
 
     int xoa(String maNhanVien);
 }

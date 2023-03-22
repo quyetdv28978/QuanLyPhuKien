@@ -5,10 +5,9 @@
 package DomainModels;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -21,6 +20,7 @@ public class ChucVu implements Serializable {
 
     @Id
     private String idChucVu;
+
     private String maChucVu;
     private String tenChucVu;
     private Date ngayTao;
@@ -35,6 +35,12 @@ public class ChucVu implements Serializable {
         this.tenChucVu = tenChucVu;
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;
+    }
+
+    public ChucVu(String idChucVu, String maChucVu, String tenChucVu) {
+        this.idChucVu = idChucVu;
+        this.maChucVu = maChucVu;
+        this.tenChucVu = tenChucVu;
     }
 
     public String getIdChucVu() {

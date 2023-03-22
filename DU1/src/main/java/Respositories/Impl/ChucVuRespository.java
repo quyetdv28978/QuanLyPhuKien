@@ -17,7 +17,14 @@ public class ChucVuRespository implements IManageChucVuRespository {
 
     @Override
     public List<ChucVu> getListFromDb() {
-        return DBConnection.selectQueRy("FROM CHUCVU");
+        if (DBConnection.selectQueRy("FROM ChucVu") != null) {
+            return DBConnection.selectQueRy("FROM ChucVu");
+        }
+        return null;
+    }
+
+    public List<ChucVu> getAllLoad() {
+        return DBConnection.selectQueRy("from ChucVu");
     }
 
 }

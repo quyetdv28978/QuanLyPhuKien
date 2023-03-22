@@ -4,10 +4,22 @@
  */
 package Respositories;
 
+import DomainModels.NhanVien;
+import java.util.List;
+
 /**
  *
  * @author suppe
  */
 public interface IManageNhanVienRespository {
-    
+
+    List<Object[]> getJoin(String dieuKien);
+
+    List<NhanVien> getListNhanVienFromDb();
+
+    int them(NhanVien maNhanVien);
+
+    int capNhat(NhanVien maNhanVien);
+
+    int xoa(String maNhanVien);
 }

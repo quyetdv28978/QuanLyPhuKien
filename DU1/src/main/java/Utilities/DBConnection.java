@@ -4,8 +4,8 @@
  */
 package Utilities;
 
-import DomainModels.CV;
-import DomainModels.NV;
+import DomainModels.ChucVu;
+import DomainModels.NhanVien;
 import java.util.List;
 import java.util.Properties;
 import org.hibernate.Session;
@@ -33,8 +33,8 @@ public class DBConnection {
         pro.put(Environment.PASS, "S2gaungok");
         pro.put(Environment.SHOW_SQL, true);
         confi.setProperties(pro);
-        confi.addAnnotatedClass(CV.class);
-        confi.addAnnotatedClass(NV.class);
+        confi.addAnnotatedClass(ChucVu.class);
+        confi.addAnnotatedClass(NhanVien.class);
 
         ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
         FACTORY = confi.buildSessionFactory(ser);
