@@ -4,12 +4,6 @@
  */
 package Utilities;
 
-import domainmodel.ChatLieu;
-import domainmodel.ChiTietKhuyenMai;
-import domainmodel.DanhMuc;
-import domainmodel.KhachHang;
-import domainmodel.KhuyenMai;
-import domainmodel.SanPham;
 import java.util.List;
 
 import java.util.Properties;
@@ -39,12 +33,6 @@ public class DBConnection {
         pro.put(Environment.SHOW_SQL, true);
         confi.setProperties(pro);
         
-        confi.addAnnotatedClass(KhachHang.class);
-        confi.addAnnotatedClass(DanhMuc.class);
-        confi.addAnnotatedClass(ChatLieu.class);
-        confi.addAnnotatedClass(SanPham.class);
-        confi.addAnnotatedClass(KhuyenMai.class);
-        confi.addAnnotatedClass(ChiTietKhuyenMai.class);
 //        confi.addClass(com.foo.bar.pro.class);
         ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
         FACTORY = confi.buildSessionFactory(ser);
