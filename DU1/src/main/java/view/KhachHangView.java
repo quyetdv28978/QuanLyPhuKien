@@ -755,29 +755,31 @@ public class KhachHangView extends javax.swing.JFrame {
     }//GEN-LAST:event_tbHienThiMouseClicked
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-//        findMa(txtTim.getText());
+    String ten= txtTim.getText();
+        System.out.println(ten);
+        List<KhachHang> list= this.khachHangServices.SelectbyName(ten);
+        findMa(list);
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
       if (txtTenKhachHang.getText().trim().length() == 0) {
             JOptionPane.showMessageDialog(this, "Tên NV đang trống");
+            return;
         } 
-      else if (txtSDT.getText().trim().length() == 0) {
+     if (txtSDT.getText().trim().length() == 0) {
             JOptionPane.showMessageDialog(this, "SDT đang trống");
+            return;
         }  
-      else if (txtaDiaChi.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "Địa chỉ đang trống");
-        }   
-      else if (dateNgaySinh.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Ngày sinh đang trống");
-        }  
-      if (txtSDT.getText().contains("{0}[0-9]{9}")) {
+     
+      if (txtSDT.getText().matches("^[0-9]{10}$")==false) {
             JOptionPane.showMessageDialog(this, "SDT sai định dạng");
+            return;
         }  
       if (khachHangServices.add(getData("")) == 1) {
-        loadTable();
+          JOptionPane.showMessageDialog(this, "Tạo thành công");
+        return;
+        }loadTable();
         this.jcheck.clearView(jText, tbHienThi);
-        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -785,12 +787,18 @@ public class KhachHangView extends javax.swing.JFrame {
         if (jcheck.checkClcick(tbHienThi, this) == false) {
             return;
         } else {
-            if (jcheck.checkData(jText, this) == false) {
-                return;
-            }
-            if (jcheck.checkDinhDang(jText, new String[]{"^0[0-9]{9}$"}, null, this) == 0) {
-                return;
-            }
+            if (txtTenKhachHang.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Tên NV đang trống");
+            return;
+        } 
+     if (txtSDT.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "SDT đang trống");
+            return;
+        }  
+            if (txtSDT.getText().matches("^[0-9]{10}$")== false) {
+            JOptionPane.showMessageDialog(this, "SDT sai định dạng");
+            return;
+        }  
             int x = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa", "Thông báo", JOptionPane.YES_NO_OPTION);
             if (x== JOptionPane.YES_OPTION){
                 khachHangServices.update(getData("update"));
@@ -825,7 +833,7 @@ public class KhachHangView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void txtTimCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimCaretUpdate
-        // TODO add your handling code here:
+
         
     }//GEN-LAST:event_txtTimCaretUpdate
 
