@@ -1307,8 +1307,7 @@ public class ThongKe extends javax.swing.JFrame {
     }//GEN-LAST:event_btnthongkeActionPerformed
 
     private void btnlichsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlichsuActionPerformed
-//        this.setVisible(false);
-//        new LichS().setVisible(true);
+//
     }//GEN-LAST:event_btnlichsuActionPerformed
 
     private void btnquenmatkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnquenmatkhauActionPerformed
