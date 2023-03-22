@@ -3,42 +3,44 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package domainmodel;
-
 import java.io.Serializable;
-import java.util.Date;
+//import java.sql.Date;
+import java.sql.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author Admin
- */
 @Entity
-@Table(name ="SANPHAM")
+@Table(name = "SANPHAM")
 public class SanPham implements Serializable{
     @Id
-    private String id,ma,tenSanPham,mauSac,nhaSanXuat;
+    private String id;
+    private String ma,tenSanPham,mauSac,nhaSanXuat;
     private Date ngayTao;
-    private int trangThai, soLuong;
-    private float giaNhap, giaBan, trongLuong;
-    private String QL;
-    private String moTa;
-    
-    @OneToOne
-    @JoinColumn(name = "iddm")
-    private DanhMuc danhMuc;
-    
+    private Integer trangThai,soLuong;
+    private Float giaNhap,giaBan,trongLuong;
+    private String QL,moTa;
     @OneToOne
     @JoinColumn(name = "idcl")
-    private ChatLieu chatLieu;
+    private ChatLieu cl;
+    @OneToOne
+    @JoinColumn(name = "iddm")
+    private DanhMuc dm;
 
     public SanPham() {
     }
 
-    public SanPham(String id, String ma, String tenSanPham, String mauSac, String nhaSanXuat, Date ngayTao, int trangThai, int soLuong, float giaNhap, float giaBan, float trongLuong, String QL, String moTa, DanhMuc danhMuc, ChatLieu chatLieu) {
+    public SanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
+    }
+
+    
+
+    public SanPham(String id, String ma, String tenSanPham, String mauSac, String nhaSanXuat, Date ngayTao, Integer trangThai, Integer soLuong, Float giaNhap, Float giaBan, Float trongLuong, String QL, String moTa, ChatLieu cl, DanhMuc dm) {
         this.id = id;
         this.ma = ma;
         this.tenSanPham = tenSanPham;
@@ -52,10 +54,69 @@ public class SanPham implements Serializable{
         this.trongLuong = trongLuong;
         this.QL = QL;
         this.moTa = moTa;
-        this.danhMuc = danhMuc;
-        this.chatLieu = chatLieu;
+        this.cl = cl;
+        this.dm = dm;
+    }
+    
+    
+//    public SanPham(String ma, String tenSanPham, String mauSac, String nhaSanXuat, Date ngayTao, Integer trangThai, Integer soLuong, Float giaNhap, Float giaBan, Float trongLuong, String QL, String moTa, ChatLieu cl, DanhMuc dm) {
+//        
+//        this.ma = ma;
+//        this.tenSanPham = tenSanPham;
+//        this.mauSac = mauSac;
+//        this.nhaSanXuat = nhaSanXuat;
+//        this.ngayTao = ngayTao;
+//        this.trangThai = trangThai;
+//        this.soLuong = soLuong;
+//        this.giaNhap = giaNhap;
+//        this.giaBan = giaBan;
+//        this.trongLuong = trongLuong;
+//        this.QL = QL;
+//        this.moTa = moTa;
+//        this.cl = cl;
+//        this.dm = dm;
+//    }
+    
+    public SanPham(String ma, String tenSanPham, String mauSac, String nhaSanXuat,
+            Date ngayTao, Integer trangThai, Integer soLuong, Float giaNhap, Float giaBan,
+            Float trongLuong, String QL, ChatLieu cl, DanhMuc dm) {
+        
+        this.ma = ma;
+        this.tenSanPham = tenSanPham;
+        this.mauSac = mauSac;
+        this.nhaSanXuat = nhaSanXuat;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+        this.soLuong = soLuong;
+        this.giaNhap = giaNhap;
+        this.giaBan = giaBan;
+        this.trongLuong = trongLuong;
+        this.QL = QL;
+        this.cl = cl;
+        this.dm = dm;
+    }
+    
+    public SanPham(String id, String ma, String tenSanPham, String mauSac, String nhaSanXuat,
+            Date ngayTao, Integer trangThai, Integer soLuong, Float giaNhap, Float giaBan,
+            Float trongLuong, String QL, ChatLieu cl, DanhMuc dm) {
+        this.id = id;
+        this.ma = ma;
+        this.tenSanPham = tenSanPham;
+        this.mauSac = mauSac;
+        this.nhaSanXuat = nhaSanXuat;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+        this.soLuong = soLuong;
+        this.giaNhap = giaNhap;
+        this.giaBan = giaBan;
+        this.trongLuong = trongLuong;
+        this.QL = QL;
+        this.cl = cl;
+        this.dm = dm;
     }
 
+    
+   
     public String getId() {
         return id;
     }
@@ -104,43 +165,43 @@ public class SanPham implements Serializable{
         this.ngayTao = ngayTao;
     }
 
-    public int getTrangThai() {
+    public Integer getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(Integer trangThai) {
         this.trangThai = trangThai;
     }
 
-    public int getSoLuong() {
+    public Integer getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(int soLuong) {
+    public void setSoLuong(Integer soLuong) {
         this.soLuong = soLuong;
     }
 
-    public float getGiaNhap() {
+    public Float getGiaNhap() {
         return giaNhap;
     }
 
-    public void setGiaNhap(float giaNhap) {
+    public void setGiaNhap(Float giaNhap) {
         this.giaNhap = giaNhap;
     }
 
-    public float getGiaBan() {
+    public Float getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(float giaBan) {
+    public void setGiaBan(Float giaBan) {
         this.giaBan = giaBan;
     }
 
-    public float getTrongLuong() {
+    public Float getTrongLuong() {
         return trongLuong;
     }
 
-    public void setTrongLuong(float trongLuong) {
+    public void setTrongLuong(Float trongLuong) {
         this.trongLuong = trongLuong;
     }
 
@@ -160,20 +221,29 @@ public class SanPham implements Serializable{
         this.moTa = moTa;
     }
 
-    public DanhMuc getDanhMuc() {
-        return danhMuc;
+    public ChatLieu getCl() {
+        return cl;
     }
 
-    public void setDanhMuc(DanhMuc danhMuc) {
-        this.danhMuc = danhMuc;
+    public void setCl(ChatLieu cl) {
+        this.cl = cl;
     }
 
-    public ChatLieu getChatLieu() {
-        return chatLieu;
+    public DanhMuc getDm() {
+        return dm;
     }
 
-    public void setChatLieu(ChatLieu chatLieu) {
-        this.chatLieu = chatLieu;
+    public void setDm(DanhMuc dm) {
+        this.dm = dm;
     }
+
+    @Override
+    public String toString() {
+        return tenSanPham ;
+    }
+    
+    
+    
+    
     
 }

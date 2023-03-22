@@ -133,5 +133,8 @@ public class KhachHang implements Serializable {
     public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
+    public Object[] toRow0(){
+        return new Object[]{id,ma,ten,gioiTinh,sdt,ngaySinh,diaChi};
+    }
 
 }

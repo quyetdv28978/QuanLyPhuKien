@@ -1,12 +1,14 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFile
+
+import Utilities.DBConnection;System/Templates/Classes/Class.java to edit this template
  */
 package responsitories;
-
 import Utilities.DBConnection;
 import domainmodel.KhachHang;
 import java.util.List;
+import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 
 /**
@@ -65,5 +67,17 @@ public class KhachHangResponsitories implements Iresponsitories<KhachHang> {
     public KhachHang timObject(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+  public List<KhachHang> SelectbyName(String ten) {
+      List<KhachHang> pas;
+        String nameSelect = "%" + ten + "%";
+        try ( Session session = DBConnection.getseFactory().openSession()) {
+            TypedQuery<KhachHang> query = session.createQuery("From KhachHang  WHERE ten like :key");
+            query.setParameter("key", nameSelect);
+            System.out.println(query);
+            pas = query.getResultList();
+            session.close();
 
+        }
+        return pas;
+  }
 }

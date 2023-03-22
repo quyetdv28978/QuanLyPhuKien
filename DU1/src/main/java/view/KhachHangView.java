@@ -5,6 +5,7 @@
 package view;
 
 import Utilities.jframeCheck;
+import domainmodel.KhachHang;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.text.ParseException;
@@ -16,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import responsitories.KhachHangResponsitories;
 import services.KhachHangServices;
 import viewmodel.KhachHangViewModel;
 
@@ -29,10 +31,11 @@ public class KhachHangView extends javax.swing.JFrame {
      * Creates new form KhachHangView
      */
     public final KhachHangServices khachHangServices = new KhachHangServices();
+    public final KhachHangResponsitories hangResponsitories = new KhachHangResponsitories();
     DefaultTableModel dtm = new DefaultTableModel();
     private final jframeCheck jcheck = new jframeCheck();
     private final List<Object> jText = new ArrayList<>();
-    
+
     public KhachHangView() {
         initComponents();
         jText.add(txtTenKhachHang);
@@ -41,17 +44,18 @@ public class KhachHangView extends javax.swing.JFrame {
         jText.add(dateNgaySinh);
         jText.add(rdNam);
         jText.add(rdNu);
-        
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-double width = screenSize.getWidth();
+        double width = screenSize.getWidth();
         System.out.println("w" + width);
-double height = screenSize.getHeight();
-System.out.println("h" + height);
+        double height = screenSize.getHeight();
+        System.out.println("h" + height);
         loadTable();
 
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    public void loadTable(){
+
+    public void loadTable() {
         dtm = (DefaultTableModel) tbHienThi.getModel();
         dtm.setRowCount(0);
         List<KhachHangViewModel> khvms = khachHangServices.getAllKhachHang();
@@ -59,52 +63,57 @@ System.out.println("h" + height);
             dtm.addRow(khvm.toRow());
         }
     }
-    public void findMa(String ma){
+
+    public void findMa(List<KhachHang> list) {
         dtm = (DefaultTableModel) tbHienThi.getModel();
         dtm.setRowCount(0);
-        List<KhachHangViewModel> khvms = khachHangServices.getALl(ma);
-        for (KhachHangViewModel khvm : khvms) {
-            dtm.addRow(khvm.toRow());
+        List<KhachHang> khvm = khachHangServices.SelectbyName(txtTim.getText());
+        for (KhachHang khvms : khvm ){
+            dtm.addRow(khvms.toRow0());
         }
+        
     }
-    
-     public void fillForm(int row) throws ParseException {
+
+    public void fillForm(int row) throws ParseException {
         KhachHangViewModel nhanVien = khachHangServices.getAllKhachHang().get(row);
         txtTenKhachHang.setText(nhanVien.getTen());
         txtaDiaChi.setText(nhanVien.getDiaChi());
         txtSDT.setText(nhanVien.getSđt());
         Date ngay = new SimpleDateFormat("dd/MM/yyyy").parse(new SimpleDateFormat("dd/MM/yyyy").format(nhanVien.getNgaySinh()));
         dateNgaySinh.setDate(ngay);
-          String gt = nhanVien.getGioiTinh();
-      if(gt.equalsIgnoreCase("nam")){
-          rdNam.setSelected(true);
-      }else{
-          rdNu.setSelected(true);
-      }
-
-        
+        String gt = nhanVien.getGioiTinh();
+        if (gt.equalsIgnoreCase("nam")) {
+            rdNam.setSelected(true);
+        } else {
+            rdNu.setSelected(true);
+        }
 
 //        Date ngay = new SimpleDateFormat("dd/MM/yyyy").
 //                format(nhanVien.getNgaySinh());
-        
     }
-   
+
     private KhachHangViewModel getData(String dk) {
         if (dk.equalsIgnoreCase("update")) {
             System.out.println("update");
-            return new KhachHangViewModel(tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString(),tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 1).toString(), txtTenKhachHang.getText().trim(),rdNam.isSelected() == true ? "Nam" : "Nữ", txtSDT.getText(), dateNgaySinh.getDate(), txtaDiaChi.getText());
+            return new KhachHangViewModel(tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString(),
+                    tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 1).toString(), 
+                    txtTenKhachHang.getText().trim(), rdNam.isSelected() == true ? "Nam" : "Nữ", txtSDT.getText(),
+                    dateNgaySinh.getDate(), txtaDiaChi.getText());
         }
-        return new KhachHangViewModel(jcheck.createID().toString(),jcheck.randomMA(),txtTenKhachHang.getText().trim(),rdNam.isSelected() == true ? "Nam" : "Nữ", txtSDT.getText(), dateNgaySinh.getDate(), txtaDiaChi.getText());
+        return new KhachHangViewModel(jcheck.createID().toString(), jcheck.randomMA(), 
+                txtTenKhachHang.getText().trim(), rdNam.isSelected() == true ? "Nam" : "Nữ",
+                txtSDT.getText(), dateNgaySinh.getDate(), txtaDiaChi.getText());
 //        return null;
     }
-    public void clear(){
+
+    public void clear() {
         txtTenKhachHang.setText("");
         txtSDT.setText("");
         txtTim.setText("");
         txtaDiaChi.setText("");
-        
-    }
+        dateNgaySinh.setDate(null);
 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -169,7 +178,6 @@ System.out.println("h" + height);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(238, 235, 155));
-        setPreferredSize(new java.awt.Dimension(1000, 768));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 768));
 
@@ -635,6 +643,11 @@ System.out.println("h" + height);
                 txtTimCaretUpdate(evt);
             }
         });
+        txtTim.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKeyReleased(evt);
+            }
+        });
 
         btnTim.setText("Tìm Kiếm");
         btnTim.addActionListener(new java.awt.event.ActionListener() {
@@ -731,40 +744,45 @@ System.out.println("h" + height);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbHienThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHienThiMouseClicked
-//       if (this.jcheck.checkClcick(tbHienThi, this) == false) {
-//            return;
-//        }
-//        jcheck.clickTable(jText, tbHienThi);
-int row = tbHienThi.getSelectedRow();
+
+        int row = tbHienThi.getSelectedRow();
         try {
             fillForm(row);
         } catch (ParseException ex) {
             Logger.getLogger(KhachHangView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_tbHienThiMouseClicked
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        String ma = txtTim.getText();
-        findMa(ma);
+//        findMa(txtTim.getText());
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-         if (jcheck.checkData(jText, this) == false) {
-            return;
-        }
-        if (jcheck.checkDinhDang(jText, new String[]{"0[0-9]{9}"}, null, this) == 0) {
-            return;
-        }
-        if (khachHangServices.add(getData("")) == 1) {
-            return;
-        }
+      if (txtTenKhachHang.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Tên NV đang trống");
+        } 
+      else if (txtSDT.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "SDT đang trống");
+        }  
+      else if (txtaDiaChi.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Địa chỉ đang trống");
+        }   
+      else if (dateNgaySinh.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh đang trống");
+        }  
+      if (txtSDT.getText().contains("{0}[0-9]{9}")) {
+            JOptionPane.showMessageDialog(this, "SDT sai định dạng");
+        }  
+      if (khachHangServices.add(getData("")) == 1) {
         loadTable();
         this.jcheck.clearView(jText, tbHienThi);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-          if (this.jcheck.checkClcick(tbHienThi, this) == false) {
+
+        if (jcheck.checkClcick(tbHienThi, this) == false) {
             return;
         } else {
             if (jcheck.checkData(jText, this) == false) {
@@ -773,21 +791,29 @@ int row = tbHienThi.getSelectedRow();
             if (jcheck.checkDinhDang(jText, new String[]{"^0[0-9]{9}$"}, null, this) == 0) {
                 return;
             }
-            if (khachHangServices.update(getData("update")) == 1) {
-                return;
+            int x = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa", "Thông báo", JOptionPane.YES_NO_OPTION);
+            if (x== JOptionPane.YES_OPTION){
+                khachHangServices.update(getData("update"));
+                JOptionPane.showMessageDialog(this, "thành công");
+            }else{
+                JOptionPane.showMessageDialog(this, "thất bại");
             }
-        }
+            }
         loadTable();
-        this.jcheck.clearView(jText, tbHienThi);
+            this.jcheck.clearView(jText, tbHienThi);
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-         if (jcheck.checkClcick(tbHienThi, this) == false) {
+        if (jcheck.checkClcick(tbHienThi, this) == false) {
             return;
         } else {
             int a = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá không?", "Thông Báo", JOptionPane.YES_NO_OPTION);
             if (a == JOptionPane.YES_OPTION) {
                 khachHangServices.delete(tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString());
+                JOptionPane.showMessageDialog(this, "Xoá thành công");
+            }else {
+                JOptionPane.showMessageDialog(this, "Xoá thất bại");
             }
             loadTable();
             this.jcheck.clearView(jText, tbHienThi);
@@ -800,9 +826,18 @@ int row = tbHienThi.getSelectedRow();
 
     private void txtTimCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimCaretUpdate
         // TODO add your handling code here:
-         String ma = txtTim.getText();
-        findMa(ma);
+        
     }//GEN-LAST:event_txtTimCaretUpdate
+
+    private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
+      
+           String ten= txtTim.getText();
+        System.out.println(ten);
+        List<KhachHang> list= this.khachHangServices.SelectbyName(ten);
+        findMa(list);
+    
+        
+    }//GEN-LAST:event_txtTimKeyReleased
 
     /**
      * @param args the command line arguments

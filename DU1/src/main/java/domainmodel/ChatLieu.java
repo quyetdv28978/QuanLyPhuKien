@@ -2,38 +2,35 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package domainmodel;
-
+package domainmodel; 
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author Admin
- */
 @Entity
-@Table(name = "ChatLieu")
-public class ChatLieu implements Serializable {
-
+@Table(name="chatLieu")
+public class ChatLieu implements Serializable{
     @Id
     private String id;
-    private String ma, ten;
-    @ManyToOne
-    @JoinColumn(name = "idSP")
-    private SanPham sp;
+    private String ma,tenChatLieu;
 
     public ChatLieu() {
     }
 
-    public ChatLieu(String id, String ma, String ten, SanPham sp) {
+    public ChatLieu(String id, String ma, String tenChatLieu) {
         this.id = id;
         this.ma = ma;
-        this.ten = ten;
-        this.sp = sp;
+        this.tenChatLieu = tenChatLieu;
+    }
+    
+    public ChatLieu(String id) {
+        this.id = id;
+    }
+    
+    public ChatLieu(String ma, String tenChatLieu) {
+        this.ma = ma;
+        this.tenChatLieu = tenChatLieu;
     }
 
     public String getId() {
@@ -52,20 +49,13 @@ public class ChatLieu implements Serializable {
         this.ma = ma;
     }
 
-    public String getTen() {
-        return ten;
+    public String getTenChatLieu() {
+        return tenChatLieu;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setTenChatLieu(String tenChatLieu) {
+        this.tenChatLieu = tenChatLieu;
     }
-
-    public SanPham getSp() {
-        return sp;
-    }
-
-    public void setSp(SanPham sp) {
-        this.sp = sp;
-    }
-
+    
+    
 }

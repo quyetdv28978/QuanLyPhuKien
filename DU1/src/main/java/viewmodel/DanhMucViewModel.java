@@ -4,21 +4,22 @@
  */
 package viewmodel;
 
-/**
- *
- * @author Admin
- */
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 public class DanhMucViewModel {
-    private String id;
-    private String ma;
-    private String dongSP;
+    
+    private String id,dongSP;
 
     public DanhMucViewModel() {
     }
 
-    public DanhMucViewModel(String id, String ma, String dongSP) {
+    public DanhMucViewModel(String id, String dongSP) {
         this.id = id;
-        this.ma = ma;
+        this.dongSP = dongSP;
+    }
+    
+    public DanhMucViewModel(String dongSP) {
         this.dongSP = dongSP;
     }
 
@@ -30,14 +31,6 @@ public class DanhMucViewModel {
         this.id = id;
     }
 
-    public String getMa() {
-        return ma;
-    }
-
-    public void setMa(String ma) {
-        this.ma = ma;
-    }
-
     public String getDongSP() {
         return dongSP;
     }
@@ -45,7 +38,14 @@ public class DanhMucViewModel {
     public void setDongSP(String dongSP) {
         this.dongSP = dongSP;
     }
-  public Object[] toRow(){
-      return new Object[]{id,ma,dongSP};
-  }
+    
+    public Object[] toDataRow() {
+        return new Object[]{id,dongSP};
+    }
+
+    @Override
+    public String toString() {
+        return  dongSP ;
+    }
+    
 }

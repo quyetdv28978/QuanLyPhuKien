@@ -4,7 +4,7 @@
  */
 package responsitories;
 
-import domainmodel.DanhMuc;
+import domainmodel.SanPham;
 import java.util.List;
 import Utilities.DBConnection;
 
@@ -12,35 +12,35 @@ import Utilities.DBConnection;
  *
  * @author ADMIN
  */
-public class DanhMucResponsitories implements Iresponsitories<DanhMuc>{
+public class SanPhamResponsitories implements Iresponsitories<SanPham>{
 
     @Override
     public List<Object[]> getALLJoin(String dk) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<DanhMuc> getAll(String dk) {
-        return DBConnection.selectQueRy("from DanhMuc");
+        return DBConnection.selectQueRyJoin("from SanPham s join s.cl join s.dm");
     }
     
-    public List<DanhMuc> getAllLoad() {
-        return DBConnection.selectQueRy("from DanhMuc");
+    public List<Object[]> getALLJoinLoad() {
+        return DBConnection.selectQueRyJoin("from SanPham s join s.cl join s.dm");
     }
 
     @Override
-    public int add(DanhMuc t) {
+    public List<SanPham> getAll(String dk) {
+    return DBConnection.selectQueRy("from SanPham");
+    }
+
+    @Override
+    public int add(SanPham t) {
         return DBConnection.executeQuery(t, null);
     }
 
     @Override
-    public int update(DanhMuc t) {
+    public int update(SanPham t) {
         return DBConnection.executeQuery(t, "update");
     }
 
     @Override
     public int delete(String t) {
-        return DBConnection.delete(t, DanhMuc.class);
+        return DBConnection.delete(t, SanPham.class);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class DanhMucResponsitories implements Iresponsitories<DanhMuc>{
     }
 
     @Override
-    public DanhMuc timObject(String dk) {
+    public SanPham timObject(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

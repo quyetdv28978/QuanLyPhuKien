@@ -4,7 +4,7 @@
  */
 package responsitories;
 
-import domainmodel.DanhMuc;
+import domainmodel.ChatLieu;
 import java.util.List;
 import Utilities.DBConnection;
 
@@ -12,7 +12,7 @@ import Utilities.DBConnection;
  *
  * @author ADMIN
  */
-public class DanhMucResponsitories implements Iresponsitories<DanhMuc>{
+public class ChatLieuResponsitories implements Iresponsitories<ChatLieu> {
 
     @Override
     public List<Object[]> getALLJoin(String dk) {
@@ -20,27 +20,27 @@ public class DanhMucResponsitories implements Iresponsitories<DanhMuc>{
     }
 
     @Override
-    public List<DanhMuc> getAll(String dk) {
-        return DBConnection.selectQueRy("from DanhMuc");
+    public List<ChatLieu> getAll(String dk) {
+        return DBConnection.selectQueRy("from ChatLieu");
     }
-    
-    public List<DanhMuc> getAllLoad() {
-        return DBConnection.selectQueRy("from DanhMuc");
+
+    public List<ChatLieu> getAllLoad() {
+        return DBConnection.selectQueRy("from ChatLieu");
     }
 
     @Override
-    public int add(DanhMuc t) {
+    public int add(ChatLieu t) {
         return DBConnection.executeQuery(t, null);
     }
 
     @Override
-    public int update(DanhMuc t) {
+    public int update(ChatLieu t) {
         return DBConnection.executeQuery(t, "update");
     }
 
     @Override
     public int delete(String t) {
-        return DBConnection.delete(t, DanhMuc.class);
+        return DBConnection.delete(t, ChatLieu.class);
     }
 
     @Override
@@ -49,8 +49,8 @@ public class DanhMucResponsitories implements Iresponsitories<DanhMuc>{
     }
 
     @Override
-    public DanhMuc timObject(String dk) {
+    public ChatLieu timObject(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

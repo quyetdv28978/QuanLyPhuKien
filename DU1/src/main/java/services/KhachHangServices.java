@@ -18,16 +18,7 @@ public class KhachHangServices implements IServices<KhachHangViewModel> {
 
     public final KhachHangResponsitories hangResponsitories = new KhachHangResponsitories();
 
-    @Override
-    public List<KhachHangViewModel> getALl(String dk) {
-        
-        List<KhachHang> l=hangResponsitories.getAll(dk);
-        List<KhachHangViewModel> a = new ArrayList<>();
-        for (KhachHang khachHang : l) {
-            a.add(new KhachHangViewModel(khachHang.getId(), khachHang.getMa(), khachHang.getTen(), khachHang.getGioiTinh(), khachHang.getSdt(), khachHang.getNgaySinh(), khachHang.getDiaChi()));
-        }
-        return a;
-    }
+   
 
     @Override
     public int add(KhachHangViewModel q) {
@@ -75,5 +66,22 @@ public class KhachHangServices implements IServices<KhachHangViewModel> {
             return listKH;
         }
         return null;
+    }
+     @Override
+    public List<KhachHangViewModel> getALl(String dk) {
+        List<KhachHangViewModel> a = new ArrayList<>();
+        if(hangResponsitories.getAll(dk) != null){
+        for (KhachHang khachHang : hangResponsitories.getAll(dk)) {
+            a.add(new KhachHangViewModel(khachHang.getId(), khachHang.getMa(),
+                    khachHang.getTen(), khachHang.getGioiTinh(), khachHang.getSdt(), 
+                    khachHang.getNgaySinh(), khachHang.getDiaChi()));
+        }
+        return a;
+        }
+        return null;
+
+    }
+      public List<KhachHang> SelectbyName(String ten) {
+    return hangResponsitories.SelectbyName(ten);
     }
 }
