@@ -81,4 +81,6 @@ public class ResGioHangCT implements IfResponsitoties<ChiTietGioHang> {
     public List<GioHang> getALlGioHangs(String dk){
         return DBConnection.selectQueRy("From GioHang g " + dk);
     }
+    
+ 
 }

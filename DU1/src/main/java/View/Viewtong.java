@@ -17,6 +17,7 @@ import Responsitoties.ResHoaDon;
 import Responsitoties.ResHoaDonCho;
 import Responsitoties.ResSanPham;
 import Service.SerSanPham;
+import Utilities.DBConnection;
 import Utilities.jframeCheck;
 import ViewModel.SanPhamView;
 import java.util.HashMap;
@@ -35,7 +36,8 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.sql.Date;
+import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,6 +46,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -151,6 +154,53 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
                 hoaDon.getHinhthucthanhtoan()
             });
         }
+    }
+
+    private List<ChiTietGioHang> getChiTietGioHang(String IDGH) {
+        int soLuong = 0;
+        List<ChiTietGioHang> listCTGH = new ArrayList<>();
+//        StringBuilder tenSP1 = new StringBuilder();
+//        String maKH = "";
+        for (int i = 0; i < tblgiohang.getRowCount(); i++) {
+//                if (maKH.equals(getValueTable(i, tblgiohang, 3)) == false) {
+//                    tenSP1 = new StringBuilder();
+//                }
+//                tenSP1.append(getValueTable(i, tblgiohang, 1));
+//                tenSP1.append(",");
+//                mapSP.put(getValueTable(i, tblgiohang, 3), tenSP1);
+//            maKH = getValueTable(i, tblgiohang, 3);
+
+            int vt = i;
+
+            GioHang gh = this.resGH.getALlGioHangs(dk("g.id", IDGH)).get(0);
+
+            soLuong = Integer.parseInt(getValueTable(vt, tblgiohang, 2));
+
+            SanPham spv = (SanPham) this.resSP.getAll(dk("ma", getValueTable(vt, tblgiohang, 0))).get(0);
+
+//Update san pham
+//                SanPham s = this.resSP.getAll(dk(" s.ma ", getValueTable(tbltimtheoma.getSelectedRow(), tbltimtheoma, 0))).get(0);
+//            spv.setSoluong(spv.getSoluong() - soLuong);
+//            this.resSP.update(spv);
+            embeddableCTGH idDouble = new embeddableCTGH(spv.getId(), IDGH);
+
+            ChiTietGioHang ctGH = new ChiTietGioHang(idDouble, spv, gh, soLuong, 0, new Date());
+
+            listCTGH.add(ctGH);
+        }
+        return listCTGH;
+    }
+
+    private void clear() {
+        dtm = (DefaultTableModel) tblgiohang.getModel();
+        dtm.setRowCount(0);
+        ctghCho = null;
+        hdCho = null;
+        tblgiohang.clearSelection();
+        tbnHD.clearSelection();
+        tbltimtheoma.clearSelection();
+//        loadTableSP();
+        count = 0;
     }
 
     /**
@@ -454,6 +504,22 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
 
         jLabel7.setText("Tìm kiếm theo mã");
 
+        txttimtheoma.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                txttimtheomaHierarchyChanged(evt);
+            }
+        });
+        txttimtheoma.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txttimtheomaPropertyChange(evt);
+            }
+        });
+        txttimtheoma.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txttimtheomaKeyReleased(evt);
+            }
+        });
+
         btntimkiem.setText("Tìm kiếm");
 
         btnthemsp.setText("Thêm sản phẩm");
@@ -472,7 +538,15 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
             new String [] {
                 "Mã ", "Tên sản phẩm", "Nhà sản xuất", "Màu sắc", "Trạng thái", "Số lượng", "Giá", "Trọng lượng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbltimtheoma.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbltimtheomaMouseClicked(evt);
@@ -772,7 +846,11 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbltimtheomaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbltimtheomaMouseClicked
-        int soLuong = Integer.parseInt(JOptionPane.showInputDialog(this, "Mời nhập số lượng"));
+        String so = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
+        if (so == null) {
+            return;
+        }
+        int soLuong = Integer.parseInt(so);
         String tenSP_SanPham = tbltimtheoma.getValueAt(tbltimtheoma.getSelectedRow(), 1).toString();
         String maSP_SanPham = tbltimtheoma.getValueAt(tbltimtheoma.getSelectedRow(), 0).toString();
 
@@ -803,124 +881,194 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
     }//GEN-LAST:event_tbltimtheomaMouseClicked
 
     private void btntaohdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntaohdActionPerformed
+        if (tblgiohang.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Không thể tạo hóa đơn vui lòng thêm sản phẩm");
+            return;
+        }
         HoaDon();
-        int soLuong = 0;
-        StringBuilder tenSP1 = new StringBuilder();
-        String maKH = "";
-
-        if (hdCho == null) {
+        List listCheck = this.resHDCho.getAll("ct.kh.ma = '" + ((KhachHang) dccKH.getSelectedItem()).getMa() + "'");
+//Them gio hang neu khach hang khong co hoa don cho
+        if (listCheck.isEmpty()) {
 
             IDGH = jcheck.createID().toString();
             this.resGH.addGH(new GioHang(IDGH, jcheck.randomMA(),
                     new Date(new java.util.Date().getTime()), 0, (KhachHang) dccKH.getSelectedItem()));
 
-            for (int i = 0; i < tblgiohang.getRowCount(); i++) {
-                if (maKH.equals(getValueTable(i, tblgiohang, 3)) == false) {
-                    tenSP1 = new StringBuilder();
+        }
+        if (!listCheck.isEmpty()) {
+            HoaDon k = (HoaDon) listCheck.get(0);
+            if (tbnHD.getSelectedRow() != -1) {
+                if (getValueTable(tbnHD.getSelectedRow(), tbnHD, 0).equals(k.getId())) {
+                    GioHang gh = ((ChiTietGioHang) ctghCho.get(0)).getGh();
+                    for (ChiTietGioHang chiTietGioHang : getChiTietGioHang(gh.getId())) {
+                        resGH.add(chiTietGioHang);
+                    }
                 }
-                tenSP1.append(getValueTable(i, tblgiohang, 1));
-                tenSP1.append(",");
-                mapSP.put(getValueTable(i, tblgiohang, 3), tenSP1);
-                maKH = getValueTable(i, tblgiohang, 3);
-
-                int vt = i;
-
-                GioHang gh = this.resGH.getALlGioHangs(dk("g.id", IDGH)).get(0);
-
-                soLuong = Integer.parseInt(getValueTable(vt, tblgiohang, 2));
-
-                SanPham spv = (SanPham) this.resSP.getAll(dk("ma", getValueTable(vt, tblgiohang, 0))).get(0);
-
-//Update san pham
-//                SanPham s = this.resSP.getAll(dk(" s.ma ", getValueTable(tbltimtheoma.getSelectedRow(), tbltimtheoma, 0))).get(0);
-                spv.setSoluong(spv.getSoluong() - soLuong);
-                this.resSP.update(spv);
-
-                embeddableCTGH idDouble = new embeddableCTGH(spv.getId(), IDGH);
-
-                ChiTietGioHang ctGH = new ChiTietGioHang(idDouble, spv, gh, soLuong, 0, new Date(new java.util.Date().getTime()));
-
-                resGH.add(ctGH);
             }
-            if (tenSP1.toString().endsWith(",")) {
-                tenSP1.deleteCharAt(tenSP1.length() - 1);
+        } else {
+            IDGH = jcheck.createID().toString();
+            this.resGH.addGH(new GioHang(IDGH, jcheck.randomMA(),
+                    new Date(), 0, (KhachHang) dccKH.getSelectedItem()));
+
+            for (ChiTietGioHang chiTietGioHang : getChiTietGioHang(IDGH)) {
+                resGH.add(chiTietGioHang);
+
             }
         }
+
         tblgiohang.clearSelection();
+        tbnHD.clearSelection();
         tbltimtheoma.clearSelection();
         count = 0;
     }//GEN-LAST:event_btntaohdActionPerformed
 
     private void btnttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnttActionPerformed
+        if (tblgiohang.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Không thể tạo hóa đơn");
+            return;
+        }
+        if (IDGH == null && hdCho == null) {
+            JOptionPane.showMessageDialog(this, "Không thể tạo hóa đơn");
+            return;
+        }
+
         String idHD = jcheck.createID().toString();
         String id = null;
         int trangThai = 0;
         Date ngayTT = null;
-        if (rdodatt.isSelected() == true) {
-            trangThai = 0;
-            ngayTT = new Date(new java.util.Date().getTime());
-        } else if (rdochuatt.isSelected()) {
-            trangThai = 1;
-            ngayTT = null;
-        } else if (rdoHuy.isSelected()) {
-            trangThai = 2;
-            ngayTT = null;
-        }
+
+//Kiem tra hoa don cho cua khach 
+//.getId().equals(getValueTable(tbnHD.getSelectedRow(), tbnHD, 0))
+        List listCheck = this.resHDCho.getAll("ct.kh.ma = '" + ((KhachHang) dccKH.getSelectedItem()).getMa() + "'");
+        if (!listCheck.isEmpty() && hdCho == null) {
+            JOptionPane.showMessageDialog(this, "Bạn đang có một hóa đơn chờ vui lòng thanh toán trước");
+        } else if (hdCho != null) {
+            ChiTietGioHang cthd = ((ChiTietGioHang) ctghCho.get(0));
+            if (cthd != null && hdCho != null) {
+
+// Xu li hoa don cho
+                if (rdodatt.isSelected() == true) {
+                    trangThai = 0;
+                    ngayTT = new Date(new java.util.Date().getTime());
+                } else if (rdochuatt.isSelected()) {
+                    trangThai = 1;
+                    ngayTT = null;
+                } else if (rdoHuy.isSelected()) {
+                    trangThai = 2;
+                    ngayTT = null;
+                }
+
+                GioHang g;
+                idHD = hdCho.getId();
+                if (trangThai == 0) {
+                    HoaDon hd = ((HoaDon) this.resHD.getAll(dk(" d.id ", idHD)).get(0));
+                    if (hdCho != null) {
+                        g = ((ChiTietGioHang) ctghCho.get(0)).getGh();
+                        g.setTinhtrang(0);
+                        this.resGH.updateGH(g);
+                        hdCho.setTrangThai(0);
+                        hdCho.setNgayTT(new Date(new java.util.Date().getTime()));
+                        this.resGH.updateHD(hdCho);
+                        hd = hdCho;
+                    }
+
+                    for (int i = 0; i < tblgiohang.getRowCount(); i++) {
+                        id = getValueTable(i, tblgiohang, 0);
+                        SanPham sp = ((SanPham) this.resSP.getAll(dk(" s.ma ", id)).get(0));
+
+                        embeddableCTHD idDouble = new embeddableCTHD(idHD, sp.getId());
+                        ChiTietHoaDon ctHD = new ChiTietHoaDon(idDouble, hd, sp, Integer.parseInt(getValueTable(i, tblgiohang, 2)),
+                                Float.parseFloat(getValueTable(i, tblgiohang, 2)) * sp.getGiaban(),
+                                new Date(), trangThai
+                        );
+                        sp.setSoluong(sp.getSoluong() - Integer.parseInt(getValueTable(i, tblgiohang, 2)));
+                        this.resSP.update(sp);
+                        this.resGH.addHDCT(ctHD);
+                        
+                    }
+//  reset lai tu dau     
+                    clear();
+                    loadTableSP();
+                    count = 0;
+                } else if (trangThai == 1) {
+                    JOptionPane.showMessageDialog(this, "Không thể tạo hóa đơn chờ vui lòng thanh toán hoặc hủy");
+                } else if (trangThai == 2) {
+                    if (hdCho != null) {
+                        hdCho.setTinhTrang(2);
+                        this.resGH.updateHD(hdCho);
+                        g = ((ChiTietGioHang) ctghCho.get(0)).getGh();
+                        g.setTinhtrang(2);
+                        this.resGH.updateGH(g);
+// reset lai tu dau                       
+                        loadTableHoaDon();
+                        clear();
+                        loadTableSP();
+                    }
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Bạn đang có một hóa đơn chờ vui lòng thanh toán trước");
+            }
+        } //            HoaDon k = (HoaDon) listCheck.get(0);
+        else {
+//            HoaDon hdTable = this.resHD.getAll("").get(tbnHD.getSelectedRow());
+//            if (hdTable.getKh().getMa().equals(((KhachHang) dccKH.getSelectedItem()).getMa()) && hdTable.getTinhTrang() == 1) {
+            if (rdodatt.isSelected() == true) {
+                trangThai = 0;
+                ngayTT = new Date(new java.util.Date().getTime());
+            } else if (rdochuatt.isSelected()) {
+                trangThai = 1;
+                ngayTT = null;
+            } else if (rdoHuy.isSelected()) {
+                trangThai = 2;
+                ngayTT = null;
+            }
 
 //        Thêm hóa đơn
-        if (hdCho == null) {
-            this.resGH.addHD(new HoaDon(idHD, cbbhinhthuctt.getSelectedItem().toString(),
-                    new Date(new java.util.Date().getTime()), ngayTT, trangThai,
-                    (KhachHang) dccKH.getSelectedItem(), null,
-                    Double.parseDouble(txtdg.getText().trim())));
-        } else {
-            idHD = hdCho.getId();
-        }
-
-        if (trangThai == 0) {
-            HoaDon hd = ((HoaDon) this.resHD.getAll(dk(" d.id ", idHD)).get(0));
-            if (hdCho != null) {
-                GioHang g = ((ChiTietGioHang) ctghCho.get(0)).getGh();
-                g.setTinhtrang(0);
-                this.resGH.updateGH(g);
-                hdCho.setTrangThai(0);
-                hdCho.setNgayTT(new Date(new java.util.Date().getTime()));
-                this.resGH.updateHD(hdCho);
-                hd = hdCho;
-            }
-
-            for (int i = 0; i < tblgiohang.getRowCount(); i++) {
-                id = getValueTable(i, tblgiohang, 0);
-                SanPham sp = ((SanPham) this.resSP.getAll(dk(" s.ma ", id)).get(0));
-
-                embeddableCTHD idDouble = new embeddableCTHD(idHD, sp.getId());
-                ChiTietHoaDon ctHD = new ChiTietHoaDon(idDouble, hd, sp, Integer.parseInt(getValueTable(i, tblgiohang, 2)),
-                        Float.parseFloat(getValueTable(i, tblgiohang, 2)) * sp.getGiaban(),
-                        new Date(new java.util.Date().getTime()), trangThai
-                );
-
-                this.resGH.addHDCT(ctHD);
-            }
-        } else if (trangThai == 1) {
             if (hdCho == null) {
-                GioHang g = ((GioHang) this.resGH.getALlGioHangs(dk("id", IDGH)).get(0));
+                idHD = jcheck.createID().toString();
+                this.resGH.addHD(new HoaDon(idHD, cbbhinhthuctt.getSelectedItem().toString(),
+                        new Date(new java.util.Date().getTime()), ngayTT, trangThai,
+                        (KhachHang) dccKH.getSelectedItem(), null,
+                        Double.parseDouble(txtdg.getText().trim())));
+            }
+
+            if (trangThai == 0) {
+                HoaDon hd = ((HoaDon) this.resHD.getAll(dk(" d.id ", idHD)).get(0));
+
+                for (int i = 0; i < tblgiohang.getRowCount(); i++) {
+                    id = getValueTable(i, tblgiohang, 0);
+                    SanPham sp = ((SanPham) this.resSP.getAll(dk(" s.ma ", id)).get(0));
+
+                    embeddableCTHD idDouble = new embeddableCTHD(idHD, sp.getId());
+                    ChiTietHoaDon ctHD = new ChiTietHoaDon(idDouble, hd, sp, Integer.parseInt(getValueTable(i, tblgiohang, 2)),
+                            Float.parseFloat(getValueTable(i, tblgiohang, 2)) * sp.getGiaban(),
+                            new Date(new java.util.Date().getTime()), trangThai
+                    );
+                    sp.setSoluong(sp.getSoluong() - Integer.parseInt(getValueTable(i, tblgiohang, 2)));
+                    this.resSP.update(sp);
+                    this.resGH.addHDCT(ctHD);
+                }
+            } else if (trangThai == 1) {
+
+                GioHang g = ((GioHang) this.resGH.getALlGioHangs(dk(" g.id ", IDGH)).get(0));
                 g.setTinhtrang(1);
                 this.resGH.updateGH(g);
+//                
+            } else if (trangThai == 2) {
+                if (hdCho == null) {
+                    GioHang g = ((GioHang) this.resGH.getALlGioHangs(dk(" g.id ", IDGH)).get(0));
+                    g.setTinhtrang(2);
+                    this.resGH.updateGH(g);
+                }
             }
-        } else if (trangThai == 2) {
-            if (hdCho == null) {
-                GioHang g = ((GioHang) this.resGH.getALlGioHangs(dk("id", IDGH)).get(0));
-                g.setTinhtrang(2);
-                this.resGH.updateGH(g);
-            }
+            loadTableHoaDon();
+            clear();
+            loadTableSP();
         }
-        loadTableHoaDon();
-        DefaultTableModel dtm4 = (DefaultTableModel) tblgiohang.getModel();
-        dtm4.setRowCount(0);
-        ctghCho = null;
-        hdCho = null;
-        tblgiohang.clearSelection();
-        tbltimtheoma.clearSelection();
+        IDGH = null;
+        txtsl.setText("");
+        txtdg.setText("");
     }//GEN-LAST:event_btnttActionPerformed
 
     private void rdochuattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdochuattActionPerformed
@@ -935,9 +1083,12 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
             hdCho = (HoaDon) this.resHDCho.getAll(" ct.id= " + "'" + getValueTable(tbnHD.getSelectedRow(),
                     tbnHD, 0) + "'").get(0);
             ctghCho = this.resHDCho.getAllHDCHo(hdCho.getKh().getId());
+            System.out.println(ctghCho.size());
             DefaultTableModel dtm3 = (DefaultTableModel) tblgiohang.getModel();
             dtm3.setRowCount(count);
+
             for (Object object : ctghCho) {
+                System.out.println(((ChiTietGioHang) object).getSp().getMa());
                 dtm3.addRow(new Object[]{
                     ((ChiTietGioHang) object).getSp().getMa(),
                     ((ChiTietGioHang) object).getSp().getTensanpham(),
@@ -946,6 +1097,16 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
                 });
             }
             count++;
+            for (int i = 0; i < tblgiohang.getRowCount(); i++) {
+                for (int j = 0; j < tbltimtheoma.getRowCount(); j++) {
+                    if (tblgiohang.getValueAt(i, 0).toString().equals(getValueTable(j, tbltimtheoma, 0))) {
+                        tbltimtheoma.setValueAt(Integer.parseInt(getValueTable(j, tbltimtheoma, 5)) - Integer.parseInt(tblgiohang.getValueAt(i, 2).toString()),
+                                j, 5);
+                        break;
+                    }
+                }
+
+            }
         }
     }//GEN-LAST:event_tbnHDMouseClicked
 
@@ -957,11 +1118,20 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
         DefaultTableModel dtm6 = (DefaultTableModel) tblgiohang.getModel();
         dtm6.setRowCount(0);
         loadTableSP();
+        count = 0;
+        clear();
     }//GEN-LAST:event_btnxoatatcaActionPerformed
 
     private void btnxoaspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaspActionPerformed
+        if (tblgiohang.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm cần xóa");
+            return;
+        }
         String soluongI = JOptionPane.showInputDialog(this, "Chọn số lượng cần xóa");
         if (soluongI.trim().length() == 0) {
+            return;
+        }
+        if (JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xóa không?") != JOptionPane.YES_OPTION) {
             return;
         }
         int soLuong = Integer.parseInt(soluongI);
@@ -969,15 +1139,23 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
             JOptionPane.showMessageDialog(this, "Vui lòng nhập lại số lượng");
             return;
         }
+
         SanPham s = this.resSP.getAll(dk(" s.ma ", getValueTable(tblgiohang.getSelectedRow(), tblgiohang, 0))).get(0);
         tblgiohang.setValueAt(Integer.parseInt(getValueTable(tblgiohang.getSelectedRow(), tblgiohang, 2)) - soLuong,
                 tblgiohang.getSelectedRow(), 2);
+        if (Integer.parseInt(getValueTable(tblgiohang.getSelectedRow(), tblgiohang, 2)) <= 0) {
+            dtm = (DefaultTableModel) tblgiohang.getModel();
+            dtm.removeRow(tblgiohang.getSelectedRow());
+            tblgiohang.clearSelection();
+            return;
+        }
         for (int i = 0; i < tbltimtheoma.getRowCount(); i++) {
             if (getValueTable(i, tbltimtheoma, 0).equals(getValueTable(tblgiohang.getSelectedRow(), tblgiohang, 0))) {
                 tbltimtheoma.setValueAt(Integer.parseInt(getValueTable(i, tbltimtheoma, 5)) + soLuong, i, 5);
                 break;
             }
         }
+        tbnHD.clearSelection();
 //        this.resSP.update(s);
 //        loadTableSP();
     }//GEN-LAST:event_btnxoaspActionPerformed
@@ -985,6 +1163,18 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
     private void tblgiohangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblgiohangMouseClicked
 
     }//GEN-LAST:event_tblgiohangMouseClicked
+
+    private void txttimtheomaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txttimtheomaPropertyChange
+        System.out.println(txttimtheoma.getText());        // TODO add your handling code here:
+    }//GEN-LAST:event_txttimtheomaPropertyChange
+
+    private void txttimtheomaHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_txttimtheomaHierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttimtheomaHierarchyChanged
+
+    private void txttimtheomaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimtheomaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttimtheomaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1012,19 +1202,15 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             }
 
             Result result = null;
             BufferedImage image = null;
-            System.out.println(webcam.isOpen());
             if (webcam.isOpen()) {
-                System.out.println("webcame is open");
                 if ((image = webcam.getImage()) == null) {
                     continue;
                 }
-            } else {
-                System.out.println("web came tat");
             }
             if (image != null) {
                 LuminanceSource source = new BufferedImageLuminanceSource(image);
@@ -1033,7 +1219,7 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
                 try {
                     result = new MultiFormatReader().decode(bitmap);
                 } catch (NotFoundException e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                     //No result...
                 }
 //                System.out.println("result trong qr: " + result.getText());
@@ -1044,7 +1230,6 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
                     try {
                         sanpham = ((SanPham) this.resSP.getAll(dk(" s.ma ", result_field.getText().trim())).get(0));
                     } catch (Exception e) {
-                        e.printStackTrace();
                     }
 
 //Them san pham vao gio hang bang quet QR                  
@@ -1076,7 +1261,6 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
                                 soluong += Integer.parseInt(getValueTable(i, tblgiohang, 2));
                                 tblgiohang.setValueAt(soluong, i, 2);
                                 kt2 = 1;
-//                                result_field.setText("");
                                 break;
                             }
                         }
@@ -1093,7 +1277,6 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
                             tenSP.add(sanpham.getTensanpham());
                             count++;
                         }
-//                        result_field.setText("");
                     }
 
 // Kiểm tra Set tensanpham co rong khong và txt != null
@@ -1136,8 +1319,6 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
 //                        }
 //                    }
                 }
-            } else {
-                System.out.println("khong tim thay hinh anh");
             }
         } while (true);
     }
@@ -1160,16 +1341,24 @@ public class Viewtong extends javax.swing.JFrame implements Runnable, ThreadFact
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Viewtong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Viewtong.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Viewtong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Viewtong.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Viewtong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Viewtong.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Viewtong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Viewtong.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

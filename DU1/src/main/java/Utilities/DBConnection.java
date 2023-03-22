@@ -7,11 +7,13 @@ package Utilities;
 import DomainModel.ChatLieu;
 import DomainModel.ChiTietGioHang;
 import DomainModel.ChiTietHoaDon;
+import DomainModel.ChiTietKhuyenMai;
 import DomainModel.ChucVu;
 import DomainModel.DanhMuc;
 import DomainModel.GioHang;
 import DomainModel.HoaDon;
 import DomainModel.KhachHang;
+import DomainModel.KhuyenMai;
 import DomainModel.NhanVien;
 import DomainModel.SanPham;
 import java.util.List;
@@ -52,6 +54,8 @@ public class DBConnection {
         confi.addAnnotatedClass(ChiTietHoaDon.class);
         confi.addAnnotatedClass(GioHang.class);
         confi.addAnnotatedClass(ChiTietGioHang.class);
+        confi.addAnnotatedClass(KhuyenMai.class);
+        confi.addAnnotatedClass(ChiTietKhuyenMai.class);
 
         ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
         FACTORY = confi.buildSessionFactory(ser);
