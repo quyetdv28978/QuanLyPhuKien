@@ -2,19 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Respositories.Impl;
+package Respository;
 
-import DomainModels.ChucVu;
-import DomainModels.NhanVien;
-import Respositories.IManageNhanVienRespository;
-import Utilities.DBConnection;
+import DomainModel.ChucVu;
+import DomainModel.NhanVien;
+import Respository.IManageNhanVienRespository;
+import Utility.DBConnection;
 import java.util.List;
 
 /**
  *
  * @author suppe
  */
-public class NhanVienRespository implements IManageNhanVienRespository {
+public class NhanVienRespository implements IManageRespository {
 
     @Override
     public List<Object[]> getJoin(String dieuKien) {
@@ -61,5 +61,10 @@ public class NhanVienRespository implements IManageNhanVienRespository {
             return DBConnection.selectQueRy("from ChucVu");
         }
         return null;
+    }
+
+    @Override
+    public List<ChucVu> getListChucVuFromDb() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

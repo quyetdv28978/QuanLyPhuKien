@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Utilities;
+package Utility;
 
-import DomainModels.ChucVu;
-import DomainModels.NhanVien;
+import DomainModel.ChucVu;
+import DomainModel.NhanVien;
 import java.util.List;
 import java.util.Properties;
 import org.hibernate.Session;

@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Views;
+package View;
 
-import Respositories.Impl.NhanVienRespository;
-import Services.Impl.ChucVuService;
-import Services.Impl.NhanVienService;
-import Utilities.JframeCheck;
-import ViewModels.ChucVuViewModel;
-import ViewModels.NhanVienViewModel;
+import Respository.NhanVienRespository;
+import Service.ChucVuService;
+import Service.NhanVienService;
+import Utility.JframeCheck;
+import ViewModel.ChucVuViewModel;
+import ViewModel.NhanVienViewModel;
 import java.awt.Image;
 import java.awt.Label;
 import java.io.File;
@@ -785,7 +785,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         JFileChooser chonAnh = new JFileChooser("icon\\Icon");
 
         chonAnh.showOpenDialog(this);
-        File fileAnh = chonAnh.getSelectedFile();
+        File fileAnh = chonAnh.getSelectedFile();   
         Image anh = new ImageIcon("icon\\Icon\\" + fileAnh.getName()).getImage().getScaledInstance(labelThemAnh.getWidth(), panelThemAnh.getHeight(), 0);
         labelThemAnh.setIcon(new ImageIcon(anh));
         duongDanThuMucAnh = "icon\\Icon\\" + fileAnh.getName();

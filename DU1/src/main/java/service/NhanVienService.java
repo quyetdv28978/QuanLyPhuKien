@@ -2,14 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Services.Impl;
+package Service;
 
-import DomainModels.ChucVu;
-import DomainModels.NhanVien;
-import Respositories.Impl.NhanVienRespository;
-import Services.IManageNhanVienService;
-import ViewModels.ChucVuViewModel;
-import ViewModels.NhanVienViewModel;
+import DomainModel.ChucVu;
+import DomainModel.NhanVien;
+import Respository.NhanVienRespository;
+import ViewModel.ChucVuViewModel;
+import ViewModel.NhanVienViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
  *
  * @author suppe
  */
-public class NhanVienService implements IManageNhanVienService {
+public class NhanVienService implements IManageService {
 
     public final NhanVienRespository nhanVienRespository;
 
@@ -97,6 +96,11 @@ public class NhanVienService implements IManageNhanVienService {
     @Override
     public int xoa(String maNhanVien) {
         return nhanVienRespository.xoa(maNhanVien);
+    }
+
+    @Override
+    public List<ChucVuViewModel> getListChucVuFromDb() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

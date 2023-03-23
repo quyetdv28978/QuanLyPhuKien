@@ -2,16 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Respositories;
+package Respository;
 
-import DomainModels.NhanVien;
 import java.util.List;
+import DomainModel.ChucVu;
+import DomainModel.NhanVien;
 
 /**
  *
  * @author suppe
  */
-public interface IManageNhanVienRespository {
+public interface IManageRespository {
+
+    List<ChucVu> getListChucVuFromDb();
 
     List<Object[]> getJoin(String dieuKien);
 
