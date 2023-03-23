@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-// dau dau  lan n
+// dau dau  lan n +1 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
