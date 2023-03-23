@@ -4,22 +4,22 @@
  */
 package service;
 
-import domainModel.ChatLieu;
+import domaiModel.DanhMuc;
 import java.util.ArrayList;
 import java.util.List;
-import respository.resChatLieu;
-import viewModel.ChatLieuViewModel;
+import respository.resDanhMuc;
+import viewModel.DanhMucViewModel;
 
 /**
  *
  * @author ADMIN
  */
-public class serChatLieu implements Interface<ChatLieuViewModel>{
+public class serDanhMuc implements Interface<DanhMucViewModel>{
 
-    public final resChatLieu chatLieul;
+    public final resDanhMuc danhMuc;
     
-    public serChatLieu() {
-        this.chatLieul=new resChatLieu();
+    public serDanhMuc() {
+        this.danhMuc=new resDanhMuc();
     }
     @Override
     public List<Object[]> getALLJoin(String dk) {
@@ -27,35 +27,35 @@ public class serChatLieu implements Interface<ChatLieuViewModel>{
     }
 
     @Override
-    public List<ChatLieuViewModel> getAll(String dk) {
-        List<ChatLieuViewModel> cl=new ArrayList<>();
-        for(ChatLieu i: this.chatLieul.getAll(dk)){
-            cl.add(new ChatLieuViewModel(i.getId(),i.getMa(),i.getTenChatLieu()));
-        }   
-        return cl;
+    public List<DanhMucViewModel> getAll(String dk) {
+        List<DanhMucViewModel> dm=new ArrayList<>();
+        for(DanhMuc i:this.danhMuc.getAll(dk)){
+            dm.add(new DanhMucViewModel(i.getId(), i.getDongSP()));
+        }
+        return dm;
     }
     
-    public List<ChatLieuViewModel> getAllLoad() {
-        List<ChatLieuViewModel> cl=new ArrayList<>();
-        for(ChatLieu i: this.chatLieul.getAllLoad()){
-            cl.add(new ChatLieuViewModel(i.getId(),i.getMa(),i.getTenChatLieu()));
-        }   
-        return cl;
+    public List<DanhMucViewModel> getAllLoad() {
+        List<DanhMucViewModel> dm=new ArrayList<>();
+        for(DanhMuc i:this.danhMuc.getAllLoad()){
+            dm.add(new DanhMucViewModel(i.getId(), i.getDongSP()));
+        }
+        return dm;
     }
 
     @Override
-    public int add(ChatLieuViewModel t) {
-        return this.chatLieul.add(new ChatLieu(t.getId(), t.getMa(), t.getTenChatLieu()));
+    public int add(DanhMucViewModel t) {
+        return this.danhMuc.add((DanhMuc)CD(t));
     }
 
     @Override
-    public int update(ChatLieuViewModel t) {
-        return this.chatLieul.update(new ChatLieu(t.getId(), t.getMa(), t.getTenChatLieu()));
+    public int update(DanhMucViewModel t) {
+        return this.danhMuc.update((DanhMuc)CD(t));
     }
 
     @Override
     public int delete(String t) {
-        return this.chatLieul.delete(t);
+        return this.delete(t);
     }
 
     @Override
@@ -64,13 +64,13 @@ public class serChatLieu implements Interface<ChatLieuViewModel>{
     }
 
     @Override
-    public ChatLieuViewModel timObject(String dk) {
+    public DanhMucViewModel timObject(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Object CD(ChatLieuViewModel t) {
-        return new ChatLieu(t.getMa(), t.getTenChatLieu());
+    public Object CD(DanhMucViewModel t) {
+        return new DanhMuc(t.getId(),t.getDongSP());
     }
 
     @Override

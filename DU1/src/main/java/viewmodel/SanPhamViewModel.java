@@ -4,7 +4,7 @@
  */
 package viewModel;
 
-import domainModel.DanhMuc;
+import domaiModel.DanhMuc;
 import java.sql.Date;
 
 /**

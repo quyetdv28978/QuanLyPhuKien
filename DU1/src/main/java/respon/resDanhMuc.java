@@ -4,7 +4,7 @@
  */
 package respository;
 
-import domainModel.DanhMuc;
+import domaiModel.DanhMuc;
 import java.util.List;
 import utility.DBConnection;
 

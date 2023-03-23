@@ -4,9 +4,9 @@
  */
 package respository;
 
-import domainModel.ChatLieu;
-import domainModel.DanhMuc;
-import domainModel.SanPham;
+import domaiModel.ChatLieu;
+import domaiModel.DanhMuc;
+import domaiModel.SanPham;
 import java.util.List;
 import utility.DBConnection;
 import utility.jframeCheck;

@@ -4,9 +4,9 @@
  */
 package service;
 
-import domainModel.ChatLieu;
-import domainModel.DanhMuc;
-import domainModel.SanPham;
+import domaiModel.ChatLieu;
+import domaiModel.DanhMuc;
+import domaiModel.SanPham;
 import java.util.ArrayList;
 import java.util.List;
 import respository.resSanPham;

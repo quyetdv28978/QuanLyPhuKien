@@ -4,7 +4,7 @@
  */
 package respository;
 
-import domainModel.ChatLieu;
+import domaiModel.ChatLieu;
 import java.util.List;
 import utility.DBConnection;
 
