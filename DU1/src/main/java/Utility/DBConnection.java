@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Utilities;
 
 import java.util.List;
@@ -13,39 +9,41 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
-/**
- *
- * @author yugip
- */
 public class DBConnection {
 
     private static final SessionFactory FACTORY;
 
     static {
-        Configuration confi = new Configuration();
+        Configuration conf = new Configuration();
         Properties pro = new Properties();
         pro.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
         pro.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=LapTrinhCity;trustServerCertificate=true");
-        pro.put(Environment.USER, "sa");
+        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1;trustServerCertificate=true");
+        pro.put(Environment.USER, "sa"); 
         pro.put(Environment.PASS, "123456");
+
+        pro.put(Environment.PASS, "123");
+
         pro.put(Environment.SHOW_SQL, true);
-        confi.setProperties(pro);
+        conf.setProperties(pro);
 
-        ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
-        FACTORY = confi.buildSessionFactory(ser);
-
+        ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
+        FACTORY = conf.buildSessionFactory(ser);
     }
 
-    public static SessionFactory getseFactory() {
+    public static SessionFactory getsetFactory() {
         return FACTORY;
     }
+
+    ;
+
+
 
     public static List selectQueRy(String sql) {
         Session ss = null;
         List listOB = null;
         try {
-            ss = getseFactory().openSession();
+            ss = getsetFactory().openSession();
             listOB = ss.createQuery(sql).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,7 +58,7 @@ public class DBConnection {
         Session ss = null;
         List listOB = null;
         try {
-            ss = getseFactory().openSession();
+            ss = getsetFactory().openSession();
             listOB = ss.createQuery(sql).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,7 +72,7 @@ public class DBConnection {
     public static int executeQuery(Object o, String id) {
         Session ss = null;
         try {
-            ss = getseFactory().openSession();
+            ss = getsetFactory().openSession();
             if (id != null) {
                 ss.getTransaction().begin();
                 ss.update(o);
@@ -96,7 +94,7 @@ public class DBConnection {
     public static int delete(String id, Class a) {
         Session ss = null;
         try {
-            ss = getseFactory().openSession();
+            ss = getsetFactory().openSession();
             Object o = ss.get(a, id);
             ss.getTransaction().begin();
             ss.delete(o);
