@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DomainModel;
+package domainmodel;
 
+import utility.DBConnection;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -165,11 +166,11 @@ public class ChiTietKhuyenMai implements Serializable{
 
     @Override
     public String toString() {
-        return sp.getTensanpham();
+        return sp.getTenSanPham();
     }
     
      public Object[] toRow1(){
-        return new Object[]{id,km.getTenKM(), sp.getTensanpham(),km.getNgayKT(),km.getGiaGiam()};
+        return new Object[]{id,km.getTenKM(), sp.getTenSanPham(),km.getNgayKT(),km.getGiaGiam()};
     }
 
     

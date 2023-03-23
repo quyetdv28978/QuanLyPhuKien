@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DomainModel;
+package domainmodel;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -24,7 +24,7 @@ public class KhuyenMai implements Serializable{
     private Float giaGiam;
     private Date ngayBD, ngayKT,ngayTao;
     private int trangThai;
-//    private String moTa;
+    private String moTa;
 
     public KhuyenMai() {
         
@@ -49,7 +49,7 @@ public class KhuyenMai implements Serializable{
         this.giaGiam = giaGiam;
         this.ngayBD = ngayBD;
         this.ngayKT = ngayKT;
-//        this.moTa = moTa;
+        this.moTa = moTa;
     }
     
 
@@ -62,16 +62,16 @@ public class KhuyenMai implements Serializable{
         this.ngayBD = ngayBD;
         this.ngayKT = ngayKT;
         this.ngayTao = ngayTao;
-//        this.moTa = moTa;
+        this.moTa = moTa;
     }
 
-//    public String getMoTa() {
-//        return moTa;
-//    }
-//
-//    public void setMoTa(String moTa) {
-//        this.moTa = moTa;
-//    }
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
 
 
 
@@ -151,7 +151,7 @@ public class KhuyenMai implements Serializable{
         }
     }
     public Object[] toRow(){
-        return new Object[]{id,ma, tenKM,giaGiam,ngayBD,ngayKT};
+        return new Object[]{id,ma, tenKM,giaGiam,ngayBD,ngayKT,getTT() == 0 ?"còn hạn" :"hết hạn",moTa};
     }
 
     public KhuyenMai(String tenKM, Date ngayKT) {

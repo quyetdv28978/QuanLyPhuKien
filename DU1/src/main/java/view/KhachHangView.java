@@ -4,7 +4,7 @@
  */
 package view;
 
-import Utilities.jframeCheck;
+import utility.jframeCheck;
 import domainmodel.KhachHang;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -17,8 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import responsitories.KhachHangResponsitories;
-import services.KhachHangServices;
+import respon.KhachHangResponsitories;
+import service.KhachHangServices;
 import viewmodel.KhachHangViewModel;
 
 /**
@@ -45,7 +45,6 @@ public class KhachHangView extends javax.swing.JFrame {
         jText.add(rdNam);
         jText.add(rdNu);
 
-        
         loadTable();
 
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,11 +59,12 @@ public class KhachHangView extends javax.swing.JFrame {
         }
     }
 //
+
     public void findMa(List<KhachHang> list) {
         dtm = (DefaultTableModel) tbHienThi.getModel();
         dtm.setRowCount(0);
         List<KhachHang> khvm = khachHangServices.SelectbyName(txtTim.getText());
-        for (KhachHang khvms : khvm ){
+        for (KhachHang khvms : khvm) {
             dtm.addRow(khvms.toRow0());
         }
     }
@@ -87,15 +87,27 @@ public class KhachHangView extends javax.swing.JFrame {
 //                format(nhanVien.getNgaySinh());
     }
 
+    private boolean checkSDTKH(String sdt) {
+        for (int i = 0; i < hangResponsitories.getAllKH().size(); i++) {
+            if (hangResponsitories.getAllKH().get(i).getSdt().equalsIgnoreCase(sdt)) {
+                if (tbHienThi.getSelectedRow() == i) {
+                    continue;
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+
     private KhachHangViewModel getData(String dk) {
         if (dk.equalsIgnoreCase("update")) {
             System.out.println("update");
             return new KhachHangViewModel(tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString(),
-                    tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 1).toString(), 
+                    tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 1).toString(),
                     txtTenKhachHang.getText().trim(), rdNam.isSelected() == true ? "Nam" : "Nữ", txtSDT.getText(),
                     dateNgaySinh.getDate(), txtaDiaChi.getText());
         }
-        return new KhachHangViewModel(jcheck.createID().toString(), jcheck.randomMA(), 
+        return new KhachHangViewModel(jcheck.createID().toString(), jcheck.randomMA(),
                 txtTenKhachHang.getText().trim(), rdNam.isSelected() == true ? "Nam" : "Nữ",
                 txtSDT.getText(), dateNgaySinh.getDate(), txtaDiaChi.getText());
 //        return null;
@@ -750,29 +762,30 @@ public class KhachHangView extends javax.swing.JFrame {
     }//GEN-LAST:event_tbHienThiMouseClicked
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        
+
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-      if (txtTenKhachHang.getText().trim().length() == 0) {
+        if (txtTenKhachHang.getText().trim().length() == 0) {
             JOptionPane.showMessageDialog(this, "Tên NV đang trống");
-        } 
-      else if (txtSDT.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "SDT đang trống");
-        }  
-      else if (txtaDiaChi.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "Địa chỉ đang trống");
-        }   
-      else if (dateNgaySinh.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Ngày sinh đang trống");
-        }  
-      if (txtSDT.getText().contains("{0}[0-9]{9}")) {
-            JOptionPane.showMessageDialog(this, "SDT sai định dạng");
-        }  
-      if (khachHangServices.add(getData("")) == 1) {
-        loadTable();
-        this.jcheck.clearView(jText, tbHienThi);
+            return;
         }
+        if (txtSDT.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "SDT đang trống");
+            return;
+        }
+        if (txtSDT.getText().contains("{0}[0-9]{9}")) {
+            JOptionPane.showMessageDialog(this, "SDT sai định dạng");
+            return;
+        }
+        if (checkSDTKH(txtSDT.getText()) == false) {
+            JOptionPane.showMessageDialog(this, "SDT đã tồn tại");
+            return;
+        }
+        if (khachHangServices.add(getData("")) == 1) {
+            JOptionPane.showMessageDialog(this, "Tạo thành công");
+        }loadTable();
+            this.jcheck.clearView(jText, tbHienThi);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -780,22 +793,32 @@ public class KhachHangView extends javax.swing.JFrame {
         if (jcheck.checkClcick(tbHienThi, this) == false) {
             return;
         } else {
-            if (jcheck.checkData(jText, this) == false) {
+            if (txtTenKhachHang.getText().trim().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Tên NV đang trống");
                 return;
             }
-            if (jcheck.checkDinhDang(jText, new String[]{"^0[0-9]{9}$"}, null, this) == 0) {
+            if (txtSDT.getText().trim().length() == 0) {
+                JOptionPane.showMessageDialog(this, "SDT đang trống");
+                return;
+            }
+            if (txtSDT.getText().contains("{0}[0-9]{9}")) {
+                JOptionPane.showMessageDialog(this, "SDT sai định dạng");
+                return;
+            }
+            if (checkSDTKH(txtSDT.getText()) == false) {
+                JOptionPane.showMessageDialog(this, "SDT đã tồn tại");
                 return;
             }
             int x = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa", "Thông báo", JOptionPane.YES_NO_OPTION);
-            if (x== JOptionPane.YES_OPTION){
+            if (x == JOptionPane.YES_OPTION) {
                 khachHangServices.update(getData("update"));
                 JOptionPane.showMessageDialog(this, "thành công");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "thất bại");
             }
-            }
+        }
         loadTable();
-            this.jcheck.clearView(jText, tbHienThi);
+        this.jcheck.clearView(jText, tbHienThi);
 
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -807,7 +830,7 @@ public class KhachHangView extends javax.swing.JFrame {
             if (a == JOptionPane.YES_OPTION) {
                 khachHangServices.delete(tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString());
                 JOptionPane.showMessageDialog(this, "Xoá thành công");
-            }else {
+            } else {
                 JOptionPane.showMessageDialog(this, "Xoá thất bại");
             }
             loadTable();
@@ -821,15 +844,15 @@ public class KhachHangView extends javax.swing.JFrame {
 
     private void txtTimCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimCaretUpdate
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txtTimCaretUpdate
 
     private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
-          String ten= txtTim.getText();
+        String ten = txtTim.getText();
         System.out.println(ten);
-        List<KhachHang> list= this.khachHangServices.SelectbyName(ten);
+        List<KhachHang> list = this.khachHangServices.SelectbyName(ten);
         findMa(list);
-        
+
     }//GEN-LAST:event_txtTimKeyReleased
 
     /**
