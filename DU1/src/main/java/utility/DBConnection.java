@@ -5,6 +5,7 @@
 package utility;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domaimodel.ChatLieu;
 import domaimodel.ChiTietKhuyenMai;
 import domaimodel.DanhMuc;
@@ -13,6 +14,14 @@ import domaimodel.KhuyenMai;
 import domaimodel.SanPham;
 =======
 >>>>>>> 678a8a67438d090aa30c16e443869a31b0903b5c
+=======
+import domainmodel.ChatLieu;
+import domainmodel.ChiTietKhuyenMai;
+import domainmodel.DanhMuc;
+import domainmodel.KhachHang;
+import domainmodel.KhuyenMai;
+import domainmodel.SanPham;
+>>>>>>> 1ec59489d3dc6aa9f89201863f6f7f3b6da6ac81
 import java.util.List;
 
 import java.util.Properties;
@@ -42,6 +51,12 @@ public class DBConnection {
         pro.put(Environment.SHOW_SQL, true);
         confi.setProperties(pro);
         
+        confi.addAnnotatedClass(KhachHang.class);
+        confi.addAnnotatedClass(DanhMuc.class);
+        confi.addAnnotatedClass(ChatLieu.class);
+        confi.addAnnotatedClass(SanPham.class);
+        confi.addAnnotatedClass(KhuyenMai.class);
+        confi.addAnnotatedClass(ChiTietKhuyenMai.class);
 //        confi.addClass(com.foo.bar.pro.class);
         ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
         FACTORY = confi.buildSessionFactory(ser);

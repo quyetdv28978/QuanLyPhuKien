@@ -5,9 +5,15 @@
 package respon;
 
 import utility.DBConnection;
+<<<<<<< HEAD
 import domaimodel.KhachHang;
 import domaimodel.KhuyenMai;
 import domaimodel.SanPham;
+=======
+import domainmodel.KhachHang;
+import domainmodel.KhuyenMai;
+import domainmodel.SanPham;
+>>>>>>> 1ec59489d3dc6aa9f89201863f6f7f3b6da6ac81
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
@@ -32,7 +38,16 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
        }
          return null;
     }
+<<<<<<< HEAD
     
+=======
+     public List<KhuyenMai> findTrangThai(int dk) {
+           if(DBConnection.selectQueRy("from KhuyenMai") != null){
+       return DBConnection.selectQueRy("from KhuyenMai where trangThai = " + "'" + dk+ "'" );
+       }
+         return null;
+    }
+>>>>>>> 1ec59489d3dc6aa9f89201863f6f7f3b6da6ac81
     
      public List<KhuyenMai> getAllLoad() {
          if(DBConnection.selectQueRy("from KhuyenMai") != null){
@@ -79,6 +94,7 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
         }
         return pas;
   }
+<<<<<<< HEAD
       public List<KhuyenMai> SelectbyTrangThai(String trangThai) {
       List<KhuyenMai> pas;
         String nameSelect = "%" + trangThai + "%";
@@ -92,5 +108,7 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
         }
         return pas;
   }
+=======
+>>>>>>> 1ec59489d3dc6aa9f89201863f6f7f3b6da6ac81
       
 }

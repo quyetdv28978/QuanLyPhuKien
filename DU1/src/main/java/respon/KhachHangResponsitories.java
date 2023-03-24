@@ -6,7 +6,11 @@ import Utilities.DBConnection;System/Templates/Classes/Class.java to edit this t
  */
 package respon;
 import utility.DBConnection;
+<<<<<<< HEAD
 import domaimodel.KhachHang;
+=======
+import domainmodel.KhachHang;
+>>>>>>> 1ec59489d3dc6aa9f89201863f6f7f3b6da6ac81
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.hibernate.Session;

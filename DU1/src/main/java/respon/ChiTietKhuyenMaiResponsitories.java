@@ -5,9 +5,15 @@
 package respon;
 
 import utility.DBConnection;
+<<<<<<< HEAD
 import domaimodel.ChiTietKhuyenMai;
 import domaimodel.KhuyenMai;
 import domaimodel.SanPham;
+=======
+import domainmodel.ChiTietKhuyenMai;
+import domainmodel.KhuyenMai;
+import domainmodel.SanPham;
+>>>>>>> 1ec59489d3dc6aa9f89201863f6f7f3b6da6ac81
 import java.util.List;
 import org.hibernate.Session;
 
