@@ -4,9 +4,9 @@
 
 import Utilities.DBConnection;System/Templates/Classes/Class.java to edit this template
  */
-package responsitories;
-import Utilities.DBConnection;
-import domainmodel.KhachHang;
+package respon;
+import utility.DBConnection;
+import domaimodel.KhachHang;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.hibernate.Session;

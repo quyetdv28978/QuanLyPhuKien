@@ -4,8 +4,8 @@
  */
 package viewmodel;
 
-import domainmodel.Embeddedct;
-import domainmodel.SanPham;
+import DomainModel.Embeddedct;
+import DomainModel.SanPham;
 import java.util.Date;
 
 /**

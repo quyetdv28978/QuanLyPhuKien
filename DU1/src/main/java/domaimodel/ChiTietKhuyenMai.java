@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package domainmodel;
+package domaimodel;
 
-import Utilities.DBConnection;
+import utility.DBConnection;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -24,8 +24,8 @@ public class ChiTietKhuyenMai implements Serializable{
 //    private Embeddedct ei;
     private String  id;
     private String ma;
-    private float giaGiam;
-    
+    private String moTa;
+//    private float giaGiam;
     private Date ngayTao;
     private int trangThai;
    
@@ -41,23 +41,16 @@ public class ChiTietKhuyenMai implements Serializable{
     public ChiTietKhuyenMai() {
     }
 
-    public ChiTietKhuyenMai(String id, String ma, float giaGiam, SanPham sp, KhuyenMai km) {
+    public ChiTietKhuyenMai(String id, String ma, SanPham sp, KhuyenMai km) {
         this.id = id;
         this.ma = ma;
-        this.giaGiam = giaGiam;
+//        this.giaGiam = giaGiam;
 //        this.ngayTao = ngayTao;
         this.sp = sp;
         this.km = km;
     }
 
-    public ChiTietKhuyenMai( String id, String ma, SanPham sp, KhuyenMai km) {
-        
-        this.id = id;
-        this.ma = ma;
-        
-        this.sp = sp;
-        this.km = km;
-    }
+   
 
     
 
@@ -72,10 +65,10 @@ public class ChiTietKhuyenMai implements Serializable{
 
   
 
-    public ChiTietKhuyenMai( String ma, float giaGiam, Date ngayTao, int trangThai, SanPham sp, KhuyenMai km) {
+    public ChiTietKhuyenMai( String ma, Date ngayTao, int trangThai, SanPham sp, KhuyenMai km) {
         
         this.ma = ma;
-        this.giaGiam = giaGiam;
+        
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;
         this.sp = sp;
@@ -124,13 +117,13 @@ public class ChiTietKhuyenMai implements Serializable{
         this.ma = ma;
     }
 
-    public float getGiaGiam() {
-        return giaGiam;
-    }
-
-    public void setGiaGiam(float giaGiam) {
-        this.giaGiam = giaGiam;
-    }
+//    public float getGiaGiam() {
+//        return giaGiam;
+//    }
+//
+//    public void setGiaGiam(float giaGiam) {
+//        this.giaGiam = giaGiam;
+//    }
 
     public Date getNgayTao() {
         return ngayTao;
@@ -170,7 +163,7 @@ public class ChiTietKhuyenMai implements Serializable{
     }
     
      public Object[] toRow1(){
-        return new Object[]{id,km.getTenKM(), sp.getTenSanPham(),km.getNgayKT(),km.getGiaGiam()};
+        return new Object[]{id,km.getTenKM(), sp.getTenSanPham(),km.getNgayKT(),km.getGiaGiam(),moTa};
     }
 
     

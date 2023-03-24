@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package services;
+package service;
 
-import Utilities.DBConnection;
-import domainmodel.KhuyenMai;
+import utility.DBConnection;
+import domaimodel.KhuyenMai;
 import java.util.ArrayList;
 import java.util.List;
-import responsitories.KhuyenMaiResponsitories;
+import respon.KhuyenMaiResponsitories;
 import viewmodel.KhachHangViewModel;
 import viewmodel.KhuyenMaiViewModel;
 
@@ -37,7 +37,11 @@ public final KhuyenMaiResponsitories km = new KhuyenMaiResponsitories();
     public List<KhuyenMaiViewModel> getAllLoad() {
         List<KhuyenMaiViewModel> dm=new ArrayList<>();
         for(KhuyenMai i:km.getAllLoad()){
-            dm.add(new KhuyenMaiViewModel(i.getMa(), i.getTenKM(), i.getNgayBD(), i.getNgayKT(), i.getMoTa()));
+                dm.add(new KhuyenMaiViewModel(i.getId(), i.getMa(), i.getTenKM(), 
+                        i.getNgayBD(), i.getNgayKT(), i.getMoTa(), i.getGiaGiam(), i.getTrangThai()));
+
+//            dm.add(new KhuyenMaiViewModel
+//        (i.getMa(), i.getTenKM(), i.getNgayBD(), i.getNgayKT(), i.getMoTa()));
         }
         return dm;
     }
@@ -70,6 +74,13 @@ public final KhuyenMaiResponsitories km = new KhuyenMaiResponsitories();
     @Override
     public Object CD(KhuyenMaiViewModel q) {
 //        return new KhuyenMai(q.getMa(), q.getTenKM(), q.getNgayBD(), q.getNgayKT(), q.getMoTa());
+return null;
+    }
+        public List<KhuyenMai> SelectbyName(String ten) {
+    return km.SelectbyName(ten);
+    }
+        public List<KhuyenMai> SelectbyTrangThai(String ten) {
+    return km.SelectbyTrangThai(ten);
     }
     
 }

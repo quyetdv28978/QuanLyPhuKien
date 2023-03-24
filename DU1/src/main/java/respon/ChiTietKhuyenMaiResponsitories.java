@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package responsitories;
+package respon;
 
-import Utilities.DBConnection;
-import domainmodel.ChiTietKhuyenMai;
-import domainmodel.KhuyenMai;
-import domainmodel.SanPham;
+import utility.DBConnection;
+import domaimodel.ChiTietKhuyenMai;
+import domaimodel.KhuyenMai;
+import domaimodel.SanPham;
 import java.util.List;
 import org.hibernate.Session;
 

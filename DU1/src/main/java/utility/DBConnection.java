@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Utilities;
+package utility;
 
-import domainmodel.ChatLieu;
-import domainmodel.ChiTietKhuyenMai;
-import domainmodel.DanhMuc;
-import domainmodel.KhachHang;
-import domainmodel.KhuyenMai;
-import domainmodel.SanPham;
+import domaimodel.ChatLieu;
+import domaimodel.ChiTietKhuyenMai;
+import domaimodel.DanhMuc;
+import domaimodel.KhachHang;
+import domaimodel.KhuyenMai;
+import domaimodel.SanPham;
 import java.util.List;
 
 import java.util.Properties;

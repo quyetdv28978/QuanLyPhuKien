@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package services;
+package service;
 
-import domainmodel.KhachHang;
+import domaimodel.KhachHang;
 import java.util.ArrayList;
 import java.util.List;
-import responsitories.KhachHangResponsitories;
+import respon.KhachHangResponsitories;
 import viewmodel.KhachHangViewModel;
 
 /**

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package domainmodel;
+package domaimodel;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -23,7 +23,7 @@ public class KhuyenMai implements Serializable{
     private String  ma,tenKM;
     private Float giaGiam;
     private Date ngayBD, ngayKT,ngayTao;
-    private int trangThai;
+    private String trangThai;
     private String moTa;
 
     public KhuyenMai() {
@@ -51,6 +51,18 @@ public class KhuyenMai implements Serializable{
         this.ngayKT = ngayKT;
         this.moTa = moTa;
     }
+
+    public KhuyenMai(String id, String ma, String tenKM, Float giaGiam, Date ngayBD, Date ngayKT, String trangThai, String moTa) {
+        this.id = id;
+        this.ma = ma;
+        this.tenKM = tenKM;
+        this.giaGiam = giaGiam;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
+        this.trangThai = trangThai;
+        this.moTa = moTa;
+    }
+    
     
 
 
@@ -124,7 +136,7 @@ public class KhuyenMai implements Serializable{
         this.ngayKT = ngayKT;
     }
 
-    public int getTrangThai() {
+    public String getTrangThai() {
         return trangThai;
     }
 
@@ -137,21 +149,22 @@ public class KhuyenMai implements Serializable{
     }
     
 
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
    
-    public int getTT(){
+    public String getTT(){
          Calendar cal = Calendar.getInstance();
-    Date d = cal.getTime();
-        if(ngayKT.before(d)){
-            return 1;
+         Date date = cal.getTime();
+        Date endDate1 = new Date(date.getTime() - (1 *24 * 60 *60 * 1000));
+        if(ngayKT.before(endDate1)){
+            return "Hết Hạn";
         }else{
-            return 0;
+            return "Còn Hạn";
         }
     }
     public Object[] toRow(){
-        return new Object[]{id,ma, tenKM,giaGiam,ngayBD,ngayKT,getTT() == 0 ?"còn hạn" :"hết hạn",moTa};
+        return new Object[]{id,ma, tenKM,giaGiam,ngayBD,ngayKT,getTT(),moTa};
     }
 
     public KhuyenMai(String tenKM, Date ngayKT) {

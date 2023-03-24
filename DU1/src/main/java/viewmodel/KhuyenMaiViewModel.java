@@ -4,6 +4,7 @@
  */
 package viewmodel;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -14,6 +15,8 @@ public class KhuyenMaiViewModel {
      private String id, ma,tenKM;
     private Date ngayBD, ngayKT;
     private String moTa;
+    private Float giaGiam;
+    private String trangThai;
     
 
     public KhuyenMaiViewModel() {
@@ -92,6 +95,45 @@ public class KhuyenMaiViewModel {
     public void setMoTa(String moTa) {
         this.moTa = moTa;
     }
+
+    public Float getGiaGiam() {
+        return giaGiam;
+    }
+
+    public void setGiaGiam(Float giaGiam) {
+        this.giaGiam = giaGiam;
+    }
+
+    public String getTrangThai() {
+           Calendar cal = Calendar.getInstance();
+            Date d = cal.getTime();
+        if(ngayKT.before(d)){
+            return "Hết Hạn";
+        }
+        if(ngayKT.after(d)){
+            return "Còn Hạn";
+        }
+        return null;
+        
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public KhuyenMaiViewModel(String id, String ma, String tenKM, Date ngayBD, Date ngayKT, String moTa, Float giaGiam, String trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.tenKM = tenKM;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
+        this.moTa = moTa;
+        this.giaGiam = giaGiam;
+        this.trangThai = trangThai;
+    }
+    
+
+  
     
     
 }

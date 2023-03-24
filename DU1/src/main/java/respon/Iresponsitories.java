@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package services;
+package respon;
 
 import java.util.List;
 
@@ -10,9 +10,11 @@ import java.util.List;
  *
  * @author Admin
  */
-public interface IServices<Q> {
+public interface Iresponsitories<Q> {
 
-    public List<Q> getALl(String dk);
+    public List<Object[]> getALLJoin(String dk);
+
+    public List<Q> getAll(String dk);
 
     public int add(Q q);
 
@@ -22,9 +24,5 @@ public interface IServices<Q> {
 
     public String timID(String ma);
 
-    public Q timOB(String id);
-
-    public Object CD(Q q);
-
-    public boolean checkTrung(String ma);
+    public Q timObject(String dk);
 }
