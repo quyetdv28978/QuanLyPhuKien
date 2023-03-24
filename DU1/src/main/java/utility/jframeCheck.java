@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Utilities;
 
 import java.util.List;
@@ -14,10 +11,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-/**
- *
- * @author yugip
- */
+
 public class jframeCheck {
 
     public boolean checkData(List<Object> checkL, JFrame thisjFrame) {
