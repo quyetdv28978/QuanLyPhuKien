@@ -14,7 +14,6 @@ public class KhuyenMaiViewModel {
      private String id, ma,tenKM;
     private Date ngayBD, ngayKT;
     private String moTa;
-    private Float giaGiam;
     
 
     public KhuyenMaiViewModel() {
@@ -27,17 +26,6 @@ public class KhuyenMaiViewModel {
         this.ngayKT = ngayKT;
         this.moTa = moTa;
     }
-
-    public KhuyenMaiViewModel(String ma, String tenKM, Date ngayBD, Date ngayKT, String moTa, Float giaGiam) {
-        
-        this.ma = ma;
-        this.tenKM = tenKM;
-        this.ngayBD = ngayBD;
-        this.ngayKT = ngayKT;
-        this.moTa = moTa;
-        this.giaGiam = giaGiam;
-    }
-    
 
     public KhuyenMaiViewModel(String id, String ma, String tenKM, Date ngayBD, Date ngayKT, String moTa) {
         this.id = id;
@@ -60,15 +48,6 @@ public class KhuyenMaiViewModel {
     public String getId() {
         return id;
     }
-
-    public Float getGiaGiam() {
-        return giaGiam;
-    }
-
-    public void setGiaGiam(Float giaGiam) {
-        this.giaGiam = giaGiam;
-    }
-    
 
     public void setId(String id) {
         this.id = id;

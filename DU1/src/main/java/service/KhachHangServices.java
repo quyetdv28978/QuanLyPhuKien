@@ -4,29 +4,29 @@
  */
 package service;
 
-import domaimodel.KhachHang;
+import domainmodel.KhachHang;
 import java.util.ArrayList;
 import java.util.List;
 import respon.KhachHangResponsitories;
-import viewmodel.KhachHangViewModel1;
+import viewmodel.KhachHangViewModel;
 
 /**
  *
  * @author Admin
  */
-public class KhachHangServices implements IServices<KhachHangViewModel1> {
+public class KhachHangServices implements IServices<KhachHangViewModel> {
 
     public final KhachHangResponsitories hangResponsitories = new KhachHangResponsitories();
 
    
 
     @Override
-    public int add(KhachHangViewModel1 q) {
+    public int add(KhachHangViewModel q) {
         return hangResponsitories.add((KhachHang) CD(q));
     }
 
     @Override
-    public int update(KhachHangViewModel1 q) {
+    public int update(KhachHangViewModel q) {
         return hangResponsitories.update((KhachHang) CD(q));
     }
 
@@ -41,12 +41,12 @@ public class KhachHangServices implements IServices<KhachHangViewModel1> {
     }
 
     @Override
-    public KhachHangViewModel1 timOB(String id) {
+    public KhachHangViewModel timOB(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Object CD(KhachHangViewModel1 q) {
+    public Object CD(KhachHangViewModel q) {
         return new KhachHang(q.getId(), q.getMa(), q.getTen(), q.getSdt(), q.getDiaChi(), q.getGioiTinh(), q.getNgaySinh());
 
     }
@@ -56,23 +56,23 @@ public class KhachHangServices implements IServices<KhachHangViewModel1> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public List<KhachHangViewModel1> getAllKhachHang() {
+    public List<KhachHangViewModel> getAllKhachHang() {
         if (this.hangResponsitories.getAllKH() != null) {
-            List<KhachHangViewModel1> listKH = new ArrayList<>();
+            List<KhachHangViewModel> listKH = new ArrayList<>();
             List<KhachHang> a = hangResponsitories.getAllKH();
             for (KhachHang chucVu : a) {
-                listKH.add(new KhachHangViewModel1(chucVu.getId(),chucVu.getMa(), chucVu.getTen(), chucVu.getGioiTinh(), chucVu.getSdt(), chucVu.getNgaySinh(), chucVu.getDiaChi()));
+                listKH.add(new KhachHangViewModel(chucVu.getId(),chucVu.getMa(), chucVu.getTen(), chucVu.getGioiTinh(), chucVu.getSdt(), chucVu.getNgaySinh(), chucVu.getDiaChi()));
             }
             return listKH;
         }
         return null;
     }
      @Override
-    public List<KhachHangViewModel1> getALl(String dk) {
-        List<KhachHangViewModel1> a = new ArrayList<>();
+    public List<KhachHangViewModel> getALl(String dk) {
+        List<KhachHangViewModel> a = new ArrayList<>();
         if(hangResponsitories.getAll(dk) != null){
         for (KhachHang khachHang : hangResponsitories.getAll(dk)) {
-            a.add(new KhachHangViewModel1(khachHang.getId(), khachHang.getMa(),
+            a.add(new KhachHangViewModel(khachHang.getId(), khachHang.getMa(),
                     khachHang.getTen(), khachHang.getGioiTinh(), khachHang.getSdt(), 
                     khachHang.getNgaySinh(), khachHang.getDiaChi()));
         }
