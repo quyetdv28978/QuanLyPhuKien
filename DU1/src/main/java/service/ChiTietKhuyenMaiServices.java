@@ -5,10 +5,10 @@
 package service;
 
 import utility.DBConnection;
-import domainmodel.ChiTietKhuyenMai;
-import domainmodel.DanhMuc;
-import domainmodel.KhuyenMai;
-import domainmodel.SanPham;
+import domaimodel.ChiTietKhuyenMai;
+import domaimodel.DanhMuc;
+import domaimodel.KhuyenMai;
+import domaimodel.SanPham;
 import java.util.ArrayList;
 import java.util.List;
 import respon.ChiTietKhuyenMaiResponsitories;
@@ -43,7 +43,6 @@ public class ChiTietKhuyenMaiServices implements IServices<ChiTietKhuyenMaiViewM
             for (Object[] objects : sn.getALLJoin(dk)) {
                 listNVV.add(new ChiTietKhuyenMaiViewModel(((ChiTietKhuyenMai) objects[0]).getId(),
                         ((ChiTietKhuyenMai) objects[0]).getMa(),
-                        ((ChiTietKhuyenMai) objects[0]).getGiaGiam(),
                         new SanPhamViewModel(((SanPham) objects[1]).getMa(),
                                 ((SanPham) objects[1]).getTenSanPham(),
                                 new DanhMucViewModel(((SanPham) objects[1]).
@@ -93,11 +92,11 @@ public class ChiTietKhuyenMaiServices implements IServices<ChiTietKhuyenMaiViewM
     public Object CD(ChiTietKhuyenMaiViewModel q
     ) {
 
-        return new ChiTietKhuyenMaiViewModel(q.getId(), q.getMa(), q.getGiaGiam(),
+        return new ChiTietKhuyenMaiViewModel(q.getId(), q.getMa(),
                 new SanPhamViewModel(q.getSpvm().getMa(), q.getSpvm().getTenSanPham(),
                         q.getSpvm().getDm()), new KhuyenMaiViewModel(q.getKmvm().getMa(),
                         q.getKmvm().getTenKM(), q.getKmvm().getNgayBD(),
-                        q.getKmvm().getNgayKT(), q.getKmvm().getMoTa()));
+                        q.getKmvm().getNgayKT(),q.getKmvm().getMoTa(),q.getKmvm().getGiaGiam()));
     }
 
     @Override

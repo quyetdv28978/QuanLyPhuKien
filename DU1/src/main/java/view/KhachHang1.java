@@ -22,12 +22,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import respon.KhachHangResponsitories;
 import service.KhachHangServices;
-import viewmodel.KhachHangViewModel;
+import viewmodel.KhachHangViewModel1;
 /**
  *
  * @author DELL
  */
-public class KhachHang extends javax.swing.JFrame {
+public class KhachHang1 extends javax.swing.JFrame {
   public final KhachHangServices khachHangServices = new KhachHangServices();
     public final KhachHangResponsitories hangResponsitories = new KhachHangResponsitories();
     DefaultTableModel dtm = new DefaultTableModel();
@@ -36,9 +36,17 @@ public class KhachHang extends javax.swing.JFrame {
     /**
      * Creates new form KhachHan
      */
-    public KhachHang() {
+    public KhachHang1() {
         initComponents();
+        jText.add(txtSDT);
+        jText.add(txtTenKhachHang);
+        jText.add(txtTim);
+        jText.add(txtaDiaChi);
+        jText.add(rdNam);
+        jText.add(rdNu);
         chay();
+        loadTable();
+        
     }
 
          public void chay() {
@@ -60,20 +68,13 @@ public class KhachHang extends javax.swing.JFrame {
         
         };
         th.start();
-          jText.add(txtTenKhachHang);
-        jText.add(txtaDiaChi);
-        jText.add(txtSDT);
-        jText.add(dateNgaySinh);
-        jText.add(rdNam);
-        jText.add(rdNu);
-
-        loadTable();
+        
     }
           public void loadTable() {
         dtm = (DefaultTableModel) tbHienThi.getModel();
         dtm.setRowCount(0);
-        List<KhachHangViewModel> khvms = khachHangServices.getAllKhachHang();
-        for (KhachHangViewModel khvm : khvms) {
+        List<KhachHangViewModel1> khvms = khachHangServices.getAllKhachHang();
+        for (KhachHangViewModel1 khvm : khvms) {
             dtm.addRow(khvm.toRow());
         }
     }
@@ -89,7 +90,7 @@ public class KhachHang extends javax.swing.JFrame {
     }
 
     public void fillForm(int row) throws ParseException {
-        KhachHangViewModel nhanVien = khachHangServices.getAllKhachHang().get(row);
+        KhachHangViewModel1 nhanVien = khachHangServices.getAllKhachHang().get(row);
         txtTenKhachHang.setText(nhanVien.getTen());
         txtaDiaChi.setText(nhanVien.getDiaChi());
         txtSDT.setText(nhanVien.getSđt());
@@ -118,15 +119,15 @@ public class KhachHang extends javax.swing.JFrame {
         return true;
     }
 
-    private KhachHangViewModel getData(String dk) {
+    private KhachHangViewModel1 getData(String dk) {
         if (dk.equalsIgnoreCase("update")) {
             System.out.println("update");
-            return new KhachHangViewModel(tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString(),
+            return new KhachHangViewModel1(tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString(),
                     tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 1).toString(),
                     txtTenKhachHang.getText().trim(), rdNam.isSelected() == true ? "Nam" : "Nữ", txtSDT.getText(),
                     dateNgaySinh.getDate(), txtaDiaChi.getText());
         }
-        return new KhachHangViewModel(jcheck.createID().toString(), jcheck.randomMA(),
+        return new KhachHangViewModel1(jcheck.createID().toString(), jcheck.randomMA(),
                 txtTenKhachHang.getText().trim(), rdNam.isSelected() == true ? "Nam" : "Nữ",
                 txtSDT.getText(), dateNgaySinh.getDate(), txtaDiaChi.getText());
 //        return null;
@@ -679,7 +680,7 @@ public class KhachHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "SDT đang trống");
             return;
         }
-        if (txtSDT.getText().contains("{0}[0-9]{9}")) {
+        if (txtSDT.getText().matches("{0}[0-9]{9}")) {
             JOptionPane.showMessageDialog(this, "SDT sai định dạng");
             return;
         }
@@ -705,7 +706,7 @@ public class KhachHang extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "SDT đang trống");
                 return;
             }
-            if (txtSDT.getText().contains("{0}[0-9]{9}")) {
+            if (txtSDT.getText().matches("{0}[0-9]{9}")) {
                 JOptionPane.showMessageDialog(this, "SDT sai định dạng");
                 return;
             }
@@ -798,7 +799,7 @@ public class KhachHang extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KhachHang().setVisible(true);
+                new KhachHang1().setVisible(true);
             }
         });
     }

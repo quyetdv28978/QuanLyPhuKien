@@ -5,11 +5,11 @@
 package service;
 
 import utility.DBConnection;
-import domainmodel.KhuyenMai;
+import domaimodel.KhuyenMai;
 import java.util.ArrayList;
 import java.util.List;
 import respon.KhuyenMaiResponsitories;
-import viewmodel.KhachHangViewModel;
+import viewmodel.KhachHangViewModel1;
 import viewmodel.KhuyenMaiViewModel;
 
 /**

@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author Admin
  */
-public class KhachHangViewModel {
+public class KhachHangViewModel1 {
 
     private String id;
     private String ma;
@@ -21,10 +21,10 @@ public class KhachHangViewModel {
     private String diaChi;
     
 
-    public KhachHangViewModel() {
+    public KhachHangViewModel1() {
     }
 
-    public KhachHangViewModel(String id, String ma, String ten, String gioiTinh, String sdt, Date ngaySinh, String diaChi) {
+    public KhachHangViewModel1(String id, String ma, String ten, String gioiTinh, String sdt, Date ngaySinh, String diaChi) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -41,12 +41,6 @@ public class KhachHangViewModel {
     public void setId(String id) {
         this.id = id;
     }
-
-    
-   
-
-    
-
     public String getMa() {
         return ma;
     }

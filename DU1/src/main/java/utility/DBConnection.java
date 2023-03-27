@@ -4,24 +4,21 @@
  */
 package utility;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import domaimodel.ChatLieu;
 import domaimodel.ChiTietKhuyenMai;
 import domaimodel.DanhMuc;
 import domaimodel.KhachHang;
 import domaimodel.KhuyenMai;
 import domaimodel.SanPham;
-=======
->>>>>>> 678a8a67438d090aa30c16e443869a31b0903b5c
-=======
-import domainmodel.ChatLieu;
-import domainmodel.ChiTietKhuyenMai;
-import domainmodel.DanhMuc;
-import domainmodel.KhachHang;
-import domainmodel.KhuyenMai;
-import domainmodel.SanPham;
->>>>>>> 1ec59489d3dc6aa9f89201863f6f7f3b6da6ac81
+
+import domaimodel.ChatLieu;
+import domaimodel.ChiTietKhuyenMai;
+import domaimodel.DanhMuc;
+import domaimodel.KhachHang;
+import domaimodel.KhuyenMai;
+import domaimodel.SanPham;
+
 import java.util.List;
 
 import java.util.Properties;
@@ -31,6 +28,15 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import java.util.Properties;
+import org.hibernate.cfg.Environment;
+import org.hibernate.Session;
+
+
+
+
 
 /**
  *
@@ -45,7 +51,7 @@ public class DBConnection {
         Properties pro = new Properties();
         pro.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
         pro.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1;trustServerCertificate=true");
+        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1_1;trustServerCertificate=true");
         pro.put(Environment.USER, "sa");
         pro.put(Environment.PASS, "123456");
         pro.put(Environment.SHOW_SQL, true);

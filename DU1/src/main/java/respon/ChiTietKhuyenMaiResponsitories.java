@@ -5,17 +5,18 @@
 package respon;
 
 import utility.DBConnection;
-<<<<<<< HEAD
+
+//import domaimodel.ChiTietKhuyenMai;
+//import domaimodel.KhuyenMai;
+//import domaimodel.SanPham;
 import domaimodel.ChiTietKhuyenMai;
 import domaimodel.KhuyenMai;
-import domaimodel.SanPham;
-=======
-import domainmodel.ChiTietKhuyenMai;
-import domainmodel.KhuyenMai;
-import domainmodel.SanPham;
->>>>>>> 1ec59489d3dc6aa9f89201863f6f7f3b6da6ac81
+//import domaimodel.SanPham;
+
 import java.util.List;
+import javax.persistence.TypedQuery;
 import org.hibernate.Session;
+//import org.hibernate.Session;
 
 /**
  *
@@ -25,10 +26,10 @@ public class ChiTietKhuyenMaiResponsitories implements Iresponsitories<ChiTietKh
 
     @Override
     public List<Object[]> getALLJoin(String dk) {
-        return DBConnection.selectQueRyJoin("from ChiTietKhuyenMai");
+        return  DBConnection.selectQueRyJoin("from ChiTietKhuyenMai");
     }
     public List<Object> getALLJoin1(String dk) {
-        return DBConnection.selectQueRy("from ChiTietKhuyenMai");
+        return  DBConnection.selectQueRy("from ChiTietKhuyenMai");
     }
      public List<Object[]> getALLChiTietKM() {
         return DBConnection.selectQueRyJoin("from ChiTietKhuyenMai ctkm join ctkm.sp join ctkm.km");
@@ -36,8 +37,12 @@ public class ChiTietKhuyenMaiResponsitories implements Iresponsitories<ChiTietKh
 
     @Override
     public List<ChiTietKhuyenMai> getAll(String dk) {
-        return DBConnection.selectQueRy("from ChiTietKhuyenMai");
+        if(DBConnection.selectQueRy("from ChiTietKhuyenMai") !=null){
+        return  DBConnection.selectQueRy("from ChiTietKhuyenMai");
+        }
+        return null;
     }
+    
 
     @Override
     public int add(ChiTietKhuyenMai q) {
@@ -73,13 +78,26 @@ public class ChiTietKhuyenMaiResponsitories implements Iresponsitories<ChiTietKh
     }
     public List<KhuyenMai> getALlKM() {
         if (DBConnection.selectQueRy("from KhuyenMai") != null) {
-            return DBConnection.selectQueRy("from KhuyenMai");
+            return  DBConnection.selectQueRy("from KhuyenMai");
         }
         return null;
     }
     public List<Object> getAllSP(){
-        return DBConnection.selectQueRy("from SanPham");
+        return  DBConnection.selectQueRy("from SanPham");
     }
-    
+     public List<ChiTietKhuyenMai> SelectbyTrangThaiCT(String trangThai) {
+      List<ChiTietKhuyenMai> pas;
+          System.out.println("a" + trangThai);
+        String nameSelect = "%" + trangThai + "%";
+        try ( Session session = DBConnection.getseFactory().openSession()) {
+            TypedQuery<ChiTietKhuyenMai> query = session.createQuery("From KhuyenMai  WHERE trangThai like :key");
+            query.setParameter("key", nameSelect);
+            System.out.println(query);
+            pas = query.getResultList();
+            session.close();
+
+        }
+        return pas;
+  }
     
 }

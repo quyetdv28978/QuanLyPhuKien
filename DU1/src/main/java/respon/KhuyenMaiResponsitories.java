@@ -5,15 +5,15 @@
 package respon;
 
 import utility.DBConnection;
-<<<<<<< HEAD
+
 import domaimodel.KhachHang;
 import domaimodel.KhuyenMai;
 import domaimodel.SanPham;
-=======
-import domainmodel.KhachHang;
-import domainmodel.KhuyenMai;
-import domainmodel.SanPham;
->>>>>>> 1ec59489d3dc6aa9f89201863f6f7f3b6da6ac81
+
+import domaimodel.KhachHang;
+import domaimodel.KhuyenMai;
+import domaimodel.SanPham;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
@@ -38,16 +38,14 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
        }
          return null;
     }
-<<<<<<< HEAD
-    
-=======
+
      public List<KhuyenMai> findTrangThai(int dk) {
            if(DBConnection.selectQueRy("from KhuyenMai") != null){
        return DBConnection.selectQueRy("from KhuyenMai where trangThai = " + "'" + dk+ "'" );
        }
          return null;
     }
->>>>>>> 1ec59489d3dc6aa9f89201863f6f7f3b6da6ac81
+
     
      public List<KhuyenMai> getAllLoad() {
          if(DBConnection.selectQueRy("from KhuyenMai") != null){
@@ -63,7 +61,7 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
 
     @Override
     public int update(KhuyenMai q) {
-        return DBConnection.executeQuery(q, "skhfks");
+        return DBConnection.executeQuery(q, "update");
     }
 
     @Override
@@ -94,9 +92,10 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
         }
         return pas;
   }
-<<<<<<< HEAD
+//    KhuyenMai khuyenMai = new KhuyenMai();
       public List<KhuyenMai> SelectbyTrangThai(String trangThai) {
       List<KhuyenMai> pas;
+          System.out.println("a" + trangThai);
         String nameSelect = "%" + trangThai + "%";
         try ( Session session = DBConnection.getseFactory().openSession()) {
             TypedQuery<KhuyenMai> query = session.createQuery("From KhuyenMai  WHERE trangThai like :key");
@@ -108,7 +107,7 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
         }
         return pas;
   }
-=======
->>>>>>> 1ec59489d3dc6aa9f89201863f6f7f3b6da6ac81
+       
+
       
 }

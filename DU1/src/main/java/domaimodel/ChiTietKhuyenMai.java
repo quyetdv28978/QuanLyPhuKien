@@ -4,9 +4,14 @@
  */
 package domaimodel;
 
-import utility.DBConnection;
+//import utility.DBConnection;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,8 +31,8 @@ public class ChiTietKhuyenMai implements Serializable{
     private String ma;
     private String moTa;
 //    private float giaGiam;
-    private Date ngayTao;
-    private int trangThai;
+//    private Date ngayTao;
+    private String trangThai;
    
     @ManyToOne
     @JoinColumn(name = "idSP")
@@ -44,15 +49,14 @@ public class ChiTietKhuyenMai implements Serializable{
     public ChiTietKhuyenMai(String id, String ma, SanPham sp, KhuyenMai km) {
         this.id = id;
         this.ma = ma;
-//        this.giaGiam = giaGiam;
-//        this.ngayTao = ngayTao;
         this.sp = sp;
         this.km = km;
     }
 
-   
-
-    
+    public ChiTietKhuyenMai(SanPham sp) {
+        this.sp = sp;
+        
+    }
 
     public ChiTietKhuyenMai( String id, String ma) {
         
@@ -65,31 +69,15 @@ public class ChiTietKhuyenMai implements Serializable{
 
   
 
-    public ChiTietKhuyenMai( String ma, Date ngayTao, int trangThai, SanPham sp, KhuyenMai km) {
+    public ChiTietKhuyenMai( String ma, Date ngayTao, String trangThai, SanPham sp, KhuyenMai km) {
         
         this.ma = ma;
         
-        this.ngayTao = ngayTao;
+//        this.ngayTao = ngayTao;
         this.trangThai = trangThai;
         this.sp = sp;
         this.km = km;
     }
-
- 
-
-//    public ChiTietKhuyenMai(String id, String ma, SanPham sp, KhuyenMai km) {
-//        this.id = id;
-//        this.ma = ma;
-//        
-//        this.sp = sp;
-//        this.km = km;
-//    }
-
-   
-
-  
-    
-
 
     public String getId() {
         return id;
@@ -99,15 +87,7 @@ public class ChiTietKhuyenMai implements Serializable{
         this.id = id;
     }
     
-//    public Embeddedct getEi() {
-//        return ei;
-//    }
-//
-//    public void setEi(Embeddedct ei) {
-//        this.ei = ei;
-//    }
 
-    
 
     public String getMa() {
         return ma;
@@ -125,19 +105,19 @@ public class ChiTietKhuyenMai implements Serializable{
 //        this.giaGiam = giaGiam;
 //    }
 
-    public Date getNgayTao() {
-        return ngayTao;
-    }
+//    public Date getNgayTao() {
+//        return ngayTao;
+//    }
+//
+//    public void setNgayTao(Date ngayTao) {
+//        this.ngayTao = ngayTao;
+//    }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
-    }
-
-    public int getTrangThai() {
+    public String getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
 
@@ -157,14 +137,40 @@ public class ChiTietKhuyenMai implements Serializable{
         this.km = km;
     }
 
-    @Override
-    public String toString() {
-        return sp.getTenSanPham();
+//    @Override
+//    public String toString() {
+//        return sp.getTenSanPham();
+//    }
+    public String getTT1() {
+         Calendar cal = Calendar.getInstance();
+         Date date = cal.getTime();
+        try {
+            Date now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(new Date(date.getTime()))+" 00:00:00 AM");
+       
+        if(km.getNgayKT().compareTo(now) < 0){
+            System.out.println("ngaykt");
+            return "Hết Hạn";
+        }else{
+            System.out.println("ngaybđ");
+            return "Còn Hạn";
+        }
+        }catch (ParseException ex) {
+            Logger.getLogger(ChiTietKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
     }
     
-     public Object[] toRow1(){
-        return new Object[]{id,km.getTenKM(), sp.getTenSanPham(),km.getNgayKT(),km.getGiaGiam(),moTa};
+    public Object[] toRow1(){
+        return new Object[]{id,km.getTenKM(), sp.getTenSanPham(),km.getNgayBD(),km.getNgayKT(),km.getGiaGiam(),getTT1()};
     }
+       
+//    public Object[] toRowSP(){
+//        return new Object[]{sp.getId(),sp.getMa(),sp.getTenSanPham(),sp.getGiaBan(),trangThai};
+//    }
+
+    
+        
+    
 
     
 }
