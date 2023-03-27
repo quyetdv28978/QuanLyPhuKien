@@ -192,16 +192,16 @@ public class KhuyenMai implements Serializable{
     public String toString() {
         return tenKM ;
     }
-    public static void main(String[] args) {
-        Date now;
-        try {
-            now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(new Date())+" 00:00:00 AM");
-            System.out.println("now " + now);
-        } catch (ParseException ex) {
-            Logger.getLogger(KhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-    }
+//    public static void main(String[] args) {
+//        Date now;
+//        try {
+//            now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(new Date())+" 00:00:00 AM");
+//            System.out.println("now " + now);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(KhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//            
+//    }
 //    public static void main(String[] args) {
 ////        System.out.println(new Date().before(new SimpleDateFormat("MM/dd/yyyy").parse("4/30/2023")));
 ////new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a").parse("2023/03/27 00:00:00 AM")
