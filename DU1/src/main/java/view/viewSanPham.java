@@ -72,7 +72,7 @@ public class viewSanPham extends javax.swing.JFrame {
         dtmSP.setColumnIdentifiers(z);
 
         dcmDongSP_Loc.addElement(new DanhMucViewModel("Show"));
-
+        System.out.println("sss" + tbHienThiSP.getRowCount());
         showDataSP();
 //        fillSP(0);
         showCbbDongSP();

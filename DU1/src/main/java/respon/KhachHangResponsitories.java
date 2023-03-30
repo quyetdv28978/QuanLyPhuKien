@@ -77,7 +77,7 @@ public class KhachHangResponsitories implements Iresponsitories<KhachHang> {
       List<KhachHang> pas;
         String nameSelect = "%" + ten + "%";
         try ( Session session = DBConnection.getsetFactory().openSession()) {
-            TypedQuery<KhachHang> query = session.createQuery("From KhachHang  WHERE ten like :key");
+            TypedQuery<KhachHang> query = session.createQuery("From KhachHang  WHERE ten like :key or sdt like :key ");
             query.setParameter("key", nameSelect);
             System.out.println(query);
             pas = query.getResultList();
