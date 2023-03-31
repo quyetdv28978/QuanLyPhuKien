@@ -12,19 +12,13 @@ import javax.persistence.Table;
 public class ChatLieuViewModel implements Serializable {
 
     private String id;
-    private String ma, tenChatLieu;
+    private String tenChatLieu;
 
     public ChatLieuViewModel() {
     }
 
-    public ChatLieuViewModel(String id, String ma, String tenChatLieu) {
+    public ChatLieuViewModel(String id, String tenChatLieu) {
         this.id = id;
-        this.ma = ma;
-        this.tenChatLieu = tenChatLieu;
-    }
-
-    public ChatLieuViewModel(String ma, String tenChatLieu) {
-        this.ma = ma;
         this.tenChatLieu = tenChatLieu;
     }
 
@@ -41,14 +35,6 @@ public class ChatLieuViewModel implements Serializable {
         this.id = id;
     }
 
-    public String getMa() {
-        return ma;
-    }
-
-    public void setMa(String ma) {
-        this.ma = ma;
-    }
-
     public String getTenChatLieu() {
         return tenChatLieu;
     }
@@ -58,7 +44,7 @@ public class ChatLieuViewModel implements Serializable {
     }
 
     public Object[] toDataRow() {
-        return new Object[]{id, ma, tenChatLieu};
+        return new Object[]{id, tenChatLieu};
     }
 
     @Override

@@ -4,6 +4,7 @@
  */
 package viewModel;
 
+import domaiModel.ChatLieu;
 import domaiModel.DanhMuc;
 import java.sql.Date;
 
@@ -237,5 +238,9 @@ public class SanPhamViewModel {
     public Object[] toDataRow() {
         return new Object[]{id,ma,tenSanPham,mauSac,nhaSanXuat,moTa,giaNhap,giaBan,
             trongLuong,soLuong,dm,cl,trangThai==0?"Hết hàng":"Còn hàng",QL};
+    }
+    
+    public Object[] toDataRowT() {
+        return new Object[]{id,ma,tenSanPham,giaBan};
     }
 }

@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import respository.resSanPham;
+import respon.resSanPham;
 import service.SerSanPham;
 import service.serChatLieu;
 import service.serDanhMuc;
@@ -37,6 +37,7 @@ public class viewSanPham extends javax.swing.JFrame {
 
     private DefaultComboBoxModel dcmDongSP_SP = new DefaultComboBoxModel();
     private DefaultComboBoxModel dcmChatLieu_SP = new DefaultComboBoxModel();
+    private List<Object> listCheck = new ArrayList<>();
 
     private final SerSanPham sanPhamSV = new SerSanPham();
     private final serChatLieu chatLieuSV = new serChatLieu();
@@ -71,7 +72,18 @@ public class viewSanPham extends javax.swing.JFrame {
         showCbbChatLieu();
         showDataCL();
         showDataDM();
-
+        
+        listCheck.add(txtMa_SP);
+        listCheck.add(txtTen_SP);
+        listCheck.add(txtMauSac_SP);
+        listCheck.add(txtNSX_SP);
+        listCheck.add(txtGiaNhap_SP);
+        listCheck.add(txtGiaBan_SP);
+        listCheck.add(txtTrongLuong_SP);
+        listCheck.add(txtSoLuong_SP);
+        listCheck.add(lb_MoTa);
+        listCheck.add(lbQR_SP);
+        
     }
 
     //Default SanPham
@@ -122,6 +134,8 @@ public class viewSanPham extends javax.swing.JFrame {
                 toString()).getImage().
                 getScaledInstance(lb_MoTa.getWidth(), lb_MoTa.getHeight(), 0);
         ;
+        mt = tbHienThiSP.getValueAt(tbHienThiSP.getSelectedRow(), 5).
+                toString();
         lb_MoTa.setIcon(new ImageIcon(iMT));
         txtNSX_SP.setText(sp.getNhaSanXuat());
         txtGiaNhap_SP.setText(Float.toString(sp.getGiaNhap()));
@@ -130,7 +144,7 @@ public class viewSanPham extends javax.swing.JFrame {
         txtSoLuong_SP.setText(Integer.toString(sp.getSoLuong()));
 //        dcmDongSP_SP.setSelectedItem(sp.getDongsp()); 
         dcmDongSP_SP.setSelectedItem(sp.getDm());
-        dcmChatLieu_SP.setSelectedItem(sp.getCl().getTenChatLieu());
+        dcmChatLieu_SP.setSelectedItem(sp.getCl());
         Integer tt = sp.getTrangThai();
         if (tt != 0) {
             rdConHang.setSelected(true);
@@ -140,6 +154,9 @@ public class viewSanPham extends javax.swing.JFrame {
         Image iQR = new ImageIcon(tbHienThiSP.getValueAt(tbHienThiSP.getSelectedRow(), 13)
                 .toString()).getImage()
                 .getScaledInstance(lbQR_SP.getWidth(), lbQR_SP.getHeight(), 0);
+        dd = tbHienThiSP.getValueAt(tbHienThiSP.getSelectedRow(), 13)
+                .toString();
+
         lbQR_SP.setIcon(new ImageIcon(iQR));
         tbHienThiSP.setRowSelectionInterval(row, row);
 
@@ -156,7 +173,6 @@ public class viewSanPham extends javax.swing.JFrame {
     private void fillCL(int row) {
         ChatLieuViewModel cl = chatLieuSV.getAllLoad().get(row);
         lbID.setText(cl.getId());
-        lbMa.setText(cl.getMa());
         txtTenChatLieu_CL.setText(cl.getTenChatLieu());
         tbHienThiCL.setRowSelectionInterval(row, row);
     }
@@ -194,10 +210,9 @@ public class viewSanPham extends javax.swing.JFrame {
 
     private ChatLieuViewModel getDataCL(String x) {
         if (x.equals("update")) {
-            return new ChatLieuViewModel(tbHienThiCL.getValueAt(tbHienThiCL.getSelectedRow(), 0).toString(),
-                    tbHienThiCL.getValueAt(tbHienThiCL.getSelectedRow(), 1).toString(), txtTenChatLieu_CL.getText().trim());
+            return new ChatLieuViewModel(tbHienThiCL.getValueAt(tbHienThiCL.getSelectedRow(), 0).toString(), txtTenChatLieu_CL.getText().trim());
         }
-        return new ChatLieuViewModel(jcheck.createID().toString(), jcheck.randomMA(), txtTenChatLieu_CL.getText().trim());
+        return new ChatLieuViewModel(jcheck.createID().toString(), txtTenChatLieu_CL.getText().trim());
     }
 
     private DanhMucViewModel getDataDM(String x) {
@@ -236,8 +251,8 @@ public class viewSanPham extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập mã sản phẩm!");
             return false;
         }
-        if (txtTen_SP.getText().isEmpty() || !txtTen_SP.getText().matches("[A-Za-z0-9]+")) {
-            JOptionPane.showMessageDialog(this, "vui lòng nhập tên sản phẩm và chỉ nhập số và chữ");
+        if (txtTen_SP.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "vui lòng nhập tên sản phẩm ");
             return false;
         }
         if (txtMauSac_SP.getText().isEmpty()) {
@@ -286,16 +301,23 @@ public class viewSanPham extends javax.swing.JFrame {
         }
         return true;
     }
-    
-    private boolean checkTrungSP() {
-        for(SanPhamViewModel i: this.sanPhamSV.getAll("")){
-            if((tbHienThiSP.getValueAt(tbHienThiSP.getSelectedRow(), 1).toString()).equals(i.getMa())){
+
+    private boolean checkTrungSP(String ma) {
+        for (SanPhamViewModel i : this.sanPhamSV.getAll("")) {
+            if (i.getMa().equalsIgnoreCase(ma)) {
                 JOptionPane.showMessageDialog(this, "mã sản phẩm đã tồn tại!");
-                
+                continue;
             }
             return false;
         }
         return true;
+    }
+
+    private void selectByName(List<SanPhamViewModel> sp) {
+        dtmSP.setRowCount(0);
+        for (SanPhamViewModel i : this.sanPhamSV.selectByMa(txtSearch_Loc.getText())) {
+            dtmSP.addRow(i.toDataRow());
+        }
     }
 
     /**
@@ -303,7 +325,7 @@ public class viewSanPham extends javax.swing.JFrame {
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
-    @SuppressWarnings("unchecked")
+//    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -352,8 +374,7 @@ public class viewSanPham extends javax.swing.JFrame {
         txtMa_SP = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
-        txtSearch_Loc1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txtSearch_Loc = new javax.swing.JTextField();
         jPanel19 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         cbbTrangThai_Loc1 = new javax.swing.JComboBox<>();
@@ -631,13 +652,16 @@ public class viewSanPham extends javax.swing.JFrame {
 
         jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("nhập mã sp để tìm kiếm:"));
 
-        txtSearch_Loc1.addActionListener(new java.awt.event.ActionListener() {
+        txtSearch_Loc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearch_Loc1ActionPerformed(evt);
+                txtSearch_LocActionPerformed(evt);
             }
         });
-
-        jButton2.setText("Search");
+        txtSearch_Loc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearch_LocKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -645,17 +669,13 @@ public class viewSanPham extends javax.swing.JFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtSearch_Loc1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtSearch_Loc)
+                .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearch_Loc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                .addComponent(txtSearch_Loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -700,7 +720,7 @@ public class viewSanPham extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel25)
                 .addGap(18, 18, 18)
-                .addComponent(cbbDongSP_Loc1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbbDongSP_Loc1, 0, 145, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel20Layout.setVerticalGroup(
@@ -1456,16 +1476,17 @@ public class viewSanPham extends javax.swing.JFrame {
 
     private void btAddSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddSPActionPerformed
         // TODO add your handling code here:
-        if (checkTrungSP()) {
-            int x = JOptionPane.showConfirmDialog(this, "Xác nhận thêm sản phẩm?", "Thông báo:", JOptionPane.YES_NO_OPTION);
-            if (x == JOptionPane.YES_OPTION) {
-                if (this.sanPhamSV.add(getDataSP("")) == 1) {
-                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
-                    return;
+        if (checkSP()&& checkTrungSP(txtMa_SP.getText())) {
+                int x = JOptionPane.showConfirmDialog(this, "Xác nhận thêm sản phẩm?", "Thông báo:", JOptionPane.YES_NO_OPTION);
+                if (x == JOptionPane.YES_OPTION) {
+                    if (this.sanPhamSV.add(getDataSP("")) == 1) {
+                        JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                        return;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm thất bại!");
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm thất bại!");
-            }
+            
             showDataSP();
         }
     }//GEN-LAST:event_btAddSPActionPerformed
@@ -1565,9 +1586,9 @@ public class viewSanPham extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaNhap_SPActionPerformed
 
-    private void txtSearch_Loc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearch_Loc1ActionPerformed
+    private void txtSearch_LocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearch_LocActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearch_Loc1ActionPerformed
+    }//GEN-LAST:event_txtSearch_LocActionPerformed
 
     String mt;
     private void btnTao1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTao1ActionPerformed
@@ -1580,6 +1601,14 @@ public class viewSanPham extends javax.swing.JFrame {
         Image a = new ImageIcon(mt).getImage().getScaledInstance(lb_MoTa.getWidth(), lb_MoTa.getHeight(), 0);
         lb_MoTa.setIcon(new ImageIcon(a));
     }//GEN-LAST:event_btnTao1ActionPerformed
+
+    private void txtSearch_LocKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearch_LocKeyReleased
+        // TODO add your handling code here:
+        String ma = txtSearch_Loc.getText();
+        List<SanPhamViewModel> sp = this.sanPhamSV.selectByMa(ma);
+        selectByName(sp);
+
+    }//GEN-LAST:event_txtSearch_LocKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1646,7 +1675,6 @@ public class viewSanPham extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbDongSP_Loc1;
     private javax.swing.JComboBox<String> cbbDongSP_SP;
     private javax.swing.JComboBox<String> cbbTrangThai_Loc1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1708,7 +1736,7 @@ public class viewSanPham extends javax.swing.JFrame {
     private javax.swing.JTextField txtMa_SP;
     private javax.swing.JTextField txtMauSac_SP;
     private javax.swing.JTextField txtNSX_SP;
-    private javax.swing.JTextField txtSearch_Loc1;
+    private javax.swing.JTextField txtSearch_Loc;
     private javax.swing.JTextField txtSoLuong_SP;
     private javax.swing.JTextField txtTenChatLieu_CL;
     private javax.swing.JTextField txtTen_SP;

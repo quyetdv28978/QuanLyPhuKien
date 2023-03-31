@@ -13,25 +13,17 @@ import javax.persistence.Table;
 public class ChatLieu implements Serializable{
     @Id
     private String id;
-    private String ma,tenChatLieu;
+    private String tenChatLieu;
 
     public ChatLieu() {
     }
 
-    public ChatLieu(String id, String ma, String tenChatLieu) {
+    public ChatLieu(String id, String tenChatLieu) {
         this.id = id;
-        this.ma = ma;
         this.tenChatLieu = tenChatLieu;
     }
     
-    
-    
-    public ChatLieu(String id) {
-        this.id = id;
-    }
-    
-    public ChatLieu(String ma, String tenChatLieu) {
-        this.ma = ma;
+    public ChatLieu( String tenChatLieu) {
         this.tenChatLieu = tenChatLieu;
     }
 
@@ -41,14 +33,6 @@ public class ChatLieu implements Serializable{
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getMa() {
-        return ma;
-    }
-
-    public void setMa(String ma) {
-        this.ma = ma;
     }
 
     public String getTenChatLieu() {

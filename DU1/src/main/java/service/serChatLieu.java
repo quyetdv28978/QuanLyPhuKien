@@ -7,7 +7,7 @@ package service;
 import domaiModel.ChatLieu;
 import java.util.ArrayList;
 import java.util.List;
-import respository.resChatLieu;
+import respon.resChatLieu;
 import viewModel.ChatLieuViewModel;
 
 /**
@@ -30,7 +30,7 @@ public class serChatLieu implements Interface<ChatLieuViewModel>{
     public List<ChatLieuViewModel> getAll(String dk) {
         List<ChatLieuViewModel> cl=new ArrayList<>();
         for(ChatLieu i: this.chatLieul.getAll(dk)){
-            cl.add(new ChatLieuViewModel(i.getId(),i.getMa(),i.getTenChatLieu()));
+            cl.add(new ChatLieuViewModel(i.getId(),i.getTenChatLieu()));
         }   
         return cl;
     }
@@ -38,19 +38,19 @@ public class serChatLieu implements Interface<ChatLieuViewModel>{
     public List<ChatLieuViewModel> getAllLoad() {
         List<ChatLieuViewModel> cl=new ArrayList<>();
         for(ChatLieu i: this.chatLieul.getAllLoad()){
-            cl.add(new ChatLieuViewModel(i.getId(),i.getMa(),i.getTenChatLieu()));
+            cl.add(new ChatLieuViewModel(i.getId(),i.getTenChatLieu()));
         }   
         return cl;
     }
 
     @Override
     public int add(ChatLieuViewModel t) {
-        return this.chatLieul.add(new ChatLieu(t.getId(), t.getMa(), t.getTenChatLieu()));
+        return this.chatLieul.add(new ChatLieu(t.getId(), t.getTenChatLieu()));
     }
 
     @Override
     public int update(ChatLieuViewModel t) {
-        return this.chatLieul.update(new ChatLieu(t.getId(), t.getMa(), t.getTenChatLieu()));
+        return this.chatLieul.update(new ChatLieu(t.getId(), t.getTenChatLieu()));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class serChatLieu implements Interface<ChatLieuViewModel>{
 
     @Override
     public Object CD(ChatLieuViewModel t) {
-        return new ChatLieu(t.getMa(), t.getTenChatLieu());
+        return new ChatLieu(t.getTenChatLieu());
     }
 
     @Override

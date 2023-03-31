@@ -32,7 +32,7 @@ public class DBConnection {
         Properties pro = new Properties();
         pro.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
         pro.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1;trustServerCertificate=true");
+        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM_1;trustServerCertificate=true");
         pro.put(Environment.USER, "sa");
         pro.put(Environment.PASS, "2132411");
         pro.put(Environment.SHOW_SQL, true);

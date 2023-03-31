@@ -9,7 +9,7 @@ import domaiModel.DanhMuc;
 import domaiModel.SanPham;
 import java.util.ArrayList;
 import java.util.List;
-import respository.resSanPham;
+import respon.resSanPham;
 import utility.DBConnection;
 import viewModel.ChatLieuViewModel;
 import viewModel.DanhMucViewModel;
@@ -42,8 +42,8 @@ public class SerSanPham implements Interface<SanPhamViewModel> {
                         ((SanPham) i[0]).getMoTa(), ((SanPham) i[0]).getGiaNhap(), ((SanPham) i[0]).getGiaBan(),
                         ((SanPham) i[0]).getTrongLuong(),
                         ((SanPham) i[0]).getSoLuong(),
-                        new DanhMucViewModel(((DanhMuc) i[1]).getId(),((DanhMuc) i[1]).getDongSP()),
-                        new ChatLieuViewModel(((ChatLieu) i[2]).getId(),((ChatLieu) i[2]).getMa(),((ChatLieu) i[2]).getTenChatLieu()),
+                        new DanhMucViewModel(((DanhMuc) i[1]).getId(), ((DanhMuc) i[1]).getDongSP()),
+                        new ChatLieuViewModel(((ChatLieu) i[2]).getId(), ((ChatLieu) i[2]).getTenChatLieu()),
                         ((SanPham) i[0]).getTrangThai(),
                         ((SanPham) i[0]).getQL()));
             }
@@ -81,17 +81,33 @@ public class SerSanPham implements Interface<SanPhamViewModel> {
     public Object CD(SanPhamViewModel t) {
         System.out.println("id dm: " + t.getDm().getId());
         System.out.println(t.getCl().getId());
-        return new SanPham(t.getId(),t.getMa(), t.getTenSanPham(), t.getMauSac(),
+        return new SanPham(t.getId(), t.getMa(), t.getTenSanPham(), t.getMauSac(),
                 t.getNhaSanXuat(), t.getMoTa(), t.getGiaNhap(), t.getGiaBan(), t.getTrongLuong(),
                 t.getSoLuong(),
-                new DanhMuc(t.getDm().getId(),t.getDm().getDongSP()),
-                new ChatLieu(t.getCl().getId(),t.getCl().getMa(),t.getCl().getTenChatLieu()),
+                new DanhMuc(t.getDm().getId(), t.getDm().getDongSP()),
+                new ChatLieu(t.getCl().getId(), t.getCl().getTenChatLieu()),
                 t.getTrangThai(), t.getQL());
     }
 
     @Override
     public boolean checkTrung(String ma) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public List<SanPhamViewModel> selectByMa(String ma) {
+        List<SanPhamViewModel> sp = new ArrayList<>();
+        if (this.sanPhamSV.selectByMa(ma) != null) {
+            for(SanPham i: this.sanPhamSV.selectByMa(ma)){
+                sp.add(new SanPhamViewModel(i.getId(), i.getMa(), i.getTenSanPham(), i.getMauSac(),
+                i.getNhaSanXuat(), i.getMoTa(), i.getGiaNhap(), i.getGiaBan(), i.getTrongLuong(),
+                i.getSoLuong(),
+                new DanhMucViewModel(i.getDm().getId(), i.getDm().getDongSP()),
+                new ChatLieuViewModel(i.getCl().getId(), i.getCl().getTenChatLieu()),
+                i.getTrangThai(), i.getQL()));
+            }
+            return sp;
+        }
+        return null;
     }
 
 }
