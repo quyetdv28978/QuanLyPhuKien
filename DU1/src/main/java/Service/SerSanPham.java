@@ -2,84 +2,138 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Service;
+package service;
 
-import DomainModel.ChatLieu;
-import DomainModel.DanhMuc;
-import DomainModel.SanPham;
-import Responsitoties.ResSanPham;
-import ViewModel.ChatLieuView;
-import ViewModel.DanhMucView;
-import ViewModel.SanPhamView;
+import domaimodel.ChatLieu;
+import domaimodel.DanhMuc;
+import domaimodel.SanPham;
 import java.util.ArrayList;
 import java.util.List;
+import respon.resSanPham;
+import viewmodel.ChatLieuViewModel;
+import viewmodel.DanhMucViewModel;
+import viewmodel.SanPhamViewModel;
 
 /**
  *
- * @author yugip
+ * @author ADMIN
  */
-public class SerSanPham implements IFService<SanPhamView> {
-    
-    private final ResSanPham resSP = new ResSanPham();
-    
+public class SerSanPham implements Interface<SanPhamViewModel> {
+
+    public final resSanPham sanPhamSV;
+
+    public SerSanPham() {
+        this.sanPhamSV = new resSanPham();
+    }
+
     @Override
-    public List<ViewModel.SanPhamView> getALl(String dk) {
-        List l = resSP.getALLJoin(dk);
-        List<SanPhamView> listSPV = new ArrayList<>();
-        if (l != null) {
-            for (Object[] objects : this.resSP.getALLJoin(dk)) {
-                listSPV.add(new SanPhamView(((SanPham) objects[0]).getId(), ((SanPham) objects[0]).getMa(), ((SanPham) objects[0]).getTensanpham(),
-                        ((SanPham) objects[0]).getMausac(), ((SanPham) objects[0]).getNhasanxuat(),
-                        ((SanPham) objects[0]).getQL(), ((SanPham) objects[0]).getMota(),
-                        ((SanPham) objects[0]).getGiaban(), ((SanPham) objects[0]).getGianhap(),
-                        ((SanPham) objects[0]).getTrongluong(), ((SanPham) objects[0]).getNgayTao(),
-                        ((SanPham) objects[0]).getSoluong(), ((SanPham) objects[0]).getTrangthai(),
-                        new DanhMucView(((DanhMuc) objects[1]).getTen()), new ChatLieuView(((ChatLieu) objects[2]).getId(),((ChatLieu) objects[2]).getTen(), ((ChatLieu) objects[2]).getMa())));
+    public List<SanPhamViewModel> getALl(String dk) {
+        List<SanPhamViewModel> sp = new ArrayList<>();
+        if (this.sanPhamSV.getALLJoin(dk) != null) {
+            for (Object[] i : this.sanPhamSV.getALLJoin(dk)) {
+                sp.add(new SanPhamViewModel(((SanPham) i[0]).getId(), ((SanPham) i[0]).getMa(), ((SanPham) i[0]).getTenSanPham(),
+                        ((SanPham) i[0]).getMauSac(), ((SanPham) i[0]).getNhaSanXuat(),
+                        ((SanPham) i[0]).getMoTa(), ((SanPham) i[0]).getGiaNhap(), ((SanPham) i[0]).getGiaBan(),
+                        ((SanPham) i[0]).getTrongLuong(),
+                        ((SanPham) i[0]).getSoLuong(),
+                        new DanhMucViewModel(((DanhMuc) i[1]).getId(),((DanhMuc) i[1]).getDongSP()),
+                        new ChatLieuViewModel(((ChatLieu) i[2]).getId(),((ChatLieu) i[2]).getTenChatLieu()),
+                        ((SanPham) i[0]).getTrangThai(),
+                        ((SanPham) i[0]).getQL()));
             }
+            return sp;
         }
-        return listSPV;
+        return null;
     }
-    
+
     @Override
-    public int add(ViewModel.SanPhamView q) {
-        return this.resSP.add((SanPham)CD(q));
+    public int add(SanPhamViewModel t) {
+        return this.sanPhamSV.add((SanPham) CD(t));
     }
-    
+
     @Override
-    public int update(ViewModel.SanPhamView q) {
-        return this.resSP.update((SanPham)CD(q));
+    public int update(SanPhamViewModel t) {
+        return this.sanPhamSV.update((SanPham) CD(t));
     }
-    
+
     @Override
-    public int delete(String q) {
-        return this.resSP.delete(q);
+    public int delete(String t) {
+        return this.sanPhamSV.delete(t);
     }
-    
+
     @Override
     public String timID(String ma) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
-    
+
     @Override
-    public Object CD(ViewModel.SanPhamView q) {
-        return new SanPham(q.getId(), q.getMa(), q.getTensanpham(), q.getMausac(), q.getNhasanxuat(),
-                q.getQL(), q.getMota(),
-                q.getGiaban(), q.getGianhap(),
-                q.getTrongluong(), q.getNgayTao(), q.getSoluong(),
-                q.getTrangthai(), new DanhMuc(q.getDm().getId(),q.getDm().getTen()), new ChatLieu(q.getCl().getId(),q.getCl().getTen(), q.getCl().getMa()));
-    }
-    
-    @Override
-    public boolean checkTrung(String ma) {
+    public SanPhamViewModel timOB(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public SanPhamView timOB(String id) {
-        SanPham s = this.resSP.timObject(id);
-        return new SanPhamView
-        (s.getId(), s.getMa(), s.getTensanpham());
+    public Object CD(SanPhamViewModel t) {
+        System.out.println("id dm: " + t.getDm().getId());
+        System.out.println(t.getCl().getId());
+        return new SanPham(t.getId(),t.getMa(), t.getTenSanPham(), t.getMauSac(),
+                t.getNhaSanXuat(), t.getMoTa(), t.getGiaNhap(), t.getGiaBan(), t.getTrongLuong(),
+                t.getSoLuong(),
+                new DanhMuc(t.getDm().getId(),t.getDm().getDongSP()),
+                new ChatLieu(t.getCl().getId(),t.getCl().getTenChatLieu()),
+                t.getTrangThai(), t.getQL());
     }
+
+    @Override
+    public boolean checkTrung(String ma) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public List<SanPhamViewModel> selectByTen(String ten) {
+        List<SanPhamViewModel> sp = new ArrayList<>();
+        if (this.sanPhamSV.selectByTen(ten) != null) {
+            for(SanPham i: this.sanPhamSV.selectByTen(ten)){
+                sp.add(new SanPhamViewModel(i.getId(), i.getMa(), i.getTenSanPham(), i.getMauSac(),
+                i.getNhaSanXuat(), i.getMoTa(), i.getGiaNhap(), i.getGiaBan(), i.getTrongLuong(),
+                i.getSoLuong(),
+                new DanhMucViewModel(i.getDm().getId(), i.getDm().getDongSP()),
+                new ChatLieuViewModel(i.getCl().getId(), i.getCl().getTenChatLieu()),
+                i.getTrangThai(), i.getQL()));
+            }
+            return sp;
+        }
+        return null;
+    }
+    
+    public List<SanPhamViewModel> selectByDongSP(String ten) {
+        List<SanPhamViewModel> sp = new ArrayList<>();
+        if (this.sanPhamSV.selectByDSP(ten) != null) {
+            for(SanPham i: this.sanPhamSV.selectByDSP(ten)){
+                sp.add(new SanPhamViewModel(i.getId(), i.getMa(), i.getTenSanPham(), i.getMauSac(),
+                i.getNhaSanXuat(), i.getMoTa(), i.getGiaNhap(), i.getGiaBan(), i.getTrongLuong(),
+                i.getSoLuong(),
+                new DanhMucViewModel(i.getDm().getId(), i.getDm().getDongSP()),
+                new ChatLieuViewModel(i.getCl().getId(), i.getCl().getTenChatLieu()),
+                i.getTrangThai(), i.getQL()));
+            }
+            return sp;
+        }
+        return null;
+    }
+    
+    public List<SanPhamViewModel> selectByTT(int tt) {
+        List<SanPhamViewModel> sp = new ArrayList<>();
+        if (this.sanPhamSV.selectByTT(tt) != null) {
+            for(SanPham i: this.sanPhamSV.selectByTT(tt)){
+                sp.add(new SanPhamViewModel(i.getId(), i.getMa(), i.getTenSanPham(), i.getMauSac(),
+                i.getNhaSanXuat(), i.getMoTa(), i.getGiaNhap(), i.getGiaBan(), i.getTrongLuong(),
+                i.getSoLuong(),
+                new DanhMucViewModel(i.getDm().getId(), i.getDm().getDongSP()),
+                new ChatLieuViewModel(i.getCl().getId(), i.getCl().getTenChatLieu()),
+                i.getTrangThai(), i.getQL()));
+            }
+            return sp;
+        }
+        return null;
+    }
+    
 }

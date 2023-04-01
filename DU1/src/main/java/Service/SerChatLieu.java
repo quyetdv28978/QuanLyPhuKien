@@ -2,47 +2,56 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Service;
+package service;
 
-import DomainModel.ChatLieu;
-import Responsitoties.IfResponsitoties;
-import Responsitoties.ResChatLieu;
-import ViewModel.ChatLieuView;
+import domaimodel.ChatLieu;
 import java.util.ArrayList;
 import java.util.List;
+import respon.resChatLieu;
+import viewmodel.ChatLieuViewModel;
 
 /**
  *
- * @author yugip
+ * @author ADMIN
  */
-public class SerChatLieu implements IFService<ChatLieuView> {
+public class serChatLieu implements Interface<ChatLieuViewModel>{
 
-    private ResChatLieu resDM = new ResChatLieu();
-
-    @Override
-    public List<ChatLieuView> getALl(String dk) {
-        List<ChatLieuView> listDMV = new ArrayList<>();
-        if (this.resDM.getAll(dk) != null) {
-            for (ChatLieu danhMuc : this.resDM.getAll(dk)) {
-                listDMV.add(new ChatLieuView(danhMuc.getId(), danhMuc.getMa(), danhMuc.getTen()));
-            }
-        }
-        return listDMV;
+    public final resChatLieu chatLieul;
+    
+    public serChatLieu() {
+        this.chatLieul=new resChatLieu();
     }
 
     @Override
-    public int add(ChatLieuView q) {
-        return this.resDM.add((ChatLieu) CD(q));
+    public List<ChatLieuViewModel> getALl(String dk) {
+        List<ChatLieuViewModel> cl=new ArrayList<>();
+        for(ChatLieu i: this.chatLieul.getAll(dk)){
+            cl.add(new ChatLieuViewModel(i.getId(),i.getTenChatLieu()));
+        }   
+        return cl;
+    }
+    
+    public List<ChatLieuViewModel> getAllLoad() {
+        List<ChatLieuViewModel> cl=new ArrayList<>();
+        for(ChatLieu i: this.chatLieul.getAllLoad()){
+            cl.add(new ChatLieuViewModel(i.getId(),i.getTenChatLieu()));
+        }   
+        return cl;
     }
 
     @Override
-    public int update(ChatLieuView q) {
-        return this.resDM.update((ChatLieu) CD(q));
+    public int add(ChatLieuViewModel t) {
+        return this.chatLieul.add(new ChatLieu(t.getId(), t.getTenChatLieu()));
     }
 
     @Override
-    public int delete(String q) {
-        return this.resDM.delete(q);
+    public int update(ChatLieuViewModel t) {
+        return this.chatLieul.update(new ChatLieu(t.getId(), t.getTenChatLieu()));
+    }
+
+    @Override
+    public int delete(String t) {
+        return this.chatLieul.delete(t);
     }
 
     @Override
@@ -51,18 +60,18 @@ public class SerChatLieu implements IFService<ChatLieuView> {
     }
 
     @Override
-    public ChatLieuView timOB(String id) {
+    public ChatLieuViewModel timOB(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Object CD(ChatLieuView q) {
-        return new ChatLieu(q.getId(), q.getTen(), q.getMa());
+    public Object CD(ChatLieuViewModel t) {
+        return new ChatLieu(t.getId(), t.getTenChatLieu());
     }
 
     @Override
     public boolean checkTrung(String ma) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }

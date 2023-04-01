@@ -9,16 +9,67 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
-        <exec.mainClass>com.nhom1.du1.DU1</exec.mainClass>
-        <myjar1.path>D:\DU1_nhanh_quyet\DU1\DU1\lib</myjar1.path>
+        <exec.mainClass>com.nhom1.du1.DU1</exec.mainClass> 
+        <!--duong dan cua quyet-->
+        <myjar1.path>D:\pujic\DU1\lib</myjar1.path>
+        <!--duong dan cua huong-->
+        <!--<myjar1.path>D:\DuAn1\MainKaKe\DU1\lib</myjar1.path>-->
+        <!--duong dan cua tung-->
+        <!--<myjar1.path>D:\da1\TT_doing\DU1\lib</myjar1.path>-->
+        <!--======= duong dan cua hieu-->
+        <!--<myjar1.path>D:\CNTT\Spr2023\Block2\Du_An_1\Project_Tong\DU1\lib</myjar1.path>-->
+
     </properties>
     
     <dependencies>
+        
+<!--        <dependency>
+            <groupId>bridj</groupId>
+            <artifactId>bridj</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${myjar1.path}\barcode.jar</systemPath> 
+        </dependency>
+        
+        <dependency>
+            <groupId>bridj2</groupId>
+            <artifactId>bridj2</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${myjar1.path}\org-netbeans-modules-java-j2seproject-copylibstask.jar</systemPath> 
+        </dependency>
+        
+        <dependency>
+            <groupId>bridj3</groupId>
+            <artifactId>bridj3</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${myjar1.path}\qrgen-1.0.jar</systemPath> 
+        </dependency>
+        
+        <dependency>
+            <groupId>bridj4</groupId>
+            <artifactId>bridj4</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${myjar1.path}\zxing-core-1.7.jar</systemPath> 
+        </dependency>
+        
+        <dependency>
+            <groupId>bridj5</groupId>
+            <artifactId>bridj5</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${myjar1.path}\zxing-j2se-1.7.jar</systemPath> 
+        </dependency>
+        
+        -->
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.6.10.Final</version>
+            <version>5.4.32.Final</version>
+            <type>jar</type>
         </dependency>
         
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
@@ -26,6 +77,25 @@
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <version>8.2.2.jre8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
         </dependency>
         
         <dependency>
@@ -85,10 +155,8 @@
             <artifactId>webcam-capture</artifactId>
             <version>0.3.12</version>
         </dependency>
-        <dependency>
-            <groupId>com.toedter</groupId>
-            <artifactId>jcalendar</artifactId>
-            <version>1.4</version>
-        </dependency>
-    </dependencies>       
+
+
+    </dependencies>
+
 </project>

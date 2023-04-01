@@ -2,47 +2,56 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Service;
+package service;
 
-import DomainModel.DanhMuc;
-import Responsitoties.IfResponsitoties;
-import Responsitoties.ResDanhMuc;
-import ViewModel.DanhMucView;
+import domaimodel.DanhMuc;
 import java.util.ArrayList;
 import java.util.List;
+import respon.resDanhMuc;
+import viewmodel.DanhMucViewModel;
 
 /**
  *
- * @author yugip
+ * @author ADMIN
  */
-public class SerDanhMuc implements IFService<DanhMucView> {
+public class serDanhMuc implements Interface<DanhMucViewModel>{
 
-    private ResDanhMuc resDM = new ResDanhMuc();
+    public final resDanhMuc danhMuc;
+    
+    public serDanhMuc() {
+        this.danhMuc=new resDanhMuc();
+    }
 
     @Override
-    public List<DanhMucView> getALl(String dk) {
-        List<DanhMucView> listDMV = new ArrayList<>();
-        if (this.resDM.getAll(dk) != null) {
-            for (DanhMuc danhMuc : this.resDM.getAll(dk)) {
-                listDMV.add(new DanhMucView(danhMuc.getId(), danhMuc.getTen()));
-            }
+    public List<DanhMucViewModel> getALl(String dk) {
+        List<DanhMucViewModel> dm=new ArrayList<>();
+        for(DanhMuc i:this.danhMuc.getAll(dk)){
+            dm.add(new DanhMucViewModel(i.getId(), i.getDongSP()));
         }
-        return listDMV;
+        return dm;
+    }
+    
+    public List<DanhMucViewModel> getAllLoad() {
+        List<DanhMucViewModel> dm=new ArrayList<>();
+        for(DanhMuc i:this.danhMuc.getAllLoad()){
+            dm.add(new DanhMucViewModel(i.getId(), i.getDongSP()));
+        }
+        return dm;
     }
 
     @Override
-    public int add(DanhMucView q) {
-        return this.resDM.add((DanhMuc)CD(q));
+    public int add(DanhMucViewModel t) {
+        return this.danhMuc.add((DanhMuc)CD(t));
     }
 
     @Override
-    public int update(DanhMucView q) {
-        return this.resDM.update((DanhMuc)CD(q));
+    public int update(DanhMucViewModel t) {
+        return this.danhMuc.update((DanhMuc)CD(t));
     }
 
     @Override
-    public int delete(String q) {
-        return this.resDM.delete(q);
+    public int delete(String t) {
+        return this.danhMuc.delete(t);
     }
 
     @Override
@@ -51,18 +60,18 @@ public class SerDanhMuc implements IFService<DanhMucView> {
     }
 
     @Override
-    public DanhMucView timOB(String id) {
+    public DanhMucViewModel timOB(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Object CD(DanhMucView q) {
-        return new DanhMuc(q.getId(), q.getTen());
+    public Object CD(DanhMucViewModel t) {
+        return new DanhMuc(t.getId(),t.getDongSP());
     }
 
     @Override
     public boolean checkTrung(String ma) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }
