@@ -144,5 +144,12 @@ public class HoaDon implements Serializable {
     public void setHinhthucthanhtoan(String hinhthucthanhtoan) {
         this.hinhthucthanhtoan = hinhthucthanhtoan;
     }
+
+
+    @Override
+    public String toString() {
+        return "HoaDon{" + "id=" + id + ", ngayTao=" + ngayTao + ", ngayTT=" + ngayTT + ", tinhTrang=" + tinhTrang + ", hinhthucthanhtoan=" + hinhthucthanhtoan + ", kh=" + kh + ", nv=" + nv + '}';
+    }
+    
     
 }

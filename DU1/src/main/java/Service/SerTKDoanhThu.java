@@ -1,24 +1,30 @@
-package respon;
+package service;
 
-import viewmodel.ChiTietHoaDonViewModel;
+import domaimodel.ChiTietHoaDon;
 import domaimodel.HoaDon;
-import domaimodel.SanPham;
+import java.util.Date;
 import java.util.List;
-import utility.DBConnection;
+import respon.Iresponsitories;
+import respon.resTK_DoanhThu;
+import viewmodel.ChiTietHoaDonViewModel;
+import viewmodel.HoaDonViewModel;
 
-public class ChiTietHoaDonres implements Iresponsitories<ChiTietHoaDonViewModel> {
+public class SerTKDoanhThu implements Iresponsitories<ChiTietHoaDonViewModel> {
+
+    public final resTK_DoanhThu tkdt = new resTK_DoanhThu();
+
+    public List<ChiTietHoaDon> SelectbyNgay(Date ngay) {
+        return tkdt.SelectbyNgay(ngay);
+    }
 
     @Override
     public List<Object[]> getALLJoin(String dk) {
-        if (DBConnection.selectQueRyJoin("from ChiTietHoaDon c join s.hd join s.sp") != null) {
-            return DBConnection.selectQueRyJoin("from ChiTietHoaDon c join s.hd join s.sp");
-        }
-        return null;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public List<ChiTietHoaDonViewModel> getAll(String dk) {
-        return DBConnection.selectQueRy("from ChiTietHoaDon c" + dk);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -45,30 +51,4 @@ public class ChiTietHoaDonres implements Iresponsitories<ChiTietHoaDonViewModel>
     public ChiTietHoaDonViewModel timObject(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    public List<HoaDon> getALLHD() {
-        if (DBConnection.selectQueRy("from HoaDon") != null) {
-            return DBConnection.selectQueRy("from HoaDon");
-        }
-        return null;
-    }
-
-    public List<SanPham> getALLSP() {
-        if (DBConnection.selectQueRy("from SanPham") != null) {
-            return DBConnection.selectQueRy("from SanPham");
-        }
-        return null;
-    }
-    
-       public List<Object[]> getALLJoinLoad() {
-        return DBConnection.selectQueRyJoin("from ChiTietHoaDon c join s.hd join s.sp");
-    }
-    
-         public List<Object[]> getALLJ() {
-        if (DBConnection.selectQueRyJoin("from ChiTietHoaDon c join s.hd join s.sp") != null) {
-            return DBConnection.selectQueRyJoin("from ChiTietHoaDon c join s.hd join s.sp");
-        }
-        return null;
-    }
-
 }
