@@ -212,7 +212,7 @@ public class ThongKe extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         lblSoDH2 = new javax.swing.JLabel();
         lblthanhcong2 = new javax.swing.JLabel();
-        lblbihuy2 = new javax.swing.JLabel();
+        lblbihuy = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         lbldtngay = new javax.swing.JLabel();
@@ -488,9 +488,9 @@ public class ThongKe extends javax.swing.JFrame {
         lblthanhcong2.setForeground(new java.awt.Color(255, 51, 102));
         lblthanhcong2.setText("0");
 
-        lblbihuy2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblbihuy2.setForeground(new java.awt.Color(255, 51, 102));
-        lblbihuy2.setText("0");
+        lblbihuy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblbihuy.setForeground(new java.awt.Color(255, 51, 102));
+        lblbihuy.setText("0");
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -510,7 +510,7 @@ public class ThongKe extends javax.swing.JFrame {
                     .addGroup(jPanel20Layout.createSequentialGroup()
                         .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblbihuy2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblbihuy, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel20Layout.setVerticalGroup(
@@ -527,7 +527,7 @@ public class ThongKe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(lblbihuy2))
+                    .addComponent(lblbihuy))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1188,15 +1188,14 @@ public class ThongKe extends javax.swing.JFrame {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel15Layout.createSequentialGroup()
-                            .addComponent(jLabel13)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap())
-                        .addGroup(jPanel15Layout.createSequentialGroup()
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(14, 14, 14)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                         .addComponent(btnhien)
                         .addGap(252, 252, 252))))
@@ -1456,17 +1455,17 @@ public class ThongKe extends javax.swing.JFrame {
 
         int row = Tbltheongay.getSelectedRow();
         if (cbbthoigian.getSelectedIndex() == 0) {
-            lblbihuy2.setText(((ChiTietHoaDon) (scthd.select_doanhthu_theongayBH(dateTK_doanhthu.getDate()).get(0))).getSOHD() + "");
+            lblbihuy.setText(((ChiTietHoaDon) (scthd.select_doanhthu_theongayBH(dateTK_doanhthu.getDate()).get(0))).getSOHD() + "");
             lblthanhcong2.setText(Tbltheongay.getValueAt(row, 0).toString());
             lbldtngay.setText(Tbltheongay.getValueAt(row, 1).toString());
             lblKH.setText(Tbltheongay.getValueAt(row, 2).toString());
-            lblSoDH2.setText(Integer.parseInt(lblthanhcong2.getText()) + Integer.parseInt(lblbihuy2.getText()) + "");
+            lblSoDH2.setText(Integer.parseInt(lblthanhcong2.getText()) + Integer.parseInt(lblbihuy.getText()) + "");
         } else if (cbbthoigian.getSelectedIndex() == 1) {
-            lblbihuy2.setText(((ChiTietHoaDon) (scthd.select_doanhthu_theothangBH(Integer.parseInt((String) cbbthang.getSelectedItem()), Integer.parseInt(txtnam.getText())).get(0))).getSOHD() + "");
+            lblbihuy.setText(((ChiTietHoaDon) (scthd.select_doanhthu_theothangBH(Integer.parseInt((String) cbbthang.getSelectedItem()), Integer.parseInt(txtnam.getText())).get(0))).getSOHD() + "");
             lblthanhcong2.setText(Tbltheongay.getValueAt(row, 0).toString());
             lbldtthang.setText(Tbltheongay.getValueAt(row, 1).toString());
             lblKH.setText(Tbltheongay.getValueAt(row, 2).toString());
-            lblSoDH2.setText(Integer.parseInt(lblthanhcong2.getText()) + Integer.parseInt(lblbihuy2.getText()) + "");
+            lblSoDH2.setText(Integer.parseInt(lblthanhcong2.getText()) + Integer.parseInt(lblbihuy.getText()) + "");
         }
     }//GEN-LAST:event_TbltheongayMouseClicked
 
@@ -1594,19 +1593,19 @@ public class ThongKe extends javax.swing.JFrame {
     }//GEN-LAST:event_datengayKTMouseClicked
 
     private void btnkhoangngayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkhoangngayActionPerformed
-        lblbihuy2.setText(((ChiTietHoaDon) (scthd.select_khoangBH(datetngayBD.getDate(), datengayKT.getDate()).get(0))).getSOHD() + "");
+        lblbihuy.setText(((ChiTietHoaDon) (scthd.select_khoangBH(datetngayBD.getDate(), datengayKT.getDate()).get(0))).getSOHD() + "");
         lblthanhcong2.setText(((ChiTietHoaDon) (scthd.select_khoangTC(datetngayBD.getDate(), datengayKT.getDate()).get(0))).getSOHD() + "");
         lbldtngay.setText(((ChiTietHoaDon) (scthd.select_khoangTC(datetngayBD.getDate(), datengayKT.getDate()).get(0))).getTONGTIEN() + "");
         lblKH.setText(((ChiTietHoaDon) (scthd.select_khoangTC(datetngayBD.getDate(), datengayKT.getDate()).get(0))).getSKH() + "");
-        lblSoDH2.setText(Integer.parseInt(lblthanhcong2.getText()) + Integer.parseInt(lblbihuy2.getText()) + "");
+        lblSoDH2.setText(Integer.parseInt(lblthanhcong2.getText()) + Integer.parseInt(lblbihuy.getText()) + "");
     }//GEN-LAST:event_btnkhoangngayActionPerformed
 
     private void btnhiendthientaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhiendthientaiActionPerformed
-        lblbihuy2.setText(((ChiTietHoaDon) (scthd.select_hientaiBH().get(0))).getSOHD() + "");
+        lblbihuy.setText(((ChiTietHoaDon) (scthd.select_hientaiBH().get(0))).getSOHD() + "");
         lblthanhcong2.setText(((ChiTietHoaDon) (scthd.select_hientaiTC().get(0))).getSOHD() + "");
         lbldtngay.setText(((ChiTietHoaDon) (scthd.select_hientaiTC().get(0))).getTONGTIEN() + "");
         lblKH.setText(((ChiTietHoaDon) (scthd.select_hientaiTC().get(0))).getSKH() + "");
-        lblSoDH2.setText(Integer.parseInt(lblthanhcong2.getText()) + Integer.parseInt(lblbihuy2.getText()) + "");
+        lblSoDH2.setText(Integer.parseInt(lblthanhcong2.getText()) + Integer.parseInt(lblbihuy.getText()) + "");
     }//GEN-LAST:event_btnhiendthientaiActionPerformed
 
     /**
@@ -1723,7 +1722,7 @@ public class ThongKe extends javax.swing.JFrame {
     private javax.swing.JLabel lblKH;
     private javax.swing.JLabel lblSoDH2;
     private javax.swing.JLabel lbl_ChuChay;
-    private javax.swing.JLabel lblbihuy2;
+    private javax.swing.JLabel lblbihuy;
     private javax.swing.JLabel lbldtngay;
     private javax.swing.JLabel lbldtthang;
     private javax.swing.JLabel lblthanhcong2;

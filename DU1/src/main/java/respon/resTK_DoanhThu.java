@@ -83,7 +83,7 @@ public class resTK_DoanhThu implements Iresponsitories<ChiTietHoaDon> {
     public List<ChiTietHoaDon> Selectby_doanhthu_theongayBH(Date ngayTT) {
         List<ChiTietHoaDon> pas = new ArrayList<>();
         try (Session session = DBConnection.getsetFactory().openSession()) {
-            String sql = "SELECT COUNT(c.hd.id), SUM(c.donGia * c.soluong - c.giagiam),COUNT(c.hd.kh.id) FROM ChiTietHoaDon c WHERE CAST(c.hd.ngayTT as date) = :key1 AND c.hd.tinhTrang=2 ";
+            String sql = "SELECT COUNT(c.hd.id), SUM(c.donGia * c.soluong - c.giagiam),COUNT(c.hd.kh.id) FROM ChiTietHoaDon c WHERE CAST(c.hd.ngayTao as date) =:key1 AND c.hd.tinhTrang=2 ";
             Query<Object[]> query = session.createQuery(sql, Object[].class);
             query.setParameter("key1", ngayTT);
             List<Object[]> ressulistArr = query.getResultList();
@@ -174,7 +174,7 @@ public class resTK_DoanhThu implements Iresponsitories<ChiTietHoaDon> {
     public List<ChiTietHoaDon> SelectbyKhoangNgayBH(Date ngaybd, Date ngayKt) {
         List<ChiTietHoaDon> pas = new ArrayList<>();
         try (Session session = DBConnection.getsetFactory().openSession()) {
-            String sql = "SELECT COUNT(c.hd.id), SUM(c.donGia * c.soluong - c.giagiam),COUNT(c.hd.kh.id) FROM ChiTietHoaDon c WHERE CAST(c.hd.ngayTT as date) BETWEEN :key1 AND :key2 AND c.hd.tinhTrang=2";
+            String sql = "SELECT COUNT(c.hd.id), SUM(c.donGia * c.soluong - c.giagiam),COUNT(c.hd.kh.id) FROM ChiTietHoaDon c WHERE CAST(c.hd.ngayTao as date) BETWEEN :key1 AND :key2 AND c.hd.tinhTrang=2";
             Query<Object[]> query = session.createQuery(sql, Object[].class);
             query.setParameter("key1", ngaybd);
             query.setParameter("key2", ngayKt);
@@ -218,7 +218,7 @@ public class resTK_DoanhThu implements Iresponsitories<ChiTietHoaDon> {
     public List<ChiTietHoaDon> SelectbyhientaiBH() {
         List<ChiTietHoaDon> pas = new ArrayList<>();
         try (Session session = DBConnection.getsetFactory().openSession()) {
-            String sql = "SELECT COUNT(c.hd.id), SUM(c.donGia * c.soluong - c.giagiam),COUNT(c.hd.kh.id) FROM ChiTietHoaDon c WHERE CAST(c.hd.ngayTT as date)=CAST(GETDATE() as date) AND c.hd.tinhTrang=2";
+            String sql = "SELECT COUNT(c.hd.id), SUM(c.donGia * c.soluong - c.giagiam),COUNT(c.hd.kh.id) FROM ChiTietHoaDon c WHERE CAST(c.hd.ngayTao as date)=CAST(GETDATE() as date) AND c.hd.tinhTrang=2";
             Query<Object[]> query = session.createQuery(sql, Object[].class);
             List<Object[]> ressulistArr = query.getResultList();
             for (Object[] ob : ressulistArr) {
