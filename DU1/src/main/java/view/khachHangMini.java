@@ -30,6 +30,7 @@ public class khachHangMini extends javax.swing.JFrame {
     private final JframeCheck jcheck = new JframeCheck();
     private final List<Object> jText = new ArrayList<>();
     private String idkh;
+    private int check;
 
     /**
      * Creates new form khachHangMini
@@ -37,6 +38,12 @@ public class khachHangMini extends javax.swing.JFrame {
     public khachHangMini() {
         initComponents();
         loadTable();
+    }
+
+    public khachHangMini(int check) {
+        initComponents();
+        loadTable();
+        this.check = check;
     }
 
     public void loadTable() {
@@ -63,15 +70,22 @@ public class khachHangMini extends javax.swing.JFrame {
         txtTenKhachHang.setText(nhanVien.getTen());
         txtaDiaChi.setText(nhanVien.getDiaChi());
         txtSDT.setText(nhanVien.getSđt());
-        Date ngay = new SimpleDateFormat("dd/MM/yyyy").parse(new SimpleDateFormat("dd/MM/yyyy").format(nhanVien.getNgaySinh()));
-        dateNgaySinh.setDate(ngay);
-        String gt = nhanVien.getGioiTinh();
-        if (gt.equalsIgnoreCase("nam")) {
-            rdNam.setSelected(true);
-        } else {
-            rdNu.setSelected(true);
+        Date ngay = null;
+        if (nhanVien.getNgaySinh() != null) {
+            ngay = new SimpleDateFormat("dd/MM/yyyy").parse(new SimpleDateFormat("dd/MM/yyyy").format(nhanVien.getNgaySinh()));
         }
 
+        dateNgaySinh.setDate(ngay);
+        String gt = nhanVien.getGioiTinh();
+        if (gt != null) {
+
+            if (gt.equalsIgnoreCase("nam")) {
+                rdNam.setSelected(true);
+            } else {
+                rdNu.setSelected(true);
+            }
+
+        }
 //        Date ngay = new SimpleDateFormat("dd/MM/yyyy").
 //                format(nhanVien.getNgaySinh());
     }
@@ -559,6 +573,9 @@ public class khachHangMini extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTimKeyReleased
 
     private void btnLamMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoi1ActionPerformed
+        if (this.check == 1) {
+            BanHang.banHang.getDateDatHang(this.reskh.getAllCoDK(" where k.id ='" + tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString() + "'").get(0));
+        }
         BanHang.banHang.getData(this.reskh.getAllCoDK(" where k.id ='" + tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString() + "'").get(0));
     }//GEN-LAST:event_btnLamMoi1ActionPerformed
 

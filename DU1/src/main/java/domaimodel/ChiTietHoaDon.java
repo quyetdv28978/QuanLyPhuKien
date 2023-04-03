@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -38,9 +39,11 @@ public class ChiTietHoaDon implements Serializable {
 
     private int trangThai;
     
-    
-    private  String maSP,tenSP;       
+    @Transient
+    private  String maSP,tenSP;   
+ @Transient    
     private  int Sluong, SOHD;
+  @Transient
     private  double  TONGTIEN,SKH;
 
     public String getMaSP() {
@@ -202,5 +205,9 @@ public class ChiTietHoaDon implements Serializable {
 //    }
     
  
-    
+       public Object[] torow(){
+     return new Object[]{
+        SPHD,(donGia*soluong)-giagiam
+     };
+     }
 }

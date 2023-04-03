@@ -3,6 +3,7 @@ package view;
 import domaimodel.Bieudo1;
 import domaimodel.ChiTietGioHang;
 import domaimodel.ChiTietHoaDon;
+import domaimodel.HoaDon;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -66,26 +67,17 @@ public class ThongKe extends javax.swing.JFrame {
     public void findNgay(List<ChiTietHoaDon> list) {
         dtm = (DefaultTableModel) Tbltheongay.getModel();
         dtm.setRowCount(0);
-        List<ChiTietHoaDon> kh = scthd.select_doanhthu_theongayTC(dateTK_doanhthu.getDate());
+        List<ChiTietHoaDon> kh = scthd.select_doanhthu_theongayTC( dateTK_doanhthu.getDate());
         for (ChiTietHoaDon c : kh) {
             dtm.addRow(new Object[]{
                 c.getSOHD(), c.getTONGTIEN(), c.getSKH()
             });
         }
     }
-
-    public void findNgay2(List<ChiTietHoaDon> list) {
-        dtm = (DefaultTableModel) Tbltheongay.getModel();
-        dtm.setRowCount(0);
-        List<ChiTietHoaDon> kh = scthd.select_doanhthu_theongayBH(dateTK_doanhthu.getDate());
-        for (ChiTietHoaDon c : kh) {
-            dtm.addRow(new Object[]{
-                c.getSOHD(), c.getTONGTIEN(), c.getSKH()
-            });
-        }
-    }
-
-    /*------doanh thu theo thang---------*/
+    
+  
+    /*---doanh thu theo tháng*/
+ /*------doanh thu theo thang---------*/
     public void findThang(List<ChiTietHoaDon> list) {
         dtm = (DefaultTableModel) Tbltheongay.getModel();
         dtm.setRowCount(0);
@@ -98,19 +90,6 @@ public class ThongKe extends javax.swing.JFrame {
 
     }
 
-    public void findThang2(List<ChiTietHoaDon> list) {
-        dtm = (DefaultTableModel) tblSP_H.getModel();
-        dtm.setRowCount(0);
-        List<ChiTietHoaDon> kh = scthd.select_doanhthu_theothangBH(Integer.parseInt((String) cbbSPthang.getSelectedItem()), Integer.parseInt(txtSPNam.getText()));
-        for (ChiTietHoaDon t : kh) {
-            dtm.addRow(new Object[]{
-                t.getSOHD(), t.getSluong(), t.getTONGTIEN()
-            });
-        }
-
-    }
-
-
     /*-----SAN PHAM-------*/
  /*------Tong Hop-------*/
     public void findTOP(List<ChiTietHoaDon> list) {
@@ -122,7 +101,6 @@ public class ThongKe extends javax.swing.JFrame {
                 t.getMaSP(), t.getTenSP(), t.getSOHD(), t.getSluong(), t.getTONGTIEN()
             });
         }
-
     }
 
     /*----SP theo thang-----*/
@@ -148,7 +126,7 @@ public class ThongKe extends javax.swing.JFrame {
             });
         }
     }
-
+    
     public void getIconMenu(JButton bt, String dd) {
         Image image = new ImageIcon(dd).getImage().getScaledInstance(24, 24, 0);
         bt.setIcon(new ImageIcon(image));
@@ -282,6 +260,7 @@ public class ThongKe extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setToolTipText("Cửa Hàng Phụ Kiện Trang Sức N1");
 
         lbl_ChuChay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_ChuChay.setText("Xin Chào Mọi Người Đến Đến Với Cửa Hàng Phụ Kiện Trang Sức N1.Chúc mọi người có một ngày tốt lành.                                                                                                                                                                                                                                                                                                   ");
@@ -852,7 +831,7 @@ public class ThongKe extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGap(0, 401, Short.MAX_VALUE)
         );
 
         jTabbedPane4.addTab("Biểu đồ", jPanel10);
@@ -1004,7 +983,7 @@ public class ThongKe extends javax.swing.JFrame {
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(cbbthoigian, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
@@ -1118,6 +1097,11 @@ public class ThongKe extends javax.swing.JFrame {
         btnthang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnthangMouseClicked(evt);
+            }
+        });
+        btnthang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnthangActionPerformed(evt);
             }
         });
 
@@ -1240,7 +1224,7 @@ public class ThongKe extends javax.swing.JFrame {
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel13Layout.createSequentialGroup()
@@ -1266,7 +1250,7 @@ public class ThongKe extends javax.swing.JFrame {
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGap(0, 401, Short.MAX_VALUE)
         );
 
         jTabbedPane5.addTab("Biều Đồ", jPanel14);
@@ -1300,8 +1284,9 @@ public class ThongKe extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Doanh Thu", jPanel5);
@@ -1374,7 +1359,9 @@ public class ThongKe extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -1455,13 +1442,13 @@ public class ThongKe extends javax.swing.JFrame {
 
         int row = Tbltheongay.getSelectedRow();
         if (cbbthoigian.getSelectedIndex() == 0) {
-            lblbihuy.setText(((ChiTietHoaDon) (scthd.select_doanhthu_theongayBH(dateTK_doanhthu.getDate()).get(0))).getSOHD() + "");
+            lblbihuy.setText(((scthd.select_doanhthu_theongayBH(dateTK_doanhthu.getDate())))+ "");
             lblthanhcong2.setText(Tbltheongay.getValueAt(row, 0).toString());
             lbldtngay.setText(Tbltheongay.getValueAt(row, 1).toString());
             lblKH.setText(Tbltheongay.getValueAt(row, 2).toString());
             lblSoDH2.setText(Integer.parseInt(lblthanhcong2.getText()) + Integer.parseInt(lblbihuy.getText()) + "");
         } else if (cbbthoigian.getSelectedIndex() == 1) {
-            lblbihuy.setText(((ChiTietHoaDon) (scthd.select_doanhthu_theothangBH(Integer.parseInt((String) cbbthang.getSelectedItem()), Integer.parseInt(txtnam.getText())).get(0))).getSOHD() + "");
+            lblbihuy.setText(((scthd.select_doanhthu_theothangBH(Integer.parseInt((String) cbbthang.getSelectedItem()), Integer.parseInt(txtnam.getText())))) + "");
             lblthanhcong2.setText(Tbltheongay.getValueAt(row, 0).toString());
             lbldtthang.setText(Tbltheongay.getValueAt(row, 1).toString());
             lblKH.setText(Tbltheongay.getValueAt(row, 2).toString());
@@ -1543,6 +1530,8 @@ public class ThongKe extends javax.swing.JFrame {
         if (cbbthang.getSelectedItem() != null && txtnam.getText() != null) {
             List<ChiTietHoaDon> list = this.scthd.select_doanhthu_theothangTC(Integer.parseInt((String) cbbthang.getSelectedItem()), Integer.parseInt(txtnam.getText()));
             findThang(list);
+            System.out.println(list);
+
             System.out.println(list.size());
         }
     }//GEN-LAST:event_btntimMouseClicked
@@ -1573,6 +1562,7 @@ public class ThongKe extends javax.swing.JFrame {
     private void btnhienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhienActionPerformed
         List<ChiTietHoaDon> list = scthd.SelectTOP(Integer.parseInt(txtn.getText()));
         findTOP(list);
+        System.out.println(list);
     }//GEN-LAST:event_btnhienActionPerformed
 
     private void txtSPNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSPNamActionPerformed
@@ -1582,6 +1572,8 @@ public class ThongKe extends javax.swing.JFrame {
     private void btnthangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnthangMouseClicked
         List<ChiTietHoaDon> kh = scthd.SelectbySPThang(Integer.parseInt((String) cbbSPthang.getSelectedItem()), Integer.parseInt(txtSPNam.getText()));
         findSPThang(kh);
+        System.out.println(kh.size());
+
     }//GEN-LAST:event_btnthangMouseClicked
 
     private void datetngayBDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datetngayBDMouseClicked
@@ -1593,7 +1585,7 @@ public class ThongKe extends javax.swing.JFrame {
     }//GEN-LAST:event_datengayKTMouseClicked
 
     private void btnkhoangngayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkhoangngayActionPerformed
-        lblbihuy.setText(((ChiTietHoaDon) (scthd.select_khoangBH(datetngayBD.getDate(), datengayKT.getDate()).get(0))).getSOHD() + "");
+        lblbihuy.setText(((scthd.select_khoangBH(datetngayBD.getDate(), datengayKT.getDate()))) + "");
         lblthanhcong2.setText(((ChiTietHoaDon) (scthd.select_khoangTC(datetngayBD.getDate(), datengayKT.getDate()).get(0))).getSOHD() + "");
         lbldtngay.setText(((ChiTietHoaDon) (scthd.select_khoangTC(datetngayBD.getDate(), datengayKT.getDate()).get(0))).getTONGTIEN() + "");
         lblKH.setText(((ChiTietHoaDon) (scthd.select_khoangTC(datetngayBD.getDate(), datengayKT.getDate()).get(0))).getSKH() + "");
@@ -1601,12 +1593,16 @@ public class ThongKe extends javax.swing.JFrame {
     }//GEN-LAST:event_btnkhoangngayActionPerformed
 
     private void btnhiendthientaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhiendthientaiActionPerformed
-        lblbihuy.setText(((ChiTietHoaDon) (scthd.select_hientaiBH().get(0))).getSOHD() + "");
+        lblbihuy.setText(scthd.select_hientaiBH() + "");
         lblthanhcong2.setText(((ChiTietHoaDon) (scthd.select_hientaiTC().get(0))).getSOHD() + "");
         lbldtngay.setText(((ChiTietHoaDon) (scthd.select_hientaiTC().get(0))).getTONGTIEN() + "");
         lblKH.setText(((ChiTietHoaDon) (scthd.select_hientaiTC().get(0))).getSKH() + "");
         lblSoDH2.setText(Integer.parseInt(lblthanhcong2.getText()) + Integer.parseInt(lblbihuy.getText()) + "");
     }//GEN-LAST:event_btnhiendthientaiActionPerformed
+
+    private void btnthangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnthangActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1633,6 +1629,8 @@ public class ThongKe extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ThongKe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

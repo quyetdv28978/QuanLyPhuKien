@@ -1,70 +1,74 @@
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\KhuyenMai.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\ChiTietGioHang.java
-D:\da1\TT_doing\DU1\src\main\java\respon\ChiTietKhuyenMaiResponsitories.java
-D:\da1\TT_doing\DU1\src\main\java\view\khachHangMini.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\KhachHang.java
-D:\da1\TT_doing\DU1\src\main\java\service\IManageService.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\ChiTietHoaDon.java
-D:\da1\TT_doing\DU1\src\main\java\view\LichSu.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\ChatLieu.java
-D:\da1\TT_doing\DU1\src\main\java\utility\DBConnection.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\GioHang.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\Embeddedct.java
-D:\da1\TT_doing\DU1\src\main\java\respon\resDanhMuc.java
-D:\da1\TT_doing\DU1\src\main\java\respon\KhuyenMaiResponsitories.java
-D:\da1\TT_doing\DU1\src\main\java\viewmodel\ChucVuViewModel.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\DanhMuc.java
-D:\da1\TT_doing\DU1\src\main\java\viewmodel\ChiTietKhuyenMaiViewModel.java
-D:\da1\TT_doing\DU1\src\main\java\view\DangNhap.java
-D:\da1\TT_doing\DU1\src\main\java\respon\ResHoaDon.java
-D:\da1\TT_doing\DU1\src\main\java\respon\IManageRespository.java
-D:\da1\TT_doing\DU1\src\main\java\service\ChiTietKhuyenMaiServices.java
-D:\da1\TT_doing\DU1\src\main\java\view\ThongKe.java
-D:\da1\TT_doing\DU1\src\main\java\viewmodel\DanhMucViewModel.java
-D:\da1\TT_doing\DU1\src\main\java\respon\ResGioHangCT.java
-D:\da1\TT_doing\DU1\src\main\java\service\serChatLieu.java
-D:\da1\TT_doing\DU1\src\main\java\respon\IfResponsitoties.java
-D:\da1\TT_doing\DU1\src\main\java\service\SerTKDoanhThu.java
-D:\da1\TT_doing\DU1\src\main\java\service\ChucVuService.java
-D:\da1\TT_doing\DU1\src\main\java\utility\JframeCheck.java
-D:\da1\TT_doing\DU1\src\main\java\respon\KhachHangResponsitories.java
-D:\da1\TT_doing\DU1\src\main\java\respon\ResHoaDonCho.java
-D:\da1\TT_doing\DU1\src\main\java\view\BanHang.java
-D:\da1\TT_doing\DU1\src\main\java\viewmodel\ChatLieuViewModel.java
-D:\da1\TT_doing\DU1\src\main\java\respon\Iresponsitories.java
-D:\da1\TT_doing\DU1\src\main\java\view\QuanLyNhanVien.java
-D:\da1\TT_doing\DU1\src\main\java\service\IManageNhanVienService.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\NhanVien.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\SanPham.java
-D:\da1\TT_doing\DU1\src\main\java\service\IManageChucVuService.java
-D:\da1\TT_doing\DU1\src\main\java\view\KhachHangView.java
-D:\da1\TT_doing\DU1\src\main\java\service\KhachHangServices.java
-D:\da1\TT_doing\DU1\src\main\java\respon\ChiTietHoaDonres.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\ChucVu.java
-D:\da1\TT_doing\DU1\src\main\java\respon\resTK_DoanhThu.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\ChiTietKhuyenMai.java
-D:\da1\TT_doing\DU1\src\main\java\view\ManHinhchao.java
-D:\da1\TT_doing\DU1\src\main\java\view\DoiTra.java
-D:\da1\TT_doing\DU1\src\main\java\view\viewSanPham.java
-D:\da1\TT_doing\DU1\src\main\java\service\serDanhMuc.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\HoaDon.java
-D:\da1\TT_doing\DU1\src\main\java\service\NhanVienService.java
-D:\da1\TT_doing\DU1\src\main\java\view\KhuyenMaiView.java
-D:\da1\TT_doing\DU1\src\main\java\viewmodel\SanPhamViewModel.java
-D:\da1\TT_doing\DU1\src\main\java\viewmodel\NhanVienViewModel.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\embeddableCTGH.java
-D:\da1\TT_doing\DU1\src\main\java\respon\ChucVuRespository.java
-D:\da1\TT_doing\DU1\src\main\java\respon\resChatLieu.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\embeddableCTHD.java
-D:\da1\TT_doing\DU1\src\main\java\service\SerSanPham.java
-D:\da1\TT_doing\DU1\src\main\java\viewmodel\HoaDonViewModel.java
-D:\da1\TT_doing\DU1\src\main\java\respon\resSanPham.java
-D:\da1\TT_doing\DU1\src\main\java\view\QuenMatKhau.java
-D:\da1\TT_doing\DU1\src\main\java\respon\NhanVienRespository.java
-D:\da1\TT_doing\DU1\src\main\java\view\viewChatLieu.java
-D:\da1\TT_doing\DU1\src\main\java\viewmodel\ChiTietHoaDonViewModel.java
-D:\da1\TT_doing\DU1\src\main\java\service\Interface.java
-D:\da1\TT_doing\DU1\src\main\java\viewmodel\KhachHangViewModel.java
-D:\da1\TT_doing\DU1\src\main\java\viewmodel\KhuyenMaiViewModel.java
-D:\da1\TT_doing\DU1\src\main\java\domaimodel\Bieudo1.java
-D:\da1\TT_doing\DU1\src\main\java\service\KhuyenMaiServices.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\Bieudo1.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\IManageChucVuService.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\QuanLyNhanVien.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\NhanVienViewModel_1.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\ChiTietGioHang.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\NhanVien.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\SerTKDoanhThu.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\KhuyenMai.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\IfResponsitoties.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\IManageService.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\serChatLieu.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\ManHinhchao.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ResGioHangCT.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\KhachHangView.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\NhanVienViewModel.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\KhachHang.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\Embeddedct.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\Interface.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\KhachHangViewModel.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\DoiTra.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\SerSanPham.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\resDanhMuc.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\NhanVienService.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\SanPhamViewModel.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ChiTietKhuyenMaiResponsitories.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\resSanPham.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\BaoHanh.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\ChiTietKhuyenMaiViewModel.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\ThongKe.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\ChatLieu.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\ChiTietKhuyenMai.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\KhuyenMaiViewModel.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\embeddableCTHD.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\resTK_DoanhThu.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\SerDanhMuc.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\ChucVuService.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\khachHangMini.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\viewChatLieu.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\ChiTietHoaDonViewModel.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ChucVuRespository.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\utility\jframeCheck.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\ChucVu.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\viewSanPham.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\KhachHangServices.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\ChiTietKhuyenMaiServices.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\HoaDon.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\ChiTietHoaDon.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\IManageNhanVienService.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\HoaDonViewModel.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\SanPham.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\DanhMucViewModel.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\LichSu.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\KhuyenMaiServices.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\resChatLieu.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\embeddableCTGH.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\Iresponsitories.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ResHoaDon.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\KhachHangResponsitories.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\BanHang.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\DangNhap.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ChiTietHoaDonres.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\QuenMatKhau.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\ChatLieuViewModel.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\KhuyenMaiResponsitories.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ResHoaDonCho.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\ChucVuViewModel.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\KhuyenMaiView.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\GioHang.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\utility\DBConnection.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\testBar.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\DanhMuc.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\IManageRespository.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\NhanVienRespository.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\main_T.java

@@ -45,8 +45,8 @@ public class KhachHangView extends javax.swing.JFrame {
         jText.add(txtaDiaChi);
         jText.add(rdNam);
         jText.add(rdNu);
-        chay();
-        loadTable();
+//        chay();
+//        loadTable();
         
     }
 
@@ -678,7 +678,8 @@ public class KhachHangView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-           if (txtTenKhachHang.getText().trim().length() == 0) {
+        tbHienThi.clearSelection();
+        if (txtTenKhachHang.getText().trim().length() == 0) {
             JOptionPane.showMessageDialog(this, "Tên KH đang trống");
             return;
         }
