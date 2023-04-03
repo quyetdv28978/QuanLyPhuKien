@@ -15,7 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 /**
@@ -32,7 +34,7 @@ public class KhuyenMai implements Serializable{
     private Date ngayBD, ngayKT,ngayTao;
     private String trangThai;
     private String moTa;
-//    @OneToMany(mappedBy = "sdf", cascade = )
+
 
     public KhuyenMai() {
         

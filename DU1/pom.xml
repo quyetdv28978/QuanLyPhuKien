@@ -10,60 +10,45 @@
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
         <exec.mainClass>com.nhom1.du1.DU1</exec.mainClass> 
-        <!--duong dan cua quyet-->
+        
         <myjar1.path>D:\pujic\DU1\lib</myjar1.path>
-        <!--duong dan cua huong-->
-        <!--<myjar1.path>D:\DuAn1\MainKaKe\DU1\lib</myjar1.path>-->
-        <!--duong dan cua tung-->
-        <!--<myjar1.path>D:\da1\TT_doing\DU1\lib</myjar1.path>-->
-        <!--======= duong dan cua hieu-->
-        <!--<myjar1.path>D:\CNTT\Spr2023\Block2\Du_An_1\Project_Tong\DU1\lib</myjar1.path>-->
+
 
     </properties>
     
     <dependencies>
         
-<!--        <dependency>
-            <groupId>bridj</groupId>
-            <artifactId>bridj</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${myjar1.path}\barcode.jar</systemPath> 
-        </dependency>
-        
+        <!--         https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml 
         <dependency>
-            <groupId>bridj2</groupId>
-            <artifactId>bridj2</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${myjar1.path}\org-netbeans-modules-java-j2seproject-copylibstask.jar</systemPath> 
-        </dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>-->
         
+
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
         <dependency>
-            <groupId>bridj3</groupId>
-            <artifactId>bridj3</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${myjar1.path}\qrgen-1.0.jar</systemPath> 
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.2</version>
         </dependency>
+
         
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
         <dependency>
-            <groupId>bridj4</groupId>
-            <artifactId>bridj4</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${myjar1.path}\zxing-core-1.7.jar</systemPath> 
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.2</version>
         </dependency>
-        
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
-            <groupId>bridj5</groupId>
-            <artifactId>bridj5</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${myjar1.path}\zxing-j2se-1.7.jar</systemPath> 
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.1</version>
         </dependency>
-        
-        -->
+
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -78,12 +63,7 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>8.2.2.jre8</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>4.0.1</version>
-        </dependency>
+
         
         <!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
         <dependency>
@@ -125,13 +105,13 @@
             <version>3.0.0</version>
         </dependency>
         
-        <dependency>
+        <!--        <dependency>
             <groupId>log</groupId>
             <artifactId>log</artifactId>
             <version>1.0</version>
             <scope>system</scope>
             <systemPath>${myjar1.path}\log4j-1.2.17.jar</systemPath> 
-        </dependency>
+        </dependency>-->
         
         <dependency>
             <groupId>slf</groupId>

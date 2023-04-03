@@ -863,10 +863,12 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
     private void btnbanhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbanhangActionPerformed
         this.setVisible(false);
-        new BanHang().setVisible(true);
+        new QuanLyNhanVien().setVisible(true);
     }//GEN-LAST:event_btnbanhangActionPerformed
 
     private void btnnhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnhanvienActionPerformed
+        this.setVisible(false);
+        new QuanLyNhanVien().setVisible(true);
     }//GEN-LAST:event_btnnhanvienActionPerformed
 
     private void btnsanphamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsanphamActionPerformed

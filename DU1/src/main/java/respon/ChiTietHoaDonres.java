@@ -71,7 +71,4 @@ public class ChiTietHoaDonres implements Iresponsitories<ChiTietHoaDonViewModel>
         return null;
     }
 
-    public static void main(String[] args) {
-        System.out.println("sout");
-    }
 }

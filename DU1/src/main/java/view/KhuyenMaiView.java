@@ -19,14 +19,21 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 //import java.sql.Date;
 import java.util.List;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
 import respon.ChiTietKhuyenMaiResponsitories;
@@ -59,7 +66,8 @@ public class KhuyenMaiView extends javax.swing.JFrame {
     private DefaultComboBoxModel cbbKM = new DefaultComboBoxModel();
     private DefaultComboBoxModel cbbSanPham = new DefaultComboBoxModel();
     private DefaultComboBoxModel cbbTT = new DefaultComboBoxModel();
-
+    private List<KhuyenMai> list;
+    private List<ChiTietKhuyenMai> listct;
     public KhuyenMaiView() {
         initComponents();
         chay();
@@ -79,13 +87,35 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         loadComBoKM();
         loadTableSanPham();
         loadTableSanPham2();
+        sapXep(khuyenMaiResponsitories.getAllLoad());
 //        chay1();
+        
+        
+
     }
+   
 
     public void loadTableKM() {
         dtm = (DefaultTableModel) tbHienThi.getModel();
         dtm.setRowCount(0);
         for (domaimodel.KhuyenMai object : khuyenMaiResponsitories.getAllLoad()) {
+            dtm.addRow(object.toRow());
+        }
+
+    }
+    public void sapXep(List<KhuyenMai> list1){
+        list = list1;
+        Collections.sort(list, (KhuyenMai o1, KhuyenMai o2)
+                -> o1.getNgayBD().getTime() > o2.getNgayBD().getTime() ? -1 : 1);
+       
+        loadTableKM1(list);
+
+    }
+   
+ public void loadTableKM1(List<KhuyenMai> lit) {
+        dtm = (DefaultTableModel) tbHienThi.getModel();
+        dtm.setRowCount(0);
+        for (domaimodel.KhuyenMai object : lit) {
             dtm.addRow(object.toRow());
         }
 
@@ -108,16 +138,18 @@ public class KhuyenMaiView extends javax.swing.JFrame {
             dtm.addRow(khvms.toRow());
         }
     }
-
-    public void loadTableKM1(List<KhuyenMai> lit) {
-        dtm = (DefaultTableModel) tbHienThi.getModel();
+     public void finTenSP(List<ChiTietKhuyenMai> list) {
+        dtm = (DefaultTableModel) tbHienThiSP.getModel();
         dtm.setRowCount(0);
-        for (domaimodel.KhuyenMai object : lit) {
-            dtm.addRow(object.toRow());
+        List<ChiTietKhuyenMai> khvm = chiTietKhuyenMaiResponsitories.SelectbyNameSP(txtTimSP.getText());
+        for (ChiTietKhuyenMai khvms : khvm) {
+            dtm.addRow(khvms.toRow1());
         }
-
     }
+    
+    
 
+   
     public void finTrangThai(List<KhuyenMai> list) {
 
         dtm = (DefaultTableModel) tbHienThi.getModel();
@@ -286,49 +318,51 @@ public class KhuyenMaiView extends javax.swing.JFrame {
 
     private boolean checkCalendar() {
 
-        SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
-
         Calendar cal = Calendar.getInstance();
-
-//        
         Date date = cal.getTime();
-
-        Date a1, a2;
+        Date a1, a2, a3;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            a1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse(new SimpleDateFormat("dd/MM/yyyy").format(dateNgayKT.getDate()) + " 00:00:00 AM");
+            //ép về dd/mm/yyyy 00:00
+            a1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").
+                    parse(new SimpleDateFormat("dd/MM/yyyy").format(dateNgayKT.getDate()) + " 00:00:00 AM");
             dateNgayKT.setDate(a1);
-            a2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").
-                    parse(new SimpleDateFormat("dd/MM/yyyy").format(dateNgayBD.getDate())
-                            + " 00:00:00 AM");
-//            dateNgayBD.setDate(a2);
-            System.out.println(a2);
-            Date endDate = new Date(date.getTime() - (30 * 24 * 60 * 60 * 1000));
-            Date endDate1 = new Date(date.getTime() - (1 * 24 * 60 * 60 * 1000));
-            String ngay = d.format(date);
-            Date now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse(new SimpleDateFormat("dd/MM/yyyy").format(new Date(date.getTime())) + " 00:00:00 AM");
-            LocalDate date1 = LocalDate.now();
-            System.out.println("ngaybd:" + a);
-            System.out.println("ngaykt:" + a1);
-            System.out.println("ngayktdd:" + date);
-            System.out.println("now " + now);
+            
+            // lấy ngày tháng hiện tại
+            int day = cal.get(Calendar.DATE);
+            int month = cal.get(Calendar.MONTH) + 1; // vì tháng trong Calendar tính từ 0 đến 11 nên phải cộng thêm 1
+            int year = cal.get(Calendar.YEAR);
+            String dateString = formatter.format(cal.getTime());
 
-//            if (dateNgayBD.getDate().before(endDate) == false) {
-//                JOptionPane.showMessageDialog(this, "Ngày bắt đầu không được quá 30 ngày so với hiện tại");
-//                dateNgayBD.requestFocus();
-//                return false;
-//            }
-            if (a2.compareTo(now) < 0) {
-                JOptionPane.showMessageDialog(this, "Ngày bắt đầu không thể là ngày quá khứ");
+            //ngày bắt đầu 
+            Date dateBD = dateNgayBD.getDate();
+            String bd = formatter.format(dateBD);
+
+            //ngyaf kết thúc
+            Date dateKT = dateNgayKT.getDate();
+            String kt = formatter.format(dateKT);
+
+//            //ngày bđ lớn hơn 30 ngày
+            Date endDate = new Date(date.getTime() - (30 * 24 * 60 * 60 * 1000));
+
+            //check
+
+            if (dateNgayBD.getDate().before(endDate) == false) {
+                JOptionPane.showMessageDialog(this, "Ngày bắt đầu không được quá 30 ngày so với hiện tại");
                 dateNgayBD.requestFocus();
                 return false;
             }
-
-            if (a1.compareTo(now) < 0) {
-                JOptionPane.showMessageDialog(this, "Ngày kết thúc không thể là ngày quá khứ");
-                dateNgayKT.requestFocus();
-                return false;
+            if (bd.equalsIgnoreCase(dateString)) {
+                System.out.println("ok");
+            } else {
+                if (dateNgayBD.getDate().getTime() < new Date().getTime()) {
+                    JOptionPane.showMessageDialog(this, "Ngày bắt đầu không thể là ngày quá khứ");
+                    return false;
+                }
             }
-            if (a1.compareTo(a2) < 0) {
+            if (bd.equalsIgnoreCase(kt)) {
+                System.out.println("hi");
+            } else if (a1.compareTo(dateNgayBD.getDate()) < 0) {
                 JOptionPane.showMessageDialog(this, "Ngày kết thúc không được sau ngày bắt đầu");
                 dateNgayKT.requestFocus();
                 return false;
@@ -336,6 +370,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
 
         } catch (ParseException ex) {
             Logger.getLogger(KhuyenMaiView.class.getName()).log(Level.SEVERE, null, ex);
+
         }
         return true;
     }
@@ -441,7 +476,6 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         rdHetHan = new javax.swing.JRadioButton();
         rdConHan = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -472,12 +506,10 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         lbl_Chay.setText("Chào Mừng Tất Cả Mọi Người Đến Với Cửa Hàng Trang Sức Phụ Kiện Nữ N1.Chúc Mọi Người Có Một Ngày Vui Vẻ.                                                                                                                                                      ");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 1, 1, new java.awt.Color(0, 0, 0)));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 153));
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel8.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -604,7 +636,6 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         });
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh Sách Khuyến Mãi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(255, 51, 51))); // NOI18N
 
         tbHienThi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -638,7 +669,6 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         btnTimKiem.setText("Tìm Kiếm");
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lọc", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(255, 102, 51))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("Trạng Thái :");
@@ -689,7 +719,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -708,7 +738,6 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         );
 
         jPanel36.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel36.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách"));
 
         jLabel73.setText("Tên Chương Trình :");
 
@@ -775,13 +804,6 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         buttonGroup7.add(rdConHan);
         rdConHan.setText("Còn Hạn");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
         jPanel36.setLayout(jPanel36Layout);
         jPanel36Layout.setHorizontalGroup(
@@ -811,11 +833,9 @@ public class KhuyenMaiView extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel36Layout.createSequentialGroup()
                         .addComponent(btnLamMoiKM)
                         .addGap(132, 132, 132)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                 .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel36Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(70, 70, 70)
                         .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel75)
                             .addComponent(jLabel76))
@@ -845,9 +865,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
                         .addComponent(txtGiaGiam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6))
                     .addGroup(jPanel36Layout.createSequentialGroup()
-                        .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel73))
+                        .addComponent(jLabel73)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -897,7 +915,6 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         jTabbedPane3.addTab("Khuyến Mãi", jPanel13);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh Sách Khuyến Mãi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(255, 51, 51))); // NOI18N
 
         tbHienThiSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -962,7 +979,6 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         );
 
         jPanel39.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel39.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách"));
 
         btnTaoSP.setBackground(new java.awt.Color(51, 204, 255));
         btnTaoSP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -993,23 +1009,15 @@ public class KhuyenMaiView extends javax.swing.JFrame {
 
         tbHienThiTTSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Mã SP", "TênSP", "Giá Bán", "Trạng thái"
+                "ID", "Mã SP", "TênSP", "Giá Bán"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         tbHienThiTTSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbHienThiTTSPMouseClicked(evt);
@@ -1129,7 +1137,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
                 .addGap(82, 82, 82))
         );
 
-        jTabbedPane3.addTab("Sản Phẩm Áp Dụng", jPanel15);
+        jTabbedPane3.addTab("Chi Tiết Khuyến Mãi", jPanel15);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1292,6 +1300,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         if (chiTietKhuyenMaiResponsitories.add(getDataCTKM("")) == 1) {
             JOptionPane.showMessageDialog(this, "Thành công");
         }
+        
         loadTableSanPham();
         clear();
     }//GEN-LAST:event_btnTaoSPActionPerformed
@@ -1327,10 +1336,10 @@ public class KhuyenMaiView extends javax.swing.JFrame {
     }//GEN-LAST:event_tbHienThiSPMouseClicked
 
     private void txtTimSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimSPKeyReleased
-        String ten = txtTimKM.getText();
+        String ten = txtTimSP.getText();
         System.out.println(ten);
-        List<KhuyenMai> list = khuyenMaiResponsitories.SelectbyName(ten);
-        finTenKM(list);
+        List<ChiTietKhuyenMai> list = chiTietKhuyenMaiResponsitories.SelectbyNameSP(ten);
+        finTenSP(list);
     }//GEN-LAST:event_txtTimSPKeyReleased
 
     private void btnTaoKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoKMActionPerformed
@@ -1372,8 +1381,8 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         if (khuyenMaiResponsitories.add(getData(" ")) == 1) {
             JOptionPane.showMessageDialog(this, "thành công");
         }
-
-        loadTableKM();
+        sapXep(khuyenMaiResponsitories.getAllLoad());
+//        loadTableKM();
         clear();
     }//GEN-LAST:event_btnTaoKMActionPerformed
 
@@ -1410,6 +1419,9 @@ public class KhuyenMaiView extends javax.swing.JFrame {
     private void txtDenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDenKeyReleased
         Float ten = Float.parseFloat(txtTu.getText());
         Float ten1 = Float.parseFloat(txtDen.getText());
+
+        System.out.println(ten);
+        System.out.println(ten1);
         List<SanPham> list = sanPham.SelectbyGia(ten, ten1);
         finGia(list);
     }//GEN-LAST:event_txtDenKeyReleased
@@ -1421,15 +1433,8 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         selectbyTen(list);
     }//GEN-LAST:event_txtTimKiemSPKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (dateNgayBD.getDate().getTime() < new Date().getTime()) {
-            JOptionPane.showConfirmDialog(this, "asfsaf");
-            return;
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void dateNgayBDPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateNgayBDPropertyChange
-        System.out.println(dateNgayBD.getDate());
+//        System.out.println("aaaaaaaa" + dateNgayBD.getDate());
     }//GEN-LAST:event_dateNgayBDPropertyChange
 
     /**
@@ -1495,7 +1500,6 @@ public class KhuyenMaiView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbTenKM;
     private com.toedter.calendar.JDateChooser dateNgayBD;
     private com.toedter.calendar.JDateChooser dateNgayKT;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
