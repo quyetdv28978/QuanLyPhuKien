@@ -91,15 +91,14 @@ public class ChiTietKhuyenMaiResponsitories implements Iresponsitories<ChiTietKh
         return DBConnection.selectQueRy("from SanPham");
     }
 
-
     public List<ChiTietKhuyenMai> SelectbyNameSP(String tenKM) {
         List<ChiTietKhuyenMai> pas;
         String nameSelect = "%" + tenKM + "%";
         try (Session session = DBConnection.getsetFactory().openSession()) {
-            TypedQuery<ChiTietKhuyenMai> query = session.createQuery("SELECT ctkm FROM ChiTietKhuyenMai ctkm \n" +
-"JOIN ctkm.sp sp \n" +
-"JOIN ctkm.km km \n" +
-"WHERE km.tenKM LIKE :key OR sp.tenSanPham LIKE :key");
+            TypedQuery<ChiTietKhuyenMai> query = session.createQuery("SELECT ctkm FROM ChiTietKhuyenMai ctkm \n"
+                    + "JOIN ctkm.sp sp \n"
+                    + "JOIN ctkm.km km \n"
+                    + "WHERE km.tenKM LIKE :key OR sp.tenSanPham LIKE :key");
             query.setParameter("key", nameSelect);
             System.out.println(query);
             pas = query.getResultList();
@@ -117,10 +116,9 @@ public class ChiTietKhuyenMaiResponsitories implements Iresponsitories<ChiTietKh
 //        LocalTime d = LocalTime.now();
 //        System.out.println(new java.util.Date());
 //        System.out.println(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a").parse("2023/03/27 00:00:00 AM"));
-        
+
 //        System.out.println("date util: " + new java.util.Date().setTime());
 //        LocalTime 
 //        System.out.println(LocalDate.parse(new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())));
-
     }
 }

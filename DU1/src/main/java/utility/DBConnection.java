@@ -6,7 +6,6 @@
 package utility;
 
 //import domaimodel.ChatLieu;
-
 import domaimodel.BaoHanh;
 
 import domaimodel.ChiTietKhuyenMai;
@@ -23,7 +22,6 @@ import domaimodel.KhuyenMai;
 import domaimodel.SanPham;
 
 import java.util.List;
-
 
 import domaimodel.ChucVu;
 import domaimodel.NhanVien;
@@ -57,10 +55,10 @@ public class DBConnection {
         Properties pro = new Properties();
         pro.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
         pro.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-ro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1;trustServerCertificate=true");
+        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1;trustServerCertificate=true");
 
         pro.put(Environment.USER, "sa");
-        pro.put(Environment.PASS, "2132411");
+        pro.put(Environment.PASS, "1");
         pro.put(Environment.SHOW_SQL, true);
         confi.setProperties(pro);
 
@@ -78,9 +76,6 @@ ro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1;trustServ
         confi.addAnnotatedClass(ChiTietKhuyenMai.class);
 
         confi.addAnnotatedClass(BaoHanh.class);
-
-
-        
 
         confi.addAnnotatedClass(KhachHang.class);
         confi.addAnnotatedClass(KhuyenMai.class);
