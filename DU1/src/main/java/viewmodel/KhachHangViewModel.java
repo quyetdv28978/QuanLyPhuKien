@@ -8,25 +8,30 @@ import java.util.Date;
 
 /**
  *
- * @author DELL
+ * @author Admin
  */
 public class KhachHangViewModel {
-        private String id, ma, ten;
-    private Date ngaySinh;
-    private String sdt, diaChi;
 
+    private String id;
+    private String ma;
+    private String ten;
+    private String gioiTinh;
+    private String sdt;
+    private Date ngaySinh;
+    private String diaChi;
+    
 
     public KhachHangViewModel() {
     }
 
-    public KhachHangViewModel(String id, String ma, String ten, Date ngaySinh, String sdt, String diaChi) {
+    public KhachHangViewModel(String id, String ma, String ten, String gioiTinh, String sdt, Date ngaySinh, String diaChi) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
-        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
         this.sdt = sdt;
+        this.ngaySinh = ngaySinh;
         this.diaChi = diaChi;
- 
     }
 
     public String getId() {
@@ -36,7 +41,6 @@ public class KhachHangViewModel {
     public void setId(String id) {
         this.id = id;
     }
-
     public String getMa() {
         return ma;
     }
@@ -53,20 +57,12 @@ public class KhachHangViewModel {
         this.ten = ten;
     }
 
-    public Date getNgaySinh() {
-        return ngaySinh;
-    }
-
-    public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
-    }
-
-    public String getSdt() {
+    public String getSđt() {
         return sdt;
     }
 
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
+    public void setSđt(String sđt) {
+        this.sdt = sđt;
     }
 
     public String getDiaChi() {
@@ -77,7 +73,32 @@ public class KhachHangViewModel {
         this.diaChi = diaChi;
     }
 
-  public Object[] toDataRow() {
-     return  new Object[]{id,ma,ten,ngaySinh,sdt,diaChi};
+    public Date getNgaySinh() {
+        return ngaySinh;
     }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public String getSdt() {
+        return sdt;
+    }
+
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
+    }
+    
+    public Object[] toRow() {
+        return new Object[]{id,ma, ten, gioiTinh,sdt, ngaySinh, diaChi};
+    }
+
 }

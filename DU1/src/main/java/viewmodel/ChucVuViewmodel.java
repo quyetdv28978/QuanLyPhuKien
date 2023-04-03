@@ -4,66 +4,60 @@
  */
 package viewmodel;
 
-import java.util.Date;
-
 /**
  *
- * @author DELL
+ * @author suppe
  */
-public class ChucVuViewmodel {
-    private String id, ma, ten;
-    private Date ngayTao;
-    private int trangThai;
+public class ChucVuViewModel {
 
-    public ChucVuViewmodel() {
+    private String idChucVu;
+    private String maChucVu;
+    private String tenChucVu;
+
+    public ChucVuViewModel() {
     }
 
-    public ChucVuViewmodel(String id, String ma, String ten, Date ngayTao, int trangThai) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.ngayTao = ngayTao;
-        this.trangThai = trangThai;
+    public ChucVuViewModel(String idChucVu, String maChucVu, String tenChucVu) {
+        this.idChucVu = idChucVu;
+        this.maChucVu = maChucVu;
+        this.tenChucVu = tenChucVu;
     }
 
-    public String getId() {
-        return id;
+    public ChucVuViewModel(String idChucVu) {
+        this.idChucVu = idChucVu;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getIdChucVu() {
+        return idChucVu;
     }
 
-    public String getMa() {
-        return ma;
+    public void setIdChucVu(String idChucVu) {
+        this.idChucVu = idChucVu;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public String getMaChucVu() {
+        return maChucVu;
     }
 
-    public String getTen() {
-        return ten;
+    public void setMaChucVu(String maChucVu) {
+        this.maChucVu = maChucVu;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public String getTenChucVu() {
+        return tenChucVu;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public void setTenChucVu(String tenChucVu) {
+        this.tenChucVu = tenChucVu;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    @Override
+    public String toString() {
+        return tenChucVu;
     }
 
-    public int getTrangThai() {
-        return trangThai;
+    public Object[] toDataRow() {
+        return new Object[]{tenChucVu};
     }
 
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
-    }
-    
 }

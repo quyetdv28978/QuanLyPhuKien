@@ -1,91 +1,55 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package domaimodel;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ *
+ * @author yugip
+ */
 @Entity
-@Table(name = "CHITIETHOADON")
+@Table(name = "chitietgiohang")
 public class ChiTietGioHang implements Serializable {
 
-    @Id
-    private String id;
-    private int soLuong, trangthai;
-    private float  donGia,giaGiam;
-    private Date ngayTao;
+    @EmbeddedId
+    private embeddableCTGH idDouble;
     @ManyToOne
     @JoinColumn(name = "idsp", insertable = false, updatable = false)
     private SanPham sp;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     @JoinColumn(name = "idgh", insertable = false, updatable = false)
     private GioHang gh;
 
-    public ChiTietGioHang(String id, int soLuong, int trangthai, float donGia, float giaGiam, Date ngayTao, SanPham sp, GioHang gh) {
-        this.id = id;
-        this.soLuong = soLuong;
-        this.trangthai = trangthai;
-        this.donGia = donGia;
-        this.giaGiam = giaGiam;
-        this.ngayTao = ngayTao;
-        this.sp = sp;
-        this.gh = gh;
-    }
+    private int soLuong, trangthai;
+    private Date ngayTao;
 
     public ChiTietGioHang() {
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
+    public ChiTietGioHang(embeddableCTGH idDouble, SanPham sp, GioHang gh, int soLuong, int trangthai, Date ngayTao) {
+        this.idDouble = idDouble;
+        this.sp = sp;
+        this.gh = gh;
         this.soLuong = soLuong;
-    }
-
-    public int getTrangthai() {
-        return trangthai;
-    }
-
-    public void setTrangthai(int trangthai) {
         this.trangthai = trangthai;
-    }
-
-    public float getDonGia() {
-        return donGia;
-    }
-
-    public void setDonGia(float donGia) {
-        this.donGia = donGia;
-    }
-
-    public float getGiaGiam() {
-        return giaGiam;
-    }
-
-    public void setGiaGiam(float giaGiam) {
-        this.giaGiam = giaGiam;
-    }
-
-    public Date getNgayTao() {
-        return ngayTao;
-    }
-
-    public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
+    }
+
+    public embeddableCTGH getIdDouble() {
+        return idDouble;
+    }
+
+    public void setIdDouble(embeddableCTGH idDouble) {
+        this.idDouble = idDouble;
     }
 
     public SanPham getSp() {
@@ -104,6 +68,34 @@ public class ChiTietGioHang implements Serializable {
         this.gh = gh;
     }
 
-   
+    public int getSoLuong() {
+        return soLuong;
+    }
 
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public int getTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(int trangthai) {
+        this.trangthai = trangthai;
+    }
+
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    @Override
+    public String toString() {
+        return "ChiTietGioHang{" + "idDouble=" + idDouble + ", sp=" + sp + ", gh=" + gh + ", soLuong=" + soLuong + ", trangthai=" + trangthai + ", ngayTao=" + ngayTao + '}';
+    }
+    
+    
 }

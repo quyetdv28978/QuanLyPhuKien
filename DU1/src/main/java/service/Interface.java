@@ -8,24 +8,23 @@ import java.util.List;
 
 /**
  *
- * @author ADMIN
+ * @author Admin
  */
-public interface Interface<T> {
-    public List<Object[]> getALLJoin(String dk);
+public interface Interface<Q> {
 
-    public List<T> getAll(String dk);
+    public List<Q> getALl(String dk);
 
-    public int add(T t);
+    public int add(Q q);
 
-    public int update(T t);
+    public int update(Q q);
 
-    public int delete(String t);
+    public int delete(String q);
 
     public String timID(String ma);
 
-    public T timObject(String dk);
+    public Q timOB(String id);
 
-    public Object CD(T t);
-    
+    public Object CD(Q q);
+
     public boolean checkTrung(String ma);
 }

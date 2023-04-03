@@ -1,5 +1,8 @@
-
-package Utilities;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package utility;
 
 import java.util.List;
 import java.util.Random;
@@ -11,8 +14,11 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
-public class jframeCheck {
+/**
+ *
+ * @author yugip
+ */
+public class JframeCheck {
 
     public boolean checkData(List<Object> checkL, JFrame thisjFrame) {
         for (Object object : checkL) {
@@ -54,7 +60,7 @@ public class jframeCheck {
                         if (Integer.parseInt(((JTextField) listOB.get(i)).getText().trim()) < dk[0]
                                 || Integer.parseInt(((JTextField) listOB.get(i)).getText().trim()) > dk[1]) {
                             JOptionPane.showMessageDialog(thisjFrame, ((JTextField) ((JTextField) listOB.get(i))).getName()
-                                    + " phải nằm trong khoản (" + dk[0] + "-" + dk[1] + ")");
+                                    + " phải nằm trong khoảng (" + dk[0] + "-" + dk[1] + ")");
                             ((JTextField) listOB.get(i)).requestFocus();
                             return 0;
                         }
@@ -110,7 +116,7 @@ public class jframeCheck {
 
     public boolean checkClcick(JTable jtable, JFrame jrame) {
         if (jtable.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(jrame, "Vui lòng chọn một dòng trên table");
+            JOptionPane.showMessageDialog(jrame, "Vui lòng chọn một dòng trên bảng");
             return false;
         }
         return true;
@@ -123,4 +129,5 @@ public class jframeCheck {
     public UUID createID() {
         return UUID.randomUUID();
     }
+    
 }

@@ -1,18 +1,24 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package domaimodel;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ *
+ * @author yugip
+ */
 @Entity
 @Table(name = "giohang")
-public class GioHang {
+public class GioHang implements Serializable {
     @Id
     private String id;
     private String ma;
@@ -24,6 +30,15 @@ public class GioHang {
 
     public GioHang() {
     }
+
+    public GioHang(String id, String ma, Date ngayTao, int tinhtrang) {
+        this.id = id;
+        this.ma = ma;
+        this.ngayTao = ngayTao;
+        this.tinhtrang = tinhtrang;
+    }
+    
+    
 
     public GioHang(String id, String ma, Date ngayTao, int tinhtrang, KhachHang nv) {
         this.id = id;
@@ -73,7 +88,5 @@ public class GioHang {
     public void setNv(KhachHang nv) {
         this.nv = nv;
     }
-    
-     
     
 }

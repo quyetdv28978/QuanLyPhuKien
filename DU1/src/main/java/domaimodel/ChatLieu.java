@@ -1,33 +1,34 @@
-
-package domaimodel;
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package domaimodel; 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "chatlieu")
-public class ChatLieu {
-
+@Table(name="chatLieu")
+public class ChatLieu implements Serializable{
     @Id
     private String id;
-    private String tenchatlieu, ma;
+    private String tenChatLieu;
 
     public ChatLieu() {
     }
 
-    public ChatLieu(String ten) {
-        this.tenchatlieu = ten;
-    }
-    
-    
-
-    public ChatLieu(String id, String ten, String ma) {
+    public ChatLieu(String id, String tenChatLieu) {
         this.id = id;
-        this.tenchatlieu = ten;
-        this.ma = ma;
+        this.tenChatLieu = tenChatLieu;
     }
-
+    
+    
+    
+    public ChatLieu(String id) {
+        this.id = id;
+    }
+  
     public String getId() {
         return id;
     }
@@ -36,20 +37,13 @@ public class ChatLieu {
         this.id = id;
     }
 
-    public String getTen() {
-        return tenchatlieu;
+    public String getTenChatLieu() {
+        return tenChatLieu;
     }
 
-    public void setTen(String ten) {
-        this.tenchatlieu = ten;
+    public void setTenChatLieu(String tenChatLieu) {
+        this.tenChatLieu = tenChatLieu;
     }
-
-    public String getMa() {
-        return ma;
-    }
-
-    public void setMa(String ma) {
-        this.ma = ma;
-    }
-
+    
+    
 }

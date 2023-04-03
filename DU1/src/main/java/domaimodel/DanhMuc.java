@@ -1,40 +1,36 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package domaimodel;
-
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "danhmuc")
-public class DanhMuc {
+@Table(name="DanhMuc")
+public class DanhMuc implements Serializable{
     @Id
     private String id;
-    private String dongsp, ma;
+    private String dongSP;
 
     public DanhMuc() {
     }
-
-    public DanhMuc(String ten) {
-        this.dongsp = ten;
-    }
-
-    public DanhMuc(String id, String dongsp, String ma) {
-        this.id = id;
-        this.dongsp = dongsp;
-        this.ma = ma;
-    }
-    
     
 
-    public DanhMuc(String id, String ten) {
+    public DanhMuc(String id, String dongSP) {
         this.id = id;
-        this.dongsp = ten;
+        this.dongSP = dongSP;
     }
+    
+    public DanhMuc(String id) {
+        this.id = id;
+    }
+    
+//    public DanhMuc(String dongSP) {
+//        this.dongSP = dongSP;
+//    }
 
     public String getId() {
         return id;
@@ -44,16 +40,13 @@ public class DanhMuc {
         this.id = id;
     }
 
-    public String getTen() {
-        return dongsp;
+    public String getDongSP() {
+        return dongSP;
     }
 
-    public void setTen(String ten) {
-        this.dongsp = ten;
+    public void setDongSP(String dongSP) {
+        this.dongSP = dongSP;
     }
     
     
 }
-
-
-

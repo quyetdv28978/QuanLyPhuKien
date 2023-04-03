@@ -2,13 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Responshitory;
+package respon;
 
 import domaimodel.DanhMuc;
-import Utilities.DBConnection;
 import java.util.List;
+import utility.DBConnection;
 
-public class ResDanhMuc implements IfResponsitoties<DanhMuc> {
+/**
+ *
+ * @author ADMIN
+ */
+public class resDanhMuc implements Iresponsitories<DanhMuc>{
 
     @Override
     public List<Object[]> getALLJoin(String dk) {
@@ -17,26 +21,26 @@ public class ResDanhMuc implements IfResponsitoties<DanhMuc> {
 
     @Override
     public List<DanhMuc> getAll(String dk) {
-        return DBConnection.selectQueRy("from DanhMuc" + dk);
+        return DBConnection.selectQueRy("from DanhMuc");
     }
-
+    
     public List<DanhMuc> getAllLoad() {
         return DBConnection.selectQueRy("from DanhMuc");
     }
 
     @Override
-    public int add(DanhMuc q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int add(DanhMuc t) {
+        return DBConnection.executeQuery(t, null);
     }
 
     @Override
-    public int update(DanhMuc q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int update(DanhMuc t) {
+        return DBConnection.executeQuery(t, "update");
     }
 
     @Override
-    public int delete(String q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int delete(String t) {
+        return DBConnection.delete(t, DanhMuc.class);
     }
 
     @Override
@@ -48,5 +52,5 @@ public class ResDanhMuc implements IfResponsitoties<DanhMuc> {
     public DanhMuc timObject(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }

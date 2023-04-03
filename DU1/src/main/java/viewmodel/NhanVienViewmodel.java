@@ -1,67 +1,97 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package viewmodel;
 
-import domaimodel.ChucVu;
 import java.util.Date;
 
+/**
+ *
+ * @author suppe
+ */
+public class NhanVienViewModel {
 
-public class NhanVienViewmodel {
-private String id, ma, ten;
-    private boolean gioiTinh;
+    private String idNhanVien;
+    private String maNhanVien;
+    private String tenTaiKhoan;
+    private String tenNhanVien;
+    private String cmnd;
+    private String gioiTinh;
     private Date ngaySinh;
-    private String diaChi, sdt, anh, tentk, mk;
+    private String diaChi;
+    private String sdt;
+    private String email;
+    private String anh;
     private Date ngayTao;
     private int trangThai;
-    private ChucVu cv;    
+    private ChucVuViewModel chucVuViewModel;
 
-    public NhanVienViewmodel() {
+    public NhanVienViewModel() {
     }
 
-    public NhanVienViewmodel(String id, String ma, String ten, boolean gioiTinh, Date ngaySinh, String diaChi, String sdt, String anh, String tentk, String mk, Date ngayTao, int trangThai, ChucVu cv) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
+    public NhanVienViewModel(String idNhanVien, String maNhanVien, String taiKhoan, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String email, String anh, Date ngayTao, ChucVuViewModel chucVuViewModel, int trangThai) {
+        this.idNhanVien = idNhanVien;
+        this.maNhanVien = maNhanVien;
+        this.tenTaiKhoan = tenTaiKhoan;
+        this.tenNhanVien = tenNhanVien;
+        this.cmnd = cmnd;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;
         this.diaChi = diaChi;
         this.sdt = sdt;
+        this.email = email;
         this.anh = anh;
-        this.tentk = tentk;
-        this.mk = mk;
         this.ngayTao = ngayTao;
+        this.chucVuViewModel = chucVuViewModel;
         this.trangThai = trangThai;
-        this.cv = cv;
     }
 
-    public String getId() {
-        return id;
+    public String getIdNhanVien() {
+        return idNhanVien;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdNhanVien(String idNhanVien) {
+        this.idNhanVien = idNhanVien;
     }
 
-    public String getMa() {
-        return ma;
+    public String getMaNhanVien() {
+        return maNhanVien;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setMaNhanVien(String maNhanVien) {
+        this.maNhanVien = maNhanVien;
     }
 
-    public String getTen() {
-        return ten;
+    public String getTenTaiKhoan() {
+        return tenTaiKhoan;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setTenTaiKhoan(String taiKhoan) {
+        this.tenTaiKhoan = taiKhoan;
     }
 
-    public boolean isGioiTinh() {
+    public String getTenNhanVien() {
+        return tenNhanVien;
+    }
+
+    public void setTenNhanVien(String tenNhanVien) {
+        this.tenNhanVien = tenNhanVien;
+    }
+
+    public String getCmnd() {
+        return cmnd;
+    }
+
+    public void setCmnd(String cmnd) {
+        this.cmnd = cmnd;
+    }
+
+    public String getGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(boolean gioiTinh) {
+    public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 
@@ -89,28 +119,20 @@ private String id, ma, ten;
         this.sdt = sdt;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getAnh() {
         return anh;
     }
 
     public void setAnh(String anh) {
         this.anh = anh;
-    }
-
-    public String getTentk() {
-        return tentk;
-    }
-
-    public void setTentk(String tentk) {
-        this.tentk = tentk;
-    }
-
-    public String getMk() {
-        return mk;
-    }
-
-    public void setMk(String mk) {
-        this.mk = mk;
     }
 
     public Date getNgayTao() {
@@ -129,12 +151,19 @@ private String id, ma, ten;
         this.trangThai = trangThai;
     }
 
-    public ChucVu getCv() {
-        return cv;
+    public ChucVuViewModel getChucVuViewModel() {
+        return chucVuViewModel;
     }
 
-    public void setCv(ChucVu cv) {
-        this.cv = cv;
+    public void setChucVuViewModel(ChucVuViewModel chucVuViewModel) {
+        this.chucVuViewModel = chucVuViewModel;
     }
-    
+
+    public String trangThai() {
+        if (trangThai == 0) {
+            return "Còn làm";
+        } else {
+            return "Đã nghỉ";
+        }
+    }
 }

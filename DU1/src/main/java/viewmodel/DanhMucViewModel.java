@@ -4,26 +4,23 @@
  */
 package viewmodel;
 
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-/**
- *
- * @author DELL
- */
 public class DanhMucViewModel {
-    private String id,ma,dongSP;
-    private Date ngayTao;
-    private boolean trangThai;
+    
+    private String id,dongSP;
 
     public DanhMucViewModel() {
     }
 
-    public DanhMucViewModel(String id, String ma, String dongSP, Date ngayTao, boolean trangThai) {
+    public DanhMucViewModel(String id, String dongSP) {
         this.id = id;
-        this.ma = ma;
         this.dongSP = dongSP;
-        this.ngayTao = ngayTao;
-        this.trangThai = trangThai;
+    }
+    
+    public DanhMucViewModel(String dongSP) {
+        this.dongSP = dongSP;
     }
 
     public String getId() {
@@ -34,14 +31,6 @@ public class DanhMucViewModel {
         this.id = id;
     }
 
-    public String getMa() {
-        return ma;
-    }
-
-    public void setMa(String ma) {
-        this.ma = ma;
-    }
-
     public String getDongSP() {
         return dongSP;
     }
@@ -49,21 +38,24 @@ public class DanhMucViewModel {
     public void setDongSP(String dongSP) {
         this.dongSP = dongSP;
     }
-
-    public Date getNgayTao() {
-        return ngayTao;
+    
+    public Object[] toDataRow() {
+        return new Object[]{id,dongSP};
     }
-
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    
+    public Object[] toDataRowCBB() {
+        return new Object[]{dongSP};
     }
+    
+//    @Override
+//    public String toString() {
+//        return dongSP;
+//    }
 
-    public boolean isTrangThai() {
-        return trangThai;
+    @Override
+    public String toString() {
+        return dongSP;
     }
-
-    public void setTrangThai(boolean trangThai) {
-        this.trangThai = trangThai;
-    }
+    
     
 }

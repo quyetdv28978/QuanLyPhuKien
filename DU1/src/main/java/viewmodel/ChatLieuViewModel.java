@@ -4,23 +4,26 @@
  */
 package viewmodel;
 
-/**
- *
- * @author DELL
- */
-public class ChatLieuViewModel {
+import java.io.Serializable;
+
+
+public class ChatLieuViewModel implements Serializable {
 
     private String id;
-    private String ma, tenChatLieu;
+    private String tenChatLieu;
 
     public ChatLieuViewModel() {
     }
 
-    public ChatLieuViewModel(String id, String ma, String tenChatLieu) {
+    public ChatLieuViewModel(String id, String tenChatLieu) {
         this.id = id;
-        this.ma = ma;
         this.tenChatLieu = tenChatLieu;
     }
+
+    public ChatLieuViewModel(String tenChatLieu) {
+        this.tenChatLieu = tenChatLieu;
+    }
+
 
     public String getId() {
         return id;
@@ -28,14 +31,6 @@ public class ChatLieuViewModel {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getMa() {
-        return ma;
-    }
-
-    public void setMa(String ma) {
-        this.ma = ma;
     }
 
     public String getTenChatLieu() {
@@ -47,6 +42,12 @@ public class ChatLieuViewModel {
     }
 
     public Object[] toDataRow() {
-     return  new Object[]{id,ma,tenChatLieu};
+        return new Object[]{id, tenChatLieu};
     }
+
+    @Override
+    public String toString() {
+        return tenChatLieu;
+    }
+    
 }

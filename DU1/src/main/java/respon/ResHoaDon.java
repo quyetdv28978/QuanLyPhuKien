@@ -2,31 +2,35 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Responshitory;
+package respon;
 
+import domaimodel.ChiTietHoaDon;
 import domaimodel.HoaDon;
-
-import Utilities.DBConnection;
+import domaimodel.KhachHang;
+import utility.DBConnection;
 import java.util.List;
 
 /**
  *
- * @author DELL
+ * @author yugip
  */
-public class ResHoaDon implements IfResponsitoties<HoaDon> {
+public class ResHoaDon implements IfResponsitoties<HoaDon>{
 
     @Override
     public List<Object[]> getALLJoin(String dk) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return DBConnection.selectQueRyJoin("from ChiTietHoaDon d left join d.hd " + dk);
     }
 
     @Override
     public List<HoaDon> getAll(String dk) {
-        return DBConnection.selectQueRy("from HOADON" + dk);
+        if ( DBConnection.selectQueRy("from HoaDon d " + dk) != null) {
+            return DBConnection.selectQueRy("from HoaDon d " + dk);
+        }
+        return null;
     }
-
-    public List<HoaDon> getAllLoad() {
-        return DBConnection.selectQueRy("from HOADON");
+    
+     public List<ChiTietHoaDon> getAllChiTietHoaDon(String dk) {
+        return DBConnection.selectQueRy("from ChiTietHoaDon d " + dk);
     }
 
     @Override
@@ -36,7 +40,7 @@ public class ResHoaDon implements IfResponsitoties<HoaDon> {
 
     @Override
     public int update(HoaDon q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return DBConnection.executeQuery(q, "update");
     }
 
     @Override
@@ -53,5 +57,10 @@ public class ResHoaDon implements IfResponsitoties<HoaDon> {
     public HoaDon timObject(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
+//    select kh
+    public List<KhachHang> getALl(){
+        return DBConnection.selectQueRy("from KhachHang");
+    }
+    
 }

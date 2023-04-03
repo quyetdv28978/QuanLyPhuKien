@@ -8,29 +8,67 @@ import java.util.Date;
 
 /**
  *
- * @author DELL
+ * @author Admin
  */
 public class KhuyenMaiViewModel {
- private String id, ma, tenKM;
-    private Date ngayBD, ngayKT, ngayTao;
-    private int trangthai;   
+     private String id, ma,tenKM;
+    private Date ngayBD, ngayKT;
+    private String moTa;
+    private Float giaGiam;
+    
 
     public KhuyenMaiViewModel() {
     }
 
-    public KhuyenMaiViewModel(String id, String ma, String tenKM, Date ngayBD, Date ngayKT, Date ngayTao, int trangthai) {
+    public KhuyenMaiViewModel(String ma, String tenKM, Date ngayBD, Date ngayKT, String moTa) {
+        this.ma = ma;
+        this.tenKM = tenKM;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
+        this.moTa = moTa;
+    }
+
+    public KhuyenMaiViewModel(String ma, String tenKM, Date ngayBD, Date ngayKT, String moTa, Float giaGiam) {
+        
+        this.ma = ma;
+        this.tenKM = tenKM;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
+        this.moTa = moTa;
+        this.giaGiam = giaGiam;
+    }
+    
+
+    public KhuyenMaiViewModel(String id, String ma, String tenKM, Date ngayBD, Date ngayKT, String moTa) {
         this.id = id;
         this.ma = ma;
         this.tenKM = tenKM;
         this.ngayBD = ngayBD;
         this.ngayKT = ngayKT;
-        this.ngayTao = ngayTao;
-        this.trangthai = trangthai;
+        this.moTa = moTa;
+    }
+    
+
+    public KhuyenMaiViewModel(String id, String ma, String tenKM, Date ngayBD, Date ngayKT) {
+        this.id = id;
+        this.ma = ma;
+        this.tenKM = tenKM;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
     }
 
     public String getId() {
         return id;
     }
+
+    public Float getGiaGiam() {
+        return giaGiam;
+    }
+
+    public void setGiaGiam(Float giaGiam) {
+        this.giaGiam = giaGiam;
+    }
+    
 
     public void setId(String id) {
         this.id = id;
@@ -68,20 +106,13 @@ public class KhuyenMaiViewModel {
         this.ngayKT = ngayKT;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public String getMoTa() {
+        return moTa;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
     }
-
-    public int getTrangthai() {
-        return trangthai;
-    }
-
-    public void setTrangthai(int trangthai) {
-        this.trangthai = trangthai;
-    }
+    
     
 }

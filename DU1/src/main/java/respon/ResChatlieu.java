@@ -2,13 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Responshitory;
+package respon;
 
 import domaimodel.ChatLieu;
-import Utilities.DBConnection;
 import java.util.List;
+import utility.DBConnection;
 
-public class ResChatlieu implements IfResponsitoties<ChatLieu>{
+/**
+ *
+ * @author ADMIN
+ */
+public class resChatLieu implements Iresponsitories<ChatLieu> {
 
     @Override
     public List<Object[]> getALLJoin(String dk) {
@@ -17,27 +21,26 @@ public class ResChatlieu implements IfResponsitoties<ChatLieu>{
 
     @Override
     public List<ChatLieu> getAll(String dk) {
-        return  DBConnection.selectQueRy("from ChatLieu "+dk);
+        return DBConnection.selectQueRy("from ChatLieu");
     }
-    
-     public  List<ChatLieu> getAllLoad(){
-    return DBConnection.selectQueRy("from ChatLieu");
+
+    public List<ChatLieu> getAllLoad() {
+        return DBConnection.selectQueRy("from ChatLieu");
     }
 
     @Override
-    public int add(ChatLieu q) {
-        
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int add(ChatLieu t) {
+        return DBConnection.executeQuery(t, null);
     }
 
     @Override
-    public int update(ChatLieu q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int update(ChatLieu t) {
+        return DBConnection.executeQuery(t, "update");
     }
 
     @Override
-    public int delete(String q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int delete(String t) {
+        return DBConnection.delete(t, ChatLieu.class);
     }
 
     @Override
@@ -51,5 +54,3 @@ public class ResChatlieu implements IfResponsitoties<ChatLieu>{
     }
 
 }
-
-

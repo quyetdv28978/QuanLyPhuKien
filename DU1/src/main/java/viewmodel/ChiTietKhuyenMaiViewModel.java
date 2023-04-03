@@ -4,33 +4,30 @@
  */
 package viewmodel;
 
-import domaimodel.KhuyenMai;
+import domaimodel.Embeddedct;
 import domaimodel.SanPham;
 import java.util.Date;
 
 /**
  *
- * @author DELL
+ * @author Admin
  */
 public class ChiTietKhuyenMaiViewModel {
-     private String id, ma;
+    private Embeddedct ei;
+    private String  id;
+    private  String ma;
     private float giaGiam;
-    private Date ngayTao;
-    private int trangThai;
-    private SanPham sp;
-    private KhuyenMai km;
+    private SanPhamViewModel spvm;
+    private KhuyenMaiViewModel kmvm;
 
     public ChiTietKhuyenMaiViewModel() {
     }
 
-    public ChiTietKhuyenMaiViewModel(String id, String ma, float giaGiam, Date ngayTao, int trangThai, SanPham sp, KhuyenMai km) {
+    public ChiTietKhuyenMaiViewModel(String id, String ma, SanPhamViewModel spvm, KhuyenMaiViewModel kmvm) {
         this.id = id;
         this.ma = ma;
-        this.giaGiam = giaGiam;
-        this.ngayTao = ngayTao;
-        this.trangThai = trangThai;
-        this.sp = sp;
-        this.km = km;
+        this.spvm = spvm;
+        this.kmvm = kmvm;
     }
 
     public String getId() {
@@ -40,6 +37,17 @@ public class ChiTietKhuyenMaiViewModel {
     public void setId(String id) {
         this.id = id;
     }
+
+    public Embeddedct getEi() {
+        return ei;
+    }
+
+    public void setEi(Embeddedct ei) {
+        this.ei = ei;
+    }
+
+    
+    
 
     public String getMa() {
         return ma;
@@ -57,36 +65,23 @@ public class ChiTietKhuyenMaiViewModel {
         this.giaGiam = giaGiam;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public SanPhamViewModel getSpvm() {
+        return spvm;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setSpvm(SanPhamViewModel spvm) {
+        this.spvm = spvm;
     }
 
-    public int getTrangThai() {
-        return trangThai;
+    public KhuyenMaiViewModel getKmvm() {
+        return kmvm;
     }
 
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
+    public void setKmvm(KhuyenMaiViewModel kmvm) {
+        this.kmvm = kmvm;
     }
-
-    public SanPham getSp() {
-        return sp;
-    }
-
-    public void setSp(SanPham sp) {
-        this.sp = sp;
-    }
-
-    public KhuyenMai getKm() {
-        return km;
-    }
-
-    public void setKm(KhuyenMai km) {
-        this.km = km;
+    public Object[] toRow(){
+        return new Object[]{id,ma,kmvm.getTenKM(), spvm.getDm().getDongSP(), spvm.getTenSanPham(),giaGiam, kmvm.getNgayBD(),kmvm.getNgayKT(),kmvm.getMoTa()};
     }
     
 }

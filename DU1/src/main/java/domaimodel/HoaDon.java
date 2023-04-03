@@ -1,27 +1,33 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package domaimodel;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ *
+ * @author yugip
+ */
 @Entity
 @Table(name = "hoadon")
-public class HoaDon {
+public class HoaDon implements Serializable {
     @Id
     private String id;
-    private String hinhthucthanhtoan;
     private Date ngayTao, ngayTT;
     private int tinhTrang;
-    private Double tongTien;
     
-    @OneToOne
+        private String hinhthucthanhtoan;
+    
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idkh")
     private KhachHang kh;
     
@@ -29,18 +35,45 @@ public class HoaDon {
     @JoinColumn(name = "idnv")
     private NhanVien nv;
 
+    public HoaDon(NhanVien nv1) {
+        this.nv=nv;
+    }
+
     public HoaDon() {
     }
 
-    public HoaDon(String id, String hinhthucthanhtoan, Date ngayTao, Date ngayTT, int tinhTrang, KhachHang kh, NhanVien nv, double tongTien) {
+ 
+
+    
+    public HoaDon(String id, Date ngayTao, Date ngayTT, int tinhTrang, String hinhthucthanhtoan) {
         this.id = id;
-        this.hinhthucthanhtoan = hinhthucthanhtoan;
         this.ngayTao = ngayTao;
         this.ngayTT = ngayTT;
         this.tinhTrang = tinhTrang;
+        this.hinhthucthanhtoan = hinhthucthanhtoan;
+    }
+
+    public HoaDon(String id, Date ngayTao, Date ngayTT, int tinhTrang, String hinhthucthanhtoan, KhachHang kh, NhanVien nv) {
+        this.id = id;
+        this.ngayTao = ngayTao;
+        this.ngayTT = ngayTT;
+        this.tinhTrang = tinhTrang;
+        this.hinhthucthanhtoan = hinhthucthanhtoan;
         this.kh = kh;
         this.nv = nv;
-        this.tongTien = tongTien;
+    }
+
+   
+    
+    
+
+    public HoaDon(String id, Date ngayTao, int tinhTrang,
+            KhachHang kh, NhanVien nv) {
+        this.id = id;
+        this.ngayTao = ngayTao;
+        this.tinhTrang = tinhTrang;
+        this.kh = kh;
+        this.nv = nv;
     }
 
 
@@ -50,14 +83,6 @@ public class HoaDon {
 
     public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
-    }
-
-    public Date getNgayTT() {
-        return ngayTT;
-    }
-
-    public void setNgayTT(Date ngayTT) {
-        this.ngayTT = ngayTT;
     }
 
     public int getTinhTrang() {
@@ -77,13 +102,6 @@ public class HoaDon {
         this.id = id;
     }
 
-    public String getHinhthucthanhtoan() {
-        return hinhthucthanhtoan;
-    }
-
-    public void setHinhthucthanhtoan(String hinhthucthanhtoan) {
-        this.hinhthucthanhtoan = hinhthucthanhtoan;
-    }
 
     public Date getNgayT() {
         return ngayTao;
@@ -91,15 +109,6 @@ public class HoaDon {
 
     public void setNgayT(Date ngayTao) {
         this.ngayTao = ngayTao;
-    }
-
-
-    public int getTrangThai() {
-        return tinhTrang;
-    }
-
-    public void setTrangThai(int tinhTrang) {
-        this.tinhTrang = tinhTrang;
     }
 
     public KhachHang getKh() {
@@ -118,15 +127,22 @@ public class HoaDon {
         this.nv = nv;
     }
 
-    public Double getTongTien() {
-        return tongTien;
+    public Date getNgayTT() {
+        return ngayTT;
     }
 
-    public void setTongTien(Double tongTien) {
-        this.tongTien = tongTien;
+    public void setNgayTT(Date ngayTT) {
+        this.ngayTT = ngayTT;
     }
-    
+
+   
+
+    public String getHinhthucthanhtoan() {
+        return hinhthucthanhtoan;
+    }
+
+    public void setHinhthucthanhtoan(String hinhthucthanhtoan) {
+        this.hinhthucthanhtoan = hinhthucthanhtoan;
+    }
     
 }
-
-
