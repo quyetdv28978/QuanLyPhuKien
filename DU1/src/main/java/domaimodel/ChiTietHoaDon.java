@@ -38,13 +38,13 @@ public class ChiTietHoaDon implements Serializable {
     private Date ngayTao;
 
     private int trangThai;
-    
+
     @Transient
-    private  String maSP,tenSP;   
- @Transient    
-    private  int Sluong, SOHD;
-  @Transient
-    private  double  TONGTIEN,SKH;
+    private String maSP, tenSP;
+    @Transient
+    private int Sluong, SOHD;
+    @Transient
+    private double TONGTIEN, SKH;
 
     public String getMaSP() {
         return maSP;
@@ -69,7 +69,6 @@ public class ChiTietHoaDon implements Serializable {
     public void setSluong(int Sluong) {
         this.Sluong = Sluong;
     }
-   
 
     public int getSOHD() {
         return SOHD;
@@ -203,11 +202,9 @@ public class ChiTietHoaDon implements Serializable {
 //            System.out.println(object);
 //        }
 //    }
-    
- 
-       public Object[] torow(){
-     return new Object[]{
-        SPHD,(donGia*soluong)-giagiam
-     };
-     }
+    public Object[] torow() {
+        return new Object[]{
+            SPHD, (donGia * soluong) - giagiam
+        };
+    }
 }
