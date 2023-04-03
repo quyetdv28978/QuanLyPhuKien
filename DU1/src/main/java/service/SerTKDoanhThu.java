@@ -1,16 +1,12 @@
 package service;
 
 import domaimodel.ChiTietHoaDon;
-import domaimodel.HoaDon;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import respon.Iresponsitories;
 import respon.resTK_DoanhThu;
-import viewmodel.ChiTietHoaDonViewModel;
-import viewmodel.HoaDonViewModel;
 
-public class SerTKDoanhThu implements Iresponsitories<ChiTietHoaDonViewModel> {
+
+public class SerTKDoanhThu  {
 
     public final resTK_DoanhThu rtkdt = new resTK_DoanhThu();
 
@@ -66,54 +62,5 @@ public class SerTKDoanhThu implements Iresponsitories<ChiTietHoaDonViewModel> {
     public List<ChiTietHoaDon> SelectTOP(int nam) {
         return rtkdt.selectTonghop(nam);
     }
-
-    @Override
-    public List<Object[]> getALLJoin(String dk) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<ChiTietHoaDonViewModel> getAll(String dk) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public int add(ChiTietHoaDonViewModel q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public int update(ChiTietHoaDonViewModel q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public int delete(String q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public String timID(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ChiTietHoaDonViewModel timObject(String dk) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-//    public List<ChiTietHoaDon> Selectbyhientai(){
-////    return rtkdt.Selectbyhientai();
-//    }
-    public List<ChiTietHoaDonViewModel> getAllcthd() {
-        if (this.rtkdt.getAllloadform() != null) {
-            List<ChiTietHoaDonViewModel> listct = new ArrayList<>();
-            List<ChiTietHoaDon> a = rtkdt.getAllloadform();
-            for (ChiTietHoaDon c : a) {
-                listct.add(new ChiTietHoaDonViewModel(c.getSPHD(), c.getHd(), c.getSp(), c.getSoluong(), c.getDonGia(), c.getGiagiam(), c.getNgayTao(), c.getTrangThai()));
-            }
-            return listct;
-        }
-        return null;
-    }
+    
 }
