@@ -4,8 +4,10 @@ import domaimodel.HoaDon;
 import domaimodel.SanPham;
 import domaimodel.embeddableCTHD;
 import java.util.Date;
+import java.util.Vector;
 
 public class ChiTietHoaDonViewModel {
+
     private embeddableCTHD SPHD;
     private HoaDon hd;
     private SanPham sp;
@@ -23,7 +25,7 @@ public class ChiTietHoaDonViewModel {
         this.soluong = soluong;
         this.ngayTao = ngayTao;
     }
-        
+
     public ChiTietHoaDonViewModel(embeddableCTHD SPHD, HoaDon hd, SanPham sp, int soluong, float donGia, float giagiam, Date ngayTao, int trangThai) {
         this.SPHD = SPHD;
         this.hd = hd;
@@ -34,11 +36,11 @@ public class ChiTietHoaDonViewModel {
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;
     }
-
+    
     public ChiTietHoaDonViewModel(int soluong) {
         this.soluong = soluong;
     }
-         
+
     public embeddableCTHD getSPHD() {
         return SPHD;
     }
@@ -102,7 +104,9 @@ public class ChiTietHoaDonViewModel {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
-   
-    
+
+    public Object[] torow() {
+        return new Object[]{hd.getId(), (donGia * soluong) - giagiam};
+    }
+
 }

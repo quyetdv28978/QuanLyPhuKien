@@ -1571,10 +1571,10 @@ public class viewSanPham extends javax.swing.JFrame {
         if (evt.getStateChange() != ItemEvent.SELECTED) {
             int tt = 0;
             if (cbbTrangThai_Loc1.getSelectedItem().toString().equals("Còn hàng")) {
-                tt = 0;
+                tt = 1;
                 showDataSP(new SerSanPham().selectByTT((tt)));
             } else if (cbbTrangThai_Loc1.getSelectedItem().toString().equals("Hết hàng")) {
-                tt = 1;
+                tt = 0;
                 showDataSP(new SerSanPham().selectByTT((tt)));
             } else {
                 showDataSP();
