@@ -120,16 +120,18 @@ public class ChiTietKhuyenMai implements Serializable{
         if(km.getNgayKT().compareTo(now) < 0){
             System.out.println("ngaykt");
             return "Hết Hạn";
-        }else{
-            System.out.println("ngaybđ");
+        }else {
             return "Còn Hạn";
         }
+//        else{
+//            System.out.println("ngaybđ");
+//            return "Chưa Hoạt Động";
+//        }
         }catch (ParseException ex) {
             Logger.getLogger(ChiTietKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
-    }
-    
+    }    
     public Object[] toRow1(){
         return new Object[]{id,km.getTenKM(), sp.getTenSanPham(),km.getNgayBD(),km.getNgayKT(),km.getGiaGiam(),getTT1()};
     }

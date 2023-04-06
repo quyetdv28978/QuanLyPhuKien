@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -37,6 +38,61 @@ public class ChiTietHoaDon implements Serializable {
     private Date ngayTao;
 
     private int trangThai;
+
+    @Transient
+    private String maSP, tenSP;
+    @Transient
+    private int Sluong, SOHD;
+    @Transient
+    private double TONGTIEN, SKH;
+
+    public String getMaSP() {
+        return maSP;
+    }
+
+    public void setMaSP(String maSP) {
+        this.maSP = maSP;
+    }
+
+    public String getTenSP() {
+        return tenSP;
+    }
+
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
+    }
+
+    public int getSluong() {
+        return Sluong;
+    }
+
+    public void setSluong(int Sluong) {
+        this.Sluong = Sluong;
+    }
+
+    public int getSOHD() {
+        return SOHD;
+    }
+
+    public void setSOHD(int SOHD) {
+        this.SOHD = SOHD;
+    }
+
+    public double getTONGTIEN() {
+        return TONGTIEN;
+    }
+
+    public void setTONGTIEN(double TONGTIEN) {
+        this.TONGTIEN = TONGTIEN;
+    }
+
+    public double getSKH() {
+        return SKH;
+    }
+
+    public void setSKH(double SKH) {
+        this.SKH = SKH;
+    }
 
     public ChiTietHoaDon(SanPham sp, HoaDon hd, int soluong, Date ngayTao) {
         this.sp = sp;
@@ -146,11 +202,9 @@ public class ChiTietHoaDon implements Serializable {
 //            System.out.println(object);
 //        }
 //    }
-    
-    
-     public Object[] torow(){
-     return new Object[]{
-        SPHD,(donGia*soluong)-giagiam
-     };
-     }
+    public Object[] torow() {
+        return new Object[]{
+            SPHD, (donGia * soluong) - giagiam
+        };
+    }
 }

@@ -29,12 +29,15 @@ public class NhanVien implements Serializable {
     private String tenNhanVien;
     private String cmnd;
     private String gioiTinh;
+
+    @Temporal(TemporalType.DATE)
     private Date ngaySinh;
+
     private String diaChi;
     private String sdt;
     private String email;
     private String anh;
-    private String taiKhoan;
+    private String TaiKhoan;
     private String matKhau;
 
     @Temporal(TemporalType.DATE)
@@ -49,7 +52,7 @@ public class NhanVien implements Serializable {
     public NhanVien() {
     }
 
-    public NhanVien(String idNhanVien, String maNhanVien, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String email, String anh, String taiKhoan, String matKhau, Date ngayTao, ChucVu chucVu, int trangThai) {
+    public NhanVien(String idNhanVien, String maNhanVien, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String email, String anh, String tenTaiKhoan, String matKhau, Date ngayTao, ChucVu chucVu, int trangThai) {
         this.idNhanVien = idNhanVien;
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
@@ -60,14 +63,14 @@ public class NhanVien implements Serializable {
         this.sdt = sdt;
         this.email = email;
         this.anh = anh;
-        this.taiKhoan = taiKhoan;
+        this.TaiKhoan = tenTaiKhoan;
         this.matKhau = matKhau;
         this.ngayTao = ngayTao;
         this.chucVu = chucVu;
         this.trangThai = trangThai;
     }
 
-    public NhanVien(String idNhanVien, String maNhanVien, String taiKhoan, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String email, String anh, Date ngayTao, ChucVu chucVu, int trangThai) {
+    public NhanVien(String idNhanVien, String maNhanVien, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String email, String anh, String tenTaiKhoan, String matKhau, ChucVu chucVu, int trangThai) {
         this.idNhanVien = idNhanVien;
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
@@ -78,8 +81,8 @@ public class NhanVien implements Serializable {
         this.sdt = sdt;
         this.email = email;
         this.anh = anh;
-        this.taiKhoan = taiKhoan;
-        this.ngayTao = ngayTao;
+        this.TaiKhoan = tenTaiKhoan;
+        this.matKhau = matKhau;
         this.chucVu = chucVu;
         this.trangThai = trangThai;
     }
@@ -164,12 +167,12 @@ public class NhanVien implements Serializable {
         this.anh = anh;
     }
 
-    public String getTaiKhoan() {
-        return taiKhoan;
+    public String getTenTaiKhoan() {
+        return TaiKhoan;
     }
 
-    public void setTaiKhoan(String taiKhoan) {
-        this.taiKhoan = taiKhoan;
+    public void setTenTaiKhoan(String tenTaiKhoan) {
+        this.TaiKhoan = tenTaiKhoan;
     }
 
     public String getMatKhau() {

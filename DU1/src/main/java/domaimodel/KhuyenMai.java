@@ -168,10 +168,11 @@ public class KhuyenMai implements Serializable{
          Date date = cal.getTime();
         try {
             Date now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(new Date(date.getTime()))+" 00:00:00 AM");
-       
         if(ngayKT.compareTo(now) < 0){
             System.out.println("ngaykt");
             return "Hết Hạn";
+//        }else if (ngayBD.compareTo(now) > 0 ){
+//            return "Chưa Hoạt Động";
         }else{
             System.out.println("ngaybđ");
             return "Còn Hạn";

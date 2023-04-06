@@ -4,52 +4,67 @@
  */
 package domaimodel;
 
-import java.io.Serializable;
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import static org.apache.poi.hssf.usermodel.HeaderFooter.date;
 
 /**
  *
- * @author ADMIN
+ * @author yugip
  */
 @Entity
-@Table(name = "BAOHANH")
-public class BaoHanh implements Serializable{
+@Table(name = "baohanh")
+public class BaoHanh {
+
     @Id
     private String id;
     private String ma;
-    private Date ngayTao, ngayBH;
-    private String moTa;
+    private String ngayTao;
+//    private String suaChua;
     private Integer tinhTrang;
-    private String suaChua;
+//    private Date ngayTra;
+//    private Integer soLuongBaoHanh;
     
+    private Date ngayBH;
+    @OneToOne
+    @JoinColumn(name = "idsp")
+    private SanPham sp;
     @ManyToOne
     @JoinColumn(name = "idkh")
     private KhachHang kh;
-    @OneToOne
-    @JoinColumn(name = "idSP")
-    private SanPham sp;
 
     public BaoHanh() {
     }
 
-    public BaoHanh(String id, String ma, Date ngayTao, Date ngayBH, String moTa, Integer tinhTrang, String suaChua, KhachHang kh, SanPham sp) {
+    public BaoHanh(String id, String ma, int tinhTrang, SanPham sp, KhachHang kh) {
         this.id = id;
         this.ma = ma;
-        this.ngayTao = ngayTao;
-        this.ngayBH = ngayBH;
-        this.moTa = moTa;
         this.tinhTrang = tinhTrang;
-        this.suaChua = suaChua;
-        this.kh = kh;
         this.sp = sp;
+        this.kh = kh;
+    }
+
+    public BaoHanh(String ma, Date ngayBH, SanPham sanPham, KhachHang khachHang) {
+        this.ma = ma;
+        this.ngayBH = ngayBH;
+        this.sp = sanPham;
+        this.kh = khachHang;
+    }
+
+    public KhachHang getKh() {
+        return kh;
+    }
+
+    public void setKh(KhachHang kh) {
+        this.kh = kh;
     }
 
     public String getId() {
@@ -68,52 +83,12 @@ public class BaoHanh implements Serializable{
         this.ma = ma;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
-    }
-
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
-    }
-
-    public Date getNgayBH() {
-        return ngayBH;
-    }
-
-    public void setNgayBH(Date ngayBH) {
-        this.ngayBH = ngayBH;
-    }
-
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
-
-    public Integer getTinhTrang() {
+    public int getTrangthai() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(Integer tinhTrang) {
-        this.tinhTrang = tinhTrang;
-    }
-
-    public String getSuaChua() {
-        return suaChua;
-    }
-
-    public void setSuaChua(String suaChua) {
-        this.suaChua = suaChua;
-    }
-
-    public KhachHang getKh() {
-        return kh;
-    }
-
-    public void setKh(KhachHang kh) {
-        this.kh = kh;
+    public void setTrangthai(int trangthai) {
+        this.tinhTrang = trangthai;
     }
 
     public SanPham getSp() {
@@ -123,9 +98,79 @@ public class BaoHanh implements Serializable{
     public void setSp(SanPham sp) {
         this.sp = sp;
     }
-    
-    public Object[] toDatatRow() {
-        return new Object[]{id,ma,ngayTao,ngayBH,moTa,tinhTrang,suaChua,kh,sp};
+
+//    public String getThoiHan() {
+//        return thoiHan;
+//    }
+//
+//    public void setThoiHan(String thoiHan) {
+//        this.thoiHan = thoiHan;
+//    }
+//
+//    public String getSuaChua() {
+//        return suaChua;
+//    }
+//
+//    public void setSuaChua(String suaChua) {
+//        this.suaChua = suaChua;
+////    }
+
+    public int getTinhTrang() {
+        return tinhTrang;
     }
+
+    public void setTinhTrang(int tinhTrang) {
+        this.tinhTrang = tinhTrang;
+    }
+
+//    public Date getNgayTra() {
+//        return ngayTra;
+//    }
+//
+//    public void setNgayTra(Date ngayTra) {
+//        this.ngayTra = ngayTra;
+//    }
+//
+    public Date getNgayBH() {
+        return ngayBH;
+    }
+
+    public void setNgayBH(Date ngayBH) {
+        this.ngayBH = ngayBH;
+    }
+
+//    public Integer getSoLuongBaoHanh() {
+//        return soLuongBaoHanh;
+//    }
+//
+//    public void setSoLuongBaoHanh(Integer soLuongBaoHanh) {
+//        this.soLuongBaoHanh = soLuongBaoHanh;
+//    }
+
+    public BaoHanh(String id, String ma, Integer tinhTrang, Date ngayTra, Date ngayBH, Integer soLuongBaoHanh, SanPham sp, KhachHang kh) {
+        this.id = id;
+        this.ma = ma;
+        this.tinhTrang = tinhTrang;
+//        this.ngayTra = ngayTra;
+//        this.ngayBH = ngayBH;
+//        this.soLuongBaoHanh = soLuongBaoHanh;
+        this.sp = sp;
+        this.kh = kh;
+    }
+//    
+
+    public BaoHanh(String id,String ma, Date ngayBH,SanPham sp, KhachHang kh) {
+        this.id = id;
+        this.ma = ma;
+        this.ngayBH = ngayBH;
+        this.sp = sp;
+        this.kh = kh;
+    }
+
+   
+    
+    public Object[] toRowBH(){
+    return new Object[] {id,ma,sp.getMa(),sp.getTenSanPham(), kh.getTen(), kh.getSdt(),ngayBH,tinhTrang == 1 ?"Còn Hạn" : "Còn Hạn" };
+}
 
 }

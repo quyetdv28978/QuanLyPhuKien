@@ -20,31 +20,29 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "hoadon")
 public class HoaDon implements Serializable {
+
     @Id
     private String id;
     private Date ngayTao, ngayTT;
     private int tinhTrang;
-    
-        private String hinhthucthanhtoan;
-    
+
+    private String hinhthucthanhtoan, lyDo;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idkh")
     private KhachHang kh;
-    
-     @OneToOne
+
+    @OneToOne
     @JoinColumn(name = "idnv")
     private NhanVien nv;
 
     public HoaDon(NhanVien nv1) {
-        this.nv=nv;
+        this.nv = nv;
     }
 
     public HoaDon() {
     }
 
- 
-
-    
     public HoaDon(String id, Date ngayTao, Date ngayTT, int tinhTrang, String hinhthucthanhtoan) {
         this.id = id;
         this.ngayTao = ngayTao;
@@ -63,10 +61,6 @@ public class HoaDon implements Serializable {
         this.nv = nv;
     }
 
-   
-    
-    
-
     public HoaDon(String id, Date ngayTao, int tinhTrang,
             KhachHang kh, NhanVien nv) {
         this.id = id;
@@ -75,7 +69,6 @@ public class HoaDon implements Serializable {
         this.kh = kh;
         this.nv = nv;
     }
-
 
     public Date getNgayTao() {
         return ngayTao;
@@ -89,10 +82,17 @@ public class HoaDon implements Serializable {
         return tinhTrang;
     }
 
+    public String getLyDo() {
+        return lyDo;
+    }
+
+    public void setLyDo(String lyDo) {
+        this.lyDo = lyDo;
+    }
+
     public void setTinhTrang(int tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
-
 
     public String getId() {
         return id;
@@ -101,7 +101,6 @@ public class HoaDon implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-
 
     public Date getNgayT() {
         return ngayTao;
@@ -135,8 +134,6 @@ public class HoaDon implements Serializable {
         this.ngayTT = ngayTT;
     }
 
-   
-
     public String getHinhthucthanhtoan() {
         return hinhthucthanhtoan;
     }
@@ -145,11 +142,9 @@ public class HoaDon implements Serializable {
         this.hinhthucthanhtoan = hinhthucthanhtoan;
     }
 
-
     @Override
     public String toString() {
         return "HoaDon{" + "id=" + id + ", ngayTao=" + ngayTao + ", ngayTT=" + ngayTT + ", tinhTrang=" + tinhTrang + ", hinhthucthanhtoan=" + hinhthucthanhtoan + ", kh=" + kh + ", nv=" + nv + '}';
     }
-    
-    
+
 }

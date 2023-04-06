@@ -574,9 +574,9 @@ public class khachHangMini extends javax.swing.JFrame {
 
     private void btnLamMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoi1ActionPerformed
         if (this.check == 1) {
-            BanHang.banHang.getDateDatHang(this.reskh.getAllCoDK(" where k.id ='" + tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString() + "'").get(0));
+            DangNhap.banHang.getDateDatHang(this.reskh.getAllCoDK(" where k.id ='" + tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString() + "'").get(0));
         }
-        BanHang.banHang.getData(this.reskh.getAllCoDK(" where k.id ='" + tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString() + "'").get(0));
+        DangNhap.banHang.getData(this.reskh.getAllCoDK(" where k.id ='" + tbHienThi.getValueAt(tbHienThi.getSelectedRow(), 0).toString() + "'").get(0));
     }//GEN-LAST:event_btnLamMoi1ActionPerformed
 
     /**

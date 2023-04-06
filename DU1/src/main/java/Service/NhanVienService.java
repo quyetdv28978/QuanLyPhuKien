@@ -11,6 +11,7 @@ import viewmodel.ChucVuViewModel;
 import viewmodel.NhanVienViewModel;
 import java.util.ArrayList;
 import java.util.List;
+import service.IManageService;
 
 /**
  *
@@ -36,7 +37,6 @@ public class NhanVienService implements IManageService {
                 list.add(new NhanVienViewModel(
                         ((NhanVien) nhanVien[0]).getIdNhanVien(),
                         ((NhanVien) nhanVien[0]).getMaNhanVien(),
-                        ((NhanVien) nhanVien[0]).getTaiKhoan(),
                         ((NhanVien) nhanVien[0]).getTenNhanVien(),
                         ((NhanVien) nhanVien[0]).getCmnd(),
                         ((NhanVien) nhanVien[0]).getGioiTinh(),
@@ -45,7 +45,8 @@ public class NhanVienService implements IManageService {
                         ((NhanVien) nhanVien[0]).getSdt(),
                         ((NhanVien) nhanVien[0]).getEmail(),
                         ((NhanVien) nhanVien[0]).getAnh(),
-                        ((NhanVien) nhanVien[0]).getNgayTao(),
+                        ((NhanVien) nhanVien[0]).getTenTaiKhoan(),
+                        ((NhanVien) nhanVien[0]).getMatKhau(),
                         new ChucVuViewModel(((ChucVu) nhanVien[1]).getIdChucVu(),
                                 ((ChucVu) nhanVien[1]).getMaChucVu(),
                                 ((ChucVu) nhanVien[1]).getTenChucVu()),
@@ -59,11 +60,10 @@ public class NhanVienService implements IManageService {
 
     @Override
     public Object CD(NhanVienViewModel nhanVienViewModel) {
-        
+
         return new NhanVien(
                 nhanVienViewModel.getIdNhanVien(),
                 nhanVienViewModel.getMaNhanVien(),
-                nhanVienViewModel.getTenTaiKhoan(),
                 nhanVienViewModel.getTenNhanVien(),
                 nhanVienViewModel.getCmnd(),
                 nhanVienViewModel.getGioiTinh(),
@@ -72,7 +72,8 @@ public class NhanVienService implements IManageService {
                 nhanVienViewModel.getSdt(),
                 nhanVienViewModel.getEmail(),
                 nhanVienViewModel.getAnh(),
-                nhanVienViewModel.getNgayTao(),
+                nhanVienViewModel.getTenTaiKhoan(),
+                nhanVienViewModel.getMatKhau(),
                 new ChucVu(
                         nhanVienViewModel.getChucVuViewModel().getIdChucVu(),
                         nhanVienViewModel.getChucVuViewModel().getMaChucVu(),
@@ -80,6 +81,10 @@ public class NhanVienService implements IManageService {
                 ),
                 nhanVienViewModel.getTrangThai()
         );
+    }
+
+    public List<NhanVien> timKiemTheoMa(String ma) {
+        return nhanVienRespository.timKiemTheoMa(ma);
     }
 
     @Override

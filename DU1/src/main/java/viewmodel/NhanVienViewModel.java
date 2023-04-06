@@ -14,7 +14,6 @@ public class NhanVienViewModel {
 
     private String idNhanVien;
     private String maNhanVien;
-    private String tenTaiKhoan;
     private String tenNhanVien;
     private String cmnd;
     private String gioiTinh;
@@ -23,17 +22,17 @@ public class NhanVienViewModel {
     private String sdt;
     private String email;
     private String anh;
-    private Date ngayTao;
-    private int trangThai;
+    private String tenTaiKhoan;
+    private String matKhau;
     private ChucVuViewModel chucVuViewModel;
+    private int trangThai;
 
     public NhanVienViewModel() {
     }
 
-    public NhanVienViewModel(String idNhanVien, String maNhanVien, String taiKhoan, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String email, String anh, Date ngayTao, ChucVuViewModel chucVuViewModel, int trangThai) {
+    public NhanVienViewModel(String idNhanVien, String maNhanVien, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String email, String anh, String tenTaiKhoan, String matKhau, ChucVuViewModel chucVuViewModel, int trangThai) {
         this.idNhanVien = idNhanVien;
         this.maNhanVien = maNhanVien;
-        this.tenTaiKhoan = tenTaiKhoan;
         this.tenNhanVien = tenNhanVien;
         this.cmnd = cmnd;
         this.gioiTinh = gioiTinh;
@@ -42,7 +41,8 @@ public class NhanVienViewModel {
         this.sdt = sdt;
         this.email = email;
         this.anh = anh;
-        this.ngayTao = ngayTao;
+        this.tenTaiKhoan = tenTaiKhoan;
+        this.matKhau = matKhau;
         this.chucVuViewModel = chucVuViewModel;
         this.trangThai = trangThai;
     }
@@ -61,14 +61,6 @@ public class NhanVienViewModel {
 
     public void setMaNhanVien(String maNhanVien) {
         this.maNhanVien = maNhanVien;
-    }
-
-    public String getTenTaiKhoan() {
-        return tenTaiKhoan;
-    }
-
-    public void setTenTaiKhoan(String taiKhoan) {
-        this.tenTaiKhoan = taiKhoan;
     }
 
     public String getTenNhanVien() {
@@ -135,20 +127,20 @@ public class NhanVienViewModel {
         this.anh = anh;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public String getTenTaiKhoan() {
+        return tenTaiKhoan;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setTenTaiKhoan(String tenTaiKhoan) {
+        this.tenTaiKhoan = tenTaiKhoan;
     }
 
-    public int getTrangThai() {
-        return trangThai;
+    public String getMatKhau() {
+        return matKhau;
     }
 
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
     }
 
     public ChucVuViewModel getChucVuViewModel() {
@@ -157,6 +149,14 @@ public class NhanVienViewModel {
 
     public void setChucVuViewModel(ChucVuViewModel chucVuViewModel) {
         this.chucVuViewModel = chucVuViewModel;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
 
     public String trangThai() {
