@@ -5,15 +5,12 @@
 package respon;
 
 import utility.DBConnection;
-
 import domaimodel.KhachHang;
 import domaimodel.KhuyenMai;
 import domaimodel.SanPham;
-
 import domaimodel.KhachHang;
 import domaimodel.KhuyenMai;
 import domaimodel.SanPham;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
@@ -38,14 +35,12 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
        }
          return null;
     }
-
      public List<KhuyenMai> findTrangThai(int dk) {
            if(DBConnection.selectQueRy("from KhuyenMai") != null){
        return DBConnection.selectQueRy("from KhuyenMai where trangThai = " + "'" + dk+ "'" );
        }
          return null;
     }
-
     
      public List<KhuyenMai> getAllLoad() {
          if(DBConnection.selectQueRy("from KhuyenMai") != null){
@@ -61,7 +56,7 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
 
     @Override
     public int update(KhuyenMai q) {
-        return DBConnection.executeQuery(q, "update");
+        return DBConnection.executeQuery(q, "skhfks");
     }
 
     @Override
@@ -82,7 +77,7 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
      public List<KhuyenMai> SelectbyName(String tenKM) {
       List<KhuyenMai> pas;
         String nameSelect = "%" + tenKM + "%";
-        try ( Session session = DBConnection.getseFactory().openSession()) {
+        try ( Session session = DBConnection.getsetFactory().openSession()) {
             TypedQuery<KhuyenMai> query = session.createQuery("From KhuyenMai  WHERE tenKM like :key");
             query.setParameter("key", nameSelect);
             System.out.println(query);
@@ -92,13 +87,14 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
         }
         return pas;
   }
-//    KhuyenMai khuyenMai = new KhuyenMai();
+
       public List<KhuyenMai> SelectbyTrangThai(String trangThai) {
       List<KhuyenMai> pas;
-          System.out.println("a" + trangThai);
         String nameSelect = "%" + trangThai + "%";
-        try ( Session session = DBConnection.getseFactory().openSession()) {
-            TypedQuery<KhuyenMai> query = session.createQuery("From KhuyenMai  WHERE trangThai like :key");
+        try ( Session session = DBConnection.getsetFactory().openSession()) {
+
+            TypedQuery<KhuyenMai> query = session.createQuery("From KhuyenMai  WHERE trangThai like :key ");
+
             query.setParameter("key", nameSelect);
             System.out.println(query);
             pas = query.getResultList();
@@ -107,7 +103,4 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
         }
         return pas;
   }
-       
-
-      
 }

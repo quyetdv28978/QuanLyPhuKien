@@ -8,6 +8,10 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,6 +40,21 @@ public class KhachHang implements Serializable {
     public KhachHang() {
     }
 
+    public KhachHang(String id, String ma) {
+        this.id = id;
+        this.ma = ma;
+    }
+
+    public KhachHang(String id, String ma, String ten, String sdt, String diaChi) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+    }
+
+    
+    
     public KhachHang( String ma, String ten, String sdt, String diaChi, String gioiTinh, Date ngaySinh) {
         
         this.ma = ma;

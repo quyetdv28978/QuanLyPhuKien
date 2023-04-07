@@ -4,7 +4,6 @@
  */
 package domaimodel;
 
-//import utility.DBConnection;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,8 +29,6 @@ public class ChiTietKhuyenMai implements Serializable{
     private String  id;
     private String ma;
     private String moTa;
-//    private float giaGiam;
-//    private Date ngayTao;
     private String trangThai;
    
     @ManyToOne
@@ -57,7 +54,6 @@ public class ChiTietKhuyenMai implements Serializable{
         this.sp = sp;
         
     }
-
     public ChiTietKhuyenMai( String id, String ma) {
         
         this.id = id;
@@ -65,19 +61,11 @@ public class ChiTietKhuyenMai implements Serializable{
     }
 
 
-   
-
-  
-
     public ChiTietKhuyenMai( String ma, Date ngayTao, String trangThai, SanPham sp, KhuyenMai km) {
         
         this.ma = ma;
-        
+        }
 //        this.ngayTao = ngayTao;
-        this.trangThai = trangThai;
-        this.sp = sp;
-        this.km = km;
-    }
 
     public String getId() {
         return id;
@@ -86,8 +74,6 @@ public class ChiTietKhuyenMai implements Serializable{
     public void setId(String id) {
         this.id = id;
     }
-    
-
 
     public String getMa() {
         return ma;
@@ -96,22 +82,6 @@ public class ChiTietKhuyenMai implements Serializable{
     public void setMa(String ma) {
         this.ma = ma;
     }
-
-//    public float getGiaGiam() {
-//        return giaGiam;
-//    }
-//
-//    public void setGiaGiam(float giaGiam) {
-//        this.giaGiam = giaGiam;
-//    }
-
-//    public Date getNgayTao() {
-//        return ngayTao;
-//    }
-//
-//    public void setNgayTao(Date ngayTao) {
-//        this.ngayTao = ngayTao;
-//    }
 
     public String getTrangThai() {
         return trangThai;
@@ -144,22 +114,45 @@ public class ChiTietKhuyenMai implements Serializable{
     public String getTT1() {
          Calendar cal = Calendar.getInstance();
          Date date = cal.getTime();
+         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(new Date(date.getTime()))+" 00:00:00 AM");
        
+            
+            
+            int day = cal.get(Calendar.DATE);
+            int month = cal.get(Calendar.MONTH) + 1; // vì tháng trong Calendar tính từ 0 đến 11 nên phải cộng thêm 1
+            int year = cal.get(Calendar.YEAR);
+            String dateString = formatter.format(cal.getTime());
+
+            //ngày bắt đầu 
+            Date dateBD = km.getNgayBD();
+            String bd = formatter.format(dateBD);
+
+            //ngyaf kết thúc
+            Date dateKT = km.getNgayKT();
+            String kt = formatter.format(dateKT);
+            
+            
         if(km.getNgayKT().compareTo(now) < 0){
             System.out.println("ngaykt");
             return "Hết Hạn";
-        }else{
-            System.out.println("ngaybđ");
+        }else if(bd.equalsIgnoreCase(dateString)){
+//            System.out.println("ngayhhhhhh" + km.getNgayBD());
+//            System.out.println("ngayhhhhhh111" + km.getNgayKT());
             return "Còn Hạn";
+        
+        }else{
+            System.out.println("ngayhhhhhh" + km.getNgayBD());
+            System.out.println("ngayhhhhhh111" + km.getNgayKT());
+            System.out.println("ngaybđ");
+            return "Chưa Hoạt Động";
         }
         }catch (ParseException ex) {
             Logger.getLogger(ChiTietKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
-    }
-    
+    }    
     public Object[] toRow1(){
         return new Object[]{id,km.getTenKM(), sp.getTenSanPham(),km.getNgayBD(),km.getNgayKT(),km.getGiaGiam(),getTT1()};
     }

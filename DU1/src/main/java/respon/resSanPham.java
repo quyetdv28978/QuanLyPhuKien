@@ -4,43 +4,46 @@
  */
 package respon;
 
-//import domaimodel.ChatLieu;
+import domaimodel.ChiTietHoaDon;
 import domaimodel.DanhMuc;
-import domaimodel.KhuyenMai;
+import domaimodel.HoaDon;
+import domaimodel.NhanVien;
 import domaimodel.SanPham;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import utility.DBConnection;
-//import utility.jframeCheck;
 
 /**
  *
  * @author ADMIN
  */
-public class resSanPham implements Iresponsitories<SanPham>{
+public class resSanPham implements Iresponsitories<SanPham> {
 
 //    @Override
 //    public List<Object[]> getALLJoin(String dk) {
 //        return DBConnection.selectQueRyJoin("from sanpham s join s.cl join s.dm");
 //    }
-    
     public List<Object[]> getALLJoinLoad() {
-        return DBConnection.selectQueRyJoin("from sanpham s join s.cl join s.dm");
+        return DBConnection.selectQueRyJoin("from sanpham s join s.dm");
+    }
+
+    //Huong
+    public List<SanPham> getAll123(String dk) {
+        if (DBConnection.selectQueRy("from SanPham") != null) {
+            return DBConnection.selectQueRy("from SanPham");
+        }
+        return null;
     }
 
     @Override
     public List<SanPham> getAll(String dk) {
-//        if (DBConnection.selectQueRy("from SanPham") != null) {
-        return  DBConnection.selectQueRy("from SanPham");
-//        }
-//        return null;
+        return DBConnection.selectQueRy("from SanPham s " + dk);
     }
-    public List<SanPham> getAll123(String dk) {
-        if (DBConnection.selectQueRy("from SanPham") != null) {
-        return  DBConnection.selectQueRy("from SanPham");
-        }
-        return null;
+
+    public List<SanPham> getAll2(String dk) {
+        return DBConnection.selectQueRy("from SanPham s " + dk + " and trangThai = 0");
     }
 
     @Override
@@ -67,25 +70,66 @@ public class resSanPham implements Iresponsitories<SanPham>{
     public SanPham timObject(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     public List<Object[]> getALLJoin(String dk) {
-        if (DBConnection.selectQueRyJoin("from SanPham s join s.dm join s.cl") != null) {
-            return DBConnection.selectQueRyJoin("from SanPham s join s.dm join s.cl");
+        if (DBConnection.selectQueRyJoin("from SanPham s join s.dm") != null) {
+            return DBConnection.selectQueRyJoin("from SanPham s join s.dm");
         }
         return null;
     }
-    
+
     public List<DanhMuc> getALLDM() {
         if (DBConnection.selectQueRy("from DanhMuc") != null) {
             return DBConnection.selectQueRy("from DanhMuc");
         }
         return null;
     }
-      public List<SanPham> SelectbyGia(Float gia1, Float gia2) {
-      List<SanPham> pas;
-        Float gia = gia1 ;
-                Float b =  gia2;
-        try ( Session session = DBConnection.getseFactory().openSession()) {
+
+    public List<SanPham> selectByTen(String ten) {
+        List<SanPham> sp = new ArrayList<>();
+        String tenSelect = "%" + ten + "%";
+        try (Session session = DBConnection.getsetFactory().openSession()) {
+            TypedQuery<SanPham> query = session.createQuery("from SanPham where tenSanPham like :t");
+            query.setParameter("t", tenSelect);
+            sp = query.getResultList();
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+        return sp;
+    }
+
+    public List<SanPham> selectByDSP(String ten) {
+        List<SanPham> sp = new ArrayList<>();
+        String tenSelect = "%" + ten + "%";
+        try (Session session = DBConnection.getsetFactory().openSession()) {
+            TypedQuery<SanPham> query = session.createQuery("from SanPham sp where sp.dm.dongSP like :t");
+            query.setParameter("t", tenSelect);
+            sp = query.getResultList();
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+        return sp;
+    }
+
+    public List<SanPham> selectByTT(int tt) {
+        List<SanPham> sp = new ArrayList<>();
+        int ttSelect = tt;
+        try (Session session = DBConnection.getsetFactory().openSession()) {
+            TypedQuery<SanPham> query = session.createQuery("from SanPham where trangThai = :t");
+            query.setParameter("t", ttSelect);
+            sp = query.getResultList();
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+        return sp;
+    }
+
+    //HUONG
+    public List<SanPham> SelectbyGia(Float gia1, Float gia2) {
+        List<SanPham> pas;
+        Float gia = gia1;
+        Float b = gia2;
+        try (Session session = DBConnection.getsetFactory().openSession()) {
             TypedQuery<SanPham> query = session.createQuery("From SanPham  WHERE giaBan between :key and :key2");
             query.setParameter("key", gia);
             query.setParameter("key2", b);
@@ -94,14 +138,15 @@ public class resSanPham implements Iresponsitories<SanPham>{
             session.close();
 
         }
-        
+
         return pas;
-        }
-      public List<SanPham> SelectbyTen(String tenSanPham) {
-      List<SanPham> pas;
-        
+    }
+
+    public List<SanPham> SelectbyTen(String tenSanPham) {
+        List<SanPham> pas;
+
         String a = "%" + tenSanPham + "%";
-        try ( Session session = DBConnection.getseFactory().openSession()) {
+        try (Session session = DBConnection.getsetFactory().openSession()) {
             TypedQuery<SanPham> query = session.createQuery("From SanPham  WHERE tenSanPham like :key");
             query.setParameter("key", a);
             System.out.println(query);
@@ -109,17 +154,39 @@ public class resSanPham implements Iresponsitories<SanPham>{
             session.close();
 
         }
-        
+
         return pas;
-        }
-      
-        public static void main(String[] args) {
-       SanPham s= DBConnection.getseFactory().openSession().get(SanPham.class, "C2E5951A-A4F4-42A9-AA80-0C87781AD57D");
-            System.out.println(s.getId());
-        }
     }
 
-   
-    
-    
+    public List<ChiTietHoaDon> getALLCTHD() {
+        if (DBConnection.selectQueRy("from ChiTietHoaDon") != null) {
+            return DBConnection.selectQueRy("from ChiTietHoaDon");
 
+        }
+        return null;
+    }
+
+    public List<HoaDon> getALLHD() {
+        if (DBConnection.selectQueRy("from HoaDon") != null) {
+            return DBConnection.selectQueRy("from HoaDon");
+
+        }
+        return null;
+    }
+
+    public List<NhanVien> getALLNV() {
+        if (DBConnection.selectQueRy("from NhanVien") != null) {
+            return DBConnection.selectQueRy("from NhanVien");
+
+        }
+        return null;
+    }
+
+    public List<Object[]> getAlljointon(String dk) {
+        if (DBConnection.selectQueRyJoin("from SanPham s join s.ChiTietHoaDon c join  c.Join c.HoaDon  h Join h.NhanVien") != null) {
+            return DBConnection.selectQueRyJoin("from SanPham s join s.ChiTietHoaDon c join  c.Join c.HoaDon  h Join h.NhanVien");
+        }
+        return null;
+    }
+
+}

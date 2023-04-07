@@ -7,6 +7,7 @@ package domaimodel;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Calendar;
@@ -15,8 +16,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
-import view.KhuyenMai1;
 
 /**
  *
@@ -32,6 +35,7 @@ public class KhuyenMai implements Serializable{
     private Date ngayBD, ngayKT,ngayTao;
     private String trangThai;
     private String moTa;
+
 
     public KhuyenMai() {
         
@@ -159,19 +163,52 @@ public class KhuyenMai implements Serializable{
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
+    
+    
    
     public String getTT() {
          Calendar cal = Calendar.getInstance();
          Date date = cal.getTime();
+         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(new Date(date.getTime()))+" 00:00:00 AM");
-       
+//            Date bd = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(+" 00:00:00 AM");
+
+
+
+int day = cal.get(Calendar.DATE);
+            int month = cal.get(Calendar.MONTH) + 1; // vì tháng trong Calendar tính từ 0 đến 11 nên phải cộng thêm 1
+            int year = cal.get(Calendar.YEAR);
+            String dateString = formatter.format(cal.getTime());
+
+            //ngày bắt đầu 
+            Date dateBD = ngayBD;
+            String bd = formatter.format(dateBD);
+
+            //ngyaf kết thúc
+            Date dateKT = ngayKT;
+            String kt = formatter.format(dateKT);
+            System.out.println("kt chuqa" + kt);
+            System.out.println("bd chuqa" + bd);
+
+
         if(ngayKT.compareTo(now) < 0){
             System.out.println("ngaykt");
             return "Hết Hạn";
-        }else{
-            System.out.println("ngaybđ");
+        }else if(dateString.equalsIgnoreCase(bd)){
+//        }else if (ngayBD.compareTo(now) > 0 && ngayKT.compareTo(now)<0){
+//            System.out.println("ngay chua");
+//            System.out.println("nh3" + ngayBD.toString());
+//            System.out.println("nh2" + ngayKT.toString());
             return "Còn Hạn";
+        }else{
+            System.out.println("hhh" + ngayBD.getTime());
+            System.out.println("nh3" + ngayBD.toString());
+            System.out.println("nh2" + ngayKT.toString());
+            System.out.println("ngaybđ");
+            
+
+            return "Chưa Hoạt Động";
         }
         }catch (ParseException ex) {
             Logger.getLogger(KhuyenMai.class.getName()).log(Level.SEVERE, null, ex);

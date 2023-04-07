@@ -6,10 +6,6 @@ package respon;
 
 import java.util.List;
 
-/**
- *
- * @author Admin
- */
 public interface Iresponsitories<Q> {
 
     public List<Object[]> getALLJoin(String dk);

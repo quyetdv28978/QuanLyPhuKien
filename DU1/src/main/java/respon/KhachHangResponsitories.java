@@ -6,11 +6,8 @@ import Utilities.DBConnection;System/Templates/Classes/Class.java to edit this t
  */
 package respon;
 import utility.DBConnection;
-
 import domaimodel.KhachHang;
-
 import domaimodel.KhachHang;
-
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.hibernate.Session;
@@ -28,12 +25,16 @@ public class KhachHangResponsitories implements Iresponsitories<KhachHang> {
 
     @Override
     public List<KhachHang> getAll(String dk) {
-        return (List<KhachHang>) DBConnection.selectQueRy("from KhachHang where ten = " + "'" + dk+ "'" );
+        return DBConnection.selectQueRy("from KhachHang where ten = " + "'" + dk+ "'" );
+    }
+    
+     public List<KhachHang> getAllCoDK(String dk) {
+        return DBConnection.selectQueRy("from KhachHang k " + dk );
     }
 
     public List<KhachHang> getAllKH() {
         if (DBConnection.selectQueRy("from KhachHang") != null) {
-            return  DBConnection.selectQueRy("from KhachHang");
+            return DBConnection.selectQueRy("from KhachHang");
         }
         return null;
     }
@@ -45,15 +46,16 @@ public class KhachHangResponsitories implements Iresponsitories<KhachHang> {
 
     @Override
     public int update(KhachHang q) {
-        Session s = DBConnection.getseFactory().openSession();
-        KhachHang kh = DBConnection.getseFactory().openSession().get(KhachHang.class, q.getId());
-        kh.setMa(q.getMa());
-        kh.setTen(q.getTen());
-        kh.setGioiTinh(q.getGioiTinh());
-        kh.setSđt(q.getSđt());
-        kh.setNgaySinh(q.getNgaySinh());
-        kh.setDiaChi(q.getDiaChi());
-        return DBConnection.executeQuery(q, "update");
+//        System.out.println(q.getTen());
+//        Session s = DBConnection.getsetFactory().openSession();
+//        KhachHang kh = DBConnection.getsetFactory().openSession().get(KhachHang.class, q.getId());
+//        kh.setMa(q.getMa());
+//        kh.setTen(q.getTen());
+//        kh.setGioiTinh(q.getGioiTinh());
+//        kh.setSđt(q.getSđt());
+//        kh.setNgaySinh(q.getNgaySinh());
+//        kh.setDiaChi(q.getDiaChi());
+        return DBConnection.executeQuery(q,"update");
     }
 
     @Override
@@ -74,8 +76,10 @@ public class KhachHangResponsitories implements Iresponsitories<KhachHang> {
   public List<KhachHang> SelectbyName(String ten) {
       List<KhachHang> pas;
         String nameSelect = "%" + ten + "%";
-        try ( Session session = DBConnection.getseFactory().openSession()) {
-            TypedQuery<KhachHang> query = session.createQuery("From KhachHang  WHERE ten like :key");
+        try ( Session session = DBConnection.getsetFactory().openSession()) {
+
+            TypedQuery<KhachHang> query = session.createQuery("From KhachHang  WHERE ten like :key or sdt like :key ");
+
             query.setParameter("key", nameSelect);
             System.out.println(query);
             pas = query.getResultList();

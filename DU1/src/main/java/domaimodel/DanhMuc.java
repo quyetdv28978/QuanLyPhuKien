@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package domaimodel;
-import javax.sql.*;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
