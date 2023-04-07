@@ -50,7 +50,10 @@ public class ChiTietKhuyenMaiResponsitories implements Iresponsitories<ChiTietKh
 
     @Override
     public List<ChiTietKhuyenMai> getAll(String dk) {
+        if(DBConnection.selectQueRy("from ChiTietKhuyenMai") !=null){
         return DBConnection.selectQueRy("from ChiTietKhuyenMai");
+        }
+        return null;
     }
 
     @Override

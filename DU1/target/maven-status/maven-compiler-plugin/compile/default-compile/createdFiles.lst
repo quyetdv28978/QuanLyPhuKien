@@ -12,7 +12,6 @@ domaimodel\KhuyenMai.class
 domaimodel\GioHang.class
 viewmodel\KhuyenMaiViewModel.class
 view\main_T.class
-viewmodel\ChatLieuViewModel.class
 service\KhuyenMaiServices.class
 viewmodel\NhanVienViewModel.class
 service\NhanVienService.class
@@ -43,7 +42,6 @@ viewmodel\HoaDonViewModel.class
 service\SerSanPham.class
 view\ManHinhchao$2.class
 domaimodel\BaoHanh.class
-service\serChatLieu.class
 domaimodel\Bieudo1.class
 view\main_T$3.class
 respon\resDanhMuc.class
@@ -55,7 +53,6 @@ view\DangNhap$1.class
 view\ManHinhchao.class
 view\main_T$4.class
 respon\ResGioHangCT.class
-respon\resChatLieu.class
 viewmodel\NhanVienViewModel_1.class
 viewmodel\ChiTietHoaDonViewModel.class
 respon\ChucVuRespository.class

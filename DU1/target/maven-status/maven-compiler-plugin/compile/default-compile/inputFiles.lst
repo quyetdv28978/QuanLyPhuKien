@@ -7,7 +7,6 @@ C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\NhanVien
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\KhuyenMai.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\IfResponsitoties.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\IManageService.java
-C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\serChatLieu.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\ManHinhchao.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ResGioHangCT.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\KhachHangView.java
@@ -26,7 +25,6 @@ C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\resSanPham.j
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\BaoHanh.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\ChiTietKhuyenMaiViewModel.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\ThongKe.java
-C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\ChatLieu.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\ChiTietKhuyenMai.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\KhuyenMaiViewModel.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\embeddableCTHD.java
@@ -34,7 +32,6 @@ C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\serDanhMuc.
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\SerTK_DT.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\ChucVuService.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\khachHangMini.java
-C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\viewChatLieu.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\ChiTietHoaDonViewModel.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ChucVuRespository.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\utility\JframeCheck.java
@@ -51,7 +48,6 @@ C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\SanPham.
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\DanhMucViewModel.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\LichSu.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\KhuyenMaiServices.java
-C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\resChatLieu.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\embeddableCTGH.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\Iresponsitories.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ResHoaDon.java
@@ -60,7 +56,6 @@ C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\BanHang.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\DangNhap.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ChiTietHoaDonres.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\QuenMatKhau.java
-C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\ChatLieuViewModel.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\KhuyenMaiResponsitories.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ResHoaDonCho.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\ChucVuViewModel.java
