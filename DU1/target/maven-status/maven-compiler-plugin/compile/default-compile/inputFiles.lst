@@ -4,7 +4,6 @@ C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\QuanLyNhanVien
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\NhanVienViewModel_1.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\ChiTietGioHang.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\NhanVien.java
-C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\SerTKDoanhThu.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\KhuyenMai.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\IfResponsitoties.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\IManageService.java
@@ -31,15 +30,16 @@ C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\ChatLieu
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\ChiTietKhuyenMai.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\KhuyenMaiViewModel.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\embeddableCTHD.java
-C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\resTK_DoanhThu.java
-C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\SerDanhMuc.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\serDanhMuc.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\SerTK_DT.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\ChucVuService.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\khachHangMini.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\viewChatLieu.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\viewmodel\ChiTietHoaDonViewModel.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ChucVuRespository.java
-C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\utility\jframeCheck.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\utility\JframeCheck.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\domaimodel\ChucVu.java
+C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\respon\ResTK_DT.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\view\viewSanPham.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\KhachHangServices.java
 C:\Users\DELL\Desktop\nhanh_git\New folder\DU1\src\main\java\service\ChiTietKhuyenMaiServices.java

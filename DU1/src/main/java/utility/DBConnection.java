@@ -6,36 +6,26 @@
 package utility;
 
 //import domaimodel.ChatLieu;
-
 //import domaimodel.DanhMuc;
 import domaimodel.BaoHanh;
-import domaimodel.KhachHang;
-import domaimodel.KhuyenMai;
-import domaimodel.SanPham;
-
-
-import domaimodel.ChatLieu;
-import domaimodel.ChiTietKhuyenMai;
-import domaimodel.DanhMuc;
-import domaimodel.KhachHang;
-import domaimodel.KhuyenMai;
-import domaimodel.SanPham;
-
-import java.util.List;
-
-import domaimodel.ChucVu;
-import domaimodel.NhanVien;
 import domaimodel.ChatLieu;
 import domaimodel.ChiTietGioHang;
 import domaimodel.ChiTietHoaDon;
+import domaimodel.ChiTietKhuyenMai;
+import domaimodel.ChucVu;
+import domaimodel.DanhMuc;
+import java.util.List;
 //import domaimodel.ChiTietGioHang;
 //import domaimodel.ChiTietHoaDon;
 import domaimodel.DanhMuc;
 import domaimodel.GioHang;
 import domaimodel.HoaDon;
+import domaimodel.KhachHang;
+import domaimodel.KhuyenMai;
+import domaimodel.NhanVien;
+import domaimodel.SanPham;
 //import domaimodel.GioHang;
 //import domaimodel.HoaDon;
-import domaimodel.SanPham;
 
 import java.util.List;
 import java.util.Properties;
@@ -61,7 +51,6 @@ public class DBConnection {
         pro.put(Environment.PASS, "123");
         pro.put(Environment.SHOW_SQL, true);
         confi.setProperties(pro);
-
         confi.addAnnotatedClass(ChatLieu.class);
         confi.addAnnotatedClass(ChucVu.class);
         confi.addAnnotatedClass(DanhMuc.class);
@@ -74,9 +63,7 @@ public class DBConnection {
         confi.addAnnotatedClass(KhuyenMai.class);
         confi.addAnnotatedClass(KhachHang.class);
         confi.addAnnotatedClass(ChiTietKhuyenMai.class);
-
         confi.addAnnotatedClass(BaoHanh.class);
-
         confi.addAnnotatedClass(KhachHang.class);
         confi.addAnnotatedClass(KhuyenMai.class);
 

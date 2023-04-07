@@ -40,11 +40,27 @@ public class ChiTietHoaDon implements Serializable {
     private int trangThai;
 
     @Transient
-    private String maSP, tenSP;
+    private String maSP, tenSP, MS, NSX;
     @Transient
     private int Sluong, SOHD;
     @Transient
     private double TONGTIEN, SKH;
+
+    public String getMS() {
+        return MS;
+    }
+
+    public void setMS(String MS) {
+        this.MS = MS;
+    }
+
+    public String getNSX() {
+        return NSX;
+    }
+
+    public void setNSX(String NSX) {
+        this.NSX = NSX;
+    }
 
     public String getMaSP() {
         return maSP;
