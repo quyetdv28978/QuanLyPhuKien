@@ -122,6 +122,17 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         dtm = (DefaultTableModel) tbHienThi.getModel();
         dtm.setRowCount(0);
         for (domaimodel.KhuyenMai object : khuyenMaiResponsitories.getAllLoad()) {
+            if (object.getTT().equalsIgnoreCase("Hết Hạn")) {
+                object.setTrangThai("Hết Hạn");
+                khuyenMaiResponsitories.update(object);
+//            return;
+            } else if (object.getTT().equalsIgnoreCase("Chưa Hoạt Động")) {
+                object.setTrangThai("Chưa Hoạt Động");
+                khuyenMaiResponsitories.update(object);
+            } else {
+                object.setTrangThai("Còn Hạn");
+                khuyenMaiResponsitories.update(object);
+            }
             dtm.addRow(object.toRow());
         }
 
@@ -183,6 +194,12 @@ public class KhuyenMaiView extends javax.swing.JFrame {
                 khvms.setTrangThai("Hết Hạn");
                 khuyenMaiResponsitories.update(khvms);
 //            return;
+            } else if (khvms.getTT().equalsIgnoreCase("Chưa Hoạt Động")) {
+                khvms.setTrangThai("Chưa Hoạt Động");
+                khuyenMaiResponsitories.update(khvms);
+            } else {
+                khvms.setTrangThai("Còn Hạn");
+                khuyenMaiResponsitories.update(khvms);
             }
             dtm.addRow(khvms.toRow());
         }
@@ -194,6 +211,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         dtm.setRowCount(0);
         List<SanPham> khvm = sanPham.SelectbyGia(Float.parseFloat(txtTu.getText()), Float.parseFloat(txtDen.getText()));
         for (SanPham khvms : khvm) {
+
             dtm.addRow(khvms.toRowi());
         }
     }
@@ -201,7 +219,10 @@ public class KhuyenMaiView extends javax.swing.JFrame {
     public void loadComBoKM() {
         List<domaimodel.KhuyenMai> list = khuyenMaiResponsitories.getAllLoad();
         for (domaimodel.KhuyenMai danhMucViewModel : list) {
-            cbbKM.addElement(danhMucViewModel);
+            if (danhMucViewModel.getTT().equalsIgnoreCase("Chưa Hoạt Động")
+                    || danhMucViewModel.getTT().equalsIgnoreCase("Còn Hạn")) {
+                cbbKM.addElement(danhMucViewModel);
+            }
         }
         cbbTenKM.setModel(cbbKM);
     }
@@ -275,33 +296,9 @@ public class KhuyenMaiView extends javax.swing.JFrame {
                 txtAMoTaKM.getText().trim());
     }
 
-    public ChiTietKhuyenMai getDataCTKM(String dk) {
-
-        ChiTietKhuyenMai chiTietKhuyenMai = null;
-        SanPham pham = new SanPham(tbHienThiTTSP.getValueAt(tbHienThiTTSP.getSelectedRow(), 0).
-                toString(), tbHienThiTTSP.getValueAt(tbHienThiTTSP.getSelectedRow(), 2).toString());
-        if (dk.equalsIgnoreCase("update")) {
-            return chiTietKhuyenMai = new ChiTietKhuyenMai(
-                    tbHienThiSP.getValueAt(tbHienThiSP.getSelectedRow(), 0).toString(),
-                    tbHienThiSP.getValueAt(tbHienThiSP.getSelectedRow(), 1).toString(),
-                    pham,
-                    (KhuyenMai) cbbKM.getSelectedItem()
-            );
-        }
-
-        Session s = DBConnection.getsetFactory().openSession();
-        s.saveOrUpdate(pham);
-        System.out.println("h" + pham);
-        chiTietKhuyenMai = new ChiTietKhuyenMai(
-                jcheck.createID().toString(), jcheck.randomMA(),
-                pham,
-                (KhuyenMai) cbbKM.getSelectedItem());
-        s.saveOrUpdate(chiTietKhuyenMai);
-        return chiTietKhuyenMai;
-    }
-
     private boolean checkMaKM(String ma) {
         for (int i = 0; i < khuyenMaiResponsitories.getAllLoad().size(); i++) {
+            System.out.println("makm " +khuyenMaiResponsitories.getAllLoad().get(i).getTenKM() );
             if (khuyenMaiResponsitories.getAllLoad().get(i).getTenKM().equalsIgnoreCase(ma)) {
                 if (tbHienThi.getSelectedRow() == i) {
                     continue;
@@ -313,23 +310,47 @@ public class KhuyenMaiView extends javax.swing.JFrame {
     }
 
     private boolean checKM(String tenKM, String tenSP) {
-        for (int i = 0; i < chiTietKhuyenMaiResponsitories.getAll(null).size(); i++) {
-            if (chiTietKhuyenMaiResponsitories.getAll(null).get(i).getKm().getTenKM().equalsIgnoreCase(tenKM)
-                    && chiTietKhuyenMaiResponsitories.getAll(null).get(i).getSp().getTenSanPham().equalsIgnoreCase(tenSP)) {
+        System.out.println("ten km" + tenKM);
+        System.out.println("ten sp" + tenSP);
+        for (int i = 0; i < chiTietKhuyenMaiResponsitories.getAll("").size(); i++) {
+            System.out.println("ten kmmmmmmmmmmmm" + chiTietKhuyenMaiResponsitories.getAll("").get(i).getKm().getTenKM());
+            if (chiTietKhuyenMaiResponsitories.getAll("").get(i).getKm().getTenKM().
+                    equalsIgnoreCase(tenKM)
+                    && chiTietKhuyenMaiResponsitories.getAll("").get(i).getSp().getTenSanPham()
+                            .equalsIgnoreCase(tenSP)) {
                 if (tbHienThiSP.getSelectedRow() == i) {
                     continue;
-
                 }
                 return false;
             }
         }
         return true;
     }
+//  1 san pham co 1 km dang hoat dong, n km chua hoat dong
 
-    private boolean checThemKM(Date ngayBD, String ten) {
+    private boolean checkKm3TruongHop(String idsp, String idKm, KhuyenMai km) {
+        List<ChiTietKhuyenMai> listctKm = chiTietKhuyenMaiResponsitories.getAll3(" where c.sp.id = '" + idsp + "'");
+        for (ChiTietKhuyenMai chiTietKhuyenMai : listctKm) {
+            if (chiTietKhuyenMai.getKm().getTrangThai().equals("Còn Hạn") && km.getTrangThai().equals("Chưa Hoạt Động")) {
+                if (chiTietKhuyenMai.getKm().getNgayKT().getTime() > km.getNgayBD().getTime()) {
+                    JOptionPane.showMessageDialog(this, "Không the ap km tron khoang time");
+                    return false;
+                }
+            } else if (chiTietKhuyenMai.getKm().getTrangThai().equals("Chưa Hoạt Động")
+                    && km.getTrangThai().equals("Chưa Hoạt Động")) {
+                if (chiTietKhuyenMai.getKm().getNgayKT().getTime() > km.getNgayKT().getTime()) {
+                    JOptionPane.showMessageDialog(this, "San pham co km");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean checThemKM(Date ngayBD, Date ngayKT, String ten) {
         for (int i = 0; i < chiTietKhuyenMaiResponsitories.getAll(null).size(); i++) {
-            if (chiTietKhuyenMaiResponsitories.getAll(null).get(i).getKm().getNgayBD().compareTo(ngayBD) >= 0
-                    && chiTietKhuyenMaiResponsitories.getAll(null).get(i).getKm().getNgayKT().compareTo(ngayBD) <= 0
+            if (chiTietKhuyenMaiResponsitories.getAll(null).get(i).getKm().getNgayBD().compareTo(ngayKT) > 0
+                    && chiTietKhuyenMaiResponsitories.getAll(null).get(i).getKm().getNgayKT().compareTo(ngayBD) < 0
                     && chiTietKhuyenMaiResponsitories.getAll(null).get(i).getSp().getTenSanPham().equalsIgnoreCase(ten)) {
                 if (tbHienThiSP.getSelectedRow() == i) {
                     continue;
@@ -338,6 +359,57 @@ public class KhuyenMaiView extends javax.swing.JFrame {
             }
         }
         return true;
+    }
+
+//    public boolean addALL() {
+//        ChiTietKhuyenMai chiTietKhuyenMai = null;
+//        if (cball.isSelected()) {
+//            List<SanPham> list1 = sanPham.getAll123("");
+//            chiTietKhuyenMai = new ChiTietKhuyenMai(
+//                    jcheck.createID().toString(),
+//                    jcheck.randomMA(),
+//                    null,
+//                    (KhuyenMai) cbbKM.getSelectedItem()
+//            );
+//            for (SanPham sp : list1) {
+//
+//                chiTietKhuyenMai.setId(jcheck.createID().toString());
+//                chiTietKhuyenMai.setMa(jcheck.randomMA());
+//                chiTietKhuyenMai.setSp(sp);
+//                if (checkKm3TruongHop(sp.getId(), ((KhuyenMai) cbbKM.getSelectedItem()).getId(), (KhuyenMai) cbbKM.getSelectedItem()) == false) {
+//                    return false;
+//                }
+//                if(checKM(((KhuyenMai)cbbKM.getSelectedItem()).getTenKM(), sp.getTenSanPham())==false){
+//                    JOptionPane.showMessageDialog(this, "Sản phẩm này đã được áp khuyến mãi " + ((KhuyenMai)cbbKM.getSelectedItem()).getTenKM());
+//                    return false;
+//                }
+//
+//                chiTietKhuyenMaiResponsitories.add(chiTietKhuyenMai);
+//            }
+//
+//        }
+//        return false;
+//    }
+
+    public ChiTietKhuyenMai getDataCTKM(String dk) {
+
+        ChiTietKhuyenMai chiTietKhuyenMai = null;
+//        SanPham pham = new SanPham(tbHienThiTTSP.getValueAt(tbHienThiTTSP.getSelectedRow(), 0).
+//                toString(), tbHienThiTTSP.getValueAt(tbHienThiTTSP.getSelectedRow(), 2).toString());
+
+        if (dk.equalsIgnoreCase("update")) {
+            return chiTietKhuyenMai = new ChiTietKhuyenMai(
+                    tbHienThiSP.getValueAt(tbHienThiSP.getSelectedRow(), 0).toString(),
+                    tbHienThiSP.getValueAt(tbHienThiSP.getSelectedRow(), 1).toString(),
+                    ((ChiTietKhuyenMai) chiTietKhuyenMaiResponsitories.getAll("").get(tbHienThiTTSP.getSelectedRow())).getSp(),
+                    (KhuyenMai) cbbKM.getSelectedItem()
+            );
+        }
+        Session s = DBConnection.getsetFactory().openSession();
+        tbHienThiSP.repaint();
+
+        return chiTietKhuyenMai;
+
     }
 
     private boolean checkCalendar() {
@@ -447,6 +519,38 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         th.start();
     }
 
+    public boolean add() {
+
+        ChiTietKhuyenMai chiTietKhuyenMai = null;
+        chiTietKhuyenMai = new ChiTietKhuyenMai(
+                jcheck.createID().toString(),
+                jcheck.randomMA(),
+                null,
+                (KhuyenMai) cbbKM.getSelectedItem()
+        );
+        System.out.println("tenkmthu" + ((KhuyenMai)cbbKM.getSelectedItem()).getTenKM());
+        
+        for (int i = 0; i < tbHienThiTTSP.getRowCount(); i++) {
+            if ((Boolean) tbHienThiTTSP.getValueAt(i, 4) == true) {
+                System.out.println("ténp" + tbHienThiTTSP.getValueAt(i, 2).toString());
+                if (checkKm3TruongHop(tbHienThiTTSP.getValueAt(i, 0).toString(), ((KhuyenMai) cbbKM.getSelectedItem()).getId(), (KhuyenMai) cbbKM.getSelectedItem()) == false) {
+                    return false;
+                }
+                if(checKM(((KhuyenMai)cbbKM.getSelectedItem()).getTenKM(), tbHienThiTTSP.getValueAt(i, 2).toString())==false){
+                    JOptionPane.showMessageDialog(this, "Sản phẩm này đã được áp khuyến mãi " + ((KhuyenMai)cbbKM.getSelectedItem()).getTenKM());
+                    return false;
+                }
+               
+                List<SanPham> list1 = sanPham.getAll123("");
+                chiTietKhuyenMai.setId(jcheck.createID().toString());
+                chiTietKhuyenMai.setMa(jcheck.randomMA());
+                chiTietKhuyenMai.setSp(sanPham.getAll123("").get(i));
+                chiTietKhuyenMaiResponsitories.add(chiTietKhuyenMai);
+            }
+        }
+        return false;
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -521,6 +625,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         anhNV = new javax.swing.JLabel();
         tenNV = new javax.swing.JLabel();
         CV = new javax.swing.JLabel();
+        btnlichsu1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -581,7 +686,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("Trạng Thái :");
 
-        cbbLocTrangThaiKM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Còn Hạn", "Hết Hạn" }));
+        cbbLocTrangThaiKM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Còn Hạn", "Hết Hạn", "Chưa Hoạt Động" }));
         cbbLocTrangThaiKM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbLocTrangThaiKMActionPerformed(evt);
@@ -919,15 +1024,23 @@ public class KhuyenMaiView extends javax.swing.JFrame {
 
         tbHienThiTTSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Mã SP", "TênSP", "Giá Bán"
+                "ID", "Mã SP", "TênSP", "Giá Bán", "Trạng Thái"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tbHienThiTTSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbHienThiTTSPMouseClicked(evt);
@@ -1142,6 +1255,15 @@ public class KhuyenMaiView extends javax.swing.JFrame {
 
         CV.setText("jLabel10");
 
+        btnlichsu1.setBackground(new java.awt.Color(255, 255, 153));
+        btnlichsu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnlichsu1.setText("Bảo hành");
+        btnlichsu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlichsu1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -1171,7 +1293,8 @@ public class KhuyenMaiView extends javax.swing.JFrame {
                             .addComponent(btnkhuyenmai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnthongke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnlichsu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnlichsu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -1199,13 +1322,15 @@ public class KhuyenMaiView extends javax.swing.JFrame {
                 .addComponent(btnkhachhang, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnkhuyenmai, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnthongke, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnlichsu, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnlichsu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnlichsu1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1321,7 +1446,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
                 return;
             }
             if (rdHetHan.isSelected() == true) {
-                JOptionPane.showConfirmDialog(this, "Bạn đang chọn sai trạng thái");
+                JOptionPane.showConfirmDialog(this, "Không được chuyển trạng thái của khuyến mãi sang hết hạn");
                 return;
             }
             if (checkCalendar() == false) {
@@ -1359,18 +1484,15 @@ public class KhuyenMaiView extends javax.swing.JFrame {
 
     private void btnTaoSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoSPActionPerformed
         tbHienThiSP.clearSelection();
-        if (checKM(cbbKM.getSelectedItem().toString(), tbHienThiTTSP.getValueAt(tbHienThiTTSP.getSelectedRow(), 2).toString()) == false) {
-            JOptionPane.showMessageDialog(this, "Một sản phẩm chỉ được áp dụng một khuyến mãi");
-            return;
-        }
-        if (checThemKM(((KhuyenMai) cbbKM.getSelectedItem()).getNgayBD(),
-                tbHienThiTTSP.getValueAt(tbHienThiTTSP.getSelectedRow(), 2).toString()) == false) {
-            JOptionPane.showMessageDialog(this, "Không được áp dụng khuyến mãi cho 1 sp cùng một thời gian");
-            return;
-        }
-        if (chiTietKhuyenMaiResponsitories.add(getDataCTKM("")) == 1) {
-            JOptionPane.showMessageDialog(this, "Thành công");
-        }
+
+//        if (addALL() == true) {
+//
+//            return;
+//
+//        } else {
+            if (add() == true) {
+                return;
+            }
 
         loadTableSanPham();
         clear();
@@ -1445,6 +1567,10 @@ public class KhuyenMaiView extends javax.swing.JFrame {
             txtTenKhuyenMai.requestFocus();
             return;
         }
+        if (rdHetHan.isSelected() == true) {
+            JOptionPane.showMessageDialog(this, "Không tạo khuyến mãi với trạng thái là hết hạn");
+            return;
+        }
         if (checkCalendar() == false) {
             return;
         }
@@ -1474,7 +1600,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
     }//GEN-LAST:event_cbbLocTrangThaiKMActionPerformed
 
     private void tbHienThiTTSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHienThiTTSPMouseClicked
-
+        System.out.println("trạng thái" + tbHienThiTTSP.getValueAt(tbHienThiTTSP.getSelectedRow(), 4));
     }//GEN-LAST:event_tbHienThiTTSPMouseClicked
 
     private void txtTuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTuKeyReleased
@@ -1540,7 +1666,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
 
     private void btnthongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthongkeActionPerformed
         this.setVisible(false);
-        new ThongKe().setVisible(true);
+        new ThongKeView().setVisible(true);
     }//GEN-LAST:event_btnthongkeActionPerformed
 
     private void btnlichsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlichsuActionPerformed
@@ -1552,6 +1678,11 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         this.setVisible(false);
         new DangNhap().setVisible(true);
     }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void btnlichsu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlichsu1ActionPerformed
+new BaoHanhView().setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnlichsu1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1618,6 +1749,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
     private javax.swing.JButton btnkhachhang;
     private javax.swing.JButton btnkhuyenmai;
     private javax.swing.JButton btnlichsu;
+    private javax.swing.JButton btnlichsu1;
     private javax.swing.JButton btnnhanvien;
     private javax.swing.JButton btnsanpham;
     private javax.swing.JButton btnthongke;

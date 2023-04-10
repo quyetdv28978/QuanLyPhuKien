@@ -21,7 +21,7 @@ import respon.DangnhapRes;
  */
 public class DangNhap extends javax.swing.JFrame {
 
-    public static BanHang banHang;
+    public static ViewTong vT;
 
     DangnhapRes dnr = new DangnhapRes();
     public static NhanVien nv;
@@ -61,8 +61,8 @@ public class DangNhap extends javax.swing.JFrame {
             if (tk.equals(textUser)
                     && ps.equals(textPss)) {
                 nv = x;
-                banHang = new BanHang();
-                banHang.setVisible(true);
+                vT = new ViewTong();
+                vT.setVisible(true);
                 this.dispose();
                 System.out.println("Dang nhap thanh cong");
                 kt = 1;
@@ -115,7 +115,7 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel18.setText("Mật Khẩu ");
 
-        txtp.setText("123");
+        txtp.setText("s");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -188,9 +188,9 @@ public class DangNhap extends javax.swing.JFrame {
                         .addGap(78, 78, 78)
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
+                        .addGap(144, 144, 144)
                         .addComponent(btndangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(191, 191, 191)
+                        .addGap(127, 127, 127)
                         .addComponent(btnthoat, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -206,11 +206,11 @@ public class DangNhap extends javax.swing.JFrame {
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnqmk, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btndangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnthoat, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
+                    .addComponent(btndangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnthoat, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -236,7 +236,7 @@ public class DangNhap extends javax.swing.JFrame {
     private void btnqmkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnqmkActionPerformed
         this.setVisible(false);
 
-        new QuenMatKhau().setVisible(true);
+        new Quenmk().setVisible(true);
     }//GEN-LAST:event_btnqmkActionPerformed
 
     private void btnthoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthoatActionPerformed

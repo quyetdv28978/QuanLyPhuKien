@@ -58,9 +58,9 @@
                           <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
                           <Component id="btndangnhap" min="-2" pref="138" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
                           <Component id="btnthoat" min="-2" pref="129" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -81,12 +81,12 @@
                   <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnqmk" min="-2" pref="37" max="-2" attributes="0"/>
-                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btndangnhap" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="btnthoat" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="btndangnhap" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                      <Component id="btnthoat" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace pref="47" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -183,7 +183,7 @@
             </Component>
             <Component class="javax.swing.JPasswordField" name="txtp">
               <Properties>
-                <Property name="text" type="java.lang.String" value="123"/>
+                <Property name="text" type="java.lang.String" value="s"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -7,10 +7,13 @@ package domaimodel;
 import domaimodel.SanPham;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -40,11 +43,14 @@ public class ChiTietHoaDon implements Serializable {
     private int trangThai;
 
     @Transient
-    private String maSP, tenSP;
+    private String maSP, tenSP, MS, NSX;
     @Transient
     private int Sluong, SOHD;
     @Transient
     private double TONGTIEN, SKH;
+
+//    @OneToMany(mappedBy = "hd", fetch = FetchType.LAZY)
+//    private List<BaoHanh> baohanhList;
 
     public String getMaSP() {
         return maSP;
@@ -69,6 +75,24 @@ public class ChiTietHoaDon implements Serializable {
     public void setSluong(int Sluong) {
         this.Sluong = Sluong;
     }
+
+    public String getMS() {
+        return MS;
+    }
+
+    public void setMS(String MS) {
+        this.MS = MS;
+    }
+
+    public String getNSX() {
+        return NSX;
+    }
+
+    public void setNSX(String NSX) {
+        this.NSX = NSX;
+    }
+    
+    
 
     public int getSOHD() {
         return SOHD;

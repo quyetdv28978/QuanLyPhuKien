@@ -4,6 +4,7 @@
  */
 package respon;
 
+import domaimodel.ChiTietHoaDon;
 import domaimodel.HoaDon;
 import utility.DBConnection;
 import java.util.List;
@@ -21,8 +22,20 @@ public class ResHoaDonCho {
         }
         return null;
     }
+    public List<Object> getAllSPHD(String dk, int tt){
+        return  DBConnection.selectQueRy("from ChiTietHoaDon c where c.hd.id = '" + dk + "'");
+    }
+    
+    
+      public List<Object> getAllSPHDNoEm(String dk, int tt){
+        return  DBConnection.selectQueRy("from chitiethoadonNoEmbe c where c.hd.id = '" + dk + "'");
+    }
+    
     
     public List<Object> getAllHDCHo(String dk, int tt){
        return DBConnection.selectQueRy("from ChiTietGioHang c where c.gh.tinhtrang =  "+ tt +" and  c.gh.nv.id = '" + dk + "'");
     }
+    
+    
+    
 }

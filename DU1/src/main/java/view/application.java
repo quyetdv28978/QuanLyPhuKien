@@ -8,7 +8,7 @@ package view;
  *
  * @author yugip
  */
-public class application {
+public class application {  
 
     public static void main(String[] args) {
         new DangNhap().setVisible(true);

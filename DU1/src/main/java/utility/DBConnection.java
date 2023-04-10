@@ -5,34 +5,20 @@
  */
 package utility;
 
-//import domaimodel.ChatLieu;
-//import domaimodel.DanhMuc;
-//import domaimodel.BaoHanh;
-import domaimodel.ChiTietBaoHanh;
-import domaimodel.KhachHang;
-import domaimodel.KhuyenMai;
-import domaimodel.SanPham;
 
 import domaimodel.ChiTietKhuyenMai;
-import domaimodel.DanhMuc;
 import domaimodel.KhachHang;
 import domaimodel.KhuyenMai;
-import domaimodel.SanPham;
-
-import java.util.List;
 
 import domaimodel.ChucVu;
 import domaimodel.NhanVien;
 import domaimodel.ChiTietGioHang;
 import domaimodel.ChiTietHoaDon;
-//import domaimodel.ChiTietGioHang;
-//import domaimodel.ChiTietHoaDon;
 import domaimodel.DanhMuc;
 import domaimodel.GioHang;
 import domaimodel.HoaDon;
-//import domaimodel.GioHang;
-//import domaimodel.HoaDon;
 import domaimodel.SanPham;
+import domaimodel.chitiethoadonNoEmbe;
 
 import java.util.List;
 import java.util.Properties;
@@ -42,7 +28,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
-import view.BaoHanh;
 
 public class DBConnection {
 
@@ -64,19 +49,20 @@ public class DBConnection {
         confi.addAnnotatedClass(DanhMuc.class);
         confi.addAnnotatedClass(NhanVien.class);
         confi.addAnnotatedClass(SanPham.class);
-        confi.addAnnotatedClass(ChiTietHoaDon.class);
         confi.addAnnotatedClass(ChiTietGioHang.class);
         confi.addAnnotatedClass(GioHang.class);
         confi.addAnnotatedClass(HoaDon.class);
         confi.addAnnotatedClass(KhuyenMai.class);
         confi.addAnnotatedClass(KhachHang.class);
         confi.addAnnotatedClass(ChiTietKhuyenMai.class);
-        confi.addAnnotatedClass(ChiTietBaoHanh.class);
+//        confi.addAnnotatedClass(ChiTietBaoHanh.class);
+        confi.addAnnotatedClass(ChiTietHoaDon.class);
         confi.addAnnotatedClass(domaimodel.BaoHanh.class);
-
+        confi.addAnnotatedClass(chitiethoadonNoEmbe.class);
 //        confi.addAnnotatedClass(BaoHanh.class);
         confi.addAnnotatedClass(KhachHang.class);
         confi.addAnnotatedClass(KhuyenMai.class);
+//        confi.addAnnotatedClass(ChiTietHoaDon.class);
 
         ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
         FACTORY = confi.buildSessionFactory(ser);

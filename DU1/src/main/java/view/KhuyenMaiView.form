@@ -376,9 +376,10 @@
                             <Component class="javax.swing.JComboBox" name="cbbLocTrangThaiKM">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="2">
+                                  <StringArray count="3">
                                     <StringItem index="0" value="C&#xf2;n H&#x1ea1;n"/>
                                     <StringItem index="1" value="H&#x1ebf;t H&#x1ea1;n"/>
+                                    <StringItem index="2" value="Ch&#x1b0;a Ho&#x1ea1;t &#x110;&#x1ed9;ng"/>
                                   </StringArray>
                                 </Property>
                               </Properties>
@@ -962,15 +963,21 @@
                             <Component class="javax.swing.JTable" name="tbHienThiTTSP">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="4" rowCount="4">
+                                  <Table columnCount="5" rowCount="4">
                                     <Column editable="true" title="ID" type="java.lang.Object"/>
                                     <Column editable="true" title="M&#xe3; SP" type="java.lang.Object"/>
                                     <Column editable="true" title="T&#xea;nSP" type="java.lang.Object"/>
                                     <Column editable="true" title="Gi&#xe1; B&#xe1;n" type="java.lang.Object"/>
+                                    <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Boolean"/>
                                   </Table>
                                 </Property>
                                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                                   <TableColumnModel selectionModel="0">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
                                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                       <Title/>
                                       <Editor/>
@@ -1114,6 +1121,7 @@
                                       <Component id="btnthongke" alignment="0" max="32767" attributes="0"/>
                                       <Component id="btnlichsu" alignment="0" max="32767" attributes="0"/>
                                       <Component id="btnDangXuat" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btnlichsu1" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1148,13 +1156,15 @@
                           <Component id="btnkhachhang" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnkhuyenmai" min="-2" pref="36" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnthongke" min="-2" pref="38" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnlichsu" min="-2" pref="42" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="btnDangXuat" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnlichsu" min="-2" pref="37" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="btnlichsu1" min="-2" pref="42" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnDangXuat" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1307,6 +1317,20 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jLabel10"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnlichsu1">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="99" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="B&#x1ea3;o h&#xe0;nh"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnlichsu1ActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -109,4 +109,8 @@ public class ChiTietHoaDonViewModel {
         return new Object[]{hd.getId(), (donGia * soluong) - giagiam};
     }
 
+    
+    public static void main(String[] args) {
+        System.out.println(String.format("%.2f", (double)5.3423123));
+    }
 }

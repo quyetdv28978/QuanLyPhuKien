@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import utility.DBConnection;
 
 /**
@@ -43,7 +44,31 @@ public class resSanPham implements Iresponsitories<SanPham> {
     }
 
     public List<SanPham> getAll2(String dk) {
-        return DBConnection.selectQueRy("from SanPham s " + dk + " and trangThai = 0");
+        return DBConnection.selectQueRy("from SanPham s " + dk);
+    }
+
+    public DanhMuc timDM(String ten) {
+        Query q = DBConnection.getsetFactory().openSession().createQuery("from DanhMuc d where d.dongSP = :ten");
+        q.setParameter("ten", ten);
+
+        if (q.list().isEmpty()) {
+
+            return null;
+        }
+        return (DanhMuc) q.getSingleResult();
+//        return (DanhMuc)DBConnection.getsetFactory().openSession().createQuery("from DanhMuc d where d.dongSP ='"+ten+"'").getSingleResult();
+    }
+
+    public SanPham timSP(String ten) {
+        Query q = DBConnection.getsetFactory().openSession().createQuery("from SanPham sp where sp.tenSanPham = :ten");
+        q.setParameter("ten", ten);
+
+        if (q.list().isEmpty()) {
+
+            return null;
+        }
+        return (SanPham) q.getSingleResult();
+//        return (DanhMuc)DBConnection.getsetFactory().openSession().createQuery("from DanhMuc d where d.dongSP ='"+ten+"'").getSingleResult();
     }
 
     @Override
@@ -147,7 +172,7 @@ public class resSanPham implements Iresponsitories<SanPham> {
 
         String a = "%" + tenSanPham + "%";
         try (Session session = DBConnection.getsetFactory().openSession()) {
-            TypedQuery<SanPham> query = session.createQuery("From SanPham  WHERE tenSanPham like :key");
+            TypedQuery<SanPham> query = session.createQuery("From SanPham  WHERE tenSanPham like :key and trangThai = 0");
             query.setParameter("key", a);
             System.out.println(query);
             pas = query.getResultList();

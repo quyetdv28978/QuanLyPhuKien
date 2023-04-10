@@ -7,6 +7,7 @@ package domaimodel;
 import java.io.Serializable;
 //import java.sql.Date;
 import java.sql.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -30,7 +31,7 @@ public class SanPham implements Serializable {
     private String QL, moTa;
     private String chatLieu;
     private Float kichThuoc;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "iddm")
     private DanhMuc dm;
 

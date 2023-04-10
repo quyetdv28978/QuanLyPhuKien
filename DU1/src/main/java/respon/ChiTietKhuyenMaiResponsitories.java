@@ -22,6 +22,7 @@ import java.util.Timer;
 import javax.persistence.Query;
 
 import javax.persistence.TypedQuery;
+import javax.swing.JOptionPane;
 
 import org.hibernate.Session;
 
@@ -50,8 +51,20 @@ public class ChiTietKhuyenMaiResponsitories implements Iresponsitories<ChiTietKh
 
     @Override
     public List<ChiTietKhuyenMai> getAll(String dk) {
-        if(DBConnection.selectQueRy("from ChiTietKhuyenMai") !=null){
-        return DBConnection.selectQueRy("from ChiTietKhuyenMai");
+        if (DBConnection.selectQueRy("from ChiTietKhuyenMai") != null) {
+            return DBConnection.selectQueRy("from ChiTietKhuyenMai");
+        }
+        return null;
+    }
+
+//      LIST CUA 3 TRUONG HOP
+    public List<ChiTietKhuyenMai> getAll3(String dk) {
+        String sql = "from ChiTietKhuyenMai c " + dk;
+//        JOptionPane.showMessageDialog(this, sql);
+System.out.println(sql);
+        if (DBConnection.selectQueRy("from ChiTietKhuyenMai c " + dk) != null) {
+
+            return DBConnection.selectQueRy(sql);
         }
         return null;
     }

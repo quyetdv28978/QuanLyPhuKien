@@ -407,7 +407,7 @@ public class DoiTra extends javax.swing.JFrame {
 
     private void btnthongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthongkeActionPerformed
         this.setVisible(false);
-        new ThongKe().setVisible(true);
+        new ThongKeView().setVisible(true);
     }//GEN-LAST:event_btnthongkeActionPerformed
 
     private void btnlichsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlichsuActionPerformed

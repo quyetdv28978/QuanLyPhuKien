@@ -9,6 +9,8 @@ import domaimodel.HoaDon;
 import domaimodel.KhachHang;
 import utility.DBConnection;
 import java.util.List;
+import javax.persistence.TypedQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -29,9 +31,12 @@ public class ResHoaDon implements IfResponsitoties<HoaDon>{
         return null;
     }
     
+   
+    
      public List<ChiTietHoaDon> getAllChiTietHoaDon(String dk) {
         return DBConnection.selectQueRy("from ChiTietHoaDon d " + dk);
     }
+  
 
     @Override
     public int add(HoaDon q) {
@@ -62,5 +67,16 @@ public class ResHoaDon implements IfResponsitoties<HoaDon>{
     public List<KhachHang> getALl(){
         return DBConnection.selectQueRy("from KhachHang");
     }
-    
+     public List<HoaDon> SelectbyMaHD(String maHD) {
+        List<HoaDon> pas;
+        String nameSelect = "%" + maHD + "%";
+        try (Session session = DBConnection.getsetFactory().openSession()) {
+            TypedQuery<HoaDon> query = session.createQuery("from HoaDon where tinhTrang = 0 and ma like :key");
+            query.setParameter("key", nameSelect);
+            pas = query.getResultList();
+            session.close();
+
+        }
+        return pas;
+    }
 }
