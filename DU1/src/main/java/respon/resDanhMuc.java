@@ -4,7 +4,7 @@
  */
 package respon;
 
-import domaiModel.DanhMuc;
+import domaimodel.DanhMuc;
 import java.util.List;
 import utility.DBConnection;
 
@@ -12,7 +12,7 @@ import utility.DBConnection;
  *
  * @author ADMIN
  */
-public class resDanhMuc implements Interface<DanhMuc>{
+public class resDanhMuc implements Iresponsitories<DanhMuc>{
 
     @Override
     public List<Object[]> getALLJoin(String dk) {

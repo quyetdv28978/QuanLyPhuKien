@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package viewModel;
+package viewmodel;
 
-import domaiModel.ChatLieu;
-import domaiModel.DanhMuc;
+import domaimodel.DanhMuc;
 import java.sql.Date;
 
 /**
@@ -19,15 +18,15 @@ public class SanPhamViewModel {
     private Date ngayTao;
     private Integer trangThai,soLuong;
     private Float giaNhap,giaBan,trongLuong;
+    private Float kichThuoc;
+    private String chatLieu;
     private String QL,moTa;
-    private ChatLieuViewModel cl;
     private DanhMucViewModel dm;
-    public SanPhamViewModel() {
-    }
+    
 
     public SanPhamViewModel(String id, String ma, String tenSanPham, String mauSac, String nhaSanXuat,
-            Date ngayTao, Integer trangThai, Integer soLuong, Float giaNhap, Float giaBan, Float trongLuong
-            , String QL, ChatLieuViewModel cl, DanhMucViewModel dm) {
+            Date ngayTao, Integer trangThai, Integer soLuong, Float giaNhap, Float giaBan, Float trongLuong, Float kichThuoc, String chatLieu
+            , String QL, DanhMucViewModel dm) {
         this.id = id;
         this.ma = ma;
         this.tenSanPham = tenSanPham;
@@ -39,14 +38,15 @@ public class SanPhamViewModel {
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.trongLuong = trongLuong;
+        this.kichThuoc = kichThuoc;
+        this.chatLieu = chatLieu;
         this.QL = QL;
-        this.cl = cl;
         this.dm = dm;
     }
     
     public SanPhamViewModel(String ma, String tenSanPham, String mauSac, String nhaSanXuat,
-            Date ngayTao, Integer trangThai, Integer soLuong, Float giaNhap, Float giaBan,
-            Float trongLuong, String QL, ChatLieuViewModel cl, DanhMucViewModel dm) {
+            Date ngayTao, Integer trangThai, Integer soLuong, Float giaNhap, Float giaBan, Float kichThuoc, String chatLieu,
+            Float trongLuong, String QL, DanhMucViewModel dm) {
         
         this.ma = ma;
         this.tenSanPham = tenSanPham;
@@ -59,14 +59,15 @@ public class SanPhamViewModel {
         this.giaBan = giaBan;
         this.trongLuong = trongLuong;
         this.QL = QL;
-        this.cl = cl;
+        this.kichThuoc = kichThuoc;
+        this.chatLieu = chatLieu;
         this.dm = dm;
     }
     
     //Đang dùng
     public SanPhamViewModel(String ma, String tenSanPham, String mauSac, String nhaSanXuat,
-            String moTa, Float giaNhap, Float giaBan, Float trongLuong, Integer soLuong,
-            DanhMucViewModel dm, ChatLieuViewModel cl, Integer trangThai, String QL) {
+            String moTa, Float giaNhap, Float giaBan, Float trongLuong, Integer soLuong, Float kichThuoc, String chatLieu,
+            DanhMucViewModel dm, Integer trangThai, String QL) {
         this.ma = ma;
         this.tenSanPham = tenSanPham;
         this.mauSac = mauSac;
@@ -78,13 +79,17 @@ public class SanPhamViewModel {
         this.trongLuong = trongLuong;
         this.QL = QL;
         this.moTa = moTa;
-        this.cl = cl;
+        this.kichThuoc = kichThuoc;
+        this.chatLieu = chatLieu;
         this.dm = dm;
     }
     
+//    test excel
+    
+    
     public SanPhamViewModel(String id, String ma, String tenSanPham, String mauSac, String nhaSanXuat,
-            String moTa, Float giaNhap, Float giaBan, Float trongLuong, Integer soLuong,
-            DanhMucViewModel dm, ChatLieuViewModel cl, Integer trangThai, String QL) {
+            String moTa, Float giaNhap, Float giaBan, Float trongLuong, Integer soLuong, Float kichThuoc, String chatLieu,
+            DanhMucViewModel dm, Integer trangThai, String QL) {
         this.id = id;
         this.ma = ma;
         this.tenSanPham = tenSanPham;
@@ -97,8 +102,43 @@ public class SanPhamViewModel {
         this.trongLuong = trongLuong;
         this.QL = QL;
         this.moTa = moTa;
-        this.cl = cl;
+        this.kichThuoc = kichThuoc;
+        this.chatLieu = chatLieu;
         this.dm = dm;
+    }
+
+    public SanPhamViewModel(String ma, String tenSanPham, Integer soLuong) {
+        this.id = ma;
+        this.ma = tenSanPham;
+        this.soLuong = soLuong;
+    }
+
+    public SanPhamViewModel(String id, String ma, DanhMucViewModel dm) {
+        this.id = id;
+        this.ma = ma;
+        this.dm = dm;
+    }
+
+    //doing
+    public SanPhamViewModel(String id, String ma, String tenSanPham, String mauSac, 
+            String nhaSanXuat, String moTa, Float giaNhap, Float giaBan, Float trongLuong, 
+            Integer soLuong, Float kichThuoc, String chatLieu, DanhMucViewModel dm, int trangThai, String QL) {
+        
+        this.id=id;
+        this.ma=ma;
+        this.tenSanPham=tenSanPham;
+        this.mauSac=mauSac;
+        this.nhaSanXuat=nhaSanXuat;
+        this.moTa=moTa;
+        this.giaNhap=giaNhap;
+        this.giaBan=giaBan;
+        this.trongLuong=trongLuong;
+        this.soLuong=soLuong;
+        this.kichThuoc = kichThuoc;
+        this.chatLieu = chatLieu;
+        this.dm=dm;
+        this.trangThai=trangThai;
+        this.QL=QL;
     }
 
     
@@ -199,12 +239,20 @@ public class SanPhamViewModel {
         this.QL = QL;
     }
 
-    public ChatLieuViewModel getCl() {
-        return cl;
+    public Float getKichThuoc() {
+        return kichThuoc;
     }
 
-    public void setCl(ChatLieuViewModel cl) {
-        this.cl = cl;
+    public void setKichThuoc(Float kichThuoc) {
+        this.kichThuoc = kichThuoc;
+    }
+
+    public String getChatLieu() {
+        return chatLieu;
+    }
+
+    public void setChatLieu(String chatLieu) {
+        this.chatLieu = chatLieu;
     }
 
     public DanhMucViewModel getDm() {
@@ -237,10 +285,6 @@ public class SanPhamViewModel {
     
     public Object[] toDataRow() {
         return new Object[]{id,ma,tenSanPham,mauSac,nhaSanXuat,moTa,giaNhap,giaBan,
-            trongLuong,soLuong,dm,cl,trangThai==0?"Hết hàng":"Còn hàng",QL};
-    }
-    
-    public Object[] toDataRowT() {
-        return new Object[]{id,ma,tenSanPham,giaBan};
+            trongLuong,soLuong,kichThuoc,chatLieu,dm,trangThai==0?"Còn hàng":"Hết hàng",QL};
     }
 }

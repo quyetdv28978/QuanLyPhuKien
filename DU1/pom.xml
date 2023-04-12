@@ -9,15 +9,60 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
-        <exec.mainClass>com.nhom1.du1.DU1</exec.mainClass>
+        <exec.mainClass>com.nhom1.du1.DU1</exec.mainClass> 
+        <!--duong dan cua quyet-->
+        <myjar1.path>D:\da1\Tung-Doing\DU1\lib</myjar1.path>
+        <!--duong dan cua huong-->
+        <!--<myjar1.path>D:\DuAn1\MainKaKe\DU1\lib</myjar1.path>-->
+        <!--duong dan cua tung-->
+        <!--<myjar1.path>D:\da1\TT_doing\DU1\lib</myjar1.path>-->
+        <!--======= duong dan cua hieu-->
+        <!--<myjar1.path>D:\CNTT\Spr2023\Block2\Du_An_1\Project_Tong\DU1\lib</myjar1.path>-->
+        
+        <!--<myjar1.path>D:\pujic\DU1\lib</myjar1.path>-->
+
+
     </properties>
     
     <dependencies>
+        
+        <!--         https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml 
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>-->
+        
+
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.2</version>
+        </dependency>
+
+        
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.2</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.6.10.Final</version>
+            <version>5.4.32.Final</version>
+            <type>jar</type>
         </dependency>
         
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
@@ -26,5 +71,80 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>8.2.2.jre8</version>
         </dependency>
-        </dependencies>       
+
+        
+        <!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE126</version>
+        </dependency>
+
+        <dependency>
+            <groupId>bridj</groupId>
+            <artifactId>bridj</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${myjar1.path}\bridj-0.6.2-windows-only.jar</systemPath> 
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        
+        <!--        <dependency>
+            <groupId>log</groupId>
+            <artifactId>log</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${myjar1.path}\log4j-1.2.17.jar</systemPath> 
+        </dependency>-->
+        
+        <dependency>
+            <groupId>slf</groupId>
+            <artifactId>slf</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${myjar1.path}\slf4j-api-1.6.2.jar</systemPath> 
+        </dependency>
+        
+        <dependency>
+            <groupId>slf4</groupId>
+            <artifactId>slf4</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${myjar1.path}\slf4j-log4j12-1.6.2.jar</systemPath> 
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/com.github.sarxos/webcam-capture -->
+        <dependency>
+            <groupId>com.github.sarxos</groupId>
+            <artifactId>webcam-capture</artifactId>
+            <version>0.3.12</version>
+        </dependency>
+
+
+    </dependencies>
+
 </project>

@@ -4,11 +4,11 @@
  */
 package service;
 
-import domaiModel.DanhMuc;
+import domaimodel.DanhMuc;
 import java.util.ArrayList;
 import java.util.List;
 import respon.resDanhMuc;
-import viewModel.DanhMucViewModel;
+import viewmodel.DanhMucViewModel;
 
 /**
  *
@@ -21,13 +21,9 @@ public class serDanhMuc implements Interface<DanhMucViewModel>{
     public serDanhMuc() {
         this.danhMuc=new resDanhMuc();
     }
-    @Override
-    public List<Object[]> getALLJoin(String dk) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
-    public List<DanhMucViewModel> getAll(String dk) {
+    public List<DanhMucViewModel> getALl(String dk) {
         List<DanhMucViewModel> dm=new ArrayList<>();
         for(DanhMuc i:this.danhMuc.getAll(dk)){
             dm.add(new DanhMucViewModel(i.getId(), i.getDongSP()));
@@ -55,7 +51,7 @@ public class serDanhMuc implements Interface<DanhMucViewModel>{
 
     @Override
     public int delete(String t) {
-        return this.delete(t);
+        return this.danhMuc.delete(t);
     }
 
     @Override
@@ -64,7 +60,7 @@ public class serDanhMuc implements Interface<DanhMucViewModel>{
     }
 
     @Override
-    public DanhMucViewModel timObject(String dk) {
+    public DanhMucViewModel timOB(String dk) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
