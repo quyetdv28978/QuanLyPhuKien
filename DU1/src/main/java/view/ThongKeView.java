@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.dsig.spec.ExcC14NParameterSpec;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -28,10 +29,10 @@ import org.jfree.chart.needle.ShipNeedle;
 import service.SerTK_DT;
 
 public class ThongKeView extends javax.swing.JFrame {
-
+    
     DefaultTableModel dtmThongke = new DefaultTableModel();
     private final SerTK_DT scthd = new SerTK_DT();
-
+    
     public ThongKeView() {
         initComponents();
         setLocationRelativeTo(null);
@@ -93,7 +94,7 @@ public class ThongKeView extends javax.swing.JFrame {
                 s.getSOHD(), s.getTONGTIEN(), s.getSKH()
             });
         }
-
+        
     }
 
     /*-----SAN PHAM-------*/
@@ -132,17 +133,17 @@ public class ThongKeView extends javax.swing.JFrame {
             });
         }
     }
-
+    
     public void getIconMenu(JButton bt, String dd) {
         Image image = new ImageIcon(dd).getImage().getScaledInstance(24, 24, 0);
         bt.setIcon(new ImageIcon(image));
     }
-
+    
     public void getImageThemAvatar(JLabel labelThemAnh, String duongDan) {
         Image image = new ImageIcon(duongDan).getImage().getScaledInstance(labelThemAnh.getWidth(), labelThemAnh.getHeight(), 0);
         labelThemAnh.setIcon(new ImageIcon(image));
     }
-
+    
     public void chay() {
         Thread th = new Thread() {
             @Override
@@ -159,11 +160,11 @@ public class ThongKeView extends javax.swing.JFrame {
                     lbl_ChuChay.setText(txt);
                 }
             }
-
+            
         };
         th.start();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1410,6 +1411,8 @@ public class ThongKeView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnlichsuActionPerformed
 
     private void btnquenmatkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnquenmatkhauActionPerformed
+        this.dispose();
+        new DangNhap().setVisible(true);
 //        this.setVisible(false);
 //        new QuenMatKhau().setVisible(true);
     }//GEN-LAST:event_btnquenmatkhauActionPerformed
@@ -1454,41 +1457,8 @@ public class ThongKeView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPane4MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            HSSFWorkbook hSSFWorkbook = new HSSFWorkbook();
-            HSSFSheet sheet = hSSFWorkbook.createSheet("Thống kê");
-            HSSFRow row = null;
-            Cell cell = null;
-            row = sheet.createRow(3);
-            cell = row.createCell(0, CellType.STRING);
-            cell.setCellValue("Số Hóa đơn");
-
-            cell = row.createCell(1, CellType.STRING);
-            cell.setCellValue("Doanh thu");
-
-//            for (int i = 0; i < tblxuat.getRowCount(); i++) {
-//                row = sheet.createRow(3 + i + 1);
-//                for (int j = 0; j < tblxuat.getColumnCount(); j++) {
-//                    cell = row.createCell(j, CellType.STRING);
-//                    cell.setCellValue(tblxuat.getValueAt(i, j).toString());
-//                }
-//
-//            }
-            File f = new File("Excel\\test.xls");
-
-            System.out.println(f.createNewFile());
-            try {
-                FileOutputStream fis = new FileOutputStream(f);
-                hSSFWorkbook.write(fis);
-                fis.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        JOptionPane.showMessageDialog(this, "thanh cong");
+       Excel e =new Excel();
+       e.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbbthoigianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbthoigianActionPerformed
@@ -1756,23 +1726,23 @@ public class ThongKeView extends javax.swing.JFrame {
             // thông báo cho người dùng biết rằng giá trị không hợp lệ
             System.out.println("Giá trị không hợp lệ");
         }
-
+        
     }
-
+    
     private void loadDTNgay() {
         try {
             lblbihuy.setText(((scthd.select_doanhthu_theongayBH(dateTK_doanhthu.getDate()))) + "");
             lblthanhcong2.setText(((ChiTietHoaDon) (scthd.select_doanhthu_theongayTC(dateTK_doanhthu.getDate()).get(0))).getSOHD() + "");
-            lbldtngay.setText(((ChiTietHoaDon) (scthd.select_doanhthu_theongayTC(dateTK_doanhthu.getDate()).get(0))).getTONGTIEN()+ "");
-            lblKH.setText(((ChiTietHoaDon) (scthd.select_doanhthu_theongayTC(dateTK_doanhthu.getDate()).get(0))).getSKH()+ "");
+            lbldtngay.setText(((ChiTietHoaDon) (scthd.select_doanhthu_theongayTC(dateTK_doanhthu.getDate()).get(0))).getTONGTIEN() + "");
+            lblKH.setText(((ChiTietHoaDon) (scthd.select_doanhthu_theongayTC(dateTK_doanhthu.getDate()).get(0))).getSKH() + "");
             lblSoDH2.setText(Integer.parseInt(lblthanhcong2.getText()) + Integer.parseInt(lblbihuy.getText()) + "");
         } catch (NumberFormatException e) {
             // thông báo cho người dùng biết rằng giá trị không hợp lệ
             System.out.println("Giá trị không hợp lệ");
         }
-
+        
     }
-
+    
     private void loadDTHT() {
         try {
             lblbihuy.setText(((scthd.select_hientaiBH())) + "");
@@ -1784,7 +1754,7 @@ public class ThongKeView extends javax.swing.JFrame {
             // thông báo cho người dùng biết rằng giá trị không hợp lệ
             System.out.println("Giá trị không hợp lệ");
         }
-
+        
     }
-
+    
 }

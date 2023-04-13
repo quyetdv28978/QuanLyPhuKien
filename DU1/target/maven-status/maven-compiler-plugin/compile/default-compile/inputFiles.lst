@@ -48,11 +48,13 @@ D:\pujic\DU1\src\main\java\viewmodel\ChiTietKhuyenMaiViewModel.java
 D:\pujic\DU1\src\main\java\service\IManageService.java
 D:\pujic\DU1\src\main\java\view\BanHang.java
 D:\pujic\DU1\src\main\java\domaimodel\ChucVu.java
+D:\pujic\DU1\src\main\java\view\autoClear.java
 D:\pujic\DU1\src\main\java\domaimodel\KhachHang.java
 D:\pujic\DU1\src\main\java\viewmodel\ChiTietHoaDonViewModel.java
 D:\pujic\DU1\src\main\java\viewmodel\HoaDonViewModel.java
 D:\pujic\DU1\src\main\java\respon\iquenmk.java
 D:\pujic\DU1\src\main\java\service\KhuyenMaiServices.java
+D:\pujic\DU1\src\main\java\view\Doimk.java
 D:\pujic\DU1\src\main\java\respon\BaoHanhRes.java
 D:\pujic\DU1\src\main\java\domaimodel\NhanVien.java
 D:\pujic\DU1\src\main\java\service\NhanVienService.java
@@ -68,6 +70,7 @@ D:\pujic\DU1\src\main\java\view\ChiTietBH.java
 D:\pujic\DU1\src\main\java\respon\chitietembe.java
 D:\pujic\DU1\src\main\java\domaimodel\SanPham.java
 D:\pujic\DU1\src\main\java\respon\resSanPham.java
+D:\pujic\DU1\src\main\java\respon\ihoadon.java
 D:\pujic\DU1\src\main\java\view\ManHinhchao.java
 D:\pujic\DU1\src\main\java\view\KhuyenMaiView.java
 D:\pujic\DU1\src\main\java\domaimodel\GioHang.java

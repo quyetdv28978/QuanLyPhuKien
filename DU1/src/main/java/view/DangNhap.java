@@ -5,14 +5,12 @@
 package view;
 
 import domaimodel.NhanVien;
-import java.awt.CardLayout;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import respon.DangnhapRes;
 
 /**
@@ -29,8 +27,10 @@ public class DangNhap extends javax.swing.JFrame {
     public DangNhap() {
         initComponents();
         setLocationRelativeTo(null);
-        getIconMenu(btndangnhap, "icon\\Images\\Login.png");
-        getIconMenu(btnthoat, "icon\\Images\\Exit.png");
+        getIconMenu(btndangnhap, "D:\\pujic\\DU1\\src\\main\\resources\\icon\\Images\\Login.png");
+        getIconMenu(btnthoat, "D:\\pujic\\DU1\\src\\main\\resources\\icon\\Images\\Exit.png");
+        Image image = new ImageIcon("D:\\pujic\\DU1\\src\\main\\resources\\icon\\Images\\anh.png").getImage().getScaledInstance(logo.getWidth(), logo.getHeight(), 0);
+        logo.setIcon(new ImageIcon(image));
     }
 
     public void getIconMenu(JButton bt, String dd) {
@@ -89,6 +89,7 @@ public class DangNhap extends javax.swing.JFrame {
         btnqmk = new javax.swing.JButton();
         btndangnhap = new javax.swing.JButton();
         btnthoat = new javax.swing.JButton();
+        logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,7 +102,7 @@ public class DangNhap extends javax.swing.JFrame {
         jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txttk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txttk.setText("nv1");
+        txttk.setText("hieuanhthe");
         txttk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txttk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +116,12 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel18.setText("Mật Khẩu ");
 
-        txtp.setText("s");
+        txtp.setText("123");
+        txtp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -179,7 +185,8 @@ public class DangNhap extends javax.swing.JFrame {
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap(294, Short.MAX_VALUE)
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addGap(239, 239, 239))
             .addGroup(jPanel12Layout.createSequentialGroup()
@@ -200,8 +207,11 @@ public class DangNhap extends javax.swing.JFrame {
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel16)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel16))
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -210,7 +220,7 @@ public class DangNhap extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btndangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnthoat, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,6 +256,10 @@ public class DangNhap extends javax.swing.JFrame {
     private void btndangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndangnhapActionPerformed
         check();
     }//GEN-LAST:event_btndangnhapActionPerformed
+
+    private void txtpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,6 +312,7 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JLabel logo;
     private javax.swing.JPasswordField txtp;
     private javax.swing.JTextField txttk;
     // End of variables declaration//GEN-END:variables

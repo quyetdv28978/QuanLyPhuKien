@@ -70,7 +70,7 @@ public class KhachHangView extends javax.swing.JFrame {
         getIconMenu(btnthongke, "icon\\Images\\Diagram.png");
         getIconMenu(btnlichsu, "icon\\Images\\Clock.png");
         getIconMenu(btnDangXuat, "icon\\Images\\Open door.png");
-        dangNhapNV(DangNhap.nv);
+//        dangNhapNV(DangNhap.nv);
     }
     
     public void getIconMenu(JButton bt, String dd) {

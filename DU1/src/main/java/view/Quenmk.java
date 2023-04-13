@@ -18,8 +18,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import respon.resquenmk;
-import java.util.ArrayList; import java.util.Collections; import java.util.List; import java.util.Random;import java.util.Scanner; 
- import java.util.function.Consumer; 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.function.Consumer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -30,29 +34,29 @@ import net.bytebuddy.utility.RandomString;
  * @author HP
  */
 public class Quenmk extends javax.swing.JFrame {
-private resquenmk qmkr;
 
-    
+    private resquenmk qmkr;
+
     public Quenmk() {
         initComponents();
-        qmkr=new resquenmk();
-       
-        
+        qmkr = new resquenmk();
+
         getIconMenu(btnxn, "icon\\Images\\Accept.png");
         getIconMenu(btnql, "icon\\Images\\Log out.png");
-        
-         setLocationRelativeTo(null);
-        
+        Image image = new ImageIcon("D:\\pujic\\DU1\\src\\main\\resources\\icon\\Images\\anh.png").getImage().getScaledInstance(logo.getWidth(), logo.getHeight(), 0);
+        logo.setIcon(new ImageIcon(image));
+        setLocationRelativeTo(null);
 
     }
-     public void getIconMenu(JButton bt, String dd) {
+
+    public void getIconMenu(JButton bt, String dd) {
         Image image = new ImageIcon(dd).getImage().getScaledInstance(24, 24, 0);
         bt.setIcon(new ImageIcon(image));
     }
-    
-   String p=new Random().nextLong(100000) + "";
-   
-    public void mail(){
+
+    String p = new Random().nextLong(100000) + "";
+
+    public void mail() {
         final String username = "thanhhandsome2507@gmail.com";
         final String password = "rahsnkcltjsvqtef";
 
@@ -69,7 +73,7 @@ private resquenmk qmkr;
                 return new PasswordAuthentication(username, password);
             }
         });
-       
+
         try {
 
             Message message = new MimeMessage(session);
@@ -80,7 +84,6 @@ private resquenmk qmkr;
             );
             message.setSubject("10 - 0.1");
             message.setText(p);
-            
 
             Transport.send(message);
 
@@ -89,8 +92,9 @@ private resquenmk qmkr;
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-       
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,6 +113,7 @@ private resquenmk qmkr;
         txtemail = new javax.swing.JTextField();
         btnxn = new javax.swing.JButton();
         btnql = new javax.swing.JButton();
+        logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 153));
@@ -172,24 +177,27 @@ private resquenmk qmkr;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnql)
                                 .addGap(46, 46, 46))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txttk, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(txttk, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(127, 127, 127)))))
                 .addContainerGap(59, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(186, 186, 186))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel2))
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -220,26 +228,25 @@ private resquenmk qmkr;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnxnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxnActionPerformed
-       if(txttk.getText().trim().length()==0||txtemail.getText().trim().length()==0){
-           JOptionPane.showMessageDialog(this, "ban phai dien vao cac truong nay");
-           return;
-           
-       }
-       int kt=0;
-        for (NhanVien x : qmkr.getmail()) {
-            
-       
-       if(txttk.getText().trim().equals(x.getTenTaiKhoan())&&txtemail.getText().trim().equals("thanhhandsome2507@gmail.com")){
-           mail();
-           qmkr.getall(qmkr.getnv(txttk.getText()).get(0), "sssss");
-       NhanVien nv=qmkr.getnv(txttk.getText()).get(0);
-       nv.setMatKhau(p);
-         qmkr.getall(nv, "sssss");
-         kt=1;
-         break;
-       }
+        if (txttk.getText().trim().length() == 0 || txtemail.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "ban phai dien vao cac truong nay");
+            return;
+
         }
-        if(kt==0){
+        int kt = 0;
+        for (NhanVien x : qmkr.getmail()) {
+
+            if (txttk.getText().trim().equals(x.getTenTaiKhoan()) && txtemail.getText().trim().equals("thanhhandsome2507@gmail.com")) {
+                mail();
+                qmkr.getall(qmkr.getnv(txttk.getText()).get(0), "sssss");
+                NhanVien nv = qmkr.getnv(txttk.getText()).get(0);
+                nv.setMatKhau(p);
+                qmkr.getall(nv, "sssss");
+                kt = 1;
+                break;
+            }
+        }
+        if (kt == 0) {
             JOptionPane.showMessageDialog(this, "Sai tai khoan hoac email");
             return;
         }
@@ -250,8 +257,9 @@ private resquenmk qmkr;
     }//GEN-LAST:event_btnxnActionPerformed
 
     private void btnqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnqlActionPerformed
-       DangNhap dn=new DangNhap();
-       dn.setVisible(true);
+        this.dispose();
+        DangNhap dn = new DangNhap();
+        dn.setVisible(true);
     }//GEN-LAST:event_btnqlActionPerformed
 
     /**
@@ -297,6 +305,7 @@ private resquenmk qmkr;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel logo;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txttk;
     // End of variables declaration//GEN-END:variables

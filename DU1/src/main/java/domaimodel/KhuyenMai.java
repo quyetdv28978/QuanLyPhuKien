@@ -26,18 +26,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "KHUYENMAI")
-public class KhuyenMai implements Serializable{
+public class KhuyenMai implements Serializable {
+
     @Id
     private String id;
-    private String  ma,tenKM;
+    private String ma, tenKM;
     private Float giaGiam;
-    private Date ngayBD, ngayKT,ngayTao;
+    private Date ngayBD, ngayKT, ngayTao;
     private String trangThai;
     private String moTa;
 
-
     public KhuyenMai() {
-        
+
     }
 
     public KhuyenMai(String id, String tenKM, Date ngayKT) {
@@ -49,8 +49,6 @@ public class KhuyenMai implements Serializable{
     public KhuyenMai(String tenKM) {
         this.tenKM = tenKM;
     }
-
-    
 
     public KhuyenMai(String id, String ma, String tenKM, Float giaGiam, Date ngayBD, Date ngayKT, String moTa) {
         this.id = id;
@@ -72,9 +70,6 @@ public class KhuyenMai implements Serializable{
         this.trangThai = trangThai;
         this.moTa = moTa;
     }
-    
-    
-
 
     public KhuyenMai(String id, String ma, String tenKM, Float giaGiam, Date ngayBD, Date ngayKT, Date ngayTao, String moTa) {
         this.id = id;
@@ -95,8 +90,6 @@ public class KhuyenMai implements Serializable{
         this.moTa = moTa;
     }
 
-
-
     public Date getNgayTao() {
         return ngayTao;
     }
@@ -104,7 +97,6 @@ public class KhuyenMai implements Serializable{
     public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
-    
 
     public String getId() {
         return id;
@@ -157,35 +149,50 @@ public class KhuyenMai implements Serializable{
     public void setGiaGiam(Float giaGiam) {
         this.giaGiam = giaGiam;
     }
-    
 
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
-   
+
     public String getTT() {
-         Calendar cal = Calendar.getInstance();
-         Date date = cal.getTime();
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            Date now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(new Date(date.getTime()))+" 00:00:00 AM");
-        if(ngayKT.compareTo(now) < 0){
-            System.out.println("ngaykt");
-            return "Hết Hạn";
-//        }else if (ngayBD.compareTo(now) > 0 ){
-//            return "Chưa Hoạt Động";
-        }else{
-            System.out.println("ngaybđ");
-            return "Còn Hạn";
-        }
-        }catch (ParseException ex) {
+            Date now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse(new SimpleDateFormat("dd/MM/yyyy").format(new Date(date.getTime())) + " 00:00:00 AM");
+//            Date bd = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(+" 00:00:00 AM");
+
+            int day = cal.get(Calendar.DATE);
+            int month = cal.get(Calendar.MONTH) + 1; // vì tháng trong Calendar tính từ 0 đến 11 nên phải cộng thêm 1
+            int year = cal.get(Calendar.YEAR);
+            String dateString = formatter.format(cal.getTime());
+
+            //ngày bắt đầu 
+            Date dateBD = ngayBD;
+            String bd = formatter.format(dateBD);
+
+            //ngyaf kết thúc
+            Date dateKT = ngayKT;
+            String kt = formatter.format(dateKT);
+
+            if (ngayKT.compareTo(now) < 0) {
+                System.out.println("ngaykt");
+                return "Hết Hạn";
+            } else if (dateString.equalsIgnoreCase(bd)) {
+
+                return "Còn Hạn";
+            } else {
+                return "Chưa Hoạt Động";
+            }
+        } catch (ParseException ex) {
             Logger.getLogger(KhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
-    public Object[] toRow(){
-        return new Object[]{id,ma, tenKM,giaGiam,ngayBD,ngayKT,getTT(),moTa};
+
+    public Object[] toRow() {
+        return new Object[]{id, ma, tenKM, giaGiam, ngayBD, ngayKT, getTT(), moTa};
     }
-    
 
     public KhuyenMai(String tenKM, Date ngayKT) {
         this.tenKM = tenKM;
@@ -194,7 +201,7 @@ public class KhuyenMai implements Serializable{
 
     @Override
     public String toString() {
-        return tenKM ;
+        return tenKM;
     }
 //    public static void main(String[] args) {
 //        Date now;
@@ -214,8 +221,7 @@ public class KhuyenMai implements Serializable{
 //    public String to(){
 //        return getTT() == 0 ?"còn hạn" :"hết hạn";
 //    }
- 
+
 //    public static void main(String[] args) {
 //        System.out.println("ngay: " + );
-    
 }

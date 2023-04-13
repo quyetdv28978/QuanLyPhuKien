@@ -38,11 +38,16 @@ public class ChiTietKhuyenMaiResponsitories implements Iresponsitories<ChiTietKh
     }
 
     public List<Object> getALLJoin1(String dk) {
-        Query q = DBConnection.getsetFactory().openSession().createQuery("from ChiTietKhuyenMai ct where ct.km.trangThai = :d and ct.sp.ma='" + dk + "'");
+        Query q = DBConnection.getsetFactory().openSession().createQuery("from ChiTietKhuyenMai ct where ct.km.trangThai = :d and ct.sp.ma=:ma");
         q.setParameter("d", "Còn Hạn");
-//        DBConnection.selectQueRy("from ChiTietKhuyenMai ct where ct.km.trangThai = 'Còn Hạn' and ct.sp.ma=' " + dk + "'");
-        System.out.println(q.getResultList());
+        q.setParameter("ma", dk);
+        System.out.println("day la respon:" + q.getResultList().isEmpty());
+        System.out.println("ma san pham :  " + dk);
         return q.getResultList();
+    }
+    
+    public static void main(String[] args) {
+        new ChiTietKhuyenMaiResponsitories().getALLJoin1("98162");
     }
 
     public List<Object[]> getALLChiTietKM() {
@@ -61,7 +66,7 @@ public class ChiTietKhuyenMaiResponsitories implements Iresponsitories<ChiTietKh
     public List<ChiTietKhuyenMai> getAll3(String dk) {
         String sql = "from ChiTietKhuyenMai c " + dk;
 //        JOptionPane.showMessageDialog(this, sql);
-System.out.println(sql);
+        System.out.println(sql);
         if (DBConnection.selectQueRy("from ChiTietKhuyenMai c " + dk) != null) {
 
             return DBConnection.selectQueRy(sql);
@@ -124,7 +129,6 @@ System.out.println(sql);
         return pas;
     }
 
-    public static void main(String[] args) throws ParseException {
 //        System.out.println(new java.util.Date().getMinutes());
 //        new Date(0).va
 //Timer t = new Timer();
@@ -136,5 +140,4 @@ System.out.println(sql);
 //        System.out.println("date util: " + new java.util.Date().setTime());
 //        LocalTime 
 //        System.out.println(LocalDate.parse(new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())));
-    }
 }

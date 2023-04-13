@@ -162,6 +162,6 @@ public class ChiTietBH extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbHienSP;
+    public static javax.swing.JTable tbHienSP;
     // End of variables declaration//GEN-END:variables
 }

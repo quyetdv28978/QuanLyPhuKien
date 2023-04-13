@@ -4,6 +4,17 @@
  */
 package view;
 
+import domaimodel.Bieudo1;
+import java.io.File;
+import java.io.FileOutputStream;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+
 /**
  *
  * @author yugip
@@ -13,8 +24,20 @@ public class Excel extends javax.swing.JFrame {
     /**
      * Creates new form Excel
      */
+    Bieudo1 b;
+
     public Excel() {
         initComponents();
+        b = new Bieudo1();
+
+        DefaultTableModel dtm = (DefaultTableModel) tblNV.getModel();
+        dtm.setRowCount(0);
+
+        for (Object[] x : b.getA()) {
+            dtm.addRow(new Object[]{
+                x[0],
+                x[1],});
+        }
     }
 
     /**
@@ -27,12 +50,12 @@ public class Excel extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbldt = new javax.swing.JTable();
+        tblNV = new javax.swing.JTable();
         btnin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tbldt.setModel(new javax.swing.table.DefaultTableModel(
+        tblNV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -40,12 +63,17 @@ public class Excel extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Ngay", "Doanh thu"
+                "Thang", "Doanh thu"
             }
         ));
-        jScrollPane1.setViewportView(tbldt);
+        jScrollPane1.setViewportView(tblNV);
 
         btnin.setText("In");
+        btnin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btninActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,6 +101,48 @@ public class Excel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
+        try {
+
+            HSSFWorkbook hSSFWorkbook = new HSSFWorkbook();
+            HSSFSheet sheet = hSSFWorkbook.createSheet("quyet");
+            HSSFRow row = null;
+            Cell cell = null;
+            row = sheet.createRow(3);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("Thang");
+
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Doanh thu");
+
+//            cell = row.createCell(2, CellType.STRING);
+//            cell.setCellValue("Ten");
+// Lay du lieu dua vao excel           
+            for (int i = 0; i < tblNV.getRowCount(); i++) {
+                row = sheet.createRow(3 + i + 1);
+                for (int j = 0; j < tblNV.getColumnCount(); j++) {
+                    cell = row.createCell(j, CellType.STRING);
+                    cell.setCellValue(tblNV.getValueAt(i, j).toString());
+                }
+
+            }
+            File f = new File("Excel\\test.xls");
+
+            System.out.println(f.createNewFile());
+            try {
+                FileOutputStream fis = new FileOutputStream(f);
+                hSSFWorkbook.write(fis);
+                fis.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(this, "thanh cong");
+    }//GEN-LAST:event_btninActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,6 +182,6 @@ public class Excel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnin;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbldt;
+    private javax.swing.JTable tblNV;
     // End of variables declaration//GEN-END:variables
 }

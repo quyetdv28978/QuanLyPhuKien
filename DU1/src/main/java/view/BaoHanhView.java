@@ -802,9 +802,14 @@ public class BaoHanhView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        String a = txtTim.getText();
+         String a = txtTim.getText();
         List<domaimodel.HoaDon> list1 = resHoaDon.SelectbyMaHD(a);
-        loadTableHD(list1);
+        if (list1 != null) {
+            loadTableHD(list1);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy hoá đơn");
+            
+        }
 
     }//GEN-LAST:event_btnTimActionPerformed
 
