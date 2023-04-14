@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author suppe
  */
-public class NhanVienRespository implements IManageNhanVienRespository {
+public class NhanVienRespository implements IManageRespository {
 
     @Override
     public List<Object[]> getJoin(String dieuKien) {
@@ -61,6 +61,11 @@ public class NhanVienRespository implements IManageNhanVienRespository {
             return DBConnection.selectQueRy("from ChucVu");
         }
         return null;
+    }
+
+    @Override
+    public List<ChucVu> getListChucVuFromDb() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

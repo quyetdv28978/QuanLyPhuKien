@@ -14,7 +14,7 @@ import viewmodel.KhachHangViewModel;
  *
  * @author Admin
  */
-public class KhachHangServices implements IServices<KhachHangViewModel> {
+public class KhachHangServices implements Interface<KhachHangViewModel> {
 
     public final KhachHangResponsitories hangResponsitories = new KhachHangResponsitories();
 

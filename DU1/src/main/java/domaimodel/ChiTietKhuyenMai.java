@@ -5,7 +5,12 @@
 package domaimodel;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -41,10 +46,13 @@ public class ChiTietKhuyenMai implements Serializable{
     public ChiTietKhuyenMai(String id, String ma, SanPham sp, KhuyenMai km) {
         this.id = id;
         this.ma = ma;
-//        this.giaGiam = giaGiam;
-//        this.ngayTao = ngayTao;
         this.sp = sp;
         this.km = km;
+    }
+
+    public ChiTietKhuyenMai(SanPham sp) {
+        this.sp = sp;
+        
     }
     public ChiTietKhuyenMai( String id, String ma) {
         
@@ -52,13 +60,12 @@ public class ChiTietKhuyenMai implements Serializable{
         this.ma = ma;
     }
 
-    public ChiTietKhuyenMai( String ma, Date ngayTao, String trangThai, SanPham sp, KhuyenMai km) {
-        this.ma = ma;
-        this.trangThai = trangThai;
-        this.sp = sp;
-        this.km = km;
-    }
 
+    public ChiTietKhuyenMai( String ma, Date ngayTao, String trangThai, SanPham sp, KhuyenMai km) {
+        
+        this.ma = ma;
+        }
+//        this.ngayTao = ngayTao;
 
     public String getId() {
         return id;
@@ -100,14 +107,42 @@ public class ChiTietKhuyenMai implements Serializable{
         this.km = km;
     }
 
-    @Override
-    public String toString() {
-        return sp.getTenSanPham();
+//    @Override
+//    public String toString() {
+//        return sp.getTenSanPham();
+//    }
+    public String getTT1() {
+         Calendar cal = Calendar.getInstance();
+         Date date = cal.getTime();
+        try {
+            Date now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(new Date(date.getTime()))+" 00:00:00 AM");
+       
+        if(km.getNgayKT().compareTo(now) < 0){
+            System.out.println("ngaykt");
+            return "Hết Hạn";
+        }else if(km.getNgayBD().compareTo(now)< 0 && km.getNgayKT().compareTo(now) >=0){
+            return "Còn Hạn";
+        }
+        else{
+            System.out.println("ngaybđ");
+            return "Chưa Hoạt Động";
+        }
+        }catch (ParseException ex) {
+            Logger.getLogger(ChiTietKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }    
+    public Object[] toRow1(){
+        return new Object[]{id,km.getTenKM(), sp.getTenSanPham(),km.getNgayBD(),km.getNgayKT(),km.getGiaGiam(),getTT1()};
     }
+       
+//    public Object[] toRowSP(){
+//        return new Object[]{sp.getId(),sp.getMa(),sp.getTenSanPham(),sp.getGiaBan(),trangThai};
+//    }
+
     
-     public Object[] toRow1(){
-        return new Object[]{id,km.getTenKM(), sp.getTenSanPham(),km.getNgayKT(),km.getGiaGiam(),moTa};
-    }
+        
+    
 
     
 }

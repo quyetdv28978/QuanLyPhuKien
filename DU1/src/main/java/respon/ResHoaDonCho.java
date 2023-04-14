@@ -4,6 +4,7 @@
  */
 package respon;
 
+import domaimodel.HoaDon;
 import utility.DBConnection;
 import java.util.List;
 
@@ -12,8 +13,8 @@ import java.util.List;
  * @author yugip
  */
 public class ResHoaDonCho {
-    public List<Object> getAll(String dk){
-        List list = DBConnection.selectQueRy("from HoaDon ct where ct.tinhTrang = 1 and " + dk);
+    public List<HoaDon> getAll(String dk, int tt){
+        List list = DBConnection.selectQueRy("from HoaDon ct where ct.tinhTrang = "+ tt +" and " + dk);
         
         if (list != null) {
             return list;
@@ -21,13 +22,7 @@ public class ResHoaDonCho {
         return null;
     }
     
-    public List<Object> getAllHDCHo(String dk){
-       return DBConnection.selectQueRy("from ChiTietGioHang c where c.gh.tinhtrang = 1 and  c.gh.nv.id = '" + dk + "'");
+    public List<Object> getAllHDCHo(String dk, int tt){
+       return DBConnection.selectQueRy("from ChiTietGioHang c where c.gh.tinhtrang =  "+ tt +" and  c.gh.nv.id = '" + dk + "'");
     }
-//    
-//    public static void main(String[] args) {
-//        ResHoaDonCho res = new ResHoaDonCho();
-//        ChiTietGioHang c= ((ChiTietGioHang) res.getAllHDCHo("").get(0));
-//        System.out.println(c);
-//    }
 }

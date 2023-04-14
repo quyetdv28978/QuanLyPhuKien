@@ -5,10 +5,19 @@
 package domaimodel;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 /**
@@ -25,6 +34,7 @@ public class KhuyenMai implements Serializable{
     private Date ngayBD, ngayKT,ngayTao;
     private String trangThai;
     private String moTa;
+
 
     public KhuyenMai() {
         
@@ -153,19 +163,29 @@ public class KhuyenMai implements Serializable{
         this.trangThai = trangThai;
     }
    
-    public String getTT(){
+    public String getTT() {
          Calendar cal = Calendar.getInstance();
          Date date = cal.getTime();
-        Date endDate1 = new Date(date.getTime() - (1 *24 * 60 *60 * 1000));
-        if(ngayKT.before(endDate1)){
+        try {
+            Date now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(new Date(date.getTime()))+" 00:00:00 AM");
+        if(ngayKT.compareTo(now) < 0){
+            System.out.println("ngaykt");
             return "Hết Hạn";
+        }else if (ngayBD.compareTo(now) > 0 ){
+            return "Chưa Hoạt Động";
         }else{
+            System.out.println("ngaybđ");
             return "Còn Hạn";
         }
+        }catch (ParseException ex) {
+            Logger.getLogger(KhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
     }
     public Object[] toRow(){
         return new Object[]{id,ma, tenKM,giaGiam,ngayBD,ngayKT,getTT(),moTa};
     }
+    
 
     public KhuyenMai(String tenKM, Date ngayKT) {
         this.tenKM = tenKM;
@@ -176,8 +196,26 @@ public class KhuyenMai implements Serializable{
     public String toString() {
         return tenKM ;
     }
+//    public static void main(String[] args) {
+//        Date now;
+//        try {
+//            now = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a").parse( new SimpleDateFormat("dd/MM/yyyy").format(new Date())+" 00:00:00 AM");
+//            System.out.println("now " + now);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(KhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//            
+//    }
+//    public static void main(String[] args) {
+////        System.out.println(new Date().before(new SimpleDateFormat("MM/dd/yyyy").parse("4/30/2023")));
+////new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a").parse("2023/03/27 00:00:00 AM")
+//        
+//    }
 //    public String to(){
 //        return getTT() == 0 ?"còn hạn" :"hết hạn";
 //    }
+ 
+//    public static void main(String[] args) {
+//        System.out.println("ngay: " + );
     
 }

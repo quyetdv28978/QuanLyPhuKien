@@ -5,7 +5,6 @@
 package respon;
 
 import domaimodel.ChiTietHoaDon;
-import respon.IfResponsitoties;
 import domaimodel.HoaDon;
 import domaimodel.KhachHang;
 import utility.DBConnection;
@@ -24,7 +23,10 @@ public class ResHoaDon implements IfResponsitoties<HoaDon>{
 
     @Override
     public List<HoaDon> getAll(String dk) {
-        return DBConnection.selectQueRy("from HoaDon d " + dk);
+        if ( DBConnection.selectQueRy("from HoaDon d " + dk) != null) {
+            return DBConnection.selectQueRy("from HoaDon d " + dk);
+        }
+        return null;
     }
     
      public List<ChiTietHoaDon> getAllChiTietHoaDon(String dk) {
@@ -38,7 +40,7 @@ public class ResHoaDon implements IfResponsitoties<HoaDon>{
 
     @Override
     public int update(HoaDon q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return DBConnection.executeQuery(q, "update");
     }
 
     @Override
@@ -60,4 +62,5 @@ public class ResHoaDon implements IfResponsitoties<HoaDon>{
     public List<KhachHang> getALl(){
         return DBConnection.selectQueRy("from KhachHang");
     }
+    
 }

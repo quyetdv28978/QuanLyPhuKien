@@ -14,7 +14,7 @@ public class NhanVienViewModel {
 
     private String idNhanVien;
     private String maNhanVien;
-    private String taiKhoan;
+    private String tenTaiKhoan;
     private String tenNhanVien;
     private String cmnd;
     private String gioiTinh;
@@ -30,16 +30,10 @@ public class NhanVienViewModel {
     public NhanVienViewModel() {
     }
 
-    public NhanVienViewModel(String tenNhanVien) {
-        this.tenNhanVien = tenNhanVien;
-    }
-
-    
-    
     public NhanVienViewModel(String idNhanVien, String maNhanVien, String taiKhoan, String tenNhanVien, String cmnd, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String email, String anh, Date ngayTao, ChucVuViewModel chucVuViewModel, int trangThai) {
         this.idNhanVien = idNhanVien;
         this.maNhanVien = maNhanVien;
-        this.taiKhoan = taiKhoan;
+        this.tenTaiKhoan = tenTaiKhoan;
         this.tenNhanVien = tenNhanVien;
         this.cmnd = cmnd;
         this.gioiTinh = gioiTinh;
@@ -69,12 +63,12 @@ public class NhanVienViewModel {
         this.maNhanVien = maNhanVien;
     }
 
-    public String getTaiKhoan() {
-        return taiKhoan;
+    public String getTenTaiKhoan() {
+        return tenTaiKhoan;
     }
 
-    public void setTaiKhoan(String taiKhoan) {
-        this.taiKhoan = taiKhoan;
+    public void setTenTaiKhoan(String taiKhoan) {
+        this.tenTaiKhoan = taiKhoan;
     }
 
     public String getTenNhanVien() {

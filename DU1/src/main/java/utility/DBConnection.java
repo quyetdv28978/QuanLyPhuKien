@@ -5,21 +5,34 @@
  */
 package utility;
 
-import domaimodel.ChatLieu;
+//import domaimodel.ChatLieu;
+
+//import domaimodel.DanhMuc;
+import domaimodel.BaoHanh;
+import domaimodel.KhachHang;
+import domaimodel.KhuyenMai;
+import domaimodel.SanPham;
+
+
 import domaimodel.ChiTietKhuyenMai;
 import domaimodel.DanhMuc;
 import domaimodel.KhachHang;
 import domaimodel.KhuyenMai;
 import domaimodel.SanPham;
+
 import java.util.List;
+
 import domaimodel.ChucVu;
 import domaimodel.NhanVien;
-import domaimodel.ChatLieu;
 import domaimodel.ChiTietGioHang;
 import domaimodel.ChiTietHoaDon;
+//import domaimodel.ChiTietGioHang;
+//import domaimodel.ChiTietHoaDon;
 import domaimodel.DanhMuc;
 import domaimodel.GioHang;
 import domaimodel.HoaDon;
+//import domaimodel.GioHang;
+//import domaimodel.HoaDon;
 import domaimodel.SanPham;
 
 import java.util.List;
@@ -30,7 +43,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
-import view.BanHang;
 
 public class DBConnection {
 
@@ -41,13 +53,13 @@ public class DBConnection {
         Properties pro = new Properties();
         pro.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
         pro.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1;trustServerCertificate=true");
+//        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM;trustServerCertificate=true");
+        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1_1;trustServerCertificate=true");
         pro.put(Environment.USER, "sa");
         pro.put(Environment.PASS, "1");
         pro.put(Environment.SHOW_SQL, true);
         confi.setProperties(pro);
 
-        confi.addAnnotatedClass(ChatLieu.class);
         confi.addAnnotatedClass(ChucVu.class);
         confi.addAnnotatedClass(DanhMuc.class);
         confi.addAnnotatedClass(NhanVien.class);
@@ -56,11 +68,14 @@ public class DBConnection {
         confi.addAnnotatedClass(ChiTietGioHang.class);
         confi.addAnnotatedClass(GioHang.class);
         confi.addAnnotatedClass(HoaDon.class);
+        confi.addAnnotatedClass(KhuyenMai.class);
+        confi.addAnnotatedClass(KhachHang.class);
         confi.addAnnotatedClass(ChiTietKhuyenMai.class);
-        confi.addAnnotatedClass(HoaDon.class);
+
+        confi.addAnnotatedClass(BaoHanh.class);
+
         confi.addAnnotatedClass(KhachHang.class);
         confi.addAnnotatedClass(KhuyenMai.class);
-        confi.addAnnotatedClass(BanHang.class);
 
         ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
         FACTORY = confi.buildSessionFactory(ser);
@@ -77,7 +92,6 @@ public class DBConnection {
         try {
 
             ss = getsetFactory().openSession();
-
             listOB = ss.createQuery(sql).getResultList();
         } catch (Exception e) {
             e.printStackTrace();

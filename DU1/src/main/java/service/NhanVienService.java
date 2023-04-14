@@ -63,7 +63,7 @@ public class NhanVienService implements IManageService {
         return new NhanVien(
                 nhanVienViewModel.getIdNhanVien(),
                 nhanVienViewModel.getMaNhanVien(),
-                nhanVienViewModel.getTaiKhoan(),
+                nhanVienViewModel.getTenTaiKhoan(),
                 nhanVienViewModel.getTenNhanVien(),
                 nhanVienViewModel.getCmnd(),
                 nhanVienViewModel.getGioiTinh(),

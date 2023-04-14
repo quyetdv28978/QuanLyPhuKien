@@ -87,11 +87,14 @@ public class KhuyenMaiResponsitories implements Iresponsitories<KhuyenMai>{
         }
         return pas;
   }
+
       public List<KhuyenMai> SelectbyTrangThai(String trangThai) {
       List<KhuyenMai> pas;
         String nameSelect = "%" + trangThai + "%";
         try ( Session session = DBConnection.getsetFactory().openSession()) {
-            TypedQuery<KhuyenMai> query = session.createQuery("From KhuyenMai  WHERE trangThai like :key");
+
+            TypedQuery<KhuyenMai> query = session.createQuery("From KhuyenMai  WHERE trangThai like :key ");
+
             query.setParameter("key", nameSelect);
             System.out.println(query);
             pas = query.getResultList();

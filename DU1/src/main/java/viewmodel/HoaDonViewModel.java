@@ -45,6 +45,8 @@ public class HoaDonViewModel {
         this.nv = nv;
     }
 
+    
+    
     public HoaDonViewModel(Date ngayTT) {
         this.ngayTT = ngayTT;
     }

@@ -12,7 +12,7 @@ import utility.DBConnection;
  *
  * @author HP
  */
-public class Dangnhapres implements idangnhap{
+public class Dangnhapres implements idangnhap1{
 
     @Override
     public List<NhanVien> gettk() {

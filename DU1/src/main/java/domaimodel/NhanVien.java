@@ -84,12 +84,6 @@ public class NhanVien implements Serializable {
         this.trangThai = trangThai;
     }
 
-    public NhanVien(String taiKhoan, String matKhau) {
-        this.taiKhoan = taiKhoan;
-        this.matKhau = matKhau;
-    }
-    
-
     public String getIdNhanVien() {
         return idNhanVien;
     }

@@ -41,7 +41,6 @@ public class KhachHangViewModel {
     public void setId(String id) {
         this.id = id;
     }
-
     public String getMa() {
         return ma;
     }

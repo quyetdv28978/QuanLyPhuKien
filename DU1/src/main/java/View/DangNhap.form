@@ -23,10 +23,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,25 +46,33 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="239" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                           <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
-                          <Component id="btndangnhap" min="-2" pref="138" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                          <Component id="btnthoat" min="-2" pref="129" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnqmk" min="-2" pref="126" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="55" max="32767" attributes="0"/>
+                  <EmptySpace pref="61" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="239" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btndangnhap" min="-2" pref="138" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+                          <Component id="btnthoat" min="-2" pref="129" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -76,12 +83,14 @@
                   <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnqmk" min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btndangnhap" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="btnthoat" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="btndangnhap" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace pref="43" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -130,13 +139,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txttk" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="txttk" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                           <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="42" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtp" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="txtp" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
@@ -183,12 +192,26 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtpActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="btnqmk">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="13" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Qu&#xea;n M&#xe2;&#x323;t Kh&#xe2;&#x309;u"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnqmkActionPerformed"/>
+          </Events>
+        </Component>
         <Component class="javax.swing.JButton" name="btndangnhap">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

@@ -5,11 +5,8 @@
 package viewmodel;
 
 import domaimodel.Embeddedct;
-import domaimodel.Embeddedct;
 import domaimodel.SanPham;
 import java.util.Date;
-import viewmodel.SanPhamViewModel;
-
 
 /**
  *
@@ -26,10 +23,9 @@ public class ChiTietKhuyenMaiViewModel {
     public ChiTietKhuyenMaiViewModel() {
     }
 
-    public ChiTietKhuyenMaiViewModel(String id, String ma, float giaGiam, SanPhamViewModel spvm, KhuyenMaiViewModel kmvm) {
+    public ChiTietKhuyenMaiViewModel(String id, String ma, SanPhamViewModel spvm, KhuyenMaiViewModel kmvm) {
         this.id = id;
         this.ma = ma;
-        this.giaGiam = giaGiam;
         this.spvm = spvm;
         this.kmvm = kmvm;
     }

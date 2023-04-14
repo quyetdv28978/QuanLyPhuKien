@@ -51,7 +51,7 @@ public class serDanhMuc implements Interface<DanhMucViewModel>{
 
     @Override
     public int delete(String t) {
-        return this.delete(t);
+        return this.danhMuc.delete(t);
     }
 
     @Override
