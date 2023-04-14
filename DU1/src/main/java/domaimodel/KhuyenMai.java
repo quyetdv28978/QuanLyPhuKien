@@ -196,10 +196,6 @@ int day = cal.get(Calendar.DATE);
             System.out.println("ngaykt");
             return "Hết Hạn";
         }else if(dateString.equalsIgnoreCase(bd)){
-//        }else if (ngayBD.compareTo(now) > 0 && ngayKT.compareTo(now)<0){
-//            System.out.println("ngay chua");
-//            System.out.println("nh3" + ngayBD.toString());
-//            System.out.println("nh2" + ngayKT.toString());
             return "Còn Hạn";
         }else{
             System.out.println("hhh" + ngayBD.getTime());

@@ -4,9 +4,7 @@
  */
 package respon;
 
-
 import domaimodel.BaoHanh;
-import domaimodel.ChiTietHoaDon;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.hibernate.Session;
@@ -22,40 +20,30 @@ public class BaoHanhRes implements Iresponsitories<BaoHanh> {
     public List<Object[]> getALLJoin(String dk) {
         return DBConnection.selectQueRyJoin("from BaoHanh");
     }
-//
-//    public List<Object[]> getALLChiTietBH() {
-//        return DBConnection.selectQueRyJoin("from BaoHanh ctbh join ctbh.bh");
-//    }
+
+    public List<Object[]> getALLChiTietBH() {
+        return DBConnection.selectQueRyJoin("from BaoHanh bh join bh.sp join bh.kh");
+    }
 
     @Override
     public List<BaoHanh> getAll(String dk) {
-        if (DBConnection.selectQueRy("from BaoHanh") != null) {
-            return DBConnection.selectQueRy("from BaoHanh");
-        }
-        return null;
+        return DBConnection.selectQueRy("from BaoHanh");
     }
-    
+
     @Override
     public int add(BaoHanh q) {
-//        System.out.println("so" + q.getSoLanBH());
         return DBConnection.executeQuery(q, null);
     }
 
     @Override
     public int update(BaoHanh q) {
-        System.out.println("hhh" + q);
-        System.out.println("id vtbh" + q.getId());
-        
-        if (DBConnection.executeQuery(q, "update") != 0) {
-            return DBConnection.executeQuery(q, "");
-        }
-        return 0;
 
+        return DBConnection.executeQuery(q, "update");
     }
 
     @Override
     public int delete(String q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return DBConnection.delete(q, BaoHanh.class);
     }
 
     @Override
@@ -75,8 +63,52 @@ public class BaoHanhRes implements Iresponsitories<BaoHanh> {
         return null;
     }
 
-    public int themCTBH(String dk) {
-        return DBConnection.selectQueRy("from BaoHanh k where k.bh.id = '" + dk + "'").size() + 1;
+//    public List<Object> getAllBH() {
+//        return DBConnection.selectQueRy("from BaoHanh");
+//    }
+    public List<BaoHanh> SelectbyMaBH(String tenKM) {
+        List<BaoHanh> pas;
+        String nameSelect = "%" + tenKM + "%";
+        try (Session session = DBConnection.getsetFactory().openSession()) {
+            TypedQuery<BaoHanh> query = session.createQuery("FROM BaoHanh bh \n"
+                    //                    + "JOIN bh.sp sp \n"
+                    //                    + "JOIN bh.kh kh \n"
+                    + "WHERE bh.kh.sdt LIKE :key OR bh.ma LIKE :key");
+            query.setParameter("key", nameSelect);
+            System.out.println(query);
+            pas = query.getResultList();
+            session.close();
+
+        }
+        return pas;
+    }
+     public List<BaoHanh> SelectbyBH(String maBH) {
+        List<BaoHanh> pas;
+        String nameSelect = "%" + maBH + "%";
+        try (Session session = DBConnection.getsetFactory().openSession()) {
+            TypedQuery<BaoHanh> query = session.createQuery("FROM BaoHanh bh \n"
+                    //                    + "JOIN bh.sp sp \n"
+                    //                    + "JOIN bh.kh kh \n"
+                    + "WHERE bh.cthd.hd.ma LIKE :key");
+            query.setParameter("key", nameSelect);
+            System.out.println(query);
+            pas = query.getResultList();
+            session.close();
+
+        }
+        return pas;
+    }
+
+    public List<BaoHanh> getAllBHChange(String dk, String maSP) {
+        return DBConnection.selectQueRy("from BaoHanh b where b.cthd.hd.id = '" + dk + "'" + " and b.cthd.sp.ma = '" + maSP + "'");
+    }
+
+    public List<BaoHanh> getAllBHChange1(String dk) {
+        return DBConnection.selectQueRy("from BaoHanh b where b.cthd.hd.id = '" + dk + "'");
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new BaoHanhRes().getAllBHChange1("CE5A815E-26F0-4E3F-96A2-201C8CB41C0F").size());
     }
 
 }

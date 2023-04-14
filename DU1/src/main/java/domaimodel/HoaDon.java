@@ -26,7 +26,7 @@ public class HoaDon implements Serializable {
     private String ma;
     private Date ngayTao, ngayTT;
     private int tinhTrang;
-    
+    private double tongTien;
 
     private String hinhthucthanhtoan, lyDo;
 
@@ -63,6 +63,21 @@ public class HoaDon implements Serializable {
         this.nv = nv;
     }
 
+    public HoaDon(String id, String ma, Date ngayTao, Date ngayTT, int tinhTrang, double tongTien, String hinhthucthanhtoan, String lyDo, KhachHang kh, NhanVien nv) {
+        this.id = id;
+        this.ma = ma;
+        this.ngayTao = ngayTao;
+        this.ngayTT = ngayTT;
+        this.tinhTrang = tinhTrang;
+        this.tongTien = tongTien;
+        this.hinhthucthanhtoan = hinhthucthanhtoan;
+        this.lyDo = lyDo;
+        this.kh = kh;
+        this.nv = nv;
+    }
+    
+    
+
     public HoaDon(String id, String ma, Date ngayTao, int tinhTrang,
             KhachHang kh, NhanVien nv) {
         this.id = id;
@@ -77,6 +92,16 @@ public class HoaDon implements Serializable {
         return ngayTao;
     }
 
+    public double getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    
+    
     public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
@@ -152,14 +177,18 @@ public class HoaDon implements Serializable {
     public void setMa(String ma) {
         this.ma = ma;
     }
-    
 
     @Override
     public String toString() {
         return "HoaDon{" + "id=" + id + ", ngayTao=" + ngayTao + ", ngayTT=" + ngayTT + ", tinhTrang=" + tinhTrang + ", hinhthucthanhtoan=" + hinhthucthanhtoan + ", kh=" + kh + ", nv=" + nv + '}';
     }
-    public Object[] toRowhd(){
-        return new Object[] {id,ma,kh.getTen(), kh.getSdt(),ngayTT,tinhTrang == 0 ? "Đã Thanh Toán" : "Chưa Thanh Toán"};
+
+    public Object[] toRowhd() {
+        return new Object[]{id, ma, kh.getTen(), kh.getSdt(), ngayTT, tinhTrang == 0 ? "Đã Thanh Toán" : "Chưa Thanh Toán"};
+    }
+
+    public Object[] toRowhd1() {
+        return new Object[]{id, ma, kh.getTen(), ngayTT, tinhTrang == 0 ? "Đã Thanh Toán" : "Chưa Thanh Toán"};
     }
 
 }

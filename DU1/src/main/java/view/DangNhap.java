@@ -101,7 +101,7 @@ public class DangNhap extends javax.swing.JFrame {
         jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txttk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txttk.setText("nv12345");
+        txttk.setText("nv1");
         txttk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txttk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,11 +116,6 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel18.setText("Mật Khẩu ");
 
         txtp.setText("123");
-        txtp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtpActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -251,10 +246,6 @@ public class DangNhap extends javax.swing.JFrame {
     private void btndangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndangnhapActionPerformed
         check();
     }//GEN-LAST:event_btndangnhapActionPerformed
-
-    private void txtpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtpActionPerformed
 
     /**
      * @param args the command line arguments

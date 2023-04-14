@@ -1,9 +1,22 @@
 package view;
 
+import domaimodel.NhanVien;
 import java.awt.Image;
+import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import respon.resquenmk;
+
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class QuenMatKhau extends javax.swing.JFrame {
 
@@ -35,14 +48,15 @@ public class QuenMatKhau extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txttk = new javax.swing.JTextField();
+        txtmkm = new javax.swing.JTextField();
+        txtnhaplai = new javax.swing.JTextField();
         btmdmk = new javax.swing.JButton();
         btnhuy = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         lblLogo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -54,20 +68,23 @@ public class QuenMatKhau extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        txttk.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        txtmkm.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jTextField3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        txtnhaplai.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         btmdmk.setBackground(new java.awt.Color(51, 204, 255));
         btmdmk.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btmdmk.setForeground(new java.awt.Color(0, 0, 0));
         btmdmk.setText("Đổi Mật Khẩu");
+        btmdmk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btmdmkActionPerformed(evt);
+            }
+        });
 
         btnhuy.setBackground(new java.awt.Color(51, 204, 255));
         btnhuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnhuy.setForeground(new java.awt.Color(0, 0, 0));
         btnhuy.setText("Hủy");
         btnhuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,16 +93,20 @@ public class QuenMatKhau extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Tài Khoản :");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Mật Khẩu Mới:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Nhập Lại Mât Khẩu :");
+
+        jButton1.setText("Gửi mail");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -106,28 +127,30 @@ public class QuenMatKhau extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
-                                .addComponent(jTextField3)))
-                        .addGap(121, 121, 121))))
+                            .addComponent(txttk, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                            .addComponent(txtmkm, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                            .addComponent(txtnhaplai, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton1)
+                        .addGap(17, 17, 17))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(81, 81, 81)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txttk, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(51, 51, 51)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtmkm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(47, 47, 47)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                    .addComponent(txtnhaplai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btmdmk, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -135,11 +158,9 @@ public class QuenMatKhau extends javax.swing.JFrame {
         );
 
         lblLogo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblLogo.setForeground(new java.awt.Color(0, 0, 0));
         lblLogo.setText(" ");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Quên Mật Khẩu");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -186,6 +207,64 @@ public class QuenMatKhau extends javax.swing.JFrame {
         this.setVisible(false);
         new DangNhap().setVisible(true);
     }//GEN-LAST:event_btnhuyActionPerformed
+    resquenmk qmk = new resquenmk();
+    private void btmdmkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmdmkActionPerformed
+        if (txtmkm.getText().trim().length() == 0 || txttk.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Phải điền vào các trường còn trống");
+            return;
+        }
+        if (txtmkm.getText().trim().equals(txtnhaplai.getText().trim()) && txttk.getText().trim().equals(qmk.gettk().get(0).getTenTaiKhoan())) {
+            qmk.getall(qmk.getnv(txttk.getText()).get(0), "sssss");
+            NhanVien nv = qmk.getnv(txttk.getText()).get(0);
+            nv.setMatKhau(txtmkm.getText());
+            qmk.getall(nv, "sssss");
+            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc mật khẩu không khớp vui lòng nhập lại");
+            return;
+        }
+
+
+    }//GEN-LAST:event_btmdmkActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        final String username = "quyetdv28978@gmail.com";
+        final String password = "ocarmaktsezosivm";
+
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+//dang nhap gmail
+        Session session = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("quyetdv28978@gmail.com"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse("thanhhhph28937@fpt.edu.vn")
+            );
+            message.setSubject("10 - 0.1");
+            message.setText("9.9");
+
+            Transport.send(message);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -237,15 +316,16 @@ public class QuenMatKhau extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btmdmk;
     private javax.swing.JButton btnhuy;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JTextField txtmkm;
+    private javax.swing.JTextField txtnhaplai;
+    private javax.swing.JTextField txttk;
     // End of variables declaration//GEN-END:variables
 }

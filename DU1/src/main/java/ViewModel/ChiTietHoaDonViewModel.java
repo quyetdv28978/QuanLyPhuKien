@@ -108,13 +108,5 @@ public class ChiTietHoaDonViewModel {
     public Object[] torow() {
         return new Object[]{hd.getId(), (donGia * soluong) - giagiam};
     }
-     public Object[] torowHD() {
-        return new Object[]{SPHD,sp.getMa(),sp.getTenSanPham(),soluong
-            
-        };
-    }
-     public Object[] toRowhd(){
-        return new Object[] {hd.getId(),hd.getMa(),hd.getKh().getTen(), hd.getKh().getSdt(),hd.getNgayTT(),trangThai};
-    }
 
 }

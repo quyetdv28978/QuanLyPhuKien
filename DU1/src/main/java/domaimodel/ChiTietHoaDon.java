@@ -4,14 +4,16 @@
  */
 package domaimodel;
 
-import com.itextpdf.text.pdf.PdfName;
 import domaimodel.SanPham;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -41,11 +43,14 @@ public class ChiTietHoaDon implements Serializable {
     private int trangThai;
 
     @Transient
-    private String maSP, tenSP;
+    private String maSP, tenSP, MS, NSX;
     @Transient
     private int Sluong, SOHD;
     @Transient
     private double TONGTIEN, SKH;
+
+//    @OneToMany(mappedBy = "hd", fetch = FetchType.LAZY)
+//    private List<BaoHanh> baohanhList;
 
     public String getMaSP() {
         return maSP;
@@ -70,6 +75,24 @@ public class ChiTietHoaDon implements Serializable {
     public void setSluong(int Sluong) {
         this.Sluong = Sluong;
     }
+
+    public String getMS() {
+        return MS;
+    }
+
+    public void setMS(String MS) {
+        this.MS = MS;
+    }
+
+    public String getNSX() {
+        return NSX;
+    }
+
+    public void setNSX(String NSX) {
+        this.NSX = NSX;
+    }
+    
+    
 
     public int getSOHD() {
         return SOHD;
@@ -128,6 +151,17 @@ public class ChiTietHoaDon implements Serializable {
         this.trangThai = trangThai;
         this.giagiam = giagiam;
     }
+
+    public ChiTietHoaDon(HoaDon hd, SanPham sp, int soluong, float donGia, float giagiam, Date ngayTao, int trangThai) {
+        this.hd = hd;
+        this.sp = sp;
+        this.soluong = soluong;
+        this.donGia = donGia;
+        this.giagiam = giagiam;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+    }
+    
 
     public Date getNgayTao() {
         return ngayTao;
@@ -208,11 +242,10 @@ public class ChiTietHoaDon implements Serializable {
             SPHD, (donGia * soluong) - giagiam
         };
     }
-    public Object[] toRowhd(){
-        return new Object[] {hd.getId(),hd.getMa(),hd.getKh().getTen(), hd.getKh().getSdt(),hd.getNgayTT(),0};
+     public Object[] toRowhd1() {
+        return new Object[]{ sp.getMa(), sp.getTenSanPham(), soluong};
     }
-    public Object[] toRowhd1(){
-        return new Object[] {SPHD,sp.getMa(),sp.getTenSanPham(), soluong};
+      public Object[] toRowhdHoDon() {
+        return new Object[]{ hd.getId(),hd.getMa(), hd.getKh().getTen(),hd.getNgayTT(), donGia,trangThai == 0 ? "Đã Thanh Toán" : "Chưa Thanh Toán"};
     }
-   
 }

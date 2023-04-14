@@ -130,6 +130,19 @@ public class BaoHanhView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Không tìm thấy mã hoá đơn : "+ txtTim.getText());
         }
     }
+    public void loadTableBH(List<BaoHanh> list) {
+        dtm = (DefaultTableModel) tbhHienThiCTBH.getModel();
+        dtm.setRowCount(0);
+        List<BaoHanh> danhSachHoaDon = baoHanhRes.SelectbyBH(txtTimBH.getText());
+        if (danhSachHoaDon != null && !danhSachHoaDon.isEmpty()) {
+            for (BaoHanh hoaDon : danhSachHoaDon) {
+                // Xử lý thông tin hoá đơn ở đây
+                dtm.addRow(hoaDon.toRowCTBH());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy mã hoá đơn : "+ txtTimBH.getText());
+        }
+    }
 
     public void loadTableCTBH() {
         if (baoHanhRes.getAll("") != null) {
@@ -301,6 +314,8 @@ public class BaoHanhView extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbhHienThiCTBH = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        txtTimBH = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tenNV = new javax.swing.JLabel();
@@ -580,21 +595,40 @@ public class BaoHanhView extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tbhHienThiCTBH);
 
+        jLabel10.setText("Tìm Kiếm :");
+
+        txtTimBH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimBHKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTimBH, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtTimBH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 153));
@@ -794,7 +828,7 @@ public class BaoHanhView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_Chay)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -818,7 +852,8 @@ public class BaoHanhView extends javax.swing.JFrame {
         String a = txtTim.getText();
         List<domaimodel.HoaDon> list1 = resHoaDon.SelectbyMaHD(a);
         loadTableHD(list1);
-        System.out.println("list" + list1.get(0).getMa());
+        txtTim.setText("");
+//        System.out.println("list" + list1.get(0).getMa());
 
     }//GEN-LAST:event_btnTimActionPerformed
 
@@ -847,6 +882,7 @@ public class BaoHanhView extends javax.swing.JFrame {
                 new ChiTietBH(lisst).setVisible(true);
                 
             }
+           
 
 ////                JOptionPane.showConfirmDialog(this, c.getSoLanBH());
 //
@@ -919,7 +955,7 @@ public class BaoHanhView extends javax.swing.JFrame {
 
     private void btmthongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmthongkeActionPerformed
         this.dispose();
-        new ThongKe().setVisible(true);// TODO add your handling code here:
+        new ThongKeView().setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_btmthongkeActionPerformed
 
     private void btnlichsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlichsuActionPerformed
@@ -931,6 +967,13 @@ public class BaoHanhView extends javax.swing.JFrame {
         new DangNhap().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btndxActionPerformed
+
+    private void txtTimBHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimBHKeyReleased
+         String a = txtTimBH.getText();
+        List<domaimodel.BaoHanh> list1 = baoHanhRes.SelectbyBH(a);
+        loadTableBH(list);
+//        System.out.println("list" + list1.get(0).getMa());
+    }//GEN-LAST:event_txtTimBHKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1002,6 +1045,7 @@ public class BaoHanhView extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dateNgayBH;
     private com.toedter.calendar.JDateChooser dateNgayTra;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
@@ -1029,11 +1073,12 @@ public class BaoHanhView extends javax.swing.JFrame {
     private javax.swing.JLabel lbTenKH;
     private javax.swing.JLabel lbTenSP;
     private javax.swing.JLabel lbl_Chay;
-    private javax.swing.JTable tbHienThi;
+    public static javax.swing.JTable tbHienThi;
     public static javax.swing.JTable tbhHienThiCTBH;
     private javax.swing.JLabel tenNV;
     private javax.swing.JTextArea txtAMoTa;
     private javax.swing.JTextField txtSL;
     private javax.swing.JTextField txtTim;
+    private javax.swing.JTextField txtTimBH;
     // End of variables declaration//GEN-END:variables
 }

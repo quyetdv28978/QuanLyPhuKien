@@ -156,6 +156,13 @@ public class SanPham implements Serializable {
         this.giaBan = giaBan;
     }
 
+    public SanPham(String ma, String tenSanPham, Integer soLuong, Float giaBan) {
+        this.ma = ma;
+        this.tenSanPham = tenSanPham;
+        this.soLuong = soLuong;
+        this.giaBan = giaBan;
+    }
+
     public String getId() {
         return id;
     }
@@ -294,6 +301,14 @@ public class SanPham implements Serializable {
 
     public Object[] toRowi() {
         return new Object[]{id, ma, tenSanPham, giaBan, getTT()};
+    }
+     public Object[] toRow1() {
+        return new Object[]{ ma, tenSanPham, soLuong, giaBan};
+    } public Object[] toRowgia() {
+        return new Object[]{ ma, tenSanPham, soLuong,dm.getDongSP(), giaBan};
+    }
+    public Object[] toRowSP() {
+        return new Object[]{ ma, tenSanPham, soLuong, giaBan};
     }
 
     @Override

@@ -1,12 +1,9 @@
 package respon;
 
-import domaimodel.ChiTietHoaDon;
 import viewmodel.ChiTietHoaDonViewModel;
 import domaimodel.HoaDon;
 import domaimodel.SanPham;
 import java.util.List;
-import javax.persistence.TypedQuery;
-import org.hibernate.Session;
 import utility.DBConnection;
 
 public class ChiTietHoaDonres implements Iresponsitories<ChiTietHoaDonViewModel> {
@@ -23,11 +20,10 @@ public class ChiTietHoaDonres implements Iresponsitories<ChiTietHoaDonViewModel>
     public List<ChiTietHoaDonViewModel> getAll(String dk) {
         return DBConnection.selectQueRy("from ChiTietHoaDon c" + dk);
     }
-     
 
     @Override
     public int add(ChiTietHoaDonViewModel q) {
-        return  DBConnection.executeQuery(q, null);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -74,7 +70,5 @@ public class ChiTietHoaDonres implements Iresponsitories<ChiTietHoaDonViewModel>
         }
         return null;
     }
-       
-
 
 }

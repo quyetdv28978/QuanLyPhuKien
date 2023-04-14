@@ -1,9 +1,11 @@
 package domaimodel;
 
-
 import domaimodel.HoaDon;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
@@ -15,31 +17,87 @@ import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.time.SimpleTimePeriod;
-
+import utility.DBConnection;
 
 public class Bieudo1 {
 
-//    private Hoadonres thongKeService = null;
+    public Bieudo1() {
+    }
+
 //
-//    public Taolop() {
-//        this.thongKeService = new Hoadonres();
-//    }
+    //    dataset.addValue(30000000, "Tổng tiền", "04/2022");
+//
+//     
+    public List<Object[]> getA() {
+        return DBConnection.getsetFactory().openSession().createQuery(
+                "select c.hd.ngayTT,  sum(c.donGia),c.hd.id from ChiTietHoaDon c  group by c.hd.ngayTT ,c.hd.id").getResultList();
+    }
+
+    public List<Object[]> get() {
+//        dung thang nay
+        List<Object[]> listThongKe = new ArrayList<>();
+
+//        o tren
+        List<Object[]> thognKe = getA();
+//        System.out.println(thognKe.size());
+        int kt = 0, count = 0;
+        double tongTien = 0;
+        for (int i = 0; i < thognKe.size(); i++) {
+            kt = 1;
+            Object[] a = new Object[thognKe.size()];
+            for (int j = i + 1; j < thognKe.size(); j++) {
+                if (new SimpleDateFormat("MM").format(((Date) thognKe.get(i)[0])).
+                        equals(new SimpleDateFormat("MM").format(((Date) thognKe.get(j)[0])))) {
+                    System.out.println("id hoa don: " + thognKe.get(j)[2]);
+                    if (kt != 0) {
+                        tongTien += ((double) thognKe.get(i)[1]) + ((double) thognKe.get(j)[1]);
+                    } else
+                        tongTien += ((double) thognKe.get(j)[1]);
+                    System.out.println("tien a: " + (double) thognKe.get(i)[1] + "   " + "tien b: " + (double) thognKe.get(j)[1]);
+//                          listThongKe.remove(a);
+                    System.out.println("tong tien: " + tongTien);
+                    System.out.println("siza: " + thognKe.size());
+
+//                     listThongKe.add();
+                    thognKe.remove(j);
+                    j--;
+//                     i--;
+                    kt = 0;
+//                     count ++;
+                }
+            }
+            if (kt != 0) {
+                a[count] = (((double) thognKe.get(i)[1]));
+                a[count + 1] = new SimpleDateFormat("MM").format(((Date) thognKe.get(i)[0]));
+                listThongKe.add(a);
+
+//                listThongKe.add(((double)thognKe.get(i)[1]));
+//                listThongKe.add(new SimpleDateFormat("MM").format(((Date)thognKe.get(i)[0])));
+            } else {
+//                thognKe.remove(i);
+//               i--;
+                a[count] = tongTien;
+                a[count + 1] = new SimpleDateFormat("MM").format(((Date) thognKe.get(i)[0]));
+                listThongKe.add(a);
+            }
+        }
+        return listThongKe;
+    }
 
     public void setDataToChart1(JPanel jpnItem) {
-//        List<HoaDon> listItem = thongKeService.getlistbyhoadon();
-
+        List<Object[]> listItem = get();
+//
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-//        if (listItem != null) {
-//            for (HoaDon item : listItem) {
-//                dataset.addValue(10, "", "20/02/2022");
-//            }
-//        }
- dataset.addValue(10000000, "Tổng tiền", "02/2022");
-  dataset.addValue(20000000, "Tổng tiền", "03/2022");
-    dataset.addValue(30000000, "Tổng tiền", "04/2022");
-
-     
-
+        if (listItem != null) {
+            for (Object[] x : listItem) {
+                dataset.addValue((Double) x[0], "Tổng tiền", x[1].toString());
+            }
+        }
+// dataset.addValue(10000000, "Tổng tiền", "02/2022");
+//  dataset.addValue(20000000, "Tổng tiền", "03/2022");
+//    dataset.addValue(30000000, "Tổng tiền", "04/2022");
+//
+//     
 
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Biểu đồ thống kê doanh thu theo tháng".toUpperCase(),
@@ -47,7 +105,7 @@ public class Bieudo1 {
                 dataset);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(jpnItem.getWidth(), 300));
+        chartPanel.setPreferredSize(new Dimension(400, 400));
 
         jpnItem.removeAll();
         jpnItem.setLayout(new CardLayout());
@@ -55,7 +113,5 @@ public class Bieudo1 {
         jpnItem.validate();
         jpnItem.repaint();
     }
-
-   
 
 }

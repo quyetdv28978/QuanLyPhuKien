@@ -40,10 +40,8 @@ public class embeddableCTHD implements Serializable{
 
     @Override
     public String toString() {
-        return idsp ;
+        return "embeddableCTHD{" + "idhd=" + idhd + ", idsp=" + idsp + '}';
     }
-
-   
     
     
 }

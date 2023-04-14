@@ -11,7 +11,7 @@
         <maven.compiler.target>18</maven.compiler.target>
         <exec.mainClass>com.nhom1.du1.DU1</exec.mainClass> 
         <!--duong dan cua quyet-->
-        <!--<myjar1.path>C:\Users\Admin\Downloads\DU1 (11)\DU1\lib</myjar1.path>-->
+        <myjar1.path>C:\Users\Admin\Downloads\DU1 (18)\DU1\lib</myjar1.path>
         <!--duong dan cua huong-->
         <!--<myjar1.path>D:\DuAn1\MainKaKe\DU1\lib</myjar1.path>-->
         <!--duong dan cua tung-->
@@ -25,18 +25,30 @@
     </properties>
     
     <dependencies>
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itextpdf</artifactId>
-            <version>5.5.13.3</version>
-        </dependency>
+        
         <!--         https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml 
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>4.1.2</version>
         </dependency>-->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
         
+        <!-- https://mvnrepository.com/artifact/com.sun.mail/smtp -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>smtp</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.3</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
         <dependency>
@@ -96,7 +108,7 @@
             <version>RELEASE126</version>
         </dependency>
 
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>bridj</groupId>
             <artifactId>bridj</artifactId>
             <version>1.0</version>
@@ -125,15 +137,15 @@
             <systemPath>${myjar1.path}\log4j-1.2.17.jar</systemPath> 
         </dependency>-->
         
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>slf</groupId>
             <artifactId>slf</artifactId>
             <version>1.0</version>
             <scope>system</scope>
             <systemPath>${myjar1.path}\slf4j-api-1.6.2.jar</systemPath> 
         </dependency>-->
-<!--        
-        <dependency>
+        
+        <!--        <dependency>
             <groupId>slf4</groupId>
             <artifactId>slf4</artifactId>
             <version>1.0</version>
@@ -147,8 +159,35 @@
             <artifactId>webcam-capture</artifactId>
             <version>0.3.12</version>
         </dependency>
-
-
     </dependencies>
 
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>view.application</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

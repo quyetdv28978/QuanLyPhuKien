@@ -5,7 +5,7 @@
 package service;
 
 import utility.DBConnection;
-import domainmodel.KhuyenMai;
+import domaimodel.KhuyenMai;
 import java.util.ArrayList;
 import java.util.List;
 import respon.KhuyenMaiResponsitories;
@@ -16,7 +16,7 @@ import viewmodel.KhuyenMaiViewModel;
  *
  * @author Admin
  */
-public class KhuyenMaiServices implements IServices<KhuyenMaiViewModel>{
+public class KhuyenMaiServices implements Interface<KhuyenMaiViewModel>{
 public final KhuyenMaiResponsitories km = new KhuyenMaiResponsitories();
    
     @Override

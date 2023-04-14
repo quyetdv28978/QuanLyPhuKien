@@ -36,11 +36,14 @@ public class ResHoaDon implements IfResponsitoties<HoaDon>{
      public List<ChiTietHoaDon> getAllChiTietHoaDon(String dk) {
         return DBConnection.selectQueRy("from ChiTietHoaDon d " + dk);
     }
+      public List<HoaDon> getAllHoaDon(String dk) {
+        return DBConnection.selectQueRy("from HoaDon where ngay " + dk);
+    }
   
 
     @Override
     public int add(HoaDon q) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return DBConnection.executeQuery(q, null);
     }
 
     @Override
@@ -72,6 +75,19 @@ public class ResHoaDon implements IfResponsitoties<HoaDon>{
         String nameSelect = "%" + maHD + "%";
         try (Session session = DBConnection.getsetFactory().openSession()) {
             TypedQuery<HoaDon> query = session.createQuery("from HoaDon where tinhTrang = 0 and ma like :key");
+            query.setParameter("key", nameSelect);
+            System.out.println(query);
+            pas = query.getResultList();
+            session.close();
+
+        }
+        return pas;
+    }
+      public List<HoaDon> SelectbyHD(String maHD) {
+        List<HoaDon> pas;
+        String nameSelect = "%" + maHD + "%";
+        try (Session session = DBConnection.getsetFactory().openSession()) {
+            TypedQuery<HoaDon> query = session.createQuery("from HoaDon where ma like :key");
             query.setParameter("key", nameSelect);
             System.out.println(query);
             pas = query.getResultList();

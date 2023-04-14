@@ -121,13 +121,6 @@ public class JframeCheck {
         }
         return true;
     }
-     public boolean checkClcick1(JTable jtable, JFrame jrame) {
-        if (jtable.getSelectedRow() == -1) {
-//            JOptionPane.showMessageDialog(jrame, "Vui lòng chọn một dòng trên bảng");
-            return false;
-        }
-        return true;
-    }
 
     public String randomMA() {
         return new Random().nextLong(100000) + "";

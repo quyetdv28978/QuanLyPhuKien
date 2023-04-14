@@ -4,7 +4,7 @@
  */
 package service;
 
-import domainmodel.KhachHang;
+import domaimodel.KhachHang;
 import java.util.ArrayList;
 import java.util.List;
 import respon.KhachHangResponsitories;
@@ -14,7 +14,7 @@ import viewmodel.KhachHangViewModel;
  *
  * @author Admin
  */
-public class KhachHangServices implements IServices<KhachHangViewModel> {
+public class KhachHangServices implements Interface<KhachHangViewModel> {
 
     public final KhachHangResponsitories hangResponsitories = new KhachHangResponsitories();
 

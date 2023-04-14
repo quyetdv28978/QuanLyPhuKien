@@ -134,12 +134,12 @@ public class ChiTietKhuyenMai implements Serializable{
             String kt = formatter.format(dateKT);
             
             
-        if(km.getNgayKT().compareTo(now) < 0){
+        if(km.getNgayKT().compareTo(new Date()) < 0){
+            System.out.println("date" + new Date());
             System.out.println("ngaykt");
             return "Hết Hạn";
         }else if(bd.equalsIgnoreCase(dateString)){
-//            System.out.println("ngayhhhhhh" + km.getNgayBD());
-//            System.out.println("ngayhhhhhh111" + km.getNgayKT());
+
             return "Còn Hạn";
         
         }else{

@@ -22,7 +22,7 @@ public class LichSu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         dangNhapNV(DangNhap.nv);
     }
-    
+
     private void dangNhapNV(NhanVien nv) {
         Image image = new ImageIcon(nv.getAnh()).getImage().getScaledInstance(anhNV.getWidth(), anhNV.getHeight(), 0);
         anhNV.setIcon(new ImageIcon(image));
@@ -191,7 +191,7 @@ public class LichSu extends javax.swing.JFrame {
 
         btnquenmatkhau.setBackground(new java.awt.Color(255, 255, 153));
         btnquenmatkhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnquenmatkhau.setText("Quên Mật Khẩu ");
+        btnquenmatkhau.setText("Bảo Hành");
         btnquenmatkhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnquenmatkhauActionPerformed(evt);
@@ -540,7 +540,7 @@ public class LichSu extends javax.swing.JFrame {
 
     private void btnthongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthongkeActionPerformed
         this.setVisible(false);
-        new ThongKe().setVisible(true);
+        new ThongKeView().setVisible(true);
     }//GEN-LAST:event_btnthongkeActionPerformed
 
     private void btnlichsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlichsuActionPerformed
@@ -555,7 +555,8 @@ public class LichSu extends javax.swing.JFrame {
     }//GEN-LAST:event_btndangxuatActionPerformed
 
     private void btnquenmatkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnquenmatkhauActionPerformed
-        //        this.setVisible(false);
+        new BaoHanhView().setVisible(true);
+        this.dispose();        //        this.setVisible(false);
         //        new QuenMatKhau().setVisible(true);
     }//GEN-LAST:event_btnquenmatkhauActionPerformed
 

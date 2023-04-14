@@ -51,8 +51,8 @@ public class ChiTietKhuyenMaiResponsitories implements Iresponsitories<ChiTietKh
 
     @Override
     public List<ChiTietKhuyenMai> getAll(String dk) {
-        if (DBConnection.selectQueRy("from ChiTietKhuyenMai") != null) {
-            return DBConnection.selectQueRy("from ChiTietKhuyenMai");
+        if (DBConnection.selectQueRy("from ChiTietKhuyenMai ctkm") != null) {
+            return DBConnection.selectQueRy("from ChiTietKhuyenMai ctkm");
         }
         return null;
     }
@@ -83,7 +83,7 @@ System.out.println(sql);
 
     @Override
     public int delete(String q) {
-        return DBConnection.delete(q, ChiTietKhuyenMai.class);
+        return DBConnection.delete("from ChiTietKhuyenMai ctkm where ctkm.km.trangThai = '" + q + "'", ChiTietKhuyenMai.class);
     }
 
     @Override

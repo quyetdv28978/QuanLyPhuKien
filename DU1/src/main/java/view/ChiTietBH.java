@@ -6,6 +6,7 @@ package view;
 
 import domaimodel.BaoHanh;
 import domaimodel.ChiTietHoaDon;
+import domaimodel.HoaDon;
 import domaimodel.SanPham;
 import domaimodel.chitiethoadonNoEmbe;
 import java.rmi.server.ObjID;
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import respon.BaoHanhRes;
 import utility.JframeCheck;
+import static view.BaoHanhView.tbHienThi;
 
 /**
  *
@@ -44,7 +46,7 @@ public class ChiTietBH extends javax.swing.JFrame {
         dtm = (DefaultTableModel) tbHienSP.getModel();
         dtm.setRowCount(0);
         for (Object sanPham : l) {
-            dtm.addRow(((chitiethoadonNoEmbe) sanPham).toRowhd1());
+            dtm.addRow(((chitiethoadonNoEmbe) sanPham).toRowhd3());
         }
     }
 //    public BaoHanhView getAll(String dk){
@@ -108,13 +110,13 @@ public class ChiTietBH extends javax.swing.JFrame {
 
         int soLuongReal = Integer.parseInt(soLuong);
         chitiethoadonNoEmbe cthd = (chitiethoadonNoEmbe) listcthd.get(tbHienSP.getSelectedRow());
-
+        
         if (soLuongReal > cthd.getSoluong() || soLuongReal == 0) {
             JOptionPane.showMessageDialog(this, "Số lượng sản phẩm nhập vào phải bé hơn hoặc bằng số lượng đã mua");
             return;
         }
 
-        new BaoHanhRes().add(new domaimodel.BaoHanh(jcheck.createID().toString(), jcheck.randomMA(), new Date(), null, 0, null,
+        new BaoHanhRes().add(new domaimodel.BaoHanh(jcheck.createID().toString(), BaoHanhView.tbHienThi.getValueAt(0, 1).toString(), new Date(), null, 0, null,
                 soLuongReal, null, cthd));
 
         DefaultTableModel dtm2 = (DefaultTableModel) BaoHanhView.tbhHienThiCTBH.getModel();
@@ -122,6 +124,10 @@ public class ChiTietBH extends javax.swing.JFrame {
         for (domaimodel.BaoHanh baoHanh : new BaoHanhRes().getALlBH()) {
             dtm2.addRow(baoHanh.toRowCTBH());
         }
+         DefaultTableModel defaultTableModelXoa = (DefaultTableModel) BaoHanhView.tbHienThi.getModel();
+            defaultTableModelXoa.setRowCount(0);
+            
+        this.dispose();
     }//GEN-LAST:event_tbHienSPMouseClicked
 
     /**
@@ -149,6 +155,7 @@ public class ChiTietBH extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ChiTietBH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

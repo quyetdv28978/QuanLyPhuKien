@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import utility.DBConnection;
 
 /**
@@ -28,22 +29,31 @@ public class resSanPham implements Iresponsitories<SanPham> {
     public List<Object[]> getALLJoinLoad() {
         return DBConnection.selectQueRyJoin("from sanpham s join s.dm");
     }
-
     //Huong
     public List<SanPham> getAll123(String dk) {
         if (DBConnection.selectQueRy("from SanPham") != null) {
-            return DBConnection.selectQueRy("from SanPham");
+        return  DBConnection.selectQueRy("from SanPham");
         }
         return null;
     }
 
     @Override
     public List<SanPham> getAll(String dk) {
+        if (DBConnection.selectQueRy("from SanPham s " + dk) != null) {
+             return DBConnection.selectQueRy("from SanPham s " + dk);
+        }
+        else return null;
+    }
+    
+      public List<SanPham> getAll2(String dk) {
         return DBConnection.selectQueRy("from SanPham s " + dk);
     }
-
-    public List<SanPham> getAll2(String dk) {
-        return DBConnection.selectQueRy("from SanPham s " + dk + " and trangThai = 0");
+    
+    public DanhMuc timDM(String ten){
+        Query q = DBConnection.getsetFactory().openSession().createQuery("from DanhMuc d where d.dongSP = :ten");
+        q.setParameter("ten", ten);
+        return (DanhMuc)q.getSingleResult();
+//        return (DanhMuc)DBConnection.getsetFactory().openSession().createQuery("from DanhMuc d where d.dongSP ='"+ten+"'").getSingleResult();
     }
 
     @Override
@@ -84,52 +94,51 @@ public class resSanPham implements Iresponsitories<SanPham> {
         }
         return null;
     }
-
+    
     public List<SanPham> selectByTen(String ten) {
         List<SanPham> sp = new ArrayList<>();
         String tenSelect = "%" + ten + "%";
-        try (Session session = DBConnection.getsetFactory().openSession()) {
-            TypedQuery<SanPham> query = session.createQuery("from SanPham where tenSanPham like :t");
+        try(Session session=DBConnection.getsetFactory().openSession()) {
+            TypedQuery<SanPham> query=session.createQuery("from SanPham where tenSanPham like :t");
             query.setParameter("t", tenSelect);
-            sp = query.getResultList();
+            sp=query.getResultList();
         } catch (Exception e) {
             e.fillInStackTrace();
         }
         return sp;
     }
-
+    
     public List<SanPham> selectByDSP(String ten) {
         List<SanPham> sp = new ArrayList<>();
         String tenSelect = "%" + ten + "%";
-        try (Session session = DBConnection.getsetFactory().openSession()) {
-            TypedQuery<SanPham> query = session.createQuery("from SanPham sp where sp.dm.dongSP like :t");
+        try(Session session=DBConnection.getsetFactory().openSession()) {
+            TypedQuery<SanPham> query=session.createQuery("from SanPham sp where sp.dm.dongSP like :t");
             query.setParameter("t", tenSelect);
-            sp = query.getResultList();
+            sp=query.getResultList();
         } catch (Exception e) {
             e.fillInStackTrace();
         }
         return sp;
     }
-
+    
     public List<SanPham> selectByTT(int tt) {
         List<SanPham> sp = new ArrayList<>();
         int ttSelect = tt;
-        try (Session session = DBConnection.getsetFactory().openSession()) {
-            TypedQuery<SanPham> query = session.createQuery("from SanPham where trangThai = :t");
+        try(Session session=DBConnection.getsetFactory().openSession()) {
+            TypedQuery<SanPham> query=session.createQuery("from SanPham where trangThai = :t");
             query.setParameter("t", ttSelect);
-            sp = query.getResultList();
+            sp=query.getResultList();
         } catch (Exception e) {
             e.fillInStackTrace();
         }
         return sp;
     }
-
     //HUONG
     public List<SanPham> SelectbyGia(Float gia1, Float gia2) {
-        List<SanPham> pas;
-        Float gia = gia1;
-        Float b = gia2;
-        try (Session session = DBConnection.getsetFactory().openSession()) {
+      List<SanPham> pas;
+        Float gia = gia1 ;
+                Float b =  gia2;
+        try ( Session session = DBConnection.getsetFactory().openSession()) {
             TypedQuery<SanPham> query = session.createQuery("From SanPham  WHERE giaBan between :key and :key2");
             query.setParameter("key", gia);
             query.setParameter("key2", b);
@@ -138,15 +147,14 @@ public class resSanPham implements Iresponsitories<SanPham> {
             session.close();
 
         }
-
+        
         return pas;
-    }
-
-    public List<SanPham> SelectbyTen(String tenSanPham) {
-        List<SanPham> pas;
-
+        }
+      public List<SanPham> SelectbyTen(String tenSanPham) {
+      List<SanPham> pas;
+        
         String a = "%" + tenSanPham + "%";
-        try (Session session = DBConnection.getsetFactory().openSession()) {
+        try ( Session session = DBConnection.getsetFactory().openSession()) {
             TypedQuery<SanPham> query = session.createQuery("From SanPham  WHERE tenSanPham like :key");
             query.setParameter("key", a);
             System.out.println(query);
@@ -154,9 +162,11 @@ public class resSanPham implements Iresponsitories<SanPham> {
             session.close();
 
         }
-
+        
         return pas;
-    }
+        }
+      
+
 
     public List<ChiTietHoaDon> getALLCTHD() {
         if (DBConnection.selectQueRy("from ChiTietHoaDon") != null) {
@@ -187,6 +197,11 @@ public class resSanPham implements Iresponsitories<SanPham> {
             return DBConnection.selectQueRyJoin("from SanPham s join s.ChiTietHoaDon c join  c.Join c.HoaDon  h Join h.NhanVien");
         }
         return null;
+    }
+    //giá bé hơn bằng
+     public List<SanPham> getAllSPHDCungGiaNoEm(String dk, int tt) {
+        return DBConnection.selectQueRy("from SanPham\n"
+                + "where soLuong > 0 and giaBan >= '" + dk + "'");
     }
 
 }
