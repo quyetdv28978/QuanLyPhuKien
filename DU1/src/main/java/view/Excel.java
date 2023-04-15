@@ -7,13 +7,24 @@ package view;
 import domaimodel.Bieudo1;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.hssf.usermodel.*;
 
 /**
  *
@@ -39,6 +50,7 @@ public class Excel extends javax.swing.JFrame {
                 x[1],});
         }
     }
+    String dd = "";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +64,8 @@ public class Excel extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNV = new javax.swing.JTable();
         btnin = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,7 +77,7 @@ public class Excel extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Thang", "Doanh thu"
+                "Tháng", "Doanh thu"
             }
         ));
         jScrollPane1.setViewportView(tblNV);
@@ -75,18 +89,34 @@ public class Excel extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Gửi mail");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Đính kèm file excel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(219, 219, 219)
-                        .addComponent(btnin))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(btnin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -95,7 +125,10 @@ public class Excel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(btnin)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnin)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
                 .addGap(27, 27, 27))
         );
 
@@ -104,14 +137,13 @@ public class Excel extends javax.swing.JFrame {
 
     private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
         try {
-
             HSSFWorkbook hSSFWorkbook = new HSSFWorkbook();
-            HSSFSheet sheet = hSSFWorkbook.createSheet("quyet");
+            HSSFSheet sheet = hSSFWorkbook.createSheet("Biểu đồ");
             HSSFRow row = null;
             Cell cell = null;
-            row = sheet.createRow(3);
+            row = sheet.createRow(2);
             cell = row.createCell(0, CellType.STRING);
-            cell.setCellValue("Thang");
+            cell.setCellValue("Tháng");
 
             cell = row.createCell(1, CellType.STRING);
             cell.setCellValue("Doanh thu");
@@ -120,7 +152,7 @@ public class Excel extends javax.swing.JFrame {
 //            cell.setCellValue("Ten");
 // Lay du lieu dua vao excel           
             for (int i = 0; i < tblNV.getRowCount(); i++) {
-                row = sheet.createRow(3 + i + 1);
+                row = sheet.createRow(2 + i + 1);
                 for (int j = 0; j < tblNV.getColumnCount(); j++) {
                     cell = row.createCell(j, CellType.STRING);
                     cell.setCellValue(tblNV.getValueAt(i, j).toString());
@@ -143,6 +175,68 @@ public class Excel extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "thanh cong");
     }//GEN-LAST:event_btninActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        final String username = "thanhhhph28937@fpt.edu.vn";
+        final String password = "moeoiwtnwfaitkxj";
+
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+//dang nhap gmail
+        Session session = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+//        dd="D:\\pujic\\DU1\\Excel\\test.xls";
+        dd = "D:\\ThuMucChinhRar\\DU1\\Excel\\test.xls";
+        try {
+
+            Message message = new MimeMessage(session);
+            MimeBodyPart cp = new MimeBodyPart();
+            cp.setContent("", "text/html; charset=utf-8");
+            message.setSubject("");
+            message.setText("");
+            MimeBodyPart fp = new MimeBodyPart();
+            File f = new File(dd);
+            FileDataSource fd = new FileDataSource(f);
+            fp.setDataHandler(new DataHandler(fd));
+            fp.setFileName(f.getName());
+            MimeMultipart m = new MimeMultipart();
+            m.addBodyPart(cp);
+            m.addBodyPart(fp);
+            message.setContent(m);
+
+            message.setFrom(new InternetAddress("thanhhhph28937@fpt.edu.vn"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse("quyetdvph28978@fpt.edu.vn")
+            );
+
+            Transport.send(message);
+
+            JOptionPane.showMessageDialog(this, "Done");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFileChooser f = new JFileChooser();
+        f.setDialogTitle("Mở file");
+        f.showOpenDialog(null);
+        File fa = f.getSelectedFile();
+        dd = fa.getAbsolutePath();
+        JOptionPane.showMessageDialog(this, "Đính kèm thành công");
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,6 +275,8 @@ public class Excel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnin;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblNV;
     // End of variables declaration//GEN-END:variables

@@ -11,7 +11,7 @@
         <maven.compiler.target>18</maven.compiler.target>
         <exec.mainClass>com.nhom1.du1.DU1</exec.mainClass> 
         <!--duong dan cua quyet-->
-        <myjar1.path>C:\Users\Admin\Downloads\DU1 (17)\DU1\lib</myjar1.path>
+        <!--<myjar1.path>C:\Users\Admin\Downloads\DU1 (17)\DU1\lib</myjar1.path>-->
         <!--duong dan cua huong-->
         <!--<myjar1.path>D:\DuAn1\MainKaKe\DU1\lib</myjar1.path>-->
         <!--duong dan cua tung-->

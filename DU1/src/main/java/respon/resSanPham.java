@@ -40,7 +40,14 @@ public class resSanPham implements Iresponsitories<SanPham> {
 
     @Override
     public List<SanPham> getAll(String dk) {
-        return DBConnection.selectQueRy("from SanPham s " + dk);
+        if (DBConnection.selectQueRy("from SanPham s " + dk) != null) {
+            return DBConnection.selectQueRy("from SanPham s " + dk);
+        } else
+            return null;
+    }
+
+    public List<SanPham> getAllHH(String dk) {
+        return DBConnection.selectQueRy("from SanPham where trangThai=1 ");
     }
 
     public List<SanPham> getAll2(String dk) {
@@ -96,9 +103,23 @@ public class resSanPham implements Iresponsitories<SanPham> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public List<SanPham> selectByGiaT(Float gia1, Float gia2) {
+        List<SanPham> sp;
+        Float gia1Select = gia1;
+        Float gia2Select = gia2;
+        try (Session session = DBConnection.getsetFactory().openSession()) {
+            TypedQuery<SanPham> query = session.createQuery("from SanPham where giaBan between :t1 and :t2");
+            query.setParameter("t1", gia1Select);
+            query.setParameter("t2", gia2Select);
+            sp = query.getResultList();
+            session.close();
+        }
+        return sp;
+    }
+
     public List<Object[]> getALLJoin(String dk) {
-        if (DBConnection.selectQueRyJoin("from SanPham s join s.dm") != null) {
-            return DBConnection.selectQueRyJoin("from SanPham s join s.dm");
+        if (DBConnection.selectQueRyJoin("from SanPham s join s.dm where s.trangThai = 0") != null) {
+            return DBConnection.selectQueRyJoin("from SanPham s join s.dm where s.trangThai = 0");
         }
         return null;
     }
@@ -114,11 +135,10 @@ public class resSanPham implements Iresponsitories<SanPham> {
         List<SanPham> sp = new ArrayList<>();
         String tenSelect = "%" + ten + "%";
         try (Session session = DBConnection.getsetFactory().openSession()) {
-            TypedQuery<SanPham> query = session.createQuery("from SanPham where tenSanPham like :t");
+            TypedQuery<SanPham> query = session.createQuery("from SanPham where tenSanPham like :t and trangThai = 0");
             query.setParameter("t", tenSelect);
             sp = query.getResultList();
         } catch (Exception e) {
-            e.fillInStackTrace();
         }
         return sp;
     }
@@ -127,7 +147,7 @@ public class resSanPham implements Iresponsitories<SanPham> {
         List<SanPham> sp = new ArrayList<>();
         String tenSelect = "%" + ten + "%";
         try (Session session = DBConnection.getsetFactory().openSession()) {
-            TypedQuery<SanPham> query = session.createQuery("from SanPham sp where sp.dm.dongSP like :t");
+            TypedQuery<SanPham> query = session.createQuery("from SanPham sp where sp.dm.dongSP like :t and sp.trangThai = 0");
             query.setParameter("t", tenSelect);
             sp = query.getResultList();
         } catch (Exception e) {
@@ -172,7 +192,7 @@ public class resSanPham implements Iresponsitories<SanPham> {
 
         String a = "%" + tenSanPham + "%";
         try (Session session = DBConnection.getsetFactory().openSession()) {
-            TypedQuery<SanPham> query = session.createQuery("From SanPham  WHERE tenSanPham like :key and trangThai = 0");
+            TypedQuery<SanPham> query = session.createQuery("From SanPham  WHERE tenSanPham like :key");
             query.setParameter("key", a);
             System.out.println(query);
             pas = query.getResultList();
@@ -212,6 +232,12 @@ public class resSanPham implements Iresponsitories<SanPham> {
             return DBConnection.selectQueRyJoin("from SanPham s join s.ChiTietHoaDon c join  c.Join c.HoaDon  h Join h.NhanVien");
         }
         return null;
+    }
+
+    //giá bé hơn bằng
+    public List<SanPham> getAllSPHDCungGiaNoEm(String dk, int tt) {
+        return DBConnection.selectQueRy("from SanPham\n"
+                + "where soLuong > 0 and giaBan >= '" + dk + "'");
     }
 
 }

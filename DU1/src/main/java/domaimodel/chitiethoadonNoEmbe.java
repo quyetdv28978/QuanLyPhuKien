@@ -25,6 +25,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "chitiethoadon")
 public class chitiethoadonNoEmbe implements Serializable {
+
     @Id
     private String id;
     @ManyToOne
@@ -33,8 +34,8 @@ public class chitiethoadonNoEmbe implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idsp")
     private SanPham sp;
-    
-    @OneToMany(mappedBy = "cthd",orphanRemoval = true)
+
+    @OneToMany(mappedBy = "cthd", orphanRemoval = true)
     Set<BaoHanh> a;
 
     private int soluong;
@@ -51,6 +52,17 @@ public class chitiethoadonNoEmbe implements Serializable {
     private int Sluong, SOHD;
     @Transient
     private double TONGTIEN, SKH;
+
+    public chitiethoadonNoEmbe(String id, HoaDon hd, SanPham sp, int soluong, float donGia, float giagiam, Date ngayTao, int trangThai) {
+        this.id = id;
+        this.hd = hd;
+        this.sp = sp;
+        this.soluong = soluong;
+        this.donGia = donGia;
+        this.giagiam = giagiam;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+    }
 
     public String getMaSP() {
         return maSP;
@@ -111,8 +123,6 @@ public class chitiethoadonNoEmbe implements Serializable {
     public void setNSX(String NSX) {
         this.NSX = NSX;
     }
-    
-    
 
     public void setSKH(double SKH) {
         this.SKH = SKH;
@@ -135,18 +145,16 @@ public class chitiethoadonNoEmbe implements Serializable {
         this.trangThai = trangThai;
     }
 
-    public chitiethoadonNoEmbe(String id,String maSP, String tenSP) {
+    public chitiethoadonNoEmbe(String id, String maSP, String tenSP) {
         this.id = id;
         this.maSP = maSP;
         this.tenSP = tenSP;
     }
 
-   
-
     public chitiethoadonNoEmbe() {
     }
 
-    public chitiethoadonNoEmbe( HoaDon hd, SanPham sp,
+    public chitiethoadonNoEmbe(HoaDon hd, SanPham sp,
             int soluong, float donGia, Date ngayTao,
             int trangThai, float giagiam) {
         this.hd = hd;
@@ -181,6 +189,7 @@ public class chitiethoadonNoEmbe implements Serializable {
     public void setSoluong(int soluong) {
         this.soluong = soluong;
     }
+
     public HoaDon getHd() {
         return hd;
     }
@@ -215,7 +224,7 @@ public class chitiethoadonNoEmbe implements Serializable {
 
     public Object[] torow() {
         return new Object[]{
-           (donGia * soluong) - giagiam
+            (donGia * soluong) - giagiam
         };
     }
 
@@ -232,7 +241,19 @@ public class chitiethoadonNoEmbe implements Serializable {
     }
 
     public Object[] toRowhd1() {
-        return new Object[]{ sp.getMa(), sp.getTenSanPham(), soluong};
+        return new Object[]{sp.getId(), sp.getMa(), sp.getTenSanPham(), soluong, sp.getDm().getDongSP(), sp.getGiaBan()};
+    }
+    
+     public Object[] toRowhd4() {
+        return new Object[]{sp.getMa(), sp.getTenSanPham(), soluong};
+    }
+
+    public Object[] toRowhd2() {
+        return new Object[]{sp.getMa(), sp.getTenSanPham(), soluong, sp.getGiaBan()};
+    }
+
+    public Object[] toRowhd3() {
+        return new Object[]{sp.getMa(), sp.getTenSanPham(), soluong};
     }
 
     public String getId() {

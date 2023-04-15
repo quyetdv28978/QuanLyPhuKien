@@ -502,7 +502,6 @@ public class khachHangMini extends javax.swing.JFrame {
         }
         loadTable();
         this.jcheck.clearView(jText, tbHienThi);
-        BanHang.banHang.getData(this.reskh.getAllCoDK(" where k.id ='" + idkh + "'").get(0));
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

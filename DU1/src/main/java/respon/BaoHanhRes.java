@@ -37,7 +37,7 @@ public class BaoHanhRes implements Iresponsitories<BaoHanh> {
 
     @Override
     public int update(BaoHanh q) {
-        
+
         return DBConnection.executeQuery(q, "update");
     }
 
@@ -71,9 +71,32 @@ public class BaoHanhRes implements Iresponsitories<BaoHanh> {
         String nameSelect = "%" + tenKM + "%";
         try (Session session = DBConnection.getsetFactory().openSession()) {
             TypedQuery<BaoHanh> query = session.createQuery("FROM BaoHanh bh \n"
-//                    + "JOIN bh.sp sp \n"
-//                    + "JOIN bh.kh kh \n"
+                    //                    + "JOIN bh.sp sp \n"
+                    //                    + "JOIN bh.kh kh \n"
                     + "WHERE bh.kh.sdt LIKE :key OR bh.ma LIKE :key");
+            query.setParameter("key", nameSelect);
+            System.out.println(query);
+            pas = query.getResultList();
+            session.close();
+
+        }
+        return pas;
+    }
+
+    public List<BaoHanh> getAllBHChange(String dk, String maSP) {
+        return DBConnection.selectQueRy("from BaoHanh b where b.cthd.hd.id = '" + dk + "'" + " and b.cthd.sp.ma = '" + maSP + "'");
+    }
+
+    public List<BaoHanh> getAllBHChange1(String dk) {
+        return DBConnection.selectQueRy("from BaoHanh b where b.cthd.hd.id = '" + dk + "'");
+    }
+
+    public List<BaoHanh> SelectbyBH(String maBH) {
+        List<BaoHanh> pas;
+        String nameSelect = "%" + maBH + "%";
+        try (Session session = DBConnection.getsetFactory().openSession()) {
+            TypedQuery<BaoHanh> query = session.createQuery("FROM BaoHanh bh \n"
+                    + "WHERE bh.cthd.hd.ma LIKE :key");
             query.setParameter("key", nameSelect);
             System.out.println(query);
             pas = query.getResultList();

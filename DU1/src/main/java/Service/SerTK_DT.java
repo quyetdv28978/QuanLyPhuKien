@@ -3,6 +3,7 @@ package service;
 import domaimodel.ChiTietHoaDon;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JPanel;
 import respon.ResTK_DT;
 
 public class SerTK_DT {
@@ -48,8 +49,8 @@ public class SerTK_DT {
 
     /*-------SANPHAM-------------*/
  /*----tim theo thang----*/
-    public List<ChiTietHoaDon> SelectbySPThang(Integer thang, Integer nam) {
-        return rtkdt.selectSPThang(thang, nam);
+    public List<ChiTietHoaDon> SelectbySPThang(Integer thang, Integer nam, JPanel jpnItem) {
+        return rtkdt.selectSPThang(thang, nam, jpnItem);
     }
 
     /*----tim theo ngay*/
@@ -60,5 +61,10 @@ public class SerTK_DT {
     /*--------tim TONGHOP---------*/
     public List<ChiTietHoaDon> SelectTOP(int nam) {
         return rtkdt.selectTonghop(nam);
+    }
+    
+    
+     public void setDataToChart1(JPanel jpnItem, int year) {
+        rtkdt.setDataToChart1(jpnItem, year);
     }
 }

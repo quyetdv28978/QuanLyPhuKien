@@ -59,7 +59,6 @@ public class BaoHanh implements Serializable {
         this.ngayTra = ngayTra;
     }
 
-  
     public BaoHanh() {
     }
 
@@ -140,6 +139,11 @@ public class BaoHanh implements Serializable {
 //        return "ChiTietBaoHanh{" + "id=" + id + ", ma=" + ma + ", ngayBH=" + ngayBH + ", moTa=" + moTa + ", tinhTrang=" + tinhTrang + ", suaChua=" + suaChua + ", soLuongBaoHanh=" + soLuongBaoHanh + ", soLanBH=" + soLanBH + ", ngayTra=" + ngayTra + ", bh=" + bh + '}';
 //    }
     public Object[] toRowCTBH() {
+        return new Object[]{id, cthd.getHd().getMa(), cthd.getHd().getKh().getTen(), cthd.getHd().getKh().getSdt(), cthd.getSp().getMa(), cthd.getSp().getTenSanPham(),
+            suaChua, new Date(), ngayTra, soLuongBaoHanh, tinhTrang == 0 ? "Đang Xử Lí" : "Đã Hoàn Thành", moTa};
+    }
+
+    public Object[] toRowLSBH() {
         return new Object[]{id, ma, cthd.getHd().getKh().getTen(), cthd.getHd().getKh().getSdt(), cthd.getSp().getMa(), cthd.getSp().getTenSanPham(),
             suaChua, new Date(), ngayTra, soLuongBaoHanh, tinhTrang == 0 ? "Đang Xử Lí" : "Đã Hoàn Thành", moTa};
     }

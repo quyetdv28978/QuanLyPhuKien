@@ -6,6 +6,19 @@ package view;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -48,6 +61,8 @@ public class Excelbdsp extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbltksp = new javax.swing.JTable();
         btninsp = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,7 +74,7 @@ public class Excelbdsp extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Ten san pham", "So luong"
+                "Tên sản phẩm", "Số lượng"
             }
         ));
         jScrollPane1.setViewportView(tbltksp);
@@ -71,28 +86,47 @@ public class Excelbdsp extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Gửi mail");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Đính kèm file excel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
-                        .addComponent(btninsp)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
+                        .addComponent(btninsp, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addComponent(btninsp)
-                .addGap(70, 70, 70))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btninsp)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(38, 38, 38))
         );
 
         pack();
@@ -100,31 +134,30 @@ public class Excelbdsp extends javax.swing.JFrame {
 
     private void btninspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninspActionPerformed
        try {
-
             HSSFWorkbook hSSFWorkbook = new HSSFWorkbook();
-            HSSFSheet sheet = hSSFWorkbook.createSheet("quyet");
+            HSSFSheet sheet = hSSFWorkbook.createSheet("Biểu đồ");
             HSSFRow row = null;
             Cell cell = null;
-            row = sheet.createRow(3);
+            row = sheet.createRow(2);
             cell = row.createCell(0, CellType.STRING);
-            cell.setCellValue("Ten san pham");
-
+            cell.setCellValue("Tên sản phẩm");
+            
             cell = row.createCell(1, CellType.STRING);
-            cell.setCellValue("So luong");
-
+            cell.setCellValue("Số lượng");
+            
 //            cell = row.createCell(2, CellType.STRING);
 //            cell.setCellValue("Ten");
 // Lay du lieu dua vao excel           
             for (int i = 0; i < tbltksp.getRowCount(); i++) {
-                row = sheet.createRow(3 + i + 1);
+                row = sheet.createRow(2 + i+1);
                 for (int j = 0; j < tbltksp.getColumnCount(); j++) {
-                    cell = row.createCell(j, CellType.STRING);
+                    cell = row.createCell(j,CellType.STRING);
                     cell.setCellValue(tbltksp.getValueAt(i, j).toString());
                 }
-
+                
             }
             File f = new File("Excel\\test.xls");
-
+            
             System.out.println(f.createNewFile());
             try {
                 FileOutputStream fis = new FileOutputStream(f);
@@ -133,12 +166,75 @@ public class Excelbdsp extends javax.swing.JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
         JOptionPane.showMessageDialog(this, "thanh cong");
     }//GEN-LAST:event_btninspActionPerformed
+String dd="";
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        final String username = "thanhhhph28937@fpt.edu.vn";
+        final String password = "moeoiwtnwfaitkxj";
+
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+//dang nhap gmail
+        Session session = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        dd="D:\\pujic\\DU1\\Excel\\test.xls";
+        try {
+
+            Message message = new MimeMessage(session);
+            MimeBodyPart cp = new MimeBodyPart();
+            cp.setContent("", "text/html; charset=utf-8");
+            message.setSubject("");
+            message.setText("");
+            MimeBodyPart fp=new MimeBodyPart();
+            File f=new File(dd);
+            FileDataSource fd=new FileDataSource(f);
+            fp.setDataHandler(new DataHandler(fd));
+            fp.setFileName(f.getName());
+            MimeMultipart m=new MimeMultipart();
+            m.addBodyPart(cp);
+            m.addBodyPart(fp);
+            message.setContent(m);
+            
+            
+
+            message.setFrom(new InternetAddress("thanhhhph28937@fpt.edu.vn"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse("quyetdvph28978@fpt.edu.vn")
+            );
+         
+
+            Transport.send(message);
+
+            JOptionPane.showMessageDialog(this, "Done");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFileChooser f=new JFileChooser();
+       f.setDialogTitle("Mở file");
+       f.showOpenDialog(null);
+       File fa=f.getSelectedFile();
+       dd=fa.getAbsolutePath();
+        JOptionPane.showMessageDialog(this, "Đính kèm thành công");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,6 +273,8 @@ public class Excelbdsp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btninsp;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbltksp;
     // End of variables declaration//GEN-END:variables

@@ -25,15 +25,15 @@ public class resbdsp {
                 System.out.println(x[1]);
 //                System.out.println(x[2]);
 //                System.out.println(x[3]);
-                dataset.addValue((Long)x[0], "So luong",x[1].toString() );
+                dataset.addValue((Long)x[0], "Số lượng",x[1].toString() );
             }
         }
      
 
 
         JFreeChart barChart = ChartFactory.createBarChart(
-                "Biểu đồ thống kê so luong san pham ban chay nhat".toUpperCase(),
-                "Ten san pham", "So luong",
+                "Biểu đồ thống kê số lượng sản phẩm bán chạy nhất".toUpperCase(),
+                "Tên sản phẩm", "Số lượng",
                 dataset);
 
         ChartPanel chartPanel = new ChartPanel(barChart);

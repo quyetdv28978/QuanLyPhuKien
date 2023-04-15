@@ -87,7 +87,7 @@ public class Quenmk extends javax.swing.JFrame {
 
             Transport.send(message);
 
-            JOptionPane.showMessageDialog(this, "gui thanh cong");
+            JOptionPane.showMessageDialog(this, "Gửi thành công");
 
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -229,7 +229,7 @@ public class Quenmk extends javax.swing.JFrame {
 
     private void btnxnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxnActionPerformed
         if (txttk.getText().trim().length() == 0 || txtemail.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "ban phai dien vao cac truong nay");
+            JOptionPane.showMessageDialog(this, "Bạn phải điền vào các trường này");
             return;
 
         }
@@ -247,7 +247,7 @@ public class Quenmk extends javax.swing.JFrame {
             }
         }
         if (kt == 0) {
-            JOptionPane.showMessageDialog(this, "Sai tai khoan hoac email");
+            JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc email");
             return;
         }
 //       else {

@@ -11,7 +11,7 @@ import javax.swing.Timer;
 public class ManHinhchao extends javax.swing.JFrame {
 
     Timer t;
-    private String duongDanThuMucAnh = "icon\\Images\\R.png";
+    private String duongDanThuMucAnh = "D:\\pujic\\DU1\\src\\main\\resources\\icon\\Images\\anh.png";
 
     public ManHinhchao() {
         initComponents();
@@ -23,18 +23,19 @@ public class ManHinhchao extends javax.swing.JFrame {
     }
 
     public void chay() {
-        t = new Timer(100, new ActionListener() {
+        t = new Timer(50, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int value = Prott.getValue() + 1;
                 Prott.setValue(value < 100 ? value : 0);
                 if (value == 100) {
+                    DangNhap.t.stop();
                     t.stop();
                     setVisible(false);
                     new DangNhap().setVisible(true);
-                } else if (value <= 25) {
+                } else if (value <= 30) {
                     lblchao.setText("Xin Chào quý khách đến với dự án quản lý cửa hàng bán hàng trang sức");
-                } else if (value <= 50) {
+                } else if (value <= 75) {
                     lblchao.setText("Một sản phẩm của nhóm 1 lớp IT18105,môn Dự án 1,trường Cao Đẳng FPT Polytechnic");
                 } else {
                     lblchao.setText("Chúc Các Bạn có một ngày tốt lành");

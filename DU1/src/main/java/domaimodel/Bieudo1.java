@@ -90,7 +90,7 @@ public class Bieudo1 {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (listItem != null) {
             for (Object[] x : listItem) {
-                dataset.addValue((Integer) x[0], "Tổng tiền", (Double)x[1]);
+                dataset.addValue((Double) x[1], "Tổng tiền", (Integer)x[0]);
             }
         }
 // dataset.addValue(10000000, "Tổng tiền", "02/2022");

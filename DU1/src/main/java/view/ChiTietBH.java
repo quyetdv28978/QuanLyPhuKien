@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import respon.BaoHanhRes;
 import utility.JframeCheck;
+import view.DangNhap;
 
 /**
  *
@@ -44,7 +45,7 @@ public class ChiTietBH extends javax.swing.JFrame {
         dtm = (DefaultTableModel) tbHienSP.getModel();
         dtm.setRowCount(0);
         for (Object sanPham : l) {
-            dtm.addRow(((chitiethoadonNoEmbe) sanPham).toRowhd1());
+            dtm.addRow(((chitiethoadonNoEmbe) sanPham).toRowhd4());
         }
     }
 //    public BaoHanhView getAll(String dk){
@@ -114,7 +115,7 @@ public class ChiTietBH extends javax.swing.JFrame {
             return;
         }
 
-        new BaoHanhRes().add(new domaimodel.BaoHanh(jcheck.createID().toString(), jcheck.randomMA(), new Date(), null, 0, null,
+        new BaoHanhRes().add(new domaimodel.BaoHanh(jcheck.createID().toString(), ViewTong.tbHienThi2.getValueAt(0, 1).toString(), new Date(), null, 0, null,
                 soLuongReal, null, cthd));
 
         DefaultTableModel dtm2 = (DefaultTableModel) DangNhap.vT.tbhHienThiCTBH.getModel();

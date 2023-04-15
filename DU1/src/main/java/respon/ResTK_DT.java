@@ -1,6 +1,10 @@
 package respon;
 
 import domaimodel.ChiTietHoaDon;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,16 +12,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.persistence.NoResultException;
+import javax.swing.JPanel;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import utility.DBConnection;
 
 public class ResTK_DT {
 
 //----------------------TK Doanh Thu-------------------//
 //------------theo ngay---------------------*//
-    public List<ChiTietHoaDon> Selectby_doanhthu_theoNgayTC(Date ngay)  {
+    public List<ChiTietHoaDon> Selectby_doanhthu_theoNgayTC(Date ngay) {
         List<ChiTietHoaDon> pas = new ArrayList<>();
         try (Session session = DBConnection.getsetFactory().openSession()) {
             String sql = "SELECT COUNT(DISTINCT c.hd.id), SUM(c.donGia * c.soluong - c.giagiam),COUNT(DISTINCT c.hd.kh.id)\n"
@@ -40,7 +51,7 @@ public class ResTK_DT {
         return pas;
     }
 
-    public Long Selectbydoanhthu_ngayBH(Date ngay){
+    public Long Selectbydoanhthu_ngayBH(Date ngay) {
         try (Session session = DBConnection.getsetFactory().openSession()) {
             Query<Long> query = session.createQuery("SELECT COUNT(DISTINCT h.id) FROM domaimodel.HoaDon h WHERE CONVERT(DATE,h.ngayTao,101)=CONVERT(DATE,:key1) AND h.tinhTrang = 2", Long.class);
             query.setParameter("key1", ngay);
@@ -211,7 +222,7 @@ public class ResTK_DT {
     }
 
     /*Tìm Theo Tháng-----*/
-    public List<ChiTietHoaDon> selectSPThang(int thang, int nam) {
+    public List<ChiTietHoaDon> selectSPThang(int thang, int nam, JPanel jpnItem) {
         List<ChiTietHoaDon> pas = new ArrayList<>();
         try (Session session = DBConnection.getsetFactory().openSession()) {
             String sql = "SELECT DISTINCT c.sp.ma, c.sp.tenSanPham,c.sp.mauSac,c.sp.nhaSanXuat, COUNT(c.sp.id), SUM(c.soluong), SUM(c.donGia * c.soluong - c.giagiam)\n"
@@ -222,16 +233,37 @@ public class ResTK_DT {
             query.setParameter("key1", thang);
             query.setParameter("key2", nam);
             List<Object[]> ressulistArr = query.getResultList();
-            for (Object[] ob : ressulistArr) {
-                ChiTietHoaDon r = new ChiTietHoaDon();
-                r.setMaSP(((String) ob[0]).toString());
-                r.setTenSP(((String) ob[1]).toString());
-                r.setMS(((String) ob[2]).toString());
-                r.setNSX(((String) ob[3]).toString());
-                r.setSOHD(((Number) ob[4]).intValue());
-                r.setSluong(((Number) ob[5]).intValue());
-                r.setTONGTIEN(ob[6] != null ? ((Number) ob[6]).doubleValue() : 0.0);
-                pas.add(r);
+            if (ressulistArr != null) {
+                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                for (Object[] ob : ressulistArr) {
+                    ChiTietHoaDon r = new ChiTietHoaDon();
+                    r.setMaSP(((String) ob[0]).toString());
+                    r.setTenSP(((String) ob[1]).toString());
+                    r.setMS(((String) ob[2]).toString());
+                    r.setNSX(((String) ob[3]).toString());
+                    r.setSOHD(((Number) ob[4]).intValue());
+                    r.setSluong(((Number) ob[5]).intValue());
+                    r.setTONGTIEN(ob[6] != null ? ((Number) ob[6]).doubleValue() : 0.0);
+                    pas.add(r);
+                    dataset.addValue(r.getSluong(), "So luong", r.getTenSP().toString());
+                }
+                JFreeChart barChart = ChartFactory.createBarChart(
+                        "Biểu đồ thống kê số lượng sản phẩm đã bán trong tháng".toUpperCase() + " " + thang + "/" + nam,
+                        "Tên sản phẩm", "Số lượng",
+                        dataset, PlotOrientation.VERTICAL, false, true, false);
+
+                CategoryPlot plot = barChart.getCategoryPlot();
+                plot.setRangeGridlinePaint(Color.BLACK);
+                plot.setDomainGridlinePaint(Color.BLACK);
+
+                ChartPanel chartPanel = new ChartPanel(barChart);
+                chartPanel.setPreferredSize(new Dimension(400, 400));
+
+                jpnItem.removeAll();
+                jpnItem.setLayout(new CardLayout());
+                jpnItem.add(chartPanel);
+                jpnItem.validate();
+                jpnItem.repaint();
             }
         } catch (HibernateException ex) {
             ex.printStackTrace();
@@ -239,5 +271,43 @@ public class ResTK_DT {
         return pas;
     }
 
+    public List<Object[]> getA(int year) {
+        return DBConnection.getsetFactory().openSession().createQuery(
+                "SELECT COUNT(c.hd.id), SUM(c.donGia * c.soluong - c.giagiam), MONTH(c.hd.ngayTT), YEAR(c.hd.ngayTT)\n"
+                + "FROM ChiTietHoaDon c\n"
+                + "WHERE c.hd.tinhTrang = 0\n"
+                + "AND YEAR(c.hd.ngayTT) = :year\n"
+                + "GROUP BY YEAR(c.hd.ngayTT), MONTH(c.hd.ngayTT)")
+                .setParameter("year", year)
+                .getResultList();
+    }
 
+    public void setDataToChart1(JPanel jpnItem, int year) {
+        List<Object[]> listItem = getA(year);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        if (listItem != null) {
+            for (Object[] x : listItem) {
+                int month = (Integer) x[3];
+                dataset.addValue((Number) x[0], "Số Đơn Hàng", month);
+                dataset.addValue((Number) x[1], "Doanh Thu", month);
+            }
+        }
+        JFreeChart chart = ChartFactory.createLineChart(
+                "Biểu đồ đường Doanh thu/Số đơn hàng trong năm " + year + " cửa hàng",
+                "Tháng",
+                "Số Lượng",
+                dataset
+        );
+
+        chart.setBackgroundPaint(Color.WHITE);
+        chart.getTitle().setPaint(Color.BLACK);
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(500, 300));
+        jpnItem.removeAll();
+        jpnItem.setLayout(new BorderLayout());
+        jpnItem.add(chartPanel, BorderLayout.CENTER);
+        jpnItem.validate();
+        jpnItem.repaint();
+    }
 }

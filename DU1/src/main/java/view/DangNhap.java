@@ -6,11 +6,14 @@ package view;
 
 import domaimodel.NhanVien;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import respon.DangnhapRes;
 
 /**
@@ -19,6 +22,7 @@ import respon.DangnhapRes;
  */
 public class DangNhap extends javax.swing.JFrame {
 
+    public static Timer t = null;
     public static ViewTong vT;
 
     DangnhapRes dnr = new DangnhapRes();
@@ -60,18 +64,29 @@ public class DangNhap extends javax.swing.JFrame {
             String textPss = txtp.getText();
             if (tk.equals(textUser)
                     && ps.equals(textPss)) {
+//                ManHinhchao c = new ManHinhchao();
+//                c.setVisible(true);
+//                t = new Timer(6000, new ActionListener() {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//                        c.dispose();
+//                        nv = x;
+//                        vT = new ViewTong();
+//                        vT.setVisible(true);
+//                    }
+//                });
+//                t.start();
                 nv = x;
                 vT = new ViewTong();
                 vT.setVisible(true);
                 this.dispose();
-                System.out.println("Dang nhap thanh cong");
                 kt = 1;
-
                 break;
+
             }
         }
         if (kt == 0) {
-            JOptionPane.showMessageDialog(this, "Ban nhap sai tai khoan hoac mat khau");
+            JOptionPane.showMessageDialog(this, "Bạn nhập sai tài khoản hoặc mật khẩu");
         }
     }
 
@@ -196,9 +211,9 @@ public class DangNhap extends javax.swing.JFrame {
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(144, 144, 144)
-                        .addComponent(btndangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(127, 127, 127)
-                        .addComponent(btnthoat, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btndangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107)
+                        .addComponent(btnthoat, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnqmk, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))

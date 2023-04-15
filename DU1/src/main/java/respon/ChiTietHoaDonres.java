@@ -1,5 +1,6 @@
 package respon;
 
+import domaimodel.ChiTietHoaDon;
 import viewmodel.ChiTietHoaDonViewModel;
 import domaimodel.HoaDon;
 import domaimodel.SanPham;
@@ -59,16 +60,20 @@ public class ChiTietHoaDonres implements Iresponsitories<ChiTietHoaDonViewModel>
         }
         return null;
     }
-    
-       public List<Object[]> getALLJoinLoad() {
+
+    public List<Object[]> getALLJoinLoad() {
         return DBConnection.selectQueRyJoin("from ChiTietHoaDon c join s.hd join s.sp");
     }
-    
-         public List<Object[]> getALLJ() {
+
+    public List<Object[]> getALLJ() {
         if (DBConnection.selectQueRyJoin("from ChiTietHoaDon c join s.hd join s.sp") != null) {
             return DBConnection.selectQueRyJoin("from ChiTietHoaDon c join s.hd join s.sp");
         }
         return null;
+    }
+
+    public List<ChiTietHoaDon> getALLDh(String dk) {
+        return DBConnection.selectQueRy("from ChiTietHoaDon cthd where cthd.hd.id ='"+dk+"'" + "and cthd.hd.tinhTrang = 2");
     }
 
 }

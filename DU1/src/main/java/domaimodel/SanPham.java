@@ -73,28 +73,29 @@ public class SanPham implements Serializable {
         this.chatLieu = chatLieu;
         this.dm = dm;
     }
+
     //doing Load
-    public SanPham(String id, String ma, String tenSanPham, String mauSac, 
-            String nhaSanXuat, String moTa, Float giaNhap, Float giaBan, Float trongLuong, 
+    public SanPham(String id, String ma, String tenSanPham, String mauSac,
+            String nhaSanXuat, String moTa, Float giaNhap, Float giaBan, Float trongLuong,
             Integer soLuong, Float kichThuoc, String chatLieu, DanhMuc dm, int trangThai, String QL) {
-        
-        this.id=id;
-        this.ma=ma;
-        this.tenSanPham=tenSanPham;
-        this.mauSac=mauSac;
-        this.nhaSanXuat=nhaSanXuat;
-        this.moTa=moTa;
-        this.giaNhap=giaNhap;
-        this.giaBan=giaBan;
-        this.trongLuong=trongLuong;
-        this.soLuong=soLuong;
+
+        this.id = id;
+        this.ma = ma;
+        this.tenSanPham = tenSanPham;
+        this.mauSac = mauSac;
+        this.nhaSanXuat = nhaSanXuat;
+        this.moTa = moTa;
+        this.giaNhap = giaNhap;
+        this.giaBan = giaBan;
+        this.trongLuong = trongLuong;
+        this.soLuong = soLuong;
         this.kichThuoc = kichThuoc;
         this.chatLieu = chatLieu;
-        this.dm=dm;
-        this.trangThai=trangThai;
-        this.QL=QL;
+        this.dm = dm;
+        this.trangThai = trangThai;
+        this.QL = QL;
     }
-    
+
     public SanPham(String id, String tenSanPham) {
         this.id = id;
         this.tenSanPham = tenSanPham;
@@ -295,6 +296,28 @@ public class SanPham implements Serializable {
 
     public Object[] toRowi() {
         return new Object[]{id, ma, tenSanPham, giaBan, getTT()};
+    }
+
+    public Object[] toRow1() {
+        return new Object[]{ma, tenSanPham, soLuong, giaBan};
+    }
+
+    public Object[] toRowgia() {
+        return new Object[]{ma, tenSanPham, soLuong, dm.getDongSP(), giaBan};
+    }
+
+    public Object[] toRowSP() {
+        return new Object[]{ma, tenSanPham, soLuong, giaBan};
+    }
+
+    public Object[] toDataRow() {
+        return new Object[]{id, ma, tenSanPham, giaBan,
+            trongLuong, soLuong, kichThuoc, chatLieu, dm.getDongSP(), trangThai == 0 ? "Còn hàng" : "Hết hàng"};
+    }
+
+    public Object[] toDataGia() {
+        return new Object[]{id, ma, tenSanPham, mauSac, nhaSanXuat, moTa, giaNhap, giaBan,
+            trongLuong, soLuong, kichThuoc, chatLieu, dm, trangThai == 0 ? "Còn hàng" : "Hết hàng", QL};
     }
 
     @Override
